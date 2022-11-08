@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.poly.model;
+package com.ebooks.model;
 
 /**
  *
  * @author Admin
  */
-public class AudioSach {
+public class Vi {
     
 }

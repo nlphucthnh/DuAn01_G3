@@ -1,12 +1,12 @@
-package com.poly.Compoment;
+package com.ebooks.Compoment;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-public class PanelCircle extends javax.swing.JPanel {
+public class PanelBorder extends javax.swing.JPanel {
 
-    public PanelCircle() {
+    public PanelBorder() {
         initComponents();
         setOpaque(false);
     }
@@ -32,7 +32,7 @@ public class PanelCircle extends javax.swing.JPanel {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(),500000, 500000);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(),25, 25);
         super.paintComponent(grphcs);
     }
 

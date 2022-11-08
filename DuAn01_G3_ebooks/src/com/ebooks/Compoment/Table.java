@@ -1,4 +1,4 @@
-package com.poly.Compoment;
+package com.ebooks.Compoment;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -17,7 +17,7 @@ public class Table extends JTable {
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
-                com.poly.Compoment.TableHeader header = new com.poly.Compoment.TableHeader(o + "");
+                com.ebooks.Compoment.TableHeader header = new com.ebooks.Compoment.TableHeader(o + "");
                 if (i1 == 4) {
                     header.setHorizontalAlignment(JLabel.CENTER);
                 }
