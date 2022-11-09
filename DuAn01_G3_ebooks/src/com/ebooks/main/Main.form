@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelBorder1" alignment="0" min="-2" pref="660" max="-2" attributes="0"/>
+          <Component id="panelBorder1" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -54,7 +54,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="320" y="290" width="-1" height="-1"/>
+              <AbsoluteConstraints x="760" y="60" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -73,13 +73,13 @@
         <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ea" green="f8" red="e5" type="rgb"/>
+              <Color blue="d7" green="ef" red="cd" type="rgb"/>
             </Property>
             <Property name="radius" type="int" value="20"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="100" width="90" height="510"/>
+              <AbsoluteConstraints x="20" y="160" width="90" height="450"/>
             </Constraint>
           </Constraints>
 
@@ -129,7 +129,7 @@
             <Container class="com.ebooks.Compoment.PanelRadius" name="pnlManage">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="15"/>
               </Properties>
@@ -144,13 +144,16 @@
                 <Component class="com.ebooks.Compoment.MyButton" name="btnManage">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/ebooks/Icon/business-time 1.png"/>
                     </Property>
                     <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                    </Property>
+                    <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
@@ -168,7 +171,7 @@
             <Container class="com.ebooks.Compoment.PanelRadius" name="pnlStatistical">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="15"/>
               </Properties>
@@ -183,13 +186,13 @@
                 <Component class="com.ebooks.Compoment.MyButton" name="btnStatistical">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/ebooks/Icon/chart-area (2).png"/>
                     </Property>
                     <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
@@ -207,7 +210,7 @@
             <Container class="com.ebooks.Compoment.PanelRadius" name="pnlRead">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="15"/>
               </Properties>
@@ -222,13 +225,13 @@
                 <Component class="com.ebooks.Compoment.MyButton" name="btnRead">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/ebooks/Icon/book-alt (3).png"/>
                     </Property>
                     <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
@@ -246,7 +249,7 @@
             <Container class="com.ebooks.Compoment.PanelRadius" name="pnlListen">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
                 </Property>
                 <Property name="radius" type="int" value="15"/>
               </Properties>
@@ -261,13 +264,13 @@
                 <Component class="com.ebooks.Compoment.MyButton" name="btnListen">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/com/ebooks/Icon/headphones (3).png"/>
                     </Property>
                     <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ea" green="f8" red="e5" type="rgb"/>
+                      <Color blue="d7" green="ef" red="cd" type="rgb"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
@@ -282,6 +285,213 @@
                 </Component>
               </SubComponents>
             </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="160" y="120" width="1070" height="550"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="false"/>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="0" y="10" width="710" height="520"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="com.ebooks.Compoment.Table" name="table1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ea" green="f9" red="e7" type="rgb"/>
+                </Property>
+                <Property name="radius" type="int" value="20"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="750" y="10" width="300" height="520"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="520" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d7" green="ef" red="cd" type="rgb"/>
+            </Property>
+            <Property name="radius" type="int" value="20"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="160" y="30" width="520" height="60"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="false"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/ebooks/Icon/search (1).png"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="10" y="10" width="50" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="com.ebooks.Compoment.SearchText" name="searchText1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchText1ActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="60" y="10" width="450" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="com.ebooks.Compoment.ImageAvatar" name="imageAvatar1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1130" y="25" width="70" height="70"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+        </Container>
+        <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius4">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d7" green="ef" red="cd" type="rgb"/>
+            </Property>
+            <Property name="radius" type="int" value="10"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1050" y="40" width="40" height="40"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="com.ebooks.Compoment.MyButton" name="myButton1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/ebooks/Icon/settings (1).png"/>
+                </Property>
+                <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius5">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d7" green="ef" red="cd" type="rgb"/>
+            </Property>
+            <Property name="radius" type="int" value="10"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="980" y="40" width="40" height="40"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+          <SubComponents>
+            <Component class="com.ebooks.Compoment.MyButton" name="myButton2">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/ebooks/Icon/bell (1).png"/>
+                </Property>
+                <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="d7" green="ef" red="cd" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+                  <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
