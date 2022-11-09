@@ -4,18 +4,55 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.Compoment.MyButton;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Admin
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form main
-     */
+    ImageIcon MainA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\apps (2).png");
+    ImageIcon MainB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\apps (1).png");
+    ImageIcon ManageB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\business-time 1.png");
+    ImageIcon ManageA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\business-time (4).png");
+    ImageIcon StatisticalA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\chart-area (4).png");
+    ImageIcon StatisticalB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\chart-area (2).png");
+    ImageIcon ReadA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\book-alt (4).png");
+    ImageIcon ReadB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\book-alt (3).png");
+    ImageIcon ListenA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (4).png");
+    ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
+
     public Main() {
         initComponents();
-        init();
+//        init();
+        setBackground(new Color(0, 0, 0, 0));
+
+    }
+
+    public void SetColorPanel(JPanel panel, boolean bl) {
+        if (bl) {
+            panel.setBackground(new Color(145, 227, 168));
+        } else {
+            panel.setBackground(new Color(229, 248, 234));
+
+        }
+    }
+
+    public void SetColorIconBtn(MyButton btn, boolean bl, ImageIcon iconA, ImageIcon iconB) {
+        if (bl) {
+            btn.setIcon(iconA);
+            btn.setBackground(new Color(145, 227, 168));
+            btn.setBoderColor(new Color(145, 227, 168));
+        } else {
+            btn.setIcon(iconB);
+            btn.setBackground(new Color(229, 248, 234));
+            btn.setBoderColor(new Color(229, 248, 234));
+        }
     }
 
     /**
@@ -27,23 +64,220 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelBorder1 = new com.ebooks.Compoment.PanelBorder();
+        jButton1 = new javax.swing.JButton();
+        lblLogo = new javax.swing.JLabel();
+        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
+        pnlMain = new com.ebooks.Compoment.PanelRadius();
+        btnMain = new com.ebooks.Compoment.MyButton();
+        pnlManage = new com.ebooks.Compoment.PanelRadius();
+        btnManage = new com.ebooks.Compoment.MyButton();
+        pnlStatistical = new com.ebooks.Compoment.PanelRadius();
+        btnStatistical = new com.ebooks.Compoment.MyButton();
+        pnlRead = new com.ebooks.Compoment.PanelRadius();
+        btnRead = new com.ebooks.Compoment.MyButton();
+        pnlListen = new com.ebooks.Compoment.PanelRadius();
+        btnListen = new com.ebooks.Compoment.MyButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
+        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        panelRadius1.setBackground(new java.awt.Color(229, 248, 234));
+        panelRadius1.setRadius(20);
+        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlMain.setBackground(new java.awt.Color(145, 227, 168));
+        pnlMain.setRadius(15);
+        pnlMain.setLayout(new java.awt.GridBagLayout());
+
+        btnMain.setBackground(new java.awt.Color(145, 227, 168));
+        btnMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/apps (2).png"))); // NOI18N
+        btnMain.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnMain.setFocusable(false);
+        btnMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMainActionPerformed(evt);
+            }
+        });
+        pnlMain.add(btnMain, new java.awt.GridBagConstraints());
+
+        panelRadius1.add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 20, 60, 60));
+
+        pnlManage.setBackground(new java.awt.Color(229, 248, 234));
+        pnlManage.setRadius(15);
+        pnlManage.setLayout(new java.awt.GridBagLayout());
+
+        btnManage.setBackground(new java.awt.Color(229, 248, 234));
+        btnManage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/business-time 1.png"))); // NOI18N
+        btnManage.setBoderColor(new java.awt.Color(229, 248, 234));
+        btnManage.setFocusable(false);
+        btnManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageActionPerformed(evt);
+            }
+        });
+        pnlManage.add(btnManage, new java.awt.GridBagConstraints());
+
+        panelRadius1.add(pnlManage, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 100, 60, 60));
+
+        pnlStatistical.setBackground(new java.awt.Color(229, 248, 234));
+        pnlStatistical.setRadius(15);
+        pnlStatistical.setLayout(new java.awt.GridBagLayout());
+
+        btnStatistical.setBackground(new java.awt.Color(229, 248, 234));
+        btnStatistical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/chart-area (2).png"))); // NOI18N
+        btnStatistical.setBoderColor(new java.awt.Color(229, 248, 234));
+        btnStatistical.setFocusable(false);
+        btnStatistical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatisticalActionPerformed(evt);
+            }
+        });
+        pnlStatistical.add(btnStatistical, new java.awt.GridBagConstraints());
+
+        panelRadius1.add(pnlStatistical, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 180, 60, 60));
+
+        pnlRead.setBackground(new java.awt.Color(229, 248, 234));
+        pnlRead.setRadius(15);
+        pnlRead.setLayout(new java.awt.GridBagLayout());
+
+        btnRead.setBackground(new java.awt.Color(229, 248, 234));
+        btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/book-alt (3).png"))); // NOI18N
+        btnRead.setBoderColor(new java.awt.Color(229, 248, 234));
+        btnRead.setFocusable(false);
+        btnRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadActionPerformed(evt);
+            }
+        });
+        pnlRead.add(btnRead, new java.awt.GridBagConstraints());
+
+        panelRadius1.add(pnlRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 260, 60, 60));
+
+        pnlListen.setBackground(new java.awt.Color(229, 248, 234));
+        pnlListen.setRadius(15);
+        pnlListen.setLayout(new java.awt.GridBagLayout());
+
+        btnListen.setBackground(new java.awt.Color(229, 248, 234));
+        btnListen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/headphones (3).png"))); // NOI18N
+        btnListen.setBoderColor(new java.awt.Color(229, 248, 234));
+        btnListen.setFocusable(false);
+        btnListen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListenActionPerformed(evt);
+            }
+        });
+        pnlListen.add(btnListen, new java.awt.GridBagConstraints());
+
+        panelRadius1.add(pnlListen, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 340, 60, 60));
+
+        panelBorder1.add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainActionPerformed
+        //SetColorPanel
+        SetColorPanel(pnlMain, true);
+        SetColorPanel(pnlManage, false);
+        SetColorPanel(pnlStatistical, false);
+        SetColorPanel(pnlRead, false);
+        SetColorPanel(pnlListen, false);
+        //SetColorBtn
+        SetColorIconBtn(btnMain, true, MainA, MainB);
+        SetColorIconBtn(btnManage, false, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, false, ReadA, ReadB);
+        SetColorIconBtn(btnListen, false, ListenA, ListenB);
+
+    }//GEN-LAST:event_btnMainActionPerformed
+
+    private void btnManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageActionPerformed
+        SetColorPanel(pnlMain, false);
+        SetColorPanel(pnlManage, true);
+        SetColorPanel(pnlStatistical, false);
+        SetColorPanel(pnlRead, false);
+        SetColorPanel(pnlListen, false);
+         //SetColorBtn
+        SetColorIconBtn(btnMain, false, MainA, MainB);
+        SetColorIconBtn(btnManage, true, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, false, ReadA, ReadB);
+        SetColorIconBtn(btnListen, false, ListenA, ListenB);
+    }//GEN-LAST:event_btnManageActionPerformed
+
+    private void btnStatisticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalActionPerformed
+        SetColorPanel(pnlMain, false);
+        SetColorPanel(pnlManage, false);
+        SetColorPanel(pnlStatistical, true);
+        SetColorPanel(pnlRead, false);
+        SetColorPanel(pnlListen, false);
+         //SetColorBtn
+        SetColorIconBtn(btnMain, false, MainA, MainB);
+        SetColorIconBtn(btnManage, false, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, true, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, false, ReadA, ReadB);
+        SetColorIconBtn(btnListen, false, ListenA, ListenB);
+    }//GEN-LAST:event_btnStatisticalActionPerformed
+
+    private void btnListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListenActionPerformed
+        SetColorPanel(pnlMain, false);
+        SetColorPanel(pnlManage, false);
+        SetColorPanel(pnlStatistical, false);
+        SetColorPanel(pnlRead, false);
+        SetColorPanel(pnlListen, true);
+         //SetColorBtn
+        SetColorIconBtn(btnMain, false, MainA, MainB);
+        SetColorIconBtn(btnManage, false, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, false, ReadA, ReadB);
+        SetColorIconBtn(btnListen, true, ListenA, ListenB);
+    }//GEN-LAST:event_btnListenActionPerformed
+
+    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        SetColorPanel(pnlMain, false);
+        SetColorPanel(pnlManage, false);
+        SetColorPanel(pnlStatistical, false);
+        SetColorPanel(pnlRead, true);
+        SetColorPanel(pnlListen, false);
+        //SetColorBtn
+        SetColorIconBtn(btnMain, false, MainA, MainB);
+        SetColorIconBtn(btnManage, false, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, true, ReadA, ReadB);
+        SetColorIconBtn(btnListen, false, ListenA, ListenB);
+        
+    }//GEN-LAST:event_btnReadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,11 +316,25 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnListen;
+    private com.ebooks.Compoment.MyButton btnMain;
+    private com.ebooks.Compoment.MyButton btnManage;
+    private com.ebooks.Compoment.MyButton btnRead;
+    private com.ebooks.Compoment.MyButton btnStatistical;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblLogo;
+    private com.ebooks.Compoment.PanelBorder panelBorder1;
+    private com.ebooks.Compoment.PanelRadius panelRadius1;
+    private com.ebooks.Compoment.PanelRadius pnlListen;
+    private com.ebooks.Compoment.PanelRadius pnlMain;
+    private com.ebooks.Compoment.PanelRadius pnlManage;
+    private com.ebooks.Compoment.PanelRadius pnlRead;
+    private com.ebooks.Compoment.PanelRadius pnlStatistical;
     // End of variables declaration//GEN-END:variables
-    public void init(){
+    public void init() {
         new StartUpDiaLog(this, true).setVisible(true);
-        new LogInDiaLog(this,true).setVisible(true);
-        
+        new LogInDiaLog(this, true).setVisible(true);
+
     }
 
 }
