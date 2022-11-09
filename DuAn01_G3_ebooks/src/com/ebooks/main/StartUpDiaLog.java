@@ -79,7 +79,7 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Open Sans", 1, 34)); // NOI18N
         jLabel1.setText("bạn yêu thích ");

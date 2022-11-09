@@ -85,6 +85,8 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public void init(){
         new StartUpDiaLog(this, true).setVisible(true);
+        new LogInDiaLog(this,true).setVisible(true);
+        
     }
 
 }
