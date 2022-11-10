@@ -54,7 +54,7 @@ public class ImageBoder extends JComponent {
             int y = height / 2 - diameter / 2;
             int border = borderSize * 2;
             diameter -= border;
-            Rectangle size = getAutoSize(icon, diameter);
+            Rectangle size = getAutoSize(icon);
             BufferedImage img = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2_img = img.createGraphics();
             g2_img.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -102,6 +102,21 @@ public class ImageBoder extends JComponent {
         int ch =size;
         int x = (cw - width) / 2;
         int y = (ch - height) / 2;
+        return new Rectangle(new Point(x, y), new Dimension(width, height));
+    }
+    
+    private Rectangle getAutoSize(Icon image) {
+        int w = getWidth();
+        int h = getHeight();
+        int iw = image.getIconWidth();
+        int ih = image.getIconHeight();
+        double xScale = (double) w / iw;
+        double yScale = (double) h / ih;
+        double scale = Math.max(xScale, yScale);
+        int width = (int) (scale * iw);
+        int height = (int) (scale * ih);
+        int x = (w - width) / 2;
+        int y = (h - height) / 2;
         return new Rectangle(new Point(x, y), new Dimension(width, height));
     }
 
