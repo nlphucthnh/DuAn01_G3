@@ -103,7 +103,7 @@ public class MaterialTabbed extends JTabbedPane {
         protected void paintContentBorder(Graphics grphcs, int tabPlacement, int selectedIndex) {
             Graphics2D g2 = (Graphics2D) grphcs.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(new Color(200, 200, 200));
+            g2.setColor(new Color(210, 210, 210));
             Insets insets = getTabAreaInsets(tabPlacement);
             int width = tabPane.getWidth();
             int height = tabPane.getHeight();
