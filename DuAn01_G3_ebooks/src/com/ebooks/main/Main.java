@@ -263,17 +263,22 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         searchText1 = new com.ebooks.Compoment.SearchText();
         imageAvatar1 = new com.ebooks.Compoment.ImageAvatar();
-        panelRadius4 = new com.ebooks.Compoment.PanelRadius();
-        myButton1 = new com.ebooks.Compoment.MyButton();
-        panelRadius5 = new com.ebooks.Compoment.PanelRadius();
-        myButton2 = new com.ebooks.Compoment.MyButton();
-        panelRadius19 = new com.ebooks.Compoment.PanelRadius();
+        pnlSetting = new com.ebooks.Compoment.PanelRadius();
+        btnSetting = new com.ebooks.Compoment.MyButton();
+        pnlBell = new com.ebooks.Compoment.PanelRadius();
+        btnBell = new com.ebooks.Compoment.MyButton();
+        pnlOff = new com.ebooks.Compoment.PanelRadius();
         lblOff = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBorder1MouseClicked(evt);
+            }
+        });
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
@@ -1492,14 +1497,18 @@ public class Main extends javax.swing.JFrame {
         jLabel29.setText("Steven Levy");
         pnlFrameListen.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, -1, -1));
 
+        myButton7.setBackground(new java.awt.Color(254, 254, 254));
         myButton7.setBorder(null);
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/rewind-button.png"))); // NOI18N
         myButton7.setBoderColor(new java.awt.Color(255, 255, 255));
+        myButton7.setColorClick(new java.awt.Color(255, 255, 255));
         pnlFrameListen.add(myButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 40, 40));
 
+        btnPlay.setBackground(new java.awt.Color(254, 254, 254));
         btnPlay.setBorder(null);
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/play-button-arrowhead.png"))); // NOI18N
         btnPlay.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnPlay.setColorClick(new java.awt.Color(255, 255, 255));
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
@@ -1507,9 +1516,11 @@ public class Main extends javax.swing.JFrame {
         });
         pnlFrameListen.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 40, 40));
 
+        myButton14.setBackground(new java.awt.Color(254, 254, 254));
         myButton14.setBorder(null);
         myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/fast-forward-double-black-arrows-multimedia-symbol.png"))); // NOI18N
         myButton14.setBoderColor(new java.awt.Color(255, 255, 255));
+        myButton14.setColorClick(new java.awt.Color(255, 255, 255));
         pnlFrameListen.add(myButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 40, 40));
 
         jLabel30.setText("5:00");
@@ -1547,33 +1558,73 @@ public class Main extends javax.swing.JFrame {
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
 
-        panelRadius4.setBackground(new java.awt.Color(205, 239, 215));
-        panelRadius4.setRadius(10);
-        panelRadius4.setLayout(new java.awt.GridBagLayout());
+        pnlSetting.setBackground(new java.awt.Color(205, 239, 215));
+        pnlSetting.setRadius(10);
+        pnlSetting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlSettingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlSettingMouseExited(evt);
+            }
+        });
+        pnlSetting.setLayout(new java.awt.GridBagLayout());
 
-        myButton1.setBackground(new java.awt.Color(205, 239, 215));
-        myButton1.setBorder(null);
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/settings (1).png"))); // NOI18N
-        myButton1.setBoderColor(new java.awt.Color(205, 239, 215));
-        panelRadius4.add(myButton1, new java.awt.GridBagConstraints());
+        btnSetting.setBackground(new java.awt.Color(205, 239, 215));
+        btnSetting.setBorder(null);
+        btnSetting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/settings (1).png"))); // NOI18N
+        btnSetting.setBoderColor(new java.awt.Color(205, 239, 215));
+        btnSetting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSettingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSettingMouseExited(evt);
+            }
+        });
+        pnlSetting.add(btnSetting, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(panelRadius4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
+        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
 
-        panelRadius5.setBackground(new java.awt.Color(205, 239, 215));
-        panelRadius5.setRadius(10);
-        panelRadius5.setLayout(new java.awt.GridBagLayout());
+        pnlBell.setBackground(new java.awt.Color(205, 239, 215));
+        pnlBell.setRadius(10);
+        pnlBell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlBellMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlBellMouseExited(evt);
+            }
+        });
+        pnlBell.setLayout(new java.awt.GridBagLayout());
 
-        myButton2.setBackground(new java.awt.Color(205, 239, 215));
-        myButton2.setBorder(null);
-        myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/bell (1).png"))); // NOI18N
-        myButton2.setBoderColor(new java.awt.Color(205, 239, 215));
-        panelRadius5.add(myButton2, new java.awt.GridBagConstraints());
+        btnBell.setBackground(new java.awt.Color(205, 239, 215));
+        btnBell.setBorder(null);
+        btnBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/bell (1).png"))); // NOI18N
+        btnBell.setBoderColor(new java.awt.Color(205, 239, 215));
+        btnBell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBellMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBellMouseExited(evt);
+            }
+        });
+        pnlBell.add(btnBell, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(panelRadius5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
+        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
 
-        panelRadius19.setBackground(new java.awt.Color(205, 239, 215));
-        panelRadius19.setRadius(10);
-        panelRadius19.setLayout(new java.awt.GridBagLayout());
+        pnlOff.setBackground(new java.awt.Color(205, 239, 215));
+        pnlOff.setRadius(10);
+        pnlOff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlOffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlOffMouseExited(evt);
+            }
+        });
+        pnlOff.setLayout(new java.awt.GridBagLayout());
 
         lblOff.setBackground(new java.awt.Color(205, 239, 215));
         lblOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/power.png"))); // NOI18N
@@ -1581,10 +1632,16 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblOffMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblOffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblOffMouseExited(evt);
+            }
         });
-        panelRadius19.add(lblOff, new java.awt.GridBagConstraints());
+        pnlOff.add(lblOff, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(panelRadius19, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
+        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1742,6 +1799,73 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lblOffMouseClicked
 
+    private void panelBorder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBorder1MouseClicked
+        
+    }//GEN-LAST:event_panelBorder1MouseClicked
+
+    private void pnlBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseEntered
+        pnlBell.setBackground(new Color(130,219,150));
+        btnBell.setBackground(new Color(130,219,150));
+        btnBell.setBoderColor(new Color(0,0,0,0));
+    }//GEN-LAST:event_pnlBellMouseEntered
+
+    private void pnlBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseExited
+        pnlBell.setBackground(new Color(205,239,215));
+        btnBell.setBackground(new Color(205,239,215));
+    }//GEN-LAST:event_pnlBellMouseExited
+
+    private void btnBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseEntered
+        pnlBell.setBackground(new Color(130,219,150));
+        btnBell.setBackground(new Color(130,219,150));
+        btnBell.setBoderColor(new Color(0,0,0,0));
+    }//GEN-LAST:event_btnBellMouseEntered
+
+    private void btnBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseExited
+        pnlBell.setBackground(new Color(205,239,215));
+        btnBell.setBackground(new Color(205,239,215));
+    }//GEN-LAST:event_btnBellMouseExited
+
+    private void btnSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingMouseEntered
+        pnlSetting.setBackground(new Color(130,219,150));
+        btnSetting.setBackground(new Color(130,219,150));
+    }//GEN-LAST:event_btnSettingMouseEntered
+
+    private void btnSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingMouseExited
+        pnlSetting.setBackground(new Color(205,239,215));
+        btnSetting.setBackground(new Color(205,239,215));
+        btnSetting.setBoderColor(new Color(0,0,0,0));
+        
+    }//GEN-LAST:event_btnSettingMouseExited
+
+    private void pnlSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSettingMouseEntered
+        pnlSetting.setBackground(new Color(130,219,150));
+        btnSetting.setBackground(new Color(130,219,150));
+        btnSetting.setBoderColor(new Color(0,0,0,0));
+    }//GEN-LAST:event_pnlSettingMouseEntered
+
+    private void pnlSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSettingMouseExited
+        pnlSetting.setBackground(new Color(205,239,215));
+        btnSetting.setBackground(new Color(205,239,215));
+    }//GEN-LAST:event_pnlSettingMouseExited
+
+    private void lblOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseEntered
+        lblOff.setBackground(new Color(0,0,0,0));
+        pnlOff.setBackground(new Color(253,127,127));
+    }//GEN-LAST:event_lblOffMouseEntered
+
+    private void lblOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseExited
+        pnlOff.setBackground(new Color(205,239,215));
+    }//GEN-LAST:event_lblOffMouseExited
+
+    private void pnlOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseEntered
+        lblOff.setBackground(new Color(0,0,0,0));
+        pnlOff.setBackground(new Color(253,127,127));
+    }//GEN-LAST:event_pnlOffMouseEntered
+
+    private void pnlOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseExited
+        pnlOff.setBackground(new Color(205,239,215));
+    }//GEN-LAST:event_pnlOffMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1779,11 +1903,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnBell;
     private com.ebooks.Compoment.MyButton btnListen;
     private com.ebooks.Compoment.MyButton btnMain;
     private com.ebooks.Compoment.MyButton btnManage;
     private com.ebooks.Compoment.MyButton btnPlay;
     private com.ebooks.Compoment.MyButton btnRead;
+    private com.ebooks.Compoment.MyButton btnSetting;
     private com.ebooks.Compoment.MyButton btnStatistical;
     private com.ebooks.Compoment.ImageAvatar imageAvatar1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
@@ -1849,7 +1975,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;
-    private com.ebooks.Compoment.MyButton myButton1;
     private com.ebooks.Compoment.MyButton myButton10;
     private com.ebooks.Compoment.MyButton myButton100;
     private com.ebooks.Compoment.MyButton myButton101;
@@ -1886,7 +2011,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton14;
     private com.ebooks.Compoment.MyButton myButton17;
     private com.ebooks.Compoment.MyButton myButton18;
-    private com.ebooks.Compoment.MyButton myButton2;
     private com.ebooks.Compoment.MyButton myButton3;
     private com.ebooks.Compoment.MyButton myButton4;
     private com.ebooks.Compoment.MyButton myButton5;
@@ -1935,7 +2059,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius16;
     private com.ebooks.Compoment.PanelRadius panelRadius17;
     private com.ebooks.Compoment.PanelRadius panelRadius18;
-    private com.ebooks.Compoment.PanelRadius panelRadius19;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius20;
     private com.ebooks.Compoment.PanelRadius panelRadius21;
@@ -1950,12 +2073,11 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius30;
     private com.ebooks.Compoment.PanelRadius panelRadius31;
-    private com.ebooks.Compoment.PanelRadius panelRadius4;
-    private com.ebooks.Compoment.PanelRadius panelRadius5;
     private com.ebooks.Compoment.PanelRadius panelRadius6;
     private com.ebooks.Compoment.PanelRadius panelRadius7;
     private com.ebooks.Compoment.PanelRadius panelRadius8;
     private com.ebooks.Compoment.PanelRadius panelRadius9;
+    private com.ebooks.Compoment.PanelRadius pnlBell;
     private javax.swing.JPanel pnlBossMain;
     private com.ebooks.Compoment.PanelRadius pnlFrameListen;
     private com.ebooks.Compoment.PanelRadius pnlFrameMain;
@@ -1966,7 +2088,9 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlMain;
     private com.ebooks.Compoment.PanelRadius pnlManage;
     private com.ebooks.Compoment.PanelRadius pnlMenuBooks;
+    private com.ebooks.Compoment.PanelRadius pnlOff;
     private com.ebooks.Compoment.PanelRadius pnlRead;
+    private com.ebooks.Compoment.PanelRadius pnlSetting;
     private com.ebooks.Compoment.PanelRadius pnlStatistical;
     private com.ebooks.Compoment.SearchText searchText1;
     private com.ebooks.Compoment.Slider slider1;
