@@ -65,7 +65,6 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new com.ebooks.Compoment.PanelBorder();
-        jButton1 = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         panelRadius1 = new com.ebooks.Compoment.PanelRadius();
         pnlMain = new com.ebooks.Compoment.PanelRadius();
@@ -268,20 +267,14 @@ public class Main extends javax.swing.JFrame {
         myButton1 = new com.ebooks.Compoment.MyButton();
         panelRadius5 = new com.ebooks.Compoment.PanelRadius();
         myButton2 = new com.ebooks.Compoment.MyButton();
+        panelRadius19 = new com.ebooks.Compoment.PanelRadius();
+        lblOff = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Thoát");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelBorder1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, -1, -1));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
         panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
@@ -1578,6 +1571,21 @@ public class Main extends javax.swing.JFrame {
 
         panelBorder1.add(panelRadius5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
 
+        panelRadius19.setBackground(new java.awt.Color(205, 239, 215));
+        panelRadius19.setRadius(10);
+        panelRadius19.setLayout(new java.awt.GridBagLayout());
+
+        lblOff.setBackground(new java.awt.Color(205, 239, 215));
+        lblOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/power.png"))); // NOI18N
+        lblOff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOffMouseClicked(evt);
+            }
+        });
+        panelRadius19.add(lblOff, new java.awt.GridBagConstraints());
+
+        panelBorder1.add(panelRadius19, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1592,10 +1600,6 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainActionPerformed
         //SetColorPanel
@@ -1734,6 +1738,10 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPlayActionPerformed
 
+    private void lblOffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lblOffMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1783,7 +1791,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.ImageBoder imageBoder3;
     private com.ebooks.Compoment.ImageBoder imageBoder4;
     private com.ebooks.Compoment.ImageBoder imageBoder5;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -1838,6 +1845,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblOff;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;
@@ -1927,6 +1935,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius16;
     private com.ebooks.Compoment.PanelRadius panelRadius17;
     private com.ebooks.Compoment.PanelRadius panelRadius18;
+    private com.ebooks.Compoment.PanelRadius panelRadius19;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius20;
     private com.ebooks.Compoment.PanelRadius panelRadius21;
