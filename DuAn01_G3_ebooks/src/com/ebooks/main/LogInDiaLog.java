@@ -51,7 +51,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
         panelBorder3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelBorder3.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        panelBorder3.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         imageBoder2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/2d23848e893747691e26.jpg"))); // NOI18N
         imageBoder2.setRadius(25);

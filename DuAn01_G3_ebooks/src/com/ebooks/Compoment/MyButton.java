@@ -5,6 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
 
@@ -76,12 +80,14 @@ public class MyButton extends JButton {
     }
     
     
+    
+    
     public MyButton(){
         setColor(Color.BLUE);
         colorOver = new Color(198,226, 255);
         colorClick = new Color(47,79,79);
         boderColor = new Color(121,205,205);
-
+   
         setContentAreaFilled(false);
     }
 
@@ -93,8 +99,11 @@ public class MyButton extends JButton {
         g2.fillRoundRect(0, 0,getWidth(),getHeight(),radius, radius);
         g2.setColor(getBackground());
         g2.fillRoundRect(2,2,getWidth()-4,getHeight()-4,radius, radius);
+        
         super.paintComponent(g); 
     }
+    
+   
     
     
     
