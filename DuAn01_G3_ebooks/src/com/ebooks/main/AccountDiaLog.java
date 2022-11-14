@@ -30,6 +30,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupVaiTroThongTinTK = new javax.swing.ButtonGroup();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
         lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
@@ -72,6 +73,9 @@ public class AccountDiaLog extends javax.swing.JDialog {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnlExit1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlExit1MousePressed(evt);
             }
         });
         pnlExit1.setLayout(new java.awt.GridBagLayout());
@@ -129,9 +133,11 @@ public class AccountDiaLog extends javax.swing.JDialog {
         jLabel3.setText("Tên Đăng Nhập");
         panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
 
+        buttonGroupVaiTroThongTinTK.add(jRadioButton1);
         jRadioButton1.setText("Người Dùng");
         panelRadius2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
 
+        buttonGroupVaiTroThongTinTK.add(jRadioButton2);
         jRadioButton2.setText("Quản Trị Viên");
         panelRadius2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
 
@@ -172,6 +178,11 @@ public class AccountDiaLog extends javax.swing.JDialog {
     private void pnlExit1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlExit1MouseExited
+
+    private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_pnlExit1MousePressed
 
     /*tbdSetting args the command line arguments
      */
@@ -216,6 +227,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupVaiTroThongTinTK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;

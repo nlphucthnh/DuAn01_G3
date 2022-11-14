@@ -71,6 +71,9 @@ public class DrinksDiaLog extends javax.swing.JDialog {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnlExit1MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlExit1MousePressed(evt);
+            }
         });
         pnlExit1.setLayout(new java.awt.GridBagLayout());
 
@@ -80,6 +83,9 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         lblExit1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExit1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblExit1MousePressed(evt);
             }
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
@@ -131,7 +137,7 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton10.setRadius(10);
-        panelRadius2.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 270, 50));
+        panelRadius2.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 270, 50));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -154,6 +160,16 @@ public class DrinksDiaLog extends javax.swing.JDialog {
     private void pnlExit1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlExit1MouseExited
+
+    private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_pnlExit1MousePressed
+
+    private void lblExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lblExit1MousePressed
 
     /*tbdSetting args the command line arguments
      */

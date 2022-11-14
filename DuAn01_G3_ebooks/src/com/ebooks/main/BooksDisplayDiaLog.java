@@ -74,6 +74,9 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnlExit1MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlExit1MousePressed(evt);
+            }
         });
         pnlExit1.setLayout(new java.awt.GridBagLayout());
 
@@ -83,6 +86,9 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         lblExit1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExit1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblExit1MousePressed(evt);
             }
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
@@ -134,19 +140,19 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel1.setText("Bảo Mật - An Ninh Mạng");
-        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, -1, -1));
+        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, -1));
 
         jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel4.setText("Books001");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 370, -1));
 
         jLabel8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel8.setText("Hacker Lược Sử");
-        panelRadius2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+        panelRadius2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 360, -1));
 
         jLabel9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel9.setText("Steven Levy");
-        panelRadius2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, -1, -1));
+        panelRadius2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -169,6 +175,16 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     private void pnlExit1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlExit1MouseExited
+
+    private void lblExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lblExit1MousePressed
+
+    private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_pnlExit1MousePressed
 
     /*tbdSetting args the command line arguments
      */

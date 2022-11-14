@@ -96,7 +96,7 @@ public class StartUpDiaLog extends javax.swing.JDialog {
 
         lblStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblStatus.setText("Khởi động ứng dụng...");
-        panelBorder1.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 160, -1));
+        panelBorder1.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 410, -1));
 
         lblPhanTram.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPhanTram.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

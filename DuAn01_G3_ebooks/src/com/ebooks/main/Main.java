@@ -6,9 +6,14 @@ package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -29,9 +34,24 @@ public class Main extends javax.swing.JFrame {
     boolean congTac = true;
     public Main() {
         initComponents();
-//        init();
+       // init();
         setBackground(new Color(0, 0, 0, 0));
-        
+        Date();
+    }
+    public void Date() {
+        new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date now = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+                SimpleDateFormat formats = new SimpleDateFormat("dd-MM-yyyy");
+                String Time = format.format(now);
+                String Day = formats.format(now);
+                lblTime.setText(Time);
+                lblDay.setText(Day);
+            }
+        }).start();
+
     }
 
     public void SetColorPanel(JPanel panel, boolean bl) {
@@ -269,6 +289,9 @@ public class Main extends javax.swing.JFrame {
         btnBell = new com.ebooks.Compoment.MyButton();
         pnlOff = new com.ebooks.Compoment.PanelRadius();
         lblOff = new javax.swing.JLabel();
+        lblDay = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1551,9 +1574,9 @@ public class Main extends javax.swing.JFrame {
                 searchText1ActionPerformed(evt);
             }
         });
-        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 450, 40));
+        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 290, 40));
 
-        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 520, 60));
+        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 370, 60));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
@@ -1643,15 +1666,29 @@ public class Main extends javax.swing.JFrame {
 
         panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
+        lblDay.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        lblDay.setText("29-09-2022");
+        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
+
+        lblTime.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        lblTime.setText("22 : 30");
+        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, -1, -1));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 10, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1970,8 +2007,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblDay;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
+    private javax.swing.JLabel lblTime;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;

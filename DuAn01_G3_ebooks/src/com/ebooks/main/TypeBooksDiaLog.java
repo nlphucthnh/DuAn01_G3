@@ -35,7 +35,6 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -85,27 +84,21 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
         panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
-        jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel18.setText("của bạn");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 120, -1));
-        jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
-
         jTextField4.setBackground(new java.awt.Color(222, 247, 227));
         jTextField4.setText("jTextField1");
-        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 210, 40));
+        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         jTextField2.setBackground(new java.awt.Color(222, 247, 227));
         jTextField2.setText("jTextField1");
-        panelRadius2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 210, 40));
+        panelRadius2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Tên Loại Sách");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
+        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,18 +110,18 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel19.setText("Hãy điền các thông tin");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
+        jLabel19.setText("Hãy điền các thông tin của bạn");
+        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 360, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 670, 190));
+        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 670, 210));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Mã Loại Sách");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
+        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -146,10 +139,12 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_pnlExit1MouseClicked
 
     private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_lblExit1MouseClicked
 
     /*tbdSetting args the command line arguments
@@ -226,7 +221,6 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;

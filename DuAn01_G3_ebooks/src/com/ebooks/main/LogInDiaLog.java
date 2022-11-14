@@ -122,9 +122,21 @@ public class LogInDiaLog extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(87, 190, 110));
         jLabel9.setText("Đăng Ký");
+        jLabel9.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel9AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel9MousePressed(evt);
             }
         });
         panelBorder3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
@@ -159,6 +171,19 @@ public class LogInDiaLog extends javax.swing.JDialog {
     private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
        
     }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
+
+    private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
+        // TODO add your handling code here:
+       
+        
+        
+        
+    }//GEN-LAST:event_jLabel9MousePressed
+
+    private void jLabel9AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel9AncestorAdded
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_jLabel9AncestorAdded
 
     /**
      * @param args the command line arguments

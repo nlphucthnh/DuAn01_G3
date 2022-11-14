@@ -76,6 +76,9 @@ public class PersonDiaLog extends javax.swing.JDialog {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 pnlExit1MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlExit1MousePressed(evt);
+            }
         });
         pnlExit1.setLayout(new java.awt.GridBagLayout());
 
@@ -168,6 +171,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_lblExit1MouseClicked
 
     private void pnlExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
@@ -181,6 +185,11 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private void pnlExit1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlExit1MouseExited
+
+    private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_pnlExit1MousePressed
 
     /*tbdSetting args the command line arguments
      */

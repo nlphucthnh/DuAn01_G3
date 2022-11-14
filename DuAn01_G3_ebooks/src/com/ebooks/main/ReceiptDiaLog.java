@@ -171,10 +171,12 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
 
     private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_lblExit1MouseClicked
 
     private void pnlExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_pnlExit1MouseClicked
 
     private void pnlExit1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseEntered
