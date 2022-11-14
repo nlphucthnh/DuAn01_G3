@@ -128,7 +128,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("Lưu Tài Khoản");
+        myButton9.setText("Lưu Thông Tin");
         myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton9.setRadius(10);

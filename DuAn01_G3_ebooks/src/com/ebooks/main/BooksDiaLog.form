@@ -325,7 +325,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="L&#x1b0;u T&#xe0;i Kho&#x1ea3;n"/>
+            <Property name="text" type="java.lang.String" value="L&#x1b0;u Th&#xf4;ng Tin"/>
             <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6e" green="be" red="57" type="rgb"/>
             </Property>

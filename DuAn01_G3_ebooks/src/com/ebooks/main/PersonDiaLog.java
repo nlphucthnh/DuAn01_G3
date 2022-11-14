@@ -93,8 +93,8 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
         jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel18.setText("của bạn");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 120, -1));
+        jLabel18.setText("người dùng");
+        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
         jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
         jTextField3.setBackground(new java.awt.Color(222, 247, 227));
@@ -135,7 +135,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("Lưu Tài Khoản");
+        myButton9.setText("Lưu Thông Tin");
         myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton9.setRadius(10);

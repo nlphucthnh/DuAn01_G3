@@ -109,14 +109,14 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="4c" green="95" red="37" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="c&#x1ee7;a b&#x1ea1;n"/>
+            <Property name="text" type="java.lang.String" value="ng&#x1b0;&#x1edd;i d&#xf9;ng"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="H&#xe3;y &#x111;i&#x1ec1;n c&#xe1;c th&#xf4;ng tin"/>
           </AccessibilityProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="100" width="120" height="-1"/>
+              <AbsoluteConstraints x="110" y="100" width="150" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -245,7 +245,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="L&#x1b0;u T&#xe0;i Kho&#x1ea3;n"/>
+            <Property name="text" type="java.lang.String" value="L&#x1b0;u Th&#xf4;ng Tin"/>
             <Property name="boderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6e" green="be" red="57" type="rgb"/>
             </Property>

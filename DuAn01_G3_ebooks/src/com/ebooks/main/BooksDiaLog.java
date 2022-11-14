@@ -156,7 +156,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
         myButton10.setBackground(new java.awt.Color(87, 190, 110));
         myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Lưu Tài Khoản");
+        myButton10.setText("Lưu Thông Tin");
         myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton10.setRadius(10);
