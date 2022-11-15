@@ -171,7 +171,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_lblExit1MouseClicked
 
     private void pnlExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
@@ -188,7 +188,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-        System.exit(0);
+         this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
     /*tbdSetting args the command line arguments

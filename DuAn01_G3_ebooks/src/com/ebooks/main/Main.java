@@ -1579,6 +1579,11 @@ public class Main extends javax.swing.JFrame {
         panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 370, 60));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
+        imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageAvatar1MouseClicked(evt);
+            }
+        });
         panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
 
         pnlSetting.setBackground(new java.awt.Color(205, 239, 215));
@@ -1603,6 +1608,11 @@ public class Main extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnSettingMouseExited(evt);
+            }
+        });
+        btnSetting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingActionPerformed(evt);
             }
         });
         pnlSetting.add(btnSetting, new java.awt.GridBagConstraints());
@@ -1903,6 +1913,14 @@ public class Main extends javax.swing.JFrame {
         pnlOff.setBackground(new Color(205,239,215));
     }//GEN-LAST:event_pnlOffMouseExited
 
+    private void btnSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingActionPerformed
+        OpenSetting();
+    }//GEN-LAST:event_btnSettingActionPerformed
+
+    private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
+        OpenPerson();
+    }//GEN-LAST:event_imageAvatar1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2153,6 +2171,19 @@ public class Main extends javax.swing.JFrame {
         new StartUpDiaLog(this, true).setVisible(true);
         new LogInDiaLog(this, true).setVisible(true);
 
+    }
+    
+    
+    public void OpenSetting(){
+       new SettingDiaLog(this, true).setVisible(true);
+        
+    }
+    
+    
+    
+    public void OpenPerson(){
+        new AccountDiaLog(this, true).setVisible(true);
+    
     }
 
 }
