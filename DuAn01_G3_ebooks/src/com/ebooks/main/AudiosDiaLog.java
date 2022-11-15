@@ -51,6 +51,8 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         jTextField6 = new javax.swing.JTextField();
         myButton10 = new com.ebooks.Compoment.MyButton();
         jTextField7 = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -61,7 +63,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -167,6 +169,15 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         jTextField7.setBackground(new java.awt.Color(222, 247, 227));
         jTextField7.setText("jTextField1");
         panelRadius2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
+
+        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("N E R D S");
+        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+
+        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
+        jLabel33.setText("Learning is the eye of the mind");
+        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -310,6 +321,8 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

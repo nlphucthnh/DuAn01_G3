@@ -176,7 +176,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1AncestorAdded
 
     private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
-        DangNhap();
+   DangNhap();
 
 
     }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
