@@ -5,12 +5,14 @@
 package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
+import com.ebooks.helper.ShareHelper;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -32,12 +34,15 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ListenA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (4).png");
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
     boolean congTac = true;
+
     public Main() {
         initComponents();
-        init();
+       init();
+        
         setBackground(new Color(0, 0, 0, 0));
         Date();
     }
+
     public void Date() {
         new Timer(10, new ActionListener() {
             @Override
@@ -1691,10 +1696,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1724,7 +1726,7 @@ public class Main extends javax.swing.JFrame {
         pnlFrameStatistical.show(false);
         pnlFrameRead.show(false);
         pnlFrameListen.show(false);
-        
+
 
     }//GEN-LAST:event_btnMainActionPerformed
 
@@ -1734,7 +1736,7 @@ public class Main extends javax.swing.JFrame {
         SetColorPanel(pnlStatistical, false);
         SetColorPanel(pnlRead, false);
         SetColorPanel(pnlListen, false);
-         //SetColorBtn
+        //SetColorBtn
         SetColorIconBtn(btnMain, false, MainA, MainB);
         SetColorIconBtn(btnManage, true, ManageA, ManageB);
         SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
@@ -1754,7 +1756,7 @@ public class Main extends javax.swing.JFrame {
         SetColorPanel(pnlStatistical, true);
         SetColorPanel(pnlRead, false);
         SetColorPanel(pnlListen, false);
-         //SetColorBtn
+        //SetColorBtn
         SetColorIconBtn(btnMain, false, MainA, MainB);
         SetColorIconBtn(btnManage, false, ManageA, ManageB);
         SetColorIconBtn(btnStatistical, true, StatisticalA, StatisticalB);
@@ -1774,7 +1776,7 @@ public class Main extends javax.swing.JFrame {
         SetColorPanel(pnlStatistical, false);
         SetColorPanel(pnlRead, false);
         SetColorPanel(pnlListen, true);
-         //SetColorBtn
+        //SetColorBtn
         SetColorIconBtn(btnMain, false, MainA, MainB);
         SetColorIconBtn(btnManage, false, ManageA, ManageB);
         SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
@@ -1809,7 +1811,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReadActionPerformed
 
     private void searchText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchText1ActionPerformed
-        
+
     }//GEN-LAST:event_searchText1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1833,10 +1835,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_myButton129ActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        if(congTac == true){
+        if (congTac == true) {
             btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
             congTac = false;
-        }else {
+        } else {
             btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
             congTac = true;
         }
@@ -1847,70 +1849,70 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_lblOffMouseClicked
 
     private void panelBorder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBorder1MouseClicked
-        
+
     }//GEN-LAST:event_panelBorder1MouseClicked
 
     private void pnlBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseEntered
-        pnlBell.setBackground(new Color(130,219,150));
-        btnBell.setBackground(new Color(130,219,150));
-        btnBell.setBoderColor(new Color(0,0,0,0));
+        pnlBell.setBackground(new Color(130, 219, 150));
+        btnBell.setBackground(new Color(130, 219, 150));
+        btnBell.setBoderColor(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_pnlBellMouseEntered
 
     private void pnlBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseExited
-        pnlBell.setBackground(new Color(205,239,215));
-        btnBell.setBackground(new Color(205,239,215));
+        pnlBell.setBackground(new Color(205, 239, 215));
+        btnBell.setBackground(new Color(205, 239, 215));
     }//GEN-LAST:event_pnlBellMouseExited
 
     private void btnBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseEntered
-        pnlBell.setBackground(new Color(130,219,150));
-        btnBell.setBackground(new Color(130,219,150));
-        btnBell.setBoderColor(new Color(0,0,0,0));
+        pnlBell.setBackground(new Color(130, 219, 150));
+        btnBell.setBackground(new Color(130, 219, 150));
+        btnBell.setBoderColor(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_btnBellMouseEntered
 
     private void btnBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseExited
-        pnlBell.setBackground(new Color(205,239,215));
-        btnBell.setBackground(new Color(205,239,215));
+        pnlBell.setBackground(new Color(205, 239, 215));
+        btnBell.setBackground(new Color(205, 239, 215));
     }//GEN-LAST:event_btnBellMouseExited
 
     private void btnSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingMouseEntered
-        pnlSetting.setBackground(new Color(130,219,150));
-        btnSetting.setBackground(new Color(130,219,150));
+        pnlSetting.setBackground(new Color(130, 219, 150));
+        btnSetting.setBackground(new Color(130, 219, 150));
     }//GEN-LAST:event_btnSettingMouseEntered
 
     private void btnSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingMouseExited
-        pnlSetting.setBackground(new Color(205,239,215));
-        btnSetting.setBackground(new Color(205,239,215));
-        btnSetting.setBoderColor(new Color(0,0,0,0));
-        
+        pnlSetting.setBackground(new Color(205, 239, 215));
+        btnSetting.setBackground(new Color(205, 239, 215));
+        btnSetting.setBoderColor(new Color(0, 0, 0, 0));
+
     }//GEN-LAST:event_btnSettingMouseExited
 
     private void pnlSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSettingMouseEntered
-        pnlSetting.setBackground(new Color(130,219,150));
-        btnSetting.setBackground(new Color(130,219,150));
-        btnSetting.setBoderColor(new Color(0,0,0,0));
+        pnlSetting.setBackground(new Color(130, 219, 150));
+        btnSetting.setBackground(new Color(130, 219, 150));
+        btnSetting.setBoderColor(new Color(0, 0, 0, 0));
     }//GEN-LAST:event_pnlSettingMouseEntered
 
     private void pnlSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSettingMouseExited
-        pnlSetting.setBackground(new Color(205,239,215));
-        btnSetting.setBackground(new Color(205,239,215));
+        pnlSetting.setBackground(new Color(205, 239, 215));
+        btnSetting.setBackground(new Color(205, 239, 215));
     }//GEN-LAST:event_pnlSettingMouseExited
 
     private void lblOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseEntered
-        lblOff.setBackground(new Color(0,0,0,0));
-        pnlOff.setBackground(new Color(253,127,127));
+        lblOff.setBackground(new Color(0, 0, 0, 0));
+        pnlOff.setBackground(new Color(253, 127, 127));
     }//GEN-LAST:event_lblOffMouseEntered
 
     private void lblOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseExited
-        pnlOff.setBackground(new Color(205,239,215));
+        pnlOff.setBackground(new Color(205, 239, 215));
     }//GEN-LAST:event_lblOffMouseExited
 
     private void pnlOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseEntered
-        lblOff.setBackground(new Color(0,0,0,0));
-        pnlOff.setBackground(new Color(253,127,127));
+        lblOff.setBackground(new Color(0, 0, 0, 0));
+        pnlOff.setBackground(new Color(253, 127, 127));
     }//GEN-LAST:event_pnlOffMouseEntered
 
     private void pnlOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseExited
-        pnlOff.setBackground(new Color(205,239,215));
+        pnlOff.setBackground(new Color(205, 239, 215));
     }//GEN-LAST:event_pnlOffMouseExited
 
     private void btnSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingActionPerformed
@@ -2168,22 +2170,20 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table9;
     // End of variables declaration//GEN-END:variables
     public void init() {
+        setIconImage(ShareHelper.APP_ICON);
         new StartUpDiaLog(this, true).setVisible(true);
-        new LogInDiaLog(this, true).setVisible(true);
+       // new LogInDiaLog(this, true).setVisible(true);
 
     }
-    
-    
-    public void OpenSetting(){
-       new SettingDiaLog(this, true).setVisible(true);
-        
+
+    public void OpenSetting() {
+        new SettingDiaLog(this, true).setVisible(true);
+
     }
-    
-    
-    
-    public void OpenPerson(){
+
+    public void OpenPerson() {
         new AccountDiaLog(this, true).setVisible(true);
-    
+
     }
 
 }
