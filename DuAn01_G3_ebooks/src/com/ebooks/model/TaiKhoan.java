@@ -14,16 +14,17 @@ public class TaiKhoan {
     private String maNguoiDung;
     private boolean vaiTro=false;
 
-    public TaiKhoan() {
-    }
-
+    
+    
     public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.maNguoiDung = maNguoiDung;
     }
 
-   
+    public TaiKhoan() {
+    }
+
 
     public String getTenDangNhap() {
         return tenDangNhap;

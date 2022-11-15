@@ -18,10 +18,10 @@ import java.util.List;
 public class TaiKhoanDAO {
     private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException{
 	TaiKhoan model=new TaiKhoan();
-        model.setTenDangNhap(rs.getString("TenDangNhap"));
-        model.setMatKhau(rs.getString("MatKhau"));
-        model.setMaNguoiDung(rs.getString("MaNguoiDung"));
-        model.setVaiTro(rs.getBoolean("VaiTro"));
+        model.setTenDangNhap(rs.getString("tenDangNhap"));
+        model.setMatKhau(rs.getString("matKhau"));
+        model.setMaNguoiDung(rs.getString("maNguoiDung"));
+        model.setVaiTro(rs.getBoolean("vaiTro"));
         return model;
     }
     
@@ -92,7 +92,7 @@ public class TaiKhoanDAO {
      * @return thực thể chứa thông tin của bản ghi
      */
     public TaiKhoan findById(String id) {
-        String sql="SELECT * FROM TaiKhoan WHERE TenDangNhap=?";
+        String sql="SELECT * FROM TaiKhoan WHERE tenDangNhap=?";
         List<TaiKhoan> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
