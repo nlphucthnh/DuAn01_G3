@@ -34,7 +34,7 @@ public class Main extends javax.swing.JFrame {
     boolean congTac = true;
     public Main() {
         initComponents();
-       // init();
+        init();
         setBackground(new Color(0, 0, 0, 0));
         Date();
     }

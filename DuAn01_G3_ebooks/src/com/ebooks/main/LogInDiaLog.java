@@ -4,14 +4,18 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.TaiKhoanDAO;
+import com.ebooks.helper.DialogHelper;
 import java.awt.Color;
-
+import com.ebooks.helper.UtilityHelper;
+import com.ebooks.helper.ShareHelper;
+import com.ebooks.model.TaiKhoan;
 /**
  *
  * @author Thinh
  */
 public class LogInDiaLog extends javax.swing.JDialog {
-
+     TaiKhoanDAO tkDao = new TaiKhoanDAO();
     /**
      * Creates new form SignUpDiaLog
      */
@@ -169,7 +173,31 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1AncestorAdded
 
     private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
-       
+
+        if (UtilityHelper.checkNullText(txtTenDangNhap)) {
+            String tenDangNhap = txtTenDangNhap.getText();
+            if (UtilityHelper.checkNullText(txtMatKhau) && UtilityHelper.checkPass(txtMatKhau)) {
+                String matKhau = new String(txtMatKhau.getPassword());
+                TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
+                if (taiKhoan == null) {
+                    DialogHelper.alert(this, "Sai Tên Đăng Nhập");
+                    txtTenDangNhap.setText("");
+                    txtTenDangNhap.requestFocus();
+                    return;
+                } else if (!matKhau.equals(taiKhoan.getMatKhau())) {
+                    DialogHelper.alert(this, "Sai Mật Khẩu");
+                    txtMatKhau.setText("");
+                    txtMatKhau.requestFocus();
+                    return;
+                } else {
+                    ShareHelper.USER = taiKhoan;
+                    DialogHelper.alert(this, "Đăng Nhập Thành Công");
+                    this.dispose();
+                }
+            }
+        }
+
+        
     }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
 
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
