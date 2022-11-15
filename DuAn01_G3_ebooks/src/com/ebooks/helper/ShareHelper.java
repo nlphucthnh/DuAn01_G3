@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
-import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.TaiKhoan;
 
 /**
@@ -70,7 +69,7 @@ public class ShareHelper {
  /**
  * Đối tượng này chứa thông tin người sử dụng sau khi đăng nhnập
  */
- public static TaiKhoan USER = new TaiKhoan();
+ public static TaiKhoan USER = new TaiKhoan(" "," "," ");
  /**
  * Xóa thông tin của người sử dụng khi có yêu cầu đăng xuất
  */ 

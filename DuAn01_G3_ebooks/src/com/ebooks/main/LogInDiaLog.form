@@ -182,7 +182,7 @@
                 </LineBorder>
               </Border>
             </Property>
-            <Property name="text" type="java.lang.String" value=" txtFieldBoder1"/>
+            <Property name="text" type="java.lang.String" value="Thaolhpc04701"/>
             <Property name="radius" type="int" value="10"/>
           </Properties>
           <Constraints>
@@ -203,7 +203,7 @@
                 </LineBorder>
               </Border>
             </Property>
-            <Property name="text" type="java.lang.String" value=" txtFieldBoder1"/>
+            <Property name="text" type="java.lang.String" value="123"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

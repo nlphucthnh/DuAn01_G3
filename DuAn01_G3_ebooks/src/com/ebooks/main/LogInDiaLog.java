@@ -10,19 +10,22 @@ import java.awt.Color;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.TaiKhoan;
+
 /**
  *
  * @author Thinh
  */
 public class LogInDiaLog extends javax.swing.JDialog {
-     TaiKhoanDAO tkDao = new TaiKhoanDAO();
+
+    TaiKhoanDAO tkDao = new TaiKhoanDAO();
+
     /**
      * Creates new form SignUpDiaLog
      */
     public LogInDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -110,13 +113,13 @@ public class LogInDiaLog extends javax.swing.JDialog {
 
         txtTenDangNhap.setBackground(new java.awt.Color(220, 250, 220));
         txtTenDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtTenDangNhap.setText(" txtFieldBoder1");
+        txtTenDangNhap.setText("Thaolhpc04701");
         txtTenDangNhap.setRadius(10);
         panelBorder3.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 320, 40));
 
         txtMatKhau.setBackground(new java.awt.Color(220, 250, 220));
         txtMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtMatKhau.setText(" txtFieldBoder1");
+        txtMatKhau.setText("123");
         panelBorder3.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 320, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -161,7 +164,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-       
+
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -173,44 +176,20 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel1AncestorAdded
 
     private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
+        DangNhap();
 
-        if (UtilityHelper.checkNullText(txtTenDangNhap)) {
-            String tenDangNhap = txtTenDangNhap.getText();
-            if (UtilityHelper.checkNullText(txtMatKhau) && UtilityHelper.checkPass(txtMatKhau)) {
-                String matKhau = new String(txtMatKhau.getPassword());
-                TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
-                if (taiKhoan == null) {
-                    DialogHelper.alert(this, "Sai Tên Đăng Nhập");
-                    txtTenDangNhap.setText("");
-                    txtTenDangNhap.requestFocus();
-                    return;
-                } else if (!matKhau.equals(taiKhoan.getMatKhau())) {
-                    DialogHelper.alert(this, "Sai Mật Khẩu");
-                    txtMatKhau.setText("");
-                    txtMatKhau.requestFocus();
-                    return;
-                } else {
-                    ShareHelper.USER = taiKhoan;
-                    DialogHelper.alert(this, "Đăng Nhập Thành Công");
-                    this.dispose();
-                }
-            }
-        }
 
-        
     }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
 
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
         // TODO add your handling code here:
-       
-        
-        
-        
+
+
     }//GEN-LAST:event_jLabel9MousePressed
 
     private void jLabel9AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel9AncestorAdded
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_jLabel9AncestorAdded
 
     /**
@@ -256,6 +235,30 @@ public class LogInDiaLog extends javax.swing.JDialog {
         });
     }
 
+    public void DangNhap() {
+        if (UtilityHelper.checkNullText(txtTenDangNhap)) {
+            String tenDangNhap = txtTenDangNhap.getText();
+            if (UtilityHelper.checkNullText(txtMatKhau) && UtilityHelper.checkPass(txtMatKhau)) {
+                String matKhau = new String(txtMatKhau.getPassword());
+                TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
+                if (taiKhoan == null) {
+                    DialogHelper.alert(this, "Sai Tên Đăng Nhập");
+                    txtTenDangNhap.setText("");
+                    txtTenDangNhap.requestFocus();
+                    return;
+                } else if (!matKhau.equals(taiKhoan.getMatKhau())) {
+                    DialogHelper.alert(this, "Sai Mật Khẩu");
+                    txtMatKhau.setText("");
+                    txtMatKhau.requestFocus();
+                    return;
+                } else {
+                    ShareHelper.USER = taiKhoan;
+                    DialogHelper.alert(this, "Đăng Nhập Thành Công");
+                    this.dispose();
+                }
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.ebooks.Compoment.MyButton btnTaoTaiKhoan;
     private javax.swing.ButtonGroup buttonGroup1;

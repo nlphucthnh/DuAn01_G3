@@ -12,17 +12,18 @@ public class TaiKhoan {
     private String tenDangNhap;
     private String matKhau;
     private String maNguoiDung;
-    private boolean vaiTro;
+    private boolean vaiTro=false;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, boolean vaiTro) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.maNguoiDung = maNguoiDung;
-        this.vaiTro = vaiTro;
     }
+
+   
 
     public String getTenDangNhap() {
         return tenDangNhap;
