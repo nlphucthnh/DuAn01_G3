@@ -71,6 +71,8 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         lblPhanTram = new javax.swing.JLabel();
         imageBoder1 = new com.ebooks.Compoment.ImageBoder();
         pgbLoading = new javax.swing.JProgressBar();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -79,7 +81,7 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         jLabel1.setFont(new java.awt.Font("Open Sans", 1, 34)); // NOI18N
         jLabel1.setText("bạn yêu thích ");
@@ -110,6 +112,15 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         pgbLoading.setBackground(new java.awt.Color(204, 204, 204));
         pgbLoading.setForeground(new java.awt.Color(153, 255, 153));
         panelBorder1.add(pgbLoading, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 440, 14));
+
+        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("N E R D S");
+        panelBorder1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+
+        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
+        jLabel33.setText("Learning is the eye of the mind");
+        panelBorder1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +185,8 @@ public class StartUpDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPhanTram;
     private javax.swing.JLabel lblStatus;

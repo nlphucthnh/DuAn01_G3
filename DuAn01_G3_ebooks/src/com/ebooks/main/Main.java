@@ -37,10 +37,17 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-       init();
-        
+        init();
+
         setBackground(new Color(0, 0, 0, 0));
         Date();
+    }
+
+    public void init() {
+        setIconImage(ShareHelper.APP_ICON);
+        new StartUpDiaLog(this, true).setVisible(true);
+        new LogInDiaLog(this, true).setVisible(true);
+
     }
 
     public void Date() {
@@ -297,6 +304,8 @@ public class Main extends javax.swing.JFrame {
         lblDay = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ Thống eBooks");
@@ -310,8 +319,8 @@ public class Main extends javax.swing.JFrame {
         });
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/ebooks-removebg-preview.png"))); // NOI18N
+        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 70, 70));
 
         panelRadius1.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius1.setRadius(20);
@@ -1580,9 +1589,9 @@ public class Main extends javax.swing.JFrame {
                 searchText1ActionPerformed(evt);
             }
         });
-        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 290, 40));
+        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 250, 40));
 
-        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 370, 60));
+        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 320, 60));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1590,7 +1599,7 @@ public class Main extends javax.swing.JFrame {
                 imageAvatar1MouseClicked(evt);
             }
         });
-        panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
+        panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, 70, 70));
 
         pnlSetting.setBackground(new java.awt.Color(205, 239, 215));
         pnlSetting.setRadius(10);
@@ -1623,7 +1632,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlSetting.add(btnSetting, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
+        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, 40, 40));
 
         pnlBell.setBackground(new java.awt.Color(205, 239, 215));
         pnlBell.setRadius(10);
@@ -1651,7 +1660,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlBell.add(btnBell, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
+        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 40, 40, 40));
 
         pnlOff.setBackground(new java.awt.Color(205, 239, 215));
         pnlOff.setRadius(10);
@@ -1680,18 +1689,27 @@ public class Main extends javax.swing.JFrame {
         });
         pnlOff.add(lblOff, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
+        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 40, 40));
 
         lblDay.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         lblDay.setText("29-09-2022");
-        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
+        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, -1, -1));
 
         lblTime.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         lblTime.setText("22 : 30");
-        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, -1, -1));
+        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 10, 40));
+        panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 10, 40));
+
+        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 36)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("N E R D S");
+        panelBorder1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, 50));
+
+        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 12)); // NOI18N
+        jLabel33.setText("Learning is the eye of the mind");
+        panelBorder1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2008,6 +2026,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2170,12 +2190,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table8;
     private com.ebooks.Compoment.Table table9;
     // End of variables declaration//GEN-END:variables
-    public void init() {
-        setIconImage(ShareHelper.APP_ICON);
-        new StartUpDiaLog(this, true).setVisible(true);
-       // new LogInDiaLog(this, true).setVisible(true);
-
-    }
 
     public void OpenSetting() {
         new SettingDiaLog(this, true).setVisible(true);
