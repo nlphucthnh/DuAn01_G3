@@ -45,8 +45,8 @@ public class Main extends javax.swing.JFrame {
 
     public void init() {
         setIconImage(ShareHelper.APP_ICON);
-        new StartUpDiaLog(this, true).setVisible(true);
-        new LogInDiaLog(this, true).setVisible(true);
+//        new StartUpDiaLog(this, true).setVisible(true);
+//        new LogInDiaLog(this, true).setVisible(true);
 
     }
 
@@ -60,7 +60,7 @@ public class Main extends javax.swing.JFrame {
                 String Time = format.format(now);
                 String Day = formats.format(now);
                 lblTime.setText(Time);
-                lblDay.setText(Day);
+                
             }
         }).start();
 
@@ -136,6 +136,11 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table2 = new com.ebooks.Compoment.Table();
+        panelRadius4 = new com.ebooks.Compoment.PanelRadius();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
         pnlFrameManage = new com.ebooks.Compoment.PanelRadius();
         jLabel17 = new javax.swing.JLabel();
         materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
@@ -301,11 +306,7 @@ public class Main extends javax.swing.JFrame {
         btnBell = new com.ebooks.Compoment.MyButton();
         pnlOff = new com.ebooks.Compoment.PanelRadius();
         lblOff = new javax.swing.JLabel();
-        lblDay = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ Thống eBooks");
@@ -319,8 +320,8 @@ public class Main extends javax.swing.JFrame {
         });
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/ebooks-removebg-preview.png"))); // NOI18N
-        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 70, 70));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         panelRadius1.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius1.setRadius(20);
@@ -517,7 +518,7 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Open Sans", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(17, 49, 30));
         jLabel2.setText("Danh Sách Các Sách");
-        pnlFrameMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        pnlFrameMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
 
         table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -533,7 +534,27 @@ public class Main extends javax.swing.JFrame {
         table2.setRadius(10);
         jScrollPane2.setViewportView(table2);
 
-        pnlFrameMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 700, 460));
+        pnlFrameMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 700, 260));
+
+        panelRadius4.setBackground(new java.awt.Color(205, 239, 215));
+        panelRadius4.setRadius(20);
+        panelRadius4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/13.png"))); // NOI18N
+        panelRadius4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 260, 140));
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/181-removebg-preview.png"))); // NOI18N
+        panelRadius4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("Inter SemiBold", 0, 36)); // NOI18N
+        jLabel34.setText("NERDS");
+        panelRadius4.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        jLabel35.setText("Học tập là ánh mắt của tri thức ");
+        panelRadius4.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        pnlFrameMain.add(panelRadius4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 700, 180));
 
         pnlBossMain.add(pnlFrameMain, "card2");
 
@@ -1589,9 +1610,9 @@ public class Main extends javax.swing.JFrame {
                 searchText1ActionPerformed(evt);
             }
         });
-        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 250, 40));
+        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 410, 40));
 
-        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 320, 60));
+        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 480, 60));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1599,7 +1620,7 @@ public class Main extends javax.swing.JFrame {
                 imageAvatar1MouseClicked(evt);
             }
         });
-        panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, 70, 70));
+        panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
 
         pnlSetting.setBackground(new java.awt.Color(205, 239, 215));
         pnlSetting.setRadius(10);
@@ -1632,7 +1653,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlSetting.add(btnSetting, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, 40, 40));
+        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
 
         pnlBell.setBackground(new java.awt.Color(205, 239, 215));
         pnlBell.setRadius(10);
@@ -1660,7 +1681,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlBell.add(btnBell, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 40, 40, 40));
+        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
 
         pnlOff.setBackground(new java.awt.Color(205, 239, 215));
         pnlOff.setRadius(10);
@@ -1689,27 +1710,11 @@ public class Main extends javax.swing.JFrame {
         });
         pnlOff.add(lblOff, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 40, 40));
+        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
-        lblDay.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        lblDay.setText("29-09-2022");
-        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, -1, -1));
-
-        lblTime.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        lblTime.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
         lblTime.setText("22 : 30");
-        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 10, 40));
-
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 36)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelBorder1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, 50));
-
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 12)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelBorder1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, -1));
+        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2028,6 +2033,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2048,8 +2055,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblDay;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
     private javax.swing.JLabel lblTime;
@@ -2154,6 +2159,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius30;
     private com.ebooks.Compoment.PanelRadius panelRadius31;
+    private com.ebooks.Compoment.PanelRadius panelRadius4;
     private com.ebooks.Compoment.PanelRadius panelRadius6;
     private com.ebooks.Compoment.PanelRadius panelRadius7;
     private com.ebooks.Compoment.PanelRadius panelRadius8;
