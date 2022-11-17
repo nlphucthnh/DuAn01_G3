@@ -19,8 +19,7 @@ public class QuanTriVienDAO {
     private QuanTriVien readFromResultSet(ResultSet rs) throws SQLException{
 	QuanTriVien model=new QuanTriVien();
         model.setMaQuanTriVien(rs.getString("MaQuanTriVien"));
-        model.setTenDangNhap(rs.getString("TenDangNhap"));
-        model.setMaNguoiDung(rs.getString("MaNguoiDung"));
+        model.setTenDangNhap(rs.getString("TenDangNhap"));        
         return model;
     }
     
@@ -47,21 +46,19 @@ public class QuanTriVienDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(QuanTriVien entity) {
-        String sql="INSERT INTO QuanTriVien (MaQuanTriVien, TenDangNhap, MaNguoiDung) VALUES (?, ?, ?)";
+        String sql="INSERT INTO QuanTriVien (MaQuanTriVien, TenDangNhap) VALUES (?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaQuanTriVien(),
-                entity.getTenDangNhap(),
-                entity.getMaNguoiDung());
+                entity.getTenDangNhap());
     }
     /**
      * Cập nhật thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(QuanTriVien entity) {
-        String sql="UPDATE QuanTriVien SET TenDangNhap=?, MaNguoiDung=? WHERE MaQuanTriVien=?";
+        String sql="UPDATE QuanTriVien SET TenDangNhap=? WHERE tenDangNhap=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenDangNhap(),
-                entity.getMaNguoiDung(),
                 entity.getMaQuanTriVien());
     }
     
@@ -70,7 +67,7 @@ public class QuanTriVienDAO {
      * @param id là mã của bản ghi cần xóa
      */
     public void delete(String id) {
-        String sql="DELETE FROM QuanTriVien WHERE MaQuanTriVien=?";
+        String sql="DELETE FROM QuanTriVien WHERE tenDangNhap=?";
         JdbcHelper.executeUpdate(sql, id);
     }
     
@@ -89,8 +86,10 @@ public class QuanTriVienDAO {
      * @return thực thể chứa thông tin của bản ghi
      */
     public QuanTriVien findById(String id) {
-        String sql="SELECT * FROM QuanTriVien WHERE MaQuanTriVien=?";
+        String sql="SELECT * FROM QuanTriVien WHERE tenDangNhap=?";
         List<QuanTriVien> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
+    
+    
 }

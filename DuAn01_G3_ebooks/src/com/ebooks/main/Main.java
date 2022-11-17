@@ -7,6 +7,7 @@ package com.ebooks.main;
 import com.ebooks.Compoment.MyButton;
 import com.ebooks.helper.ShareHelper;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -38,16 +39,33 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
-
+        movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
     }
 
     public void init() {
         setIconImage(ShareHelper.APP_ICON);
-//        new StartUpDiaLog(this, true).setVisible(true);
-//        new LogInDiaLog(this, true).setVisible(true);
+        new StartUpDiaLog(this, true).setVisible(true);
+        new LogInDiaLog(this, true).setVisible(true);
 
+    }
+    
+    
+    public void movedpnlMenu(){
+        if(ShareHelper.isManager()){
+            pnlManage.setVisible(true);
+            pnlStatistical.setVisible(true);
+            pnlRead.setLocation(15,260);
+            pnlListen.setLocation(15,340);
+            System.out.println("Thịnh là BOSS");
+        }else {
+            pnlManage.setVisible(false);
+            pnlStatistical.setVisible(false);
+            pnlRead.setLocation(new Point(15,100));
+            pnlListen.setLocation(new Point(15,180));
+            System.out.println("Thịnh là USER");
+        }
     }
 
     public void Date() {
@@ -325,7 +343,7 @@ public class Main extends javax.swing.JFrame {
 
         panelRadius1.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius1.setRadius(20);
-        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius1.setLayout(null);
 
         pnlMain.setBackground(new java.awt.Color(145, 227, 168));
         pnlMain.setRadius(15);
@@ -342,7 +360,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnlMain.add(btnMain, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 20, 60, 60));
+        panelRadius1.add(pnlMain);
+        pnlMain.setBounds(15, 20, 60, 60);
 
         pnlManage.setBackground(new java.awt.Color(205, 239, 215));
         pnlManage.setRadius(15);
@@ -360,7 +379,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnlManage.add(btnManage, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlManage, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 100, 60, 60));
+        panelRadius1.add(pnlManage);
+        pnlManage.setBounds(15, 100, 60, 60);
 
         pnlStatistical.setBackground(new java.awt.Color(205, 239, 215));
         pnlStatistical.setRadius(15);
@@ -377,7 +397,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnlStatistical.add(btnStatistical, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlStatistical, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 180, 60, 60));
+        panelRadius1.add(pnlStatistical);
+        pnlStatistical.setBounds(15, 180, 60, 60);
 
         pnlRead.setBackground(new java.awt.Color(205, 239, 215));
         pnlRead.setRadius(15);
@@ -394,7 +415,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnlRead.add(btnRead, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 260, 60, 60));
+        panelRadius1.add(pnlRead);
+        pnlRead.setBounds(15, 260, 60, 60);
 
         pnlListen.setBackground(new java.awt.Color(205, 239, 215));
         pnlListen.setRadius(15);
@@ -411,7 +433,8 @@ public class Main extends javax.swing.JFrame {
         });
         pnlListen.add(btnListen, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlListen, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 340, 60, 60));
+        panelRadius1.add(pnlListen);
+        pnlListen.setBounds(15, 340, 60, 60);
 
         panelBorder1.add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, 450));
 

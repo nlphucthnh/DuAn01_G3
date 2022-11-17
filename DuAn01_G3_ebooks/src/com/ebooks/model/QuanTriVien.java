@@ -11,15 +11,15 @@ package com.ebooks.model;
 public class QuanTriVien {
     private String maQuanTriVien;
     private String tenDangNhap;
-    private String maNguoiDung;
+   
 
     public QuanTriVien() {
     }
 
-    public QuanTriVien(String maQuanTriVien, String tenDangNhap, String maNguoiDung) {
+    public QuanTriVien(String maQuanTriVien, String tenDangNhap) {
         this.maQuanTriVien = maQuanTriVien;
         this.tenDangNhap = tenDangNhap;
-        this.maNguoiDung = maNguoiDung;
+       
     }
 
     public String getMaQuanTriVien() {
@@ -38,12 +38,6 @@ public class QuanTriVien {
         this.tenDangNhap = tenDangNhap;
     }
 
-    public String getMaNguoiDung() {
-        return maNguoiDung;
-    }
-
-    public void setMaNguoiDung(String maNguoiDung) {
-        this.maNguoiDung = maNguoiDung;
-    }
+   
     
 }

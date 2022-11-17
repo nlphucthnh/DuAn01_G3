@@ -5,6 +5,7 @@
  */
 package com.ebooks.helper;
 
+import com.ebooks.model.QuanTriVien;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.Files;
@@ -69,26 +70,39 @@ public class ShareHelper {
  /**
  * Đối tượng này chứa thông tin người sử dụng sau khi đăng nhnập
  */
- public static TaiKhoan USER = new TaiKhoan(" "," "," ");
+ public static QuanTriVien BOSS = new QuanTriVien();
+ 
+ public static TaiKhoan USER = new TaiKhoan();
+ 
  /**
  * Xóa thông tin của người sử dụng khi có yêu cầu đăng xuất
  */ 
  public static void clear(){
+     ShareHelper.BOSS = null;
      ShareHelper.USER = null;
  }
  /**
  * Kiểm tra xem đăng nhập hay chưa
  * @return đăng nhập hay chưa
  */
- public static boolean isLogin() {
+  public static boolean isLogin() {
     return ShareHelper.USER != null;
  }
+//  Kiểm tra xem đăng nhập hay chưa
+// * @return đăng nhập hay chưa
+
  
+ public static boolean isUser() {
+    return ShareHelper.USER != null;
+ }
+ //  Kiểm tra xem Người dùng đăng nhập hay chưa
  
  public static boolean isManager(){
-    return ShareHelper.isLogin() && USER.isVaiTro();
+    return ShareHelper.BOSS != null;
  }
-
+ //  Kiểm tra xem Quan Tri Viên đăng nhập hay chưa
+ 
+ 
  public static void logoff() {
     ShareHelper.USER = null;
  }

@@ -21,7 +21,7 @@ public class TaiKhoanDAO {
         model.setTenDangNhap(rs.getString("tenDangNhap"));
         model.setMatKhau(rs.getString("matKhau"));
         model.setMaNguoiDung(rs.getString("maNguoiDung"));
-        model.setVaiTro(rs.getBoolean("vaiTro"));
+        model.setTrangThai(rs.getBoolean("trangThai"));
         return model;
     }
     
@@ -53,7 +53,7 @@ public class TaiKhoanDAO {
                 entity.getTenDangNhap(),
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
-                entity.isVaiTro());
+                entity.isTrangThai());
     }
     /**
      * Cập nhật thực thể vào CSDL
@@ -64,7 +64,7 @@ public class TaiKhoanDAO {
         JdbcHelper.executeUpdate(sql,
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
-                entity.isVaiTro(),
+                entity.isTrangThai(),
                 entity.getTenDangNhap());
     }
     

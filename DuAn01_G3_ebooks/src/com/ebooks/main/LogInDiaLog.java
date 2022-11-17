@@ -4,12 +4,15 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.QuanTriVienDAO;
 import com.ebooks.dao.TaiKhoanDAO;
 import com.ebooks.helper.DialogHelper;
 import java.awt.Color;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.helper.ShareHelper;
+import com.ebooks.model.QuanTriVien;
 import com.ebooks.model.TaiKhoan;
+import com.ebooks.Compoment.MyButton;
 
 /**
  *
@@ -18,6 +21,7 @@ import com.ebooks.model.TaiKhoan;
 public class LogInDiaLog extends javax.swing.JDialog {
 
     TaiKhoanDAO tkDao = new TaiKhoanDAO();
+    QuanTriVienDAO qtvDao = new QuanTriVienDAO();
 
     /**
      * Creates new form SignUpDiaLog
@@ -42,7 +46,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
         lblLogo = new javax.swing.JLabel();
         imageBoder2 = new com.ebooks.Compoment.ImageBoder();
         jLabel2 = new javax.swing.JLabel();
-        btnTaoTaiKhoan = new com.ebooks.Compoment.MyButton();
+        btnDangNhap = new com.ebooks.Compoment.MyButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,20 +72,20 @@ public class LogInDiaLog extends javax.swing.JDialog {
         jLabel2.setText("Đăng Nhập vào Nerds");
         panelBorder3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
-        btnTaoTaiKhoan.setBackground(new java.awt.Color(87, 190, 110));
-        btnTaoTaiKhoan.setBorder(null);
-        btnTaoTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
-        btnTaoTaiKhoan.setText("Đăng Nhập ");
-        btnTaoTaiKhoan.setBoderColor(new java.awt.Color(255, 255, 255));
-        btnTaoTaiKhoan.setColorOver(new java.awt.Color(54, 172, 63));
-        btnTaoTaiKhoan.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
-        btnTaoTaiKhoan.setRadius(10);
-        btnTaoTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+        btnDangNhap.setBackground(new java.awt.Color(87, 190, 110));
+        btnDangNhap.setBorder(null);
+        btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setText("Đăng Nhập ");
+        btnDangNhap.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setColorOver(new java.awt.Color(54, 172, 63));
+        btnDangNhap.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
+        btnDangNhap.setRadius(10);
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaoTaiKhoanActionPerformed(evt);
+                btnDangNhapActionPerformed(evt);
             }
         });
-        panelBorder3.add(btnTaoTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 160, 40));
+        panelBorder3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 160, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Tên Đăng Nhập");
@@ -175,12 +179,6 @@ public class LogInDiaLog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jLabel1AncestorAdded
 
-    private void btnTaoTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoanActionPerformed
-   DangNhap();
-
-
-    }//GEN-LAST:event_btnTaoTaiKhoanActionPerformed
-
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
         // TODO add your handling code here:
 
@@ -191,6 +189,11 @@ public class LogInDiaLog extends javax.swing.JDialog {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jLabel9AncestorAdded
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        DangNhap();
+
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +244,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
             if (UtilityHelper.checkNullText(txtMatKhau) && UtilityHelper.checkPass(txtMatKhau)) {
                 String matKhau = new String(txtMatKhau.getPassword());
                 TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
+                QuanTriVien quanTri = qtvDao.findById(tenDangNhap);
                 if (taiKhoan == null) {
                     DialogHelper.alert(this, "Sai Tên Đăng Nhập");
                     txtTenDangNhap.setText("");
@@ -252,15 +256,24 @@ public class LogInDiaLog extends javax.swing.JDialog {
                     txtMatKhau.requestFocus();
                     return;
                 } else {
-                    ShareHelper.USER = taiKhoan;
-                    DialogHelper.alert(this, "Đăng Nhập Thành Công");
-                    this.dispose();
+                    if (quanTri == null) {
+                        ShareHelper.USER = taiKhoan;
+                        ShareHelper.BOSS = null;
+                        DialogHelper.alert(this, "Đăng Nhập Thành Công");
+                        this.dispose();
+                    } else {
+                        if (taiKhoan.getTenDangNhap().equals(quanTri.getTenDangNhap())) {
+                            ShareHelper.BOSS = quanTri;
+                            DialogHelper.alert(this, "Quản Trị Viên Đăng Nhập Thành Công");
+                            this.dispose();
+                        }
+                    }
                 }
             }
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.ebooks.Compoment.MyButton btnTaoTaiKhoan;
+    private com.ebooks.Compoment.MyButton btnDangNhap;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder2;
     private javax.swing.JLabel jLabel1;
