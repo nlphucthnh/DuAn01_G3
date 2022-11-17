@@ -12,19 +12,7 @@ public class TaiKhoan {
     private String tenDangNhap;
     private String matKhau;
     private String maNguoiDung;
-    private boolean vaiTro=false;
-
-    
-    
-    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung) {
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-        this.maNguoiDung = maNguoiDung;
-    }
-
-    public TaiKhoan() {
-    }
-
+    private boolean TrangThai=false;
 
     public String getTenDangNhap() {
         return tenDangNhap;
@@ -50,12 +38,16 @@ public class TaiKhoan {
         this.maNguoiDung = maNguoiDung;
     }
 
-    public boolean isVaiTro() {
-        return vaiTro;
+    public boolean isTrangThai() {
+        return TrangThai;
     }
 
-    public void setVaiTro(boolean vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
     }
+
+    
+    
+    
     
 }

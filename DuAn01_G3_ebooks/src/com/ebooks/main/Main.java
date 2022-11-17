@@ -1713,8 +1713,8 @@ public class Main extends javax.swing.JFrame {
         panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
         lblTime.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
-        lblTime.setText("22 : 30");
-        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, -1, -1));
+        lblTime.setText("22 : 30 CH");
+        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
