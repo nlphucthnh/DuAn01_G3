@@ -74,11 +74,11 @@ public class Main extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 Date now = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-                SimpleDateFormat formats = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
                 String Time = format.format(now);
                 String Day = formats.format(now);
                 lblTime.setText(Time);
-                
+                lblDay.setText(Day);
             }
         }).start();
 
@@ -324,6 +324,7 @@ public class Main extends javax.swing.JFrame {
         btnBell = new com.ebooks.Compoment.MyButton();
         pnlOff = new com.ebooks.Compoment.PanelRadius();
         lblOff = new javax.swing.JLabel();
+        lblDay = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1735,6 +1736,10 @@ public class Main extends javax.swing.JFrame {
 
         panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
+        lblDay.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        lblDay.setText("17/11/2022");
+        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, -1, -1));
+
         lblTime.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
         lblTime.setText("22 : 30 CH");
         panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
@@ -2078,6 +2083,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lblDay;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
     private javax.swing.JLabel lblTime;

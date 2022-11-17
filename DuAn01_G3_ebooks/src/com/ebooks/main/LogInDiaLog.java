@@ -117,13 +117,13 @@ public class LogInDiaLog extends javax.swing.JDialog {
 
         txtTenDangNhap.setBackground(new java.awt.Color(220, 250, 220));
         txtTenDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtTenDangNhap.setText("Thaolhpc04701");
+        txtTenDangNhap.setText("ThaoLH");
         txtTenDangNhap.setRadius(10);
         panelBorder3.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 320, 40));
 
         txtMatKhau.setBackground(new java.awt.Color(220, 250, 220));
         txtMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtMatKhau.setText("123");
+        txtMatKhau.setText("123456798");
         panelBorder3.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 320, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
