@@ -5,6 +5,8 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.util.Calendar;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -12,12 +14,13 @@ import java.awt.Color;
  */
 public class AuthorDiaLog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form SettingDiaLog
-     */
+    boolean congTac = false;
+    
     public AuthorDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Calendar.setVisible(congTac);
+        congTac = !congTac;
         setBackground(new Color(0,0,0,0));
     }
 
@@ -32,6 +35,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        Calendar = new com.toedter.calendar.JCalendar();
         lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
@@ -52,6 +56,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
+        btnIconCld = new com.ebooks.Compoment.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -60,6 +65,12 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius2.setRadius(25);
         panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Calendar.setBackground(new java.awt.Color(201, 235, 201));
+        Calendar.setDecorationBackgroundColor(new java.awt.Color(153, 255, 153));
+        Calendar.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        Calendar.setWeekdayForeground(new java.awt.Color(51, 51, 51));
+        panelRadius2.add(Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, -1, -1));
 
         lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
         panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
@@ -100,7 +111,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         jTextField3.setBackground(new java.awt.Color(222, 247, 227));
         jTextField3.setText("jTextField1");
-        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 220, 40));
+        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Ngày Sinh");
@@ -155,7 +166,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 670, 120));
+        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 680, 120));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Họ Tên Người Dùng");
@@ -169,6 +180,18 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
         jLabel33.setText("Learning is the eye of the mind");
         panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
+
+        btnIconCld.setBackground(new java.awt.Color(87, 190, 110));
+        btnIconCld.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/calendar.png"))); // NOI18N
+        btnIconCld.setActionCommand("");
+        btnIconCld.setAutoscrolls(true);
+        btnIconCld.setBoderColor(new java.awt.Color(204, 204, 204));
+        btnIconCld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIconCldActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(btnIconCld, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 55, 40));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -202,6 +225,11 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_lblExit1MousePressed
 
+    private void btnIconCldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIconCldActionPerformed
+        Calendar.setVisible(congTac);
+        congTac = !congTac;
+    }//GEN-LAST:event_btnIconCldActionPerformed
+
     /*tbdSetting args the command line arguments
      */
    public static void main(String args[]) {
@@ -212,7 +240,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -275,6 +303,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar Calendar;
+    private com.ebooks.Compoment.MyButton btnIconCld;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel19;
