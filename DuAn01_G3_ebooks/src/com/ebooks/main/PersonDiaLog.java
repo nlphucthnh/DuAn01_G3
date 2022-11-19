@@ -109,7 +109,6 @@ public class PersonDiaLog extends javax.swing.JDialog {
         jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
         txtSoDienThoai.setBackground(new java.awt.Color(222, 247, 227));
-        txtSoDienThoai.setText("0950747777");
         panelRadius2.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -117,7 +116,6 @@ public class PersonDiaLog extends javax.swing.JDialog {
         panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
         txtHoTen.setBackground(new java.awt.Color(222, 247, 227));
-        txtHoTen.setText("Nguyễn Lê Phúc Thịnh");
         panelRadius2.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -129,7 +127,6 @@ public class PersonDiaLog extends javax.swing.JDialog {
         panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(222, 247, 227));
-        txtEmail.setText("thinh@gmail.com");
         panelRadius2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -224,7 +221,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
         if(nd.isGioiTinh()){
             rdoNam.setEnabled(true);
         }else {
-            rdoNu.setEnabled(true);
+            rdoNam.setEnabled(false);
         }
     }
     /*tbdSetting args the command line arguments
