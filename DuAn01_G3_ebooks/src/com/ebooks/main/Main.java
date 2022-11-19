@@ -5,7 +5,11 @@
 package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
+import com.ebooks.Compoment.Table;
+import com.ebooks.dao.NguoiDungDAO;
+import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
+import com.ebooks.model.NguoiDung;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -14,7 +18,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
@@ -22,6 +28,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,7 +47,11 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ListenA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (4).png");
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
     boolean congTac = true;
-
+    NguoiDungDAO DaoND = new NguoiDungDAO();
+    
+    private static NguoiDung nguoiDung = null;
+    
+    
     public Main() {
         initComponents();
         initMoving(this);
@@ -48,6 +59,7 @@ public class Main extends javax.swing.JFrame {
         movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
+        fillTableNguoiDung();
     }
 
     public void init() {
@@ -229,7 +241,7 @@ public class Main extends javax.swing.JFrame {
         myButton100 = new com.ebooks.Compoment.MyButton();
         panelRadius14 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane8 = new javax.swing.JScrollPane();
-        table8 = new com.ebooks.Compoment.Table();
+        tblNguoiDung = new com.ebooks.Compoment.Table();
         myButton101 = new com.ebooks.Compoment.MyButton();
         myButton102 = new com.ebooks.Compoment.MyButton();
         myButton103 = new com.ebooks.Compoment.MyButton();
@@ -1038,7 +1050,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius14.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table8.setModel(new javax.swing.table.DefaultTableModel(
+        tblNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1049,7 +1061,12 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane8.setViewportView(table8);
+        tblNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblNguoiDungMousePressed(evt);
+            }
+        });
+        jScrollPane8.setViewportView(tblNguoiDung);
 
         panelRadius14.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
 
@@ -1981,6 +1998,16 @@ public class Main extends javax.swing.JFrame {
         OpenPerson();
     }//GEN-LAST:event_imageAvatar1MouseClicked
 
+    private void tblNguoiDungMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNguoiDungMousePressed
+        if(evt.getClickCount() == 2){
+            int indexRow = tblNguoiDung.getSelectedRow();
+            String MaNguoiDung = (String) tblNguoiDung.getValueAt(indexRow,0);
+            nguoiDung = DaoND.findById(MaNguoiDung);
+            new PersonDiaLog(this, congTac, nguoiDung).setVisible(true);
+            
+        }
+    }//GEN-LAST:event_tblNguoiDungMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -2228,8 +2255,8 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table5;
     private com.ebooks.Compoment.Table table6;
     private com.ebooks.Compoment.Table table7;
-    private com.ebooks.Compoment.Table table8;
     private com.ebooks.Compoment.Table table9;
+    private com.ebooks.Compoment.Table tblNguoiDung;
     // End of variables declaration//GEN-END:variables
 
     public void OpenSetting() {
@@ -2260,6 +2287,24 @@ public class Main extends javax.swing.JFrame {
                 frame.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
             }
         });
+    }
+    
+    DefaultTableModel model;
+    
+    public void fillTableNguoiDung(){
+        
+        model = (DefaultTableModel) tblNguoiDung.getModel();
+        model.setRowCount(0);
+        List<NguoiDung> LisND = new  ArrayList<>();
+        try {
+            LisND = DaoND.selectAll();
+            for (NguoiDung nd : LisND) {
+                Object[] row = {nd.getMaNguoiDung(), nd.getHoTen(), nd.isGioiTinh() ? "Nam" : "Nữ",nd.getSoDienThoai()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
     }
 
 }

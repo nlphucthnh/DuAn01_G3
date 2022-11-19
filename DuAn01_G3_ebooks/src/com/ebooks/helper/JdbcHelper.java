@@ -11,14 +11,14 @@ import java.util.logging.Logger;
 
 
 public class JdbcHelper {
-    public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private final static String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=eBOOK;encrypt=false;";
     public static String username = "sa";
     public static String password = "123";
     
     static {
         try {
-            Class.forName(driver);
+            Class.forName(DRIVER);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JdbcHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,6 +60,7 @@ public class JdbcHelper {
 
             }
         } catch (SQLException ex) {
+
             throw new RuntimeException(ex);
         }
     }
