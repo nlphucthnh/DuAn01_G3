@@ -642,6 +642,11 @@ public class Main extends javax.swing.JFrame {
         myButton8.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton8.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton8.setRadius(10);
+        myButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton8ActionPerformed(evt);
+            }
+        });
         panelRadius9.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
@@ -1096,6 +1101,11 @@ public class Main extends javax.swing.JFrame {
         myButton107.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton107.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton107.setRadius(10);
+        myButton107.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton107ActionPerformed(evt);
+            }
+        });
         panelRadius14.add(myButton107, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
         materialTabbed1.addTab("Người Dùng", panelRadius14);
@@ -1974,6 +1984,14 @@ public class Main extends javax.swing.JFrame {
     private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
         OpenPerson();
     }//GEN-LAST:event_imageAvatar1MouseClicked
+
+    private void myButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton107ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton107ActionPerformed
+
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8ActionPerformed
 
     /**
      * @param args the command line arguments
