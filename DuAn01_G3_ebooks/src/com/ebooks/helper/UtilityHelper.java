@@ -8,8 +8,10 @@ import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -19,7 +21,7 @@ import javax.swing.JTextField;
  */
 public class UtilityHelper {
 
-    public static boolean checkMa(JLabel lbl,JTextField txt) {
+    public static boolean checkMa(JLabel lbl, JTextField txt) {
 
         String id = txt.getText();
         String rgx = "[a-zA-Z0-9]{5,10}";
@@ -27,7 +29,7 @@ public class UtilityHelper {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), lbl.getText()+ " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
+            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
             return false;
         }
     }
@@ -104,7 +106,7 @@ public class UtilityHelper {
             return false;
         }
     }
-    
+
     //gồm 10 số 
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
@@ -119,9 +121,9 @@ public class UtilityHelper {
             return false;
         }
     }
-    
+
     public static boolean checkEmail(JTextField txt) {
-    
+
         String id = txt.getText();
         String rgx = "^[a-zA-Z][a-zA-Z0-9_\\.]{2,32}@[a-zA-Z0-9]{2,10}(\\.[a-zA-Z0-9]{2,4}){1,2}$";
         if (id.matches(rgx)) {
@@ -152,10 +154,10 @@ public class UtilityHelper {
 //        }
 //    }
     //================================================================================
-    
+
     //giá là float >0
     public static boolean checkGia(JTextField txt) {
-        
+
         try {
             float hp = Float.parseFloat(txt.getText());
             if (hp >= 0) {
@@ -171,18 +173,18 @@ public class UtilityHelper {
             return false;
         }
     }
-    
+
     public static boolean checkNullText(JTextField txt) {
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
-            
+
             DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
-    
-    public static boolean checkNullText(JTextArea txt) {  
+
+    public static boolean checkNullText(JTextArea txt) {
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
@@ -191,7 +193,7 @@ public class UtilityHelper {
             return false;
         }
     }
-    
+
     public static boolean checkNullPass(JPasswordField txt) {
         if (txt.getPassword().length > 0) {
             return true;
@@ -200,5 +202,31 @@ public class UtilityHelper {
             DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
+    }
+
+    public static void first(int index, JTable table) {
+        index = 0;
+        table.setRowSelectionInterval(index, index);
+    }
+
+    public static void previous(int index, JTable table, List list) {
+        index--;
+        if (index < 0) {
+            index = list.size() - 1;
+        }
+        table.setRowSelectionInterval(index, index);
+    }
+    
+    public static void next(int index, JTable table, List list) {
+        index++;
+        if (index > list.size() - 1) {
+            index = 0;
+        }
+        table.setRowSelectionInterval(index, index);
+    }
+    
+    public static void last(int index, JTable table, List list) {
+        index = list.size() - 1;
+        table.setRowSelectionInterval(index, index);
     }
 }

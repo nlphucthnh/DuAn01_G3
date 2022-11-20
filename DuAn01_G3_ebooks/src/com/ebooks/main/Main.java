@@ -1164,24 +1164,44 @@ public class Main extends javax.swing.JFrame {
         btnFirstThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
         btnFirstThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
         btnFirstThucUong.setRadius(10);
+        btnFirstThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstThucUongActionPerformed(evt);
+            }
+        });
         pnlThucUong.add(btnFirstThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
 
         btnPreThucUong.setBackground(new java.awt.Color(145, 227, 168));
         btnPreThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
         btnPreThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
         btnPreThucUong.setRadius(10);
+        btnPreThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreThucUongActionPerformed(evt);
+            }
+        });
         pnlThucUong.add(btnPreThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
 
         btnNextThucUong.setBackground(new java.awt.Color(145, 227, 168));
         btnNextThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
         btnNextThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
         btnNextThucUong.setRadius(10);
+        btnNextThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextThucUongActionPerformed(evt);
+            }
+        });
         pnlThucUong.add(btnNextThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
 
         btnLastThucUong.setBackground(new java.awt.Color(145, 227, 168));
         btnLastThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
         btnLastThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
         btnLastThucUong.setRadius(10);
+        btnLastThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastThucUongActionPerformed(evt);
+            }
+        });
         pnlThucUong.add(btnLastThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
         btnThucUong.setBackground(new java.awt.Color(87, 190, 110));
@@ -2085,6 +2105,26 @@ public class Main extends javax.swing.JFrame {
             this.fillTableThucUong();
         }
     }//GEN-LAST:event_btnXoaThucUongActionPerformed
+
+    private void btnFirstThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.first(index, tblThucUong);
+    }//GEN-LAST:event_btnFirstThucUongActionPerformed
+
+    private void btnPreThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.previous(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnPreThucUongActionPerformed
+
+    private void btnNextThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.next(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnNextThucUongActionPerformed
+
+    private void btnLastThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.last(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnLastThucUongActionPerformed
 
     /**
      * @param args the command line arguments
