@@ -8,6 +8,7 @@ import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -18,15 +19,15 @@ import javax.swing.JTextField;
  */
 public class UtilityHelper {
 
-    public static boolean checkMa(JTextField txt) {
+    public static boolean checkMa(JLabel lbl,JTextField txt) {
 
         String id = txt.getText();
-        String rgx = "[a-zA-Z0-9]{10}";
+        String rgx = "[a-zA-Z0-9]{5,10}";
         if (id.matches(rgx)) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
+            DialogHelper.alert(txt.getRootPane(), lbl.getText()+ " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
             return false;
         }
     }
