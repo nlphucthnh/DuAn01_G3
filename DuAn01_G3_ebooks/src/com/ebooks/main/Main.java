@@ -14,12 +14,15 @@ import jaco.mp3.player.MP3Player;
 
 import com.ebooks.dao.HoaDonThucUongDAO;
 import com.ebooks.dao.NguoiDungDAO;
+import com.ebooks.dao.SachDAO;
+import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.ThucUongDAO;
 import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.HoaDonThucUong;
 import com.ebooks.model.NguoiDung;
+import com.ebooks.model.Sach;
 import com.ebooks.model.ThucUong;
 
 import java.awt.Color;
@@ -81,17 +84,18 @@ public class Main extends javax.swing.JFrame {
     NguoiDungDAO DaoND = new NguoiDungDAO();
     ThucUongDAO DaoTU = new ThucUongDAO();
     HoaDonThucUongDAO DaoHD = new HoaDonThucUongDAO();
-
+    SachDAO DAOS = new SachDAO();
+    TacGiaDAO DAOTG = new TacGiaDAO();
     //model 
     NguoiDung nguoiDung = new NguoiDung();
     ThucUong thucUong = new ThucUong();
     HoaDonThucUong hoaDonThucUong = new HoaDonThucUong();
-
+    Sach sach = new Sach();
     //List
     List<NguoiDung> listND = new ArrayList<>();
     List<ThucUong> listTU = new ArrayList<>();
     List<HoaDonThucUong> listHD = new ArrayList<>();
-
+    List<Sach> listS = new ArrayList<>();
     int index = -1;
 
 
@@ -106,7 +110,7 @@ public class Main extends javax.swing.JFrame {
         fillTableAudio();
 
 
-        FillTableNguoiDung();
+        fillTableNguoiDung();
         fillTableThucUong();
 
     }
@@ -282,7 +286,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius10 = new com.ebooks.Compoment.PanelRadius();
         panelRadius17 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane3 = new javax.swing.JScrollPane();
-        table3 = new com.ebooks.Compoment.Table();
+        tblSach = new com.ebooks.Compoment.Table();
         myButton18 = new com.ebooks.Compoment.MyButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
@@ -790,7 +794,7 @@ public class Main extends javax.swing.JFrame {
 
         panelRadius10.add(panelRadius17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 390, 40));
 
-        table3.setModel(new javax.swing.table.DefaultTableModel(
+        tblSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -801,7 +805,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(table3);
+        jScrollPane3.setViewportView(tblSach);
 
         panelRadius10.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 860, 300));
 
@@ -2485,7 +2489,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table12;
     private com.ebooks.Compoment.Table table14;
     private com.ebooks.Compoment.Table table2;
-    private com.ebooks.Compoment.Table table3;
     private com.ebooks.Compoment.Table table4;
     private com.ebooks.Compoment.Table table5;
     private com.ebooks.Compoment.Table table6;
@@ -2493,6 +2496,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table tblAudio;
     private com.ebooks.Compoment.Table tblHoaDon;
     private com.ebooks.Compoment.Table tblNguoiDung;
+    private com.ebooks.Compoment.Table tblSach;
     private com.ebooks.Compoment.Table tblThucUong;
     // End of variables declaration//GEN-END:variables
 
@@ -2505,9 +2509,26 @@ public class Main extends javax.swing.JFrame {
         new AccountDiaLog(this, true).setVisible(true);
 
     }
+    
+    //FILLTABLE Sach
+    
+    public void fillTableSach(){
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblSach.getModel();
+        model.setRowCount(0);
+        try {
+            listS = DAOS.selectAll();
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(),sach.getTenSach(),sach.getNgayDang(),};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
 
 //    DefaultTableModel model;
-    public void FillTableNguoiDung() {
+    public void fillTableNguoiDung() {
         DefaultTableModel model;
         model = (DefaultTableModel) tblNguoiDung.getModel();
         model.setRowCount(0);
