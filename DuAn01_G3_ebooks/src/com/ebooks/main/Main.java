@@ -2154,8 +2154,6 @@ public class Main extends javax.swing.JFrame {
         player = mp3Player();
         player.addToPlayList(songFile);
         player.skipForward();
-        
-
         btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
 
 
