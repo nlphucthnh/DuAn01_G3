@@ -5,13 +5,13 @@
 package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
-<<<<<<< HEAD
+
 import com.ebooks.dao.AudioSachDAO;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.AudioSach;
 import com.ebooks.audio.FileTypeFilter;
 import jaco.mp3.player.MP3Player;
-=======
+
 import com.ebooks.dao.HoaDonThucUongDAO;
 import com.ebooks.dao.NguoiDungDAO;
 import com.ebooks.dao.ThucUongDAO;
@@ -21,7 +21,7 @@ import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.HoaDonThucUong;
 import com.ebooks.model.NguoiDung;
 import com.ebooks.model.ThucUong;
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -56,7 +56,7 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
     boolean congTac = true;
 
-<<<<<<< HEAD
+
     DefaultTableModel model;
     AudioSachDAO daoAudio = new AudioSachDAO();
     List<AudioSach> listAudio = new ArrayList();
@@ -76,7 +76,7 @@ public class Main extends javax.swing.JFrame {
     boolean repeat = false;
     // Here I am making a boolean for windowCollapsed
     boolean windowCollapsed = false;
-=======
+
     //model DAO
     NguoiDungDAO DaoND = new NguoiDungDAO();
     ThucUongDAO DaoTU = new ThucUongDAO();
@@ -93,7 +93,7 @@ public class Main extends javax.swing.JFrame {
     List<HoaDonThucUong> listHD = new ArrayList<>();
 
     int index = -1;
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
 
     public Main() {
         initComponents();
@@ -101,14 +101,14 @@ public class Main extends javax.swing.JFrame {
         movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
-<<<<<<< HEAD
+
         setModelAudio();
         fillTableAudio();
 
-=======
+
         FillTableNguoiDung();
         fillTableThucUong();
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
     }
 
     public void init() {
@@ -119,7 +119,7 @@ public class Main extends javax.swing.JFrame {
 
     }
 
-<<<<<<< HEAD
+
     //AudioSach
     public void setModelAudio() {
         //Show MP3 to play music audio
@@ -151,27 +151,27 @@ public class Main extends javax.swing.JFrame {
         return mp3Player;
     }
 
-=======
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
+
     public void movedpnlMenu() {
         if (ShareHelper.isManager()) {
             pnlManage.setVisible(true);
             pnlStatistical.setVisible(true);
             pnlRead.setLocation(15, 260);
             pnlListen.setLocation(15, 340);
-<<<<<<< HEAD
 
-=======
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
+
+
         } else {
             pnlManage.setVisible(false);
             pnlStatistical.setVisible(false);
             pnlRead.setLocation(new Point(15, 100));
             pnlListen.setLocation(new Point(15, 180));
-<<<<<<< HEAD
 
-=======
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
+
+
+
         }
     }
 
@@ -433,7 +433,6 @@ public class Main extends javax.swing.JFrame {
         lblOff = new javax.swing.JLabel();
         lblDay = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
-        lblTenAudio2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ Thống eBooks");
@@ -1919,10 +1918,6 @@ public class Main extends javax.swing.JFrame {
         lblTime.setText("22 : 30 CH");
         pnlMainProjebt.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
 
-        lblTenAudio2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
-        lblTenAudio2.setText("Hacker Lược Sử");
-        panelBorder1.add(lblTenAudio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -2377,7 +2372,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
     private javax.swing.JLabel lblTenAudio;
-    private javax.swing.JLabel lblTenAudio2;
     private javax.swing.JLabel lblTime;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
@@ -2498,15 +2492,10 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table5;
     private com.ebooks.Compoment.Table table6;
     private com.ebooks.Compoment.Table table7;
-<<<<<<< HEAD
-    private com.ebooks.Compoment.Table table8;
-    private com.ebooks.Compoment.Table table9;
     private com.ebooks.Compoment.Table tblAudio;
-=======
     private com.ebooks.Compoment.Table tblHoaDon;
     private com.ebooks.Compoment.Table tblNguoiDung;
     private com.ebooks.Compoment.Table tblThucUong;
->>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
     // End of variables declaration//GEN-END:variables
 
     public void OpenSetting() {
