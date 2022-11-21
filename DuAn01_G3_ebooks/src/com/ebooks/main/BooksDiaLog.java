@@ -178,7 +178,13 @@ public class BooksDiaLog extends javax.swing.JDialog {
         panelRadius2.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
 
         cboTheLoai.setBackground(new java.awt.Color(222, 247, 227));
+        cboTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cboTheLoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        cboTheLoai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboTheLoaiItemStateChanged(evt);
+            }
+        });
         panelRadius2.add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 210, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -230,6 +236,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_lblExit1MousePressed
+
+    private void cboTheLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTheLoaiItemStateChanged
+        TheLoai TheLoai = (TheLoai) cboTheLoai.getSelectedItem();
+      txtMaSach.setText(TheLoai.getMaTheLoai()+"00");
+    }//GEN-LAST:event_cboTheLoaiItemStateChanged
 
     /*tbdSetting args the command line arguments
      */

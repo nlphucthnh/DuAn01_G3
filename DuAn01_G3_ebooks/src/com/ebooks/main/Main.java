@@ -294,7 +294,7 @@ public class Main extends javax.swing.JFrame {
         myButton18 = new com.ebooks.Compoment.MyButton();
         cboTheLoai = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
-        myButton74 = new com.ebooks.Compoment.MyButton();
+        btnThemSach = new com.ebooks.Compoment.MyButton();
         myButton75 = new com.ebooks.Compoment.MyButton();
         myButton76 = new com.ebooks.Compoment.MyButton();
         btnFirstSach = new com.ebooks.Compoment.MyButton();
@@ -837,14 +837,19 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setText("Lọc Theo Thể Loại");
         panelRadius10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
 
-        myButton74.setBackground(new java.awt.Color(87, 190, 110));
-        myButton74.setForeground(new java.awt.Color(255, 255, 255));
-        myButton74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/add-document.png"))); // NOI18N
-        myButton74.setText("Thêm Sách");
-        myButton74.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton74.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton74.setRadius(10);
-        panelRadius10.add(myButton74, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 150, 40));
+        btnThemSach.setBackground(new java.awt.Color(87, 190, 110));
+        btnThemSach.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/add-document.png"))); // NOI18N
+        btnThemSach.setText("Thêm Sách");
+        btnThemSach.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnThemSach.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnThemSach.setRadius(10);
+        btnThemSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSachActionPerformed(evt);
+            }
+        });
+        panelRadius10.add(btnThemSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 150, 40));
 
         myButton75.setBackground(new java.awt.Color(87, 190, 110));
         myButton75.setForeground(new java.awt.Color(255, 255, 255));
@@ -2306,6 +2311,10 @@ public class Main extends javax.swing.JFrame {
        UtilityHelper.last(index, tblSach, listS);
     }//GEN-LAST:event_btnLastSachActionPerformed
 
+    private void btnThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSachActionPerformed
+        new BooksDiaLog(this, congTac).setVisible(true);
+    }//GEN-LAST:event_btnThemSachActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2366,6 +2375,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnSuaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong;
     private com.ebooks.Compoment.MyButton btnThemHoaDon;
+    private com.ebooks.Compoment.MyButton btnThemSach;
     private com.ebooks.Compoment.MyButton btnThucUong;
     private com.ebooks.Compoment.MyButton btnXoaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnXoaThucUong;
@@ -2467,7 +2477,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton71;
     private com.ebooks.Compoment.MyButton myButton72;
     private com.ebooks.Compoment.MyButton myButton73;
-    private com.ebooks.Compoment.MyButton myButton74;
     private com.ebooks.Compoment.MyButton myButton75;
     private com.ebooks.Compoment.MyButton myButton76;
     private com.ebooks.Compoment.MyButton myButton78;

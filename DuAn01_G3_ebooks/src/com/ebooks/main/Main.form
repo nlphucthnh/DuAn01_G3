@@ -1157,7 +1157,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="com.ebooks.Compoment.MyButton" name="myButton74">
+                        <Component class="com.ebooks.Compoment.MyButton" name="btnThemSach">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="6e" green="be" red="57" type="rgb"/>
@@ -1177,6 +1177,9 @@
                             </Property>
                             <Property name="radius" type="int" value="10"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemSachActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="890" y="60" width="150" height="40"/>
