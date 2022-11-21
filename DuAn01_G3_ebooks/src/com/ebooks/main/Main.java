@@ -108,7 +108,7 @@ public class Main extends javax.swing.JFrame {
 
         setModelAudio();
         fillTableAudio();
-
+        fillTableSach();
 
         fillTableNguoiDung();
         fillTableThucUong();
@@ -802,7 +802,7 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Sách", "Tên Sách", "Tên Tác Giả", "Ngày Đăng"
             }
         ));
         jScrollPane3.setViewportView(tblSach);
@@ -2519,7 +2519,7 @@ public class Main extends javax.swing.JFrame {
         try {
             listS = DAOS.selectAll();
             for (Sach sach : listS) {
-                Object[] row = {sach.getMaSach(),sach.getTenSach(),sach.getNgayDang(),};
+                Object[] row = {sach.getMaSach(),sach.getTenSach(),DAOTG.findById(sach.getMaTacGia()).getHoTen(),sach.getNgayDang(),sach.getMoTa()};
                 model.addRow(row);
             }
         } catch (Exception e) {
