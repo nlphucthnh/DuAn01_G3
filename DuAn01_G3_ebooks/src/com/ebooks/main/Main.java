@@ -5,11 +5,23 @@
 package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
+<<<<<<< HEAD
 import com.ebooks.dao.AudioSachDAO;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.AudioSach;
 import com.ebooks.audio.FileTypeFilter;
 import jaco.mp3.player.MP3Player;
+=======
+import com.ebooks.dao.HoaDonThucUongDAO;
+import com.ebooks.dao.NguoiDungDAO;
+import com.ebooks.dao.ThucUongDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.ShareHelper;
+import com.ebooks.helper.UtilityHelper;
+import com.ebooks.model.HoaDonThucUong;
+import com.ebooks.model.NguoiDung;
+import com.ebooks.model.ThucUong;
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -44,6 +56,7 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
     boolean congTac = true;
 
+<<<<<<< HEAD
     DefaultTableModel model;
     AudioSachDAO daoAudio = new AudioSachDAO();
     List<AudioSach> listAudio = new ArrayList();
@@ -63,6 +76,24 @@ public class Main extends javax.swing.JFrame {
     boolean repeat = false;
     // Here I am making a boolean for windowCollapsed
     boolean windowCollapsed = false;
+=======
+    //model DAO
+    NguoiDungDAO DaoND = new NguoiDungDAO();
+    ThucUongDAO DaoTU = new ThucUongDAO();
+    HoaDonThucUongDAO DaoHD = new HoaDonThucUongDAO();
+
+    //model 
+    NguoiDung nguoiDung = new NguoiDung();
+    ThucUong thucUong = new ThucUong();
+    HoaDonThucUong hoaDonThucUong = new HoaDonThucUong();
+
+    //List
+    List<NguoiDung> listND = new ArrayList<>();
+    List<ThucUong> listTU = new ArrayList<>();
+    List<HoaDonThucUong> listHD = new ArrayList<>();
+
+    int index = -1;
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
 
     public Main() {
         initComponents();
@@ -70,9 +101,14 @@ public class Main extends javax.swing.JFrame {
         movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
+<<<<<<< HEAD
         setModelAudio();
         fillTableAudio();
 
+=======
+        FillTableNguoiDung();
+        fillTableThucUong();
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
     }
 
     public void init() {
@@ -83,6 +119,7 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+<<<<<<< HEAD
     //AudioSach
     public void setModelAudio() {
         //Show MP3 to play music audio
@@ -114,19 +151,27 @@ public class Main extends javax.swing.JFrame {
         return mp3Player;
     }
 
+=======
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
     public void movedpnlMenu() {
         if (ShareHelper.isManager()) {
             pnlManage.setVisible(true);
             pnlStatistical.setVisible(true);
             pnlRead.setLocation(15, 260);
             pnlListen.setLocation(15, 340);
+<<<<<<< HEAD
 
+=======
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
         } else {
             pnlManage.setVisible(false);
             pnlStatistical.setVisible(false);
             pnlRead.setLocation(new Point(15, 100));
             pnlListen.setLocation(new Point(15, 180));
+<<<<<<< HEAD
 
+=======
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
         }
     }
 
@@ -176,7 +221,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBorder1 = new com.ebooks.Compoment.PanelBorder();
+        pnlMainProjebt = new com.ebooks.Compoment.PanelBorder();
         lblLogo = new javax.swing.JLabel();
         panelRadius1 = new com.ebooks.Compoment.PanelRadius();
         pnlMain = new com.ebooks.Compoment.PanelRadius();
@@ -285,7 +330,7 @@ public class Main extends javax.swing.JFrame {
         myButton100 = new com.ebooks.Compoment.MyButton();
         panelRadius14 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane8 = new javax.swing.JScrollPane();
-        table8 = new com.ebooks.Compoment.Table();
+        tblNguoiDung = new com.ebooks.Compoment.Table();
         myButton101 = new com.ebooks.Compoment.MyButton();
         myButton102 = new com.ebooks.Compoment.MyButton();
         myButton103 = new com.ebooks.Compoment.MyButton();
@@ -293,26 +338,26 @@ public class Main extends javax.swing.JFrame {
         myButton105 = new com.ebooks.Compoment.MyButton();
         myButton106 = new com.ebooks.Compoment.MyButton();
         myButton107 = new com.ebooks.Compoment.MyButton();
-        panelRadius15 = new com.ebooks.Compoment.PanelRadius();
+        pnlThucUong = new com.ebooks.Compoment.PanelRadius();
         jScrollPane9 = new javax.swing.JScrollPane();
-        table9 = new com.ebooks.Compoment.Table();
-        myButton108 = new com.ebooks.Compoment.MyButton();
-        myButton109 = new com.ebooks.Compoment.MyButton();
-        myButton110 = new com.ebooks.Compoment.MyButton();
-        myButton111 = new com.ebooks.Compoment.MyButton();
-        myButton112 = new com.ebooks.Compoment.MyButton();
-        myButton113 = new com.ebooks.Compoment.MyButton();
-        myButton114 = new com.ebooks.Compoment.MyButton();
-        panelRadius16 = new com.ebooks.Compoment.PanelRadius();
+        tblThucUong = new com.ebooks.Compoment.Table();
+        btnFirstThucUong = new com.ebooks.Compoment.MyButton();
+        btnPreThucUong = new com.ebooks.Compoment.MyButton();
+        btnNextThucUong = new com.ebooks.Compoment.MyButton();
+        btnLastThucUong = new com.ebooks.Compoment.MyButton();
+        btnThucUong = new com.ebooks.Compoment.MyButton();
+        btnSuaThongTinThucUong = new com.ebooks.Compoment.MyButton();
+        btnXoaThucUong = new com.ebooks.Compoment.MyButton();
+        pnlHoaDon = new com.ebooks.Compoment.PanelRadius();
         jScrollPane10 = new javax.swing.JScrollPane();
-        table10 = new com.ebooks.Compoment.Table();
-        myButton115 = new com.ebooks.Compoment.MyButton();
-        myButton116 = new com.ebooks.Compoment.MyButton();
-        myButton117 = new com.ebooks.Compoment.MyButton();
-        myButton118 = new com.ebooks.Compoment.MyButton();
-        myButton119 = new com.ebooks.Compoment.MyButton();
-        myButton120 = new com.ebooks.Compoment.MyButton();
-        myButton121 = new com.ebooks.Compoment.MyButton();
+        tblHoaDon = new com.ebooks.Compoment.Table();
+        btnLastHoaDon = new com.ebooks.Compoment.MyButton();
+        btnNextHoaDon = new com.ebooks.Compoment.MyButton();
+        btnPreHoaDon = new com.ebooks.Compoment.MyButton();
+        btnFirstHoaDon = new com.ebooks.Compoment.MyButton();
+        btnThemHoaDon = new com.ebooks.Compoment.MyButton();
+        btnSuaThongTinHoaDon = new com.ebooks.Compoment.MyButton();
+        btnXoaThongTinHoaDon = new com.ebooks.Compoment.MyButton();
         pnlFrameStatistical = new com.ebooks.Compoment.PanelRadius();
         jLabel20 = new javax.swing.JLabel();
         materialTabbed2 = new com.ebooks.Compoment.MaterialTabbed();
@@ -394,16 +439,11 @@ public class Main extends javax.swing.JFrame {
         setTitle("Hệ Thống eBooks");
         setUndecorated(true);
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
-        panelBorder1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBorder1MouseClicked(evt);
-            }
-        });
-        panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMainProjebt.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainProjebt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        panelBorder1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        pnlMainProjebt.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         panelRadius1.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius1.setRadius(20);
@@ -500,7 +540,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius1.add(pnlListen);
         pnlListen.setBounds(15, 340, 60, 60);
 
-        panelBorder1.add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, 450));
+        pnlMainProjebt.add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, 450));
 
         pnlBossMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlBossMain.setLayout(new java.awt.CardLayout());
@@ -705,6 +745,11 @@ public class Main extends javax.swing.JFrame {
         myButton8.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton8.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton8.setRadius(10);
+        myButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton8ActionPerformed(evt);
+            }
+        });
         panelRadius9.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
@@ -1095,7 +1140,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius14.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table8.setModel(new javax.swing.table.DefaultTableModel(
+        tblNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1106,7 +1151,12 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane8.setViewportView(table8);
+        tblNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblNguoiDungMousePressed(evt);
+            }
+        });
+        jScrollPane8.setViewportView(tblNguoiDung);
 
         panelRadius14.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
 
@@ -1159,14 +1209,19 @@ public class Main extends javax.swing.JFrame {
         myButton107.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton107.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton107.setRadius(10);
+        myButton107.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton107ActionPerformed(evt);
+            }
+        });
         panelRadius14.add(myButton107, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
         materialTabbed1.addTab("Người Dùng", panelRadius14);
 
-        panelRadius15.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlThucUong.setBackground(new java.awt.Color(255, 255, 255));
+        pnlThucUong.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table9.setModel(new javax.swing.table.DefaultTableModel(
+        tblThucUong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1177,67 +1232,107 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane9.setViewportView(table9);
+        tblThucUong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblThucUongMousePressed(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tblThucUong);
 
-        panelRadius15.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
+        pnlThucUong.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
 
-        myButton108.setBackground(new java.awt.Color(145, 227, 168));
-        myButton108.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
-        myButton108.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton108.setRadius(10);
-        panelRadius15.add(myButton108, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
+        btnFirstThucUong.setBackground(new java.awt.Color(145, 227, 168));
+        btnFirstThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
+        btnFirstThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnFirstThucUong.setRadius(10);
+        btnFirstThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnFirstThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
 
-        myButton109.setBackground(new java.awt.Color(145, 227, 168));
-        myButton109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
-        myButton109.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton109.setRadius(10);
-        panelRadius15.add(myButton109, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
+        btnPreThucUong.setBackground(new java.awt.Color(145, 227, 168));
+        btnPreThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
+        btnPreThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnPreThucUong.setRadius(10);
+        btnPreThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnPreThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
 
-        myButton110.setBackground(new java.awt.Color(145, 227, 168));
-        myButton110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
-        myButton110.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton110.setRadius(10);
-        panelRadius15.add(myButton110, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
+        btnNextThucUong.setBackground(new java.awt.Color(145, 227, 168));
+        btnNextThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
+        btnNextThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnNextThucUong.setRadius(10);
+        btnNextThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnNextThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
 
-        myButton111.setBackground(new java.awt.Color(145, 227, 168));
-        myButton111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
-        myButton111.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton111.setRadius(10);
-        panelRadius15.add(myButton111, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
+        btnLastThucUong.setBackground(new java.awt.Color(145, 227, 168));
+        btnLastThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
+        btnLastThucUong.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnLastThucUong.setRadius(10);
+        btnLastThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnLastThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
-        myButton112.setBackground(new java.awt.Color(87, 190, 110));
-        myButton112.setForeground(new java.awt.Color(255, 255, 255));
-        myButton112.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/drink-alt.png"))); // NOI18N
-        myButton112.setText("Thức Uống");
-        myButton112.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton112.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton112.setRadius(10);
-        panelRadius15.add(myButton112, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+        btnThucUong.setBackground(new java.awt.Color(87, 190, 110));
+        btnThucUong.setForeground(new java.awt.Color(255, 255, 255));
+        btnThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/drink-alt.png"))); // NOI18N
+        btnThucUong.setText("Thức Uống");
+        btnThucUong.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnThucUong.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnThucUong.setRadius(10);
+        btnThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
-        myButton113.setBackground(new java.awt.Color(87, 190, 110));
-        myButton113.setForeground(new java.awt.Color(255, 255, 255));
-        myButton113.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
-        myButton113.setText("Sửa Thông Tin");
-        myButton113.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton113.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton113.setRadius(10);
-        panelRadius15.add(myButton113, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
+        btnSuaThongTinThucUong.setBackground(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinThucUong.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaThongTinThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
+        btnSuaThongTinThucUong.setText("Sửa Thông Tin");
+        btnSuaThongTinThucUong.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinThucUong.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnSuaThongTinThucUong.setRadius(10);
+        btnSuaThongTinThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaThongTinThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnSuaThongTinThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
 
-        myButton114.setBackground(new java.awt.Color(253, 127, 127));
-        myButton114.setForeground(new java.awt.Color(255, 255, 255));
-        myButton114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/circle-cross.png"))); // NOI18N
-        myButton114.setText("Thức Uống");
-        myButton114.setBoderColor(new java.awt.Color(253, 127, 127));
-        myButton114.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton114.setRadius(10);
-        panelRadius15.add(myButton114, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
+        btnXoaThucUong.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaThucUong.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaThucUong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/circle-cross.png"))); // NOI18N
+        btnXoaThucUong.setText("Thức Uống");
+        btnXoaThucUong.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaThucUong.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnXoaThucUong.setRadius(10);
+        btnXoaThucUong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaThucUongActionPerformed(evt);
+            }
+        });
+        pnlThucUong.add(btnXoaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
-        materialTabbed1.addTab("Thực Đơn", panelRadius15);
+        materialTabbed1.addTab("Thực Đơn", pnlThucUong);
 
-        panelRadius16.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        pnlHoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table10.setModel(new javax.swing.table.DefaultTableModel(
+        tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1248,62 +1343,62 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane10.setViewportView(table10);
+        jScrollPane10.setViewportView(tblHoaDon);
 
-        panelRadius16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
+        pnlHoaDon.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
 
-        myButton115.setBackground(new java.awt.Color(145, 227, 168));
-        myButton115.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
-        myButton115.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton115.setRadius(10);
-        panelRadius16.add(myButton115, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
+        btnLastHoaDon.setBackground(new java.awt.Color(145, 227, 168));
+        btnLastHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
+        btnLastHoaDon.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnLastHoaDon.setRadius(10);
+        pnlHoaDon.add(btnLastHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
-        myButton116.setBackground(new java.awt.Color(145, 227, 168));
-        myButton116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
-        myButton116.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton116.setRadius(10);
-        panelRadius16.add(myButton116, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
+        btnNextHoaDon.setBackground(new java.awt.Color(145, 227, 168));
+        btnNextHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
+        btnNextHoaDon.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnNextHoaDon.setRadius(10);
+        pnlHoaDon.add(btnNextHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
 
-        myButton117.setBackground(new java.awt.Color(145, 227, 168));
-        myButton117.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
-        myButton117.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton117.setRadius(10);
-        panelRadius16.add(myButton117, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
+        btnPreHoaDon.setBackground(new java.awt.Color(145, 227, 168));
+        btnPreHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
+        btnPreHoaDon.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnPreHoaDon.setRadius(10);
+        pnlHoaDon.add(btnPreHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
 
-        myButton118.setBackground(new java.awt.Color(145, 227, 168));
-        myButton118.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
-        myButton118.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton118.setRadius(10);
-        panelRadius16.add(myButton118, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
+        btnFirstHoaDon.setBackground(new java.awt.Color(145, 227, 168));
+        btnFirstHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
+        btnFirstHoaDon.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnFirstHoaDon.setRadius(10);
+        pnlHoaDon.add(btnFirstHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
 
-        myButton119.setBackground(new java.awt.Color(87, 190, 110));
-        myButton119.setForeground(new java.awt.Color(255, 255, 255));
-        myButton119.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/receipt (1).png"))); // NOI18N
-        myButton119.setText("Thêm Hóa Đơn");
-        myButton119.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton119.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton119.setRadius(10);
-        panelRadius16.add(myButton119, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+        btnThemHoaDon.setBackground(new java.awt.Color(87, 190, 110));
+        btnThemHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/receipt (1).png"))); // NOI18N
+        btnThemHoaDon.setText("Thêm Hóa Đơn");
+        btnThemHoaDon.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnThemHoaDon.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnThemHoaDon.setRadius(10);
+        pnlHoaDon.add(btnThemHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
-        myButton120.setBackground(new java.awt.Color(87, 190, 110));
-        myButton120.setForeground(new java.awt.Color(255, 255, 255));
-        myButton120.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
-        myButton120.setText("Sửa Thông Tin");
-        myButton120.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton120.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton120.setRadius(10);
-        panelRadius16.add(myButton120, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
+        btnSuaThongTinHoaDon.setBackground(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaThongTinHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
+        btnSuaThongTinHoaDon.setText("Sửa Thông Tin");
+        btnSuaThongTinHoaDon.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinHoaDon.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnSuaThongTinHoaDon.setRadius(10);
+        pnlHoaDon.add(btnSuaThongTinHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
 
-        myButton121.setBackground(new java.awt.Color(253, 127, 127));
-        myButton121.setForeground(new java.awt.Color(255, 255, 255));
-        myButton121.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/circle-cross.png"))); // NOI18N
-        myButton121.setText("Xóa Hóa Đơn");
-        myButton121.setBoderColor(new java.awt.Color(253, 127, 127));
-        myButton121.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton121.setRadius(10);
-        panelRadius16.add(myButton121, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
+        btnXoaThongTinHoaDon.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaThongTinHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaThongTinHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/circle-cross.png"))); // NOI18N
+        btnXoaThongTinHoaDon.setText("Xóa Hóa Đơn");
+        btnXoaThongTinHoaDon.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaThongTinHoaDon.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnXoaThongTinHoaDon.setRadius(10);
+        pnlHoaDon.add(btnXoaThongTinHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
-        materialTabbed1.addTab("Hóa Đơn", panelRadius16);
+        materialTabbed1.addTab("Hóa Đơn", pnlHoaDon);
 
         pnlFrameManage.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1060, 480));
 
@@ -1697,7 +1792,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlBossMain.add(pnlFrameListen, "card3");
 
-        panelBorder1.add(pnlBossMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 1060, 540));
+        pnlMainProjebt.add(pnlBossMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 1060, 540));
 
         panelRadius2.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius2.setRadius(20);
@@ -1716,7 +1811,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 410, 40));
 
-        panelBorder1.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 480, 60));
+        pnlMainProjebt.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 480, 60));
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1724,7 +1819,7 @@ public class Main extends javax.swing.JFrame {
                 imageAvatar1MouseClicked(evt);
             }
         });
-        panelBorder1.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
+        pnlMainProjebt.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 25, 70, 70));
 
         pnlSetting.setBackground(new java.awt.Color(205, 239, 215));
         pnlSetting.setRadius(10);
@@ -1757,7 +1852,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlSetting.add(btnSetting, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
+        pnlMainProjebt.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
 
         pnlBell.setBackground(new java.awt.Color(205, 239, 215));
         pnlBell.setRadius(10);
@@ -1785,7 +1880,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlBell.add(btnBell, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
+        pnlMainProjebt.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
 
         pnlOff.setBackground(new java.awt.Color(205, 239, 215));
         pnlOff.setRadius(10);
@@ -1814,15 +1909,15 @@ public class Main extends javax.swing.JFrame {
         });
         pnlOff.add(lblOff, new java.awt.GridBagConstraints());
 
-        panelBorder1.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
+        pnlMainProjebt.add(pnlOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 40, 40));
 
         lblDay.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
         lblDay.setText("17/11/2022");
-        panelBorder1.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, -1, -1));
+        pnlMainProjebt.add(lblDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, -1, -1));
 
         lblTime.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
         lblTime.setText("22 : 30 CH");
-        panelBorder1.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
+        pnlMainProjebt.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
 
         lblTenAudio2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         lblTenAudio2.setText("Hacker Lược Sử");
@@ -1832,11 +1927,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMainProjebt, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMainProjebt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -2083,6 +2178,80 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPlayMouseClicked
 
+    private void myButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton107ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton107ActionPerformed
+
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8ActionPerformed
+
+
+    private void tblNguoiDungMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNguoiDungMousePressed
+        if (evt.getClickCount() == 2) {
+            int indexRow = tblNguoiDung.getSelectedRow();
+            String MaNguoiDung = (String) tblNguoiDung.getValueAt(indexRow, 0);
+            nguoiDung = DaoND.findById(MaNguoiDung);
+            new PersonDiaLog(this, congTac, nguoiDung).setVisible(true);
+        }
+    }//GEN-LAST:event_tblNguoiDungMousePressed
+
+    private void tblThucUongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThucUongMousePressed
+        if (evt.getClickCount() == 2) {
+            int indexRow = tblThucUong.getSelectedRow();
+            String maThucUong = (String) tblThucUong.getValueAt(indexRow, 0);
+            thucUong = DaoTU.findById(maThucUong);
+            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+        }
+    }//GEN-LAST:event_tblThucUongMousePressed
+
+    private void btnThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThucUongActionPerformed
+        // TODO add your handling code here:
+        new DrinksDiaLog(this, congTac).setVisible(true);
+    }//GEN-LAST:event_btnThucUongActionPerformed
+
+    private void btnSuaThongTinThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinThucUongActionPerformed
+//        index = tblThucUong.getSelectedRow();
+//        if(index < 0) {
+//            DialogHelper.alert(this, "Chưa chọn thức uống cần chỉnh sửa!");
+//        }else {
+//            String maThucUong = (String) tblThucUong.getValueAt(index, 0);
+//            thucUong = DaoTU.findById(maThucUong);
+//            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+//        }
+        this.fillTableThucUong();
+    }//GEN-LAST:event_btnSuaThongTinThucUongActionPerformed
+
+    private void btnXoaThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        if (index < 0) {
+            DialogHelper.alert(this, "Chưa chọn thức uống cần xóa!");
+        } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa thức uống này?")) {
+            DaoTU.delete(tblThucUong.getValueAt(index, 0).toString());
+            this.fillTableThucUong();
+        }
+    }//GEN-LAST:event_btnXoaThucUongActionPerformed
+
+    private void btnFirstThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.first(index, tblThucUong);
+    }//GEN-LAST:event_btnFirstThucUongActionPerformed
+
+    private void btnPreThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.previous(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnPreThucUongActionPerformed
+
+    private void btnNextThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.next(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnNextThucUongActionPerformed
+
+    private void btnLastThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastThucUongActionPerformed
+        index = tblThucUong.getSelectedRow();
+        UtilityHelper.last(index, tblThucUong, listTU);
+    }//GEN-LAST:event_btnLastThucUongActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2121,13 +2290,27 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.ebooks.Compoment.MyButton btnBell;
+    private com.ebooks.Compoment.MyButton btnFirstHoaDon;
+    private com.ebooks.Compoment.MyButton btnFirstThucUong;
+    private com.ebooks.Compoment.MyButton btnLastHoaDon;
+    private com.ebooks.Compoment.MyButton btnLastThucUong;
     private com.ebooks.Compoment.MyButton btnListen;
     private com.ebooks.Compoment.MyButton btnMain;
     private com.ebooks.Compoment.MyButton btnManage;
+    private com.ebooks.Compoment.MyButton btnNextHoaDon;
+    private com.ebooks.Compoment.MyButton btnNextThucUong;
     private com.ebooks.Compoment.MyButton btnPlay;
+    private com.ebooks.Compoment.MyButton btnPreHoaDon;
+    private com.ebooks.Compoment.MyButton btnPreThucUong;
     private com.ebooks.Compoment.MyButton btnRead;
     private com.ebooks.Compoment.MyButton btnSetting;
     private com.ebooks.Compoment.MyButton btnStatistical;
+    private com.ebooks.Compoment.MyButton btnSuaThongTinHoaDon;
+    private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong;
+    private com.ebooks.Compoment.MyButton btnThemHoaDon;
+    private com.ebooks.Compoment.MyButton btnThucUong;
+    private com.ebooks.Compoment.MyButton btnXoaThongTinHoaDon;
+    private com.ebooks.Compoment.MyButton btnXoaThucUong;
     private com.ebooks.Compoment.ImageAvatar imageAvatar1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
     private com.ebooks.Compoment.ImageBoder imageBoder2;
@@ -2208,21 +2391,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton105;
     private com.ebooks.Compoment.MyButton myButton106;
     private com.ebooks.Compoment.MyButton myButton107;
-    private com.ebooks.Compoment.MyButton myButton108;
-    private com.ebooks.Compoment.MyButton myButton109;
-    private com.ebooks.Compoment.MyButton myButton110;
-    private com.ebooks.Compoment.MyButton myButton111;
-    private com.ebooks.Compoment.MyButton myButton112;
-    private com.ebooks.Compoment.MyButton myButton113;
-    private com.ebooks.Compoment.MyButton myButton114;
-    private com.ebooks.Compoment.MyButton myButton115;
-    private com.ebooks.Compoment.MyButton myButton116;
-    private com.ebooks.Compoment.MyButton myButton117;
-    private com.ebooks.Compoment.MyButton myButton118;
-    private com.ebooks.Compoment.MyButton myButton119;
     private com.ebooks.Compoment.MyButton myButton12;
-    private com.ebooks.Compoment.MyButton myButton120;
-    private com.ebooks.Compoment.MyButton myButton121;
     private com.ebooks.Compoment.MyButton myButton122;
     private com.ebooks.Compoment.MyButton myButton123;
     private com.ebooks.Compoment.MyButton myButton124;
@@ -2272,15 +2441,12 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton97;
     private com.ebooks.Compoment.MyButton myButton98;
     private com.ebooks.Compoment.MyButton myButton99;
-    private com.ebooks.Compoment.PanelBorder panelBorder1;
     private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius10;
     private com.ebooks.Compoment.PanelRadius panelRadius11;
     private com.ebooks.Compoment.PanelRadius panelRadius12;
     private com.ebooks.Compoment.PanelRadius panelRadius13;
     private com.ebooks.Compoment.PanelRadius panelRadius14;
-    private com.ebooks.Compoment.PanelRadius panelRadius15;
-    private com.ebooks.Compoment.PanelRadius panelRadius16;
     private com.ebooks.Compoment.PanelRadius panelRadius17;
     private com.ebooks.Compoment.PanelRadius panelRadius18;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
@@ -2309,18 +2475,20 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlFrameManage;
     private com.ebooks.Compoment.PanelRadius pnlFrameRead;
     private com.ebooks.Compoment.PanelRadius pnlFrameStatistical;
+    private com.ebooks.Compoment.PanelRadius pnlHoaDon;
     private com.ebooks.Compoment.PanelRadius pnlListen;
     private com.ebooks.Compoment.PanelRadius pnlMain;
+    private com.ebooks.Compoment.PanelBorder pnlMainProjebt;
     private com.ebooks.Compoment.PanelRadius pnlManage;
     private com.ebooks.Compoment.PanelRadius pnlMenuBooks;
     private com.ebooks.Compoment.PanelRadius pnlOff;
     private com.ebooks.Compoment.PanelRadius pnlRead;
     private com.ebooks.Compoment.PanelRadius pnlSetting;
     private com.ebooks.Compoment.PanelRadius pnlStatistical;
+    private com.ebooks.Compoment.PanelRadius pnlThucUong;
     private com.ebooks.Compoment.SearchText searchText1;
     private com.ebooks.Compoment.Slider slider1;
     private com.ebooks.Compoment.Table table1;
-    private com.ebooks.Compoment.Table table10;
     private com.ebooks.Compoment.Table table11;
     private com.ebooks.Compoment.Table table12;
     private com.ebooks.Compoment.Table table14;
@@ -2330,9 +2498,15 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table5;
     private com.ebooks.Compoment.Table table6;
     private com.ebooks.Compoment.Table table7;
+<<<<<<< HEAD
     private com.ebooks.Compoment.Table table8;
     private com.ebooks.Compoment.Table table9;
     private com.ebooks.Compoment.Table tblAudio;
+=======
+    private com.ebooks.Compoment.Table tblHoaDon;
+    private com.ebooks.Compoment.Table tblNguoiDung;
+    private com.ebooks.Compoment.Table tblThucUong;
+>>>>>>> e5e54754182a3447c58c43ab790e399549e064bf
     // End of variables declaration//GEN-END:variables
 
     public void OpenSetting() {
@@ -2343,6 +2517,41 @@ public class Main extends javax.swing.JFrame {
     public void OpenPerson() {
         new AccountDiaLog(this, true).setVisible(true);
 
+    }
+
+//    DefaultTableModel model;
+    public void FillTableNguoiDung() {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblNguoiDung.getModel();
+        model.setRowCount(0);
+        try {
+            listND = DaoND.selectAll();
+            for (NguoiDung nd : listND) {
+                Object[] row = {nd.getMaNguoiDung(), nd.getHoTen(), nd.getSoDienThoai(), nd.isGioiTinh() ? "Nam" : "Nữ"};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
+    //FILL DỮ LIỆU LÊN BẢNG THỨC UỐNG
+    public void fillTableThucUong() {
+        DefaultTableModel model;
+        model = new DefaultTableModel();
+        model.setRowCount(0);
+        //set COLUMN
+        model.addColumn("MÃ THỨC UỐNG");
+        model.addColumn("TÊN THỨC UỐNG");
+        model.addColumn("GIÁ TIỀN");
+
+        listTU = DaoTU.selectAll();
+        //tạo hàng và do du lieu
+        for (ThucUong tu : listTU) {
+            Object[] row = {tu.getMaThucUong(), tu.getTenThucUong(), tu.getGia()};
+            model.addRow(row);
+            tblThucUong.setModel(model);
+        }
     }
 
 }
