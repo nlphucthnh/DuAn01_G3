@@ -1097,6 +1097,9 @@
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblSachMousePressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1123,19 +1126,14 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="jComboBox1">
+                        <Component class="javax.swing.JComboBox" name="cboTheLoai">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                              </StringArray>
+                              <StringArray count="0"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboTheLoaiActionPerformed"/>
                           </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1237,7 +1235,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="com.ebooks.Compoment.MyButton" name="myButton12">
+                        <Component class="com.ebooks.Compoment.MyButton" name="btnFirstSach">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="a8" green="e3" red="91" type="rgb"/>
@@ -1250,13 +1248,16 @@
                             </Property>
                             <Property name="radius" type="int" value="10"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstSachActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="10" y="380" width="60" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="com.ebooks.Compoment.MyButton" name="myButton13">
+                        <Component class="com.ebooks.Compoment.MyButton" name="btnNextSach">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="a8" green="e3" red="91" type="rgb"/>
@@ -1269,13 +1270,16 @@
                             </Property>
                             <Property name="radius" type="int" value="10"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextSachActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="80" y="380" width="60" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="com.ebooks.Compoment.MyButton" name="myButton17">
+                        <Component class="com.ebooks.Compoment.MyButton" name="btnPrevSach">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="a8" green="e3" red="91" type="rgb"/>
@@ -1288,13 +1292,16 @@
                             </Property>
                             <Property name="radius" type="int" value="10"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevSachActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="150" y="380" width="60" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="com.ebooks.Compoment.MyButton" name="myButton77">
+                        <Component class="com.ebooks.Compoment.MyButton" name="btnLastSach">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="a8" green="e3" red="91" type="rgb"/>
@@ -1307,6 +1314,9 @@
                             </Property>
                             <Property name="radius" type="int" value="10"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastSachActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="220" y="380" width="60" height="40"/>
