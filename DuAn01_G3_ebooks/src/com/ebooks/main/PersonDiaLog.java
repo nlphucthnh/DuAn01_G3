@@ -4,6 +4,8 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.model.NguoiDung;
+import com.sun.security.auth.NTSid;
 import java.awt.Color;
 
 /**
@@ -11,13 +13,17 @@ import java.awt.Color;
  * @author Thinh
  */
 public class PersonDiaLog extends javax.swing.JDialog {
-
-    /**
-     * Creates new form SettingDiaLog
-     */
+    
     public PersonDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setBackground(new Color(0,0,0,0));
+    }
+    
+    public PersonDiaLog(java.awt.Frame parent, boolean modal, NguoiDung nd) {
+        super(parent, modal);
+        initComponents();
+        setForm(nd);
         setBackground(new Color(0,0,0,0));
     }
 
@@ -36,20 +42,20 @@ public class PersonDiaLog extends javax.swing.JDialog {
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtSoDienThoai = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        myButton9 = new com.ebooks.Compoment.MyButton();
+        rdoNam = new javax.swing.JRadioButton();
+        rdoNu = new javax.swing.JRadioButton();
+        btnSave = new com.ebooks.Compoment.MyButton();
         jLabel19 = new javax.swing.JLabel();
         imageBoder1 = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -102,17 +108,15 @@ public class PersonDiaLog extends javax.swing.JDialog {
         panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
         jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
-        jTextField3.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField3.setText("jTextField1");
-        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
+        txtSoDienThoai.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius2.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Số Điện Thoại");
         panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField4.setText("jTextField1");
-        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
+        txtHoTen.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius2.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
@@ -122,29 +126,33 @@ public class PersonDiaLog extends javax.swing.JDialog {
         jLabel2.setText("Giới Tính");
         panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField2.setText("jTextField1");
-        panelRadius2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
+        txtEmail.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Địa Chỉ Email");
         panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Nam");
-        panelRadius2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
+        buttonGroup1.add(rdoNam);
+        rdoNam.setText("Nam");
+        rdoNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNamActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Nữ");
-        panelRadius2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
+        buttonGroup1.add(rdoNu);
+        rdoNu.setText("Nữ");
+        panelRadius2.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
 
-        myButton9.setBackground(new java.awt.Color(87, 190, 110));
-        myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("Lưu Thông Tin");
-        myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton9.setRadius(10);
-        panelRadius2.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        btnSave.setBackground(new java.awt.Color(87, 190, 110));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("Lưu Thông Tin");
+        btnSave.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnSave.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnSave.setRadius(10);
+        panelRadius2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
@@ -155,9 +163,9 @@ public class PersonDiaLog extends javax.swing.JDialog {
         imageBoder1.setRadius(20);
         panelRadius2.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 160));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtMoTa.setColumns(20);
+        txtMoTa.setRows(5);
+        jScrollPane1.setViewportView(txtMoTa);
 
         panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 670, 100));
 
@@ -202,6 +210,20 @@ public class PersonDiaLog extends javax.swing.JDialog {
          this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
+    private void rdoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoNamActionPerformed
+
+    
+    public void setForm(NguoiDung nd){
+        txtHoTen.setText(nd.getHoTen());
+        txtSoDienThoai.setText(nd.getSoDienThoai());
+        if(nd.isGioiTinh()){
+            rdoNam.setEnabled(true);
+        }else {
+            rdoNam.setEnabled(false);
+        }
+    }
     /*tbdSetting args the command line arguments
      */
    public static void main(String args[]) {
@@ -259,6 +281,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel18;
@@ -270,17 +293,16 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblExit1;
     private javax.swing.JLabel lblLogo1;
-    private com.ebooks.Compoment.MyButton myButton9;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private javax.swing.JRadioButton rdoNam;
+    private javax.swing.JRadioButton rdoNu;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextArea txtMoTa;
+    private javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,10 +32,11 @@ public class AccountDiaLog extends javax.swing.JDialog {
 
         buttonGroupVaiTroThongTinTK = new javax.swing.ButtonGroup();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -49,8 +50,12 @@ public class AccountDiaLog extends javax.swing.JDialog {
         jRadioButton2 = new javax.swing.JRadioButton();
         myButton8 = new com.ebooks.Compoment.MyButton();
         myButton9 = new com.ebooks.Compoment.MyButton();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        panelRadius3 = new com.ebooks.Compoment.PanelRadius();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table1 = new com.ebooks.Compoment.Table();
+        jLabel7 = new javax.swing.JLabel();
+        myButton1 = new com.ebooks.Compoment.MyButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -59,9 +64,6 @@ public class AccountDiaLog extends javax.swing.JDialog {
         panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius2.setRadius(25);
         panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -97,51 +99,56 @@ public class AccountDiaLog extends javax.swing.JDialog {
         jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(35, 98, 49));
         jLabel18.setText("Thông Tin Tài Khoản");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+
+        materialTabbed1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+
+        panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextField3.setBackground(new java.awt.Color(222, 247, 227));
         jTextField3.setText("jTextField1");
-        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 270, 40));
+        panelRadius1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 270, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Họ Tên");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+        panelRadius1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jTextField4.setBackground(new java.awt.Color(222, 247, 227));
         jTextField4.setText("jTextField1");
-        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 270, 40));
+        panelRadius1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 270, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mã Người  Dùng");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+        panelRadius1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel1.setText("Mật Khẩu");
-        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, -1, -1));
+        panelRadius1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Vai Trò");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
+        panelRadius1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jTextField2.setBackground(new java.awt.Color(222, 247, 227));
         jTextField2.setText("jTextField1");
-        panelRadius2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 270, 40));
+        panelRadius1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 270, 40));
 
         jPasswordField1.setBackground(new java.awt.Color(222, 247, 227));
         jPasswordField1.setText("jPasswordField1");
-        panelRadius2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 270, 40));
+        panelRadius1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 270, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Tên Đăng Nhập");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+        panelRadius1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         buttonGroupVaiTroThongTinTK.add(jRadioButton1);
         jRadioButton1.setText("Người Dùng");
-        panelRadius2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+        panelRadius1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         buttonGroupVaiTroThongTinTK.add(jRadioButton2);
         jRadioButton2.setText("Quản Trị Viên");
-        panelRadius2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
+        panelRadius1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, -1));
 
         myButton8.setBackground(new java.awt.Color(87, 190, 110));
         myButton8.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +156,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
         myButton8.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton8.setRadius(10);
-        panelRadius2.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 180, 40));
+        panelRadius1.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 180, 40));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,16 +164,46 @@ public class AccountDiaLog extends javax.swing.JDialog {
         myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton9.setRadius(10);
-        panelRadius2.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 270, 50));
+        panelRadius1.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 270, 50));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        materialTabbed1.addTab("Form Tài Khoản", panelRadius1);
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
+        panelRadius3.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table1);
+
+        panelRadius3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 740, 300));
+
+        jLabel7.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel7.setText("Bảng Người Dùng");
+        panelRadius3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        myButton1.setBackground(new java.awt.Color(87, 190, 110));
+        myButton1.setForeground(new java.awt.Color(255, 255, 255));
+        myButton1.setText("Thêm Tài Khoản");
+        myButton1.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton1.setFont(new java.awt.Font("Inter SemiBold", 1, 12)); // NOI18N
+        myButton1.setRadius(10);
+        panelRadius3.add(myButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 360, 140, 40));
+
+        materialTabbed1.addTab("Bảng Người Dùng", panelRadius3);
+
+        panelRadius2.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 880, 430));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -243,21 +280,26 @@ public class AccountDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblLogo1;
+    private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
+    private com.ebooks.Compoment.MyButton myButton1;
     private com.ebooks.Compoment.MyButton myButton8;
     private com.ebooks.Compoment.MyButton myButton9;
+    private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
+    private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.Table table1;
     // End of variables declaration//GEN-END:variables
 }
