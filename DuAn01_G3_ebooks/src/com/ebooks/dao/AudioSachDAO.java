@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.Query;
 
 /**
  *
@@ -98,6 +99,10 @@ public class AudioSachDAO {
         return select(sql);
     }
     
+    public List<AudioSach> getDuongDan(int maAudio){
+        String sql = "{call sp_DuongDan_select (?)}";
+        return select(sql);
+    }
     /**
      * Truy vấn thực thể theo mã id
      * @param id là mã của bản ghi được truy vấn
