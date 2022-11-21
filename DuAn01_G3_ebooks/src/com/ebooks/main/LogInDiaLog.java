@@ -13,6 +13,7 @@ import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.QuanTriVien;
 import com.ebooks.model.TaiKhoan;
 import com.ebooks.Compoment.MyButton;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -76,7 +77,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
         btnDangNhap.setBorder(null);
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng Nhập ");
-        btnDangNhap.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setBoderColor(new java.awt.Color(87, 190, 110));
         btnDangNhap.setColorOver(new java.awt.Color(54, 172, 63));
         btnDangNhap.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
         btnDangNhap.setRadius(10);
@@ -119,11 +120,21 @@ public class LogInDiaLog extends javax.swing.JDialog {
         txtTenDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtTenDangNhap.setText("ThaoLH");
         txtTenDangNhap.setRadius(10);
+        txtTenDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTenDangNhapKeyPressed(evt);
+            }
+        });
         panelBorder3.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 320, 40));
 
         txtMatKhau.setBackground(new java.awt.Color(220, 250, 220));
         txtMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtMatKhau.setText("123456798");
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
         panelBorder3.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 320, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -194,6 +205,18 @@ public class LogInDiaLog extends javax.swing.JDialog {
         DangNhap();
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+             DangNhap();
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
+
+    private void txtTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenDangNhapKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+             DangNhap();
+        }
+    }//GEN-LAST:event_txtTenDangNhapKeyPressed
 
     /**
      * @param args the command line arguments

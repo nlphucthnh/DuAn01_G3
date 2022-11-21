@@ -176,7 +176,7 @@ public class Main extends javax.swing.JFrame {
             pnlStatistical.setVisible(false);
             pnlRead.setLocation(new Point(15, 100));
             pnlListen.setLocation(new Point(15, 180));
-
+            
 
 
 
@@ -231,7 +231,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlMainProjebt = new com.ebooks.Compoment.PanelBorder();
         lblLogo = new javax.swing.JLabel();
-        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
+        pnlMenu = new com.ebooks.Compoment.PanelRadius();
         pnlMain = new com.ebooks.Compoment.PanelRadius();
         btnMain = new com.ebooks.Compoment.MyButton();
         pnlManage = new com.ebooks.Compoment.PanelRadius();
@@ -452,9 +452,9 @@ public class Main extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainProjebt.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        panelRadius1.setBackground(new java.awt.Color(205, 239, 215));
-        panelRadius1.setRadius(20);
-        panelRadius1.setLayout(null);
+        pnlMenu.setBackground(new java.awt.Color(205, 239, 215));
+        pnlMenu.setRadius(20);
+        pnlMenu.setLayout(null);
 
         pnlMain.setBackground(new java.awt.Color(145, 227, 168));
         pnlMain.setRadius(15);
@@ -471,7 +471,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlMain.add(btnMain, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlMain);
+        pnlMenu.add(pnlMain);
         pnlMain.setBounds(15, 20, 60, 60);
 
         pnlManage.setBackground(new java.awt.Color(205, 239, 215));
@@ -490,7 +490,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlManage.add(btnManage, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlManage);
+        pnlMenu.add(pnlManage);
         pnlManage.setBounds(15, 100, 60, 60);
 
         pnlStatistical.setBackground(new java.awt.Color(205, 239, 215));
@@ -508,7 +508,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlStatistical.add(btnStatistical, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlStatistical);
+        pnlMenu.add(pnlStatistical);
         pnlStatistical.setBounds(15, 180, 60, 60);
 
         pnlRead.setBackground(new java.awt.Color(205, 239, 215));
@@ -526,7 +526,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlRead.add(btnRead, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlRead);
+        pnlMenu.add(pnlRead);
         pnlRead.setBounds(15, 260, 60, 60);
 
         pnlListen.setBackground(new java.awt.Color(205, 239, 215));
@@ -544,10 +544,10 @@ public class Main extends javax.swing.JFrame {
         });
         pnlListen.add(btnListen, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlListen);
+        pnlMenu.add(pnlListen);
         pnlListen.setBounds(15, 340, 60, 60);
 
-        pnlMainProjebt.add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, 450));
+        pnlMainProjebt.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 90, 450));
 
         pnlBossMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlBossMain.setLayout(new java.awt.CardLayout());
@@ -2494,7 +2494,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton97;
     private com.ebooks.Compoment.MyButton myButton98;
     private com.ebooks.Compoment.MyButton myButton99;
-    private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius10;
     private com.ebooks.Compoment.PanelRadius panelRadius11;
     private com.ebooks.Compoment.PanelRadius panelRadius12;
@@ -2533,6 +2532,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlMain;
     private com.ebooks.Compoment.PanelBorder pnlMainProjebt;
     private com.ebooks.Compoment.PanelRadius pnlManage;
+    private com.ebooks.Compoment.PanelRadius pnlMenu;
     private com.ebooks.Compoment.PanelRadius pnlMenuBooks;
     private com.ebooks.Compoment.PanelRadius pnlOff;
     private com.ebooks.Compoment.PanelRadius pnlRead;

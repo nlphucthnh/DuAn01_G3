@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="H&#x1ec7; Th&#x1ed1;ng eBooks"/>
@@ -58,7 +58,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="com.ebooks.Compoment.PanelRadius" name="panelRadius1">
+        <Container class="com.ebooks.Compoment.PanelRadius" name="pnlMenu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="d7" green="ef" red="cd" type="rgb"/>
