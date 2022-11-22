@@ -31,6 +31,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -40,6 +43,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -109,14 +113,13 @@ public class Main extends javax.swing.JFrame {
         movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
-
+        initMoving(this, pnlMainProjebt);
         setModelAudio();
         fillTableAudio();
         fillTableSach();
         fillComBoBoxTheLoai();
         fillTableNguoiDung();
         fillTableThucUong();
-
     }
 
     public void init() {
@@ -216,6 +219,26 @@ public class Main extends javax.swing.JFrame {
             btn.setBoderColor(new Color(205, 239, 215));
         }
     }
+    private int x;
+    private int y;
+
+    public void initMoving(JFrame frame,JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                frame.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2288,6 +2311,7 @@ public class Main extends javax.swing.JFrame {
          String maSach = (String) tblSach.getValueAt(index,0);
          Sach sach = DAOS.findById(maSach);
          new BooksDiaLog(this, congTac, sach).setVisible(true);
+         fillTableSach();
        }
     }//GEN-LAST:event_tblSachMousePressed
 

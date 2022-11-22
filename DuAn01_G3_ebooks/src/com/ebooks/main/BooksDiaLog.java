@@ -8,14 +8,17 @@ import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TheLoaiDAO;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.Sach;
+import com.ebooks.model.TacGia;
 import com.ebooks.model.TheLoai;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
@@ -28,6 +31,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     TacGiaDAO DAOTG = new TacGiaDAO();
     TheLoaiDAO DAOTL = new TheLoaiDAO();
     List<TheLoai> listTL = new ArrayList<>();
+    String Url = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -75,6 +79,21 @@ public class BooksDiaLog extends javax.swing.JDialog {
         }     
     }
     
+     public ImageIcon ShowImg(String nameImg) {
+        ImageIcon imgIcon = new ImageIcon(Url + nameImg);
+        Image image = imgIcon.getImage();
+        Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+        imgIcon = new ImageIcon(newimg);
+        return imgIcon;
+    }
+
+    public String checkTacGia(String TenTacGia){
+        TacGia tg = DAOTG.findByName(TenTacGia);
+        if(tg != null){
+            return tg.getHoTen();  
+        }
+        return null;
+    }
     
     public void SetForm(Sach sach){
         txtMaSach.setText(sach.getMaSach());
@@ -82,8 +101,20 @@ public class BooksDiaLog extends javax.swing.JDialog {
         txtTacGia.setText(DAOTG.findById(sach.getMaTacGia()).getHoTen());
         txtDuongDan.setText(sach.getDuongDan());
         txtMoTa.setText(sach.getMoTa());
-//        lblSachImg.setIcon();
+        lblSachImg.setIcon(ShowImg(sach.getHinh()));
     }
+    
+    Sach getForm(){
+        Sach sach = new Sach();
+        sach.setMaSach(txtMaSach.getText());
+        sach.setTenSach(txtTenSach.getText());
+        sach.getMaTacGia(txtTacGia.getText());
+        
+        
+        
+       return sach; 
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +134,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnChonFile = new com.ebooks.Compoment.MyButton();
         jLabel19 = new javax.swing.JLabel();
         lblSachImg = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,6 +145,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
         txtTacGia = new javax.swing.JTextField();
         btnLuuThong = new com.ebooks.Compoment.MyButton();
         jLabel1 = new javax.swing.JLabel();
+        btnChonFile1 = new com.ebooks.Compoment.MyButton();
+        btnChonFile2 = new com.ebooks.Compoment.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -176,19 +208,12 @@ public class BooksDiaLog extends javax.swing.JDialog {
         jLabel3.setText("Thể Loại");
         pnlMainBooks.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
-        btnChonFile.setBackground(new java.awt.Color(87, 190, 110));
-        btnChonFile.setForeground(new java.awt.Color(255, 255, 255));
-        btnChonFile.setText("File");
-        btnChonFile.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnChonFile.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        btnChonFile.setRadius(10);
-        pnlMainBooks.add(btnChonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
-
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Sách");
         pnlMainBooks.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
 
+        lblSachImg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblSachImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         lblSachImg.setRadius(20);
         pnlMainBooks.add(lblSachImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
@@ -221,7 +246,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
         pnlMainBooks.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
         txtTacGia.setBackground(new java.awt.Color(222, 247, 227));
-        pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
+        pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 170, 40));
 
         btnLuuThong.setBackground(new java.awt.Color(87, 190, 110));
         btnLuuThong.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,6 +258,31 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainBooks.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        btnChonFile1.setBackground(new java.awt.Color(87, 190, 110));
+        btnChonFile1.setForeground(new java.awt.Color(255, 255, 255));
+        btnChonFile1.setText("File");
+        btnChonFile1.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnChonFile1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnChonFile1.setRadius(10);
+        btnChonFile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFile1ActionPerformed(evt);
+            }
+        });
+        pnlMainBooks.add(btnChonFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
+
+        btnChonFile2.setBackground(new java.awt.Color(87, 190, 110));
+        btnChonFile2.setForeground(new java.awt.Color(255, 255, 255));
+        btnChonFile2.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnChonFile2.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnChonFile2.setRadius(10);
+        btnChonFile2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFile2ActionPerformed(evt);
+            }
+        });
+        pnlMainBooks.add(btnChonFile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 40, 40));
 
         getContentPane().add(pnlMainBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -271,6 +321,14 @@ public class BooksDiaLog extends javax.swing.JDialog {
            txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() +"00");
       }
     }//GEN-LAST:event_cboTheLoaiActionPerformed
+
+    private void btnChonFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChonFile1ActionPerformed
+
+    private void btnChonFile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile2ActionPerformed
+      
+    }//GEN-LAST:event_btnChonFile2ActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -345,7 +403,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.ebooks.Compoment.MyButton btnChonFile;
+    private com.ebooks.Compoment.MyButton btnChonFile1;
+    private com.ebooks.Compoment.MyButton btnChonFile2;
     private com.ebooks.Compoment.MyButton btnLuuThong;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboTheLoai;

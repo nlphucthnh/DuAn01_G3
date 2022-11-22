@@ -105,4 +105,10 @@ public class TacGiaDAO {
         List<TacGia> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
+    
+    public TacGia findByName(String name) {
+        String sql="SELECT * FROM TacGia WHERE hoTen=?";
+        List<TacGia> list=select(sql,"%"+name+"%");
+        return list.size()>0?list.get(0):null;
+    }
 }

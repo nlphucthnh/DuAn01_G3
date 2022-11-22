@@ -98,6 +98,10 @@ public class Sach {
         this.maQuanTriVien = maQuanTriVien;
     }
 
+    public void getMaTacGia(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     
 }
