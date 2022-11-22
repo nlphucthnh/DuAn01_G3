@@ -108,8 +108,9 @@ public class BooksDiaLog extends javax.swing.JDialog {
         Sach sach = new Sach();
         sach.setMaSach(txtMaSach.getText());
         sach.setTenSach(txtTenSach.getText());
-        sach.getMaTacGia(txtTacGia.getText());
-        
+        sach.setDuongDan(txtDuongDan.getText());
+        sach.setHinh(lblSachImg.getIcon().toString());
+        sach.setNgayDang();
         
         
        return sach; 
