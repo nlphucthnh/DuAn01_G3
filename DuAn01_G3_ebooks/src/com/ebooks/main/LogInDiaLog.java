@@ -48,8 +48,8 @@ public class LogInDiaLog extends javax.swing.JDialog {
         imageBoder2 = new com.ebooks.Compoment.ImageBoder();
         jLabel2 = new javax.swing.JLabel();
         btnDangNhap = new com.ebooks.Compoment.MyButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTenDangNhap = new javax.swing.JLabel();
+        lblMatKhau = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtTenDangNhap = new com.ebooks.Compoment.txtFieldBoder();
         txtMatKhau = new com.ebooks.Compoment.txtFieldPassBoder();
@@ -88,13 +88,13 @@ public class LogInDiaLog extends javax.swing.JDialog {
         });
         panelBorder3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 160, 40));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Tên Đăng Nhập");
-        panelBorder3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, -1, -1));
+        lblTenDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenDangNhap.setText("Tên Đăng Nhập");
+        panelBorder3.add(lblTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Mật Khẩu");
-        panelBorder3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, -1, -1));
+        lblMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMatKhau.setText("Mật Khẩu");
+        panelBorder3.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -262,9 +262,9 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }
 
     public void DangNhap() {
-        if (UtilityHelper.checkNullText(txtTenDangNhap)) {
+        if (UtilityHelper.checkNullText(lblTenDangNhap, txtTenDangNhap)) {
             String tenDangNhap = txtTenDangNhap.getText();
-            if (UtilityHelper.checkNullText(txtMatKhau) && UtilityHelper.checkPass(txtMatKhau)) {
+            if (UtilityHelper.checkNullText(lblMatKhau, txtMatKhau) && UtilityHelper.checkPass(lblMatKhau, txtMatKhau)) {
                 String matKhau = new String(txtMatKhau.getPassword());
                 TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
                 QuanTriVien quanTri = qtvDao.findById(tenDangNhap);
@@ -301,11 +301,11 @@ public class LogInDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.ImageBoder imageBoder2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMatKhau;
+    private javax.swing.JLabel lblTenDangNhap;
     private com.ebooks.Compoment.PanelBorder panelBorder3;
     private com.ebooks.Compoment.txtFieldPassBoder txtMatKhau;
     private com.ebooks.Compoment.txtFieldBoder txtTenDangNhap;
