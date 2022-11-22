@@ -9,12 +9,13 @@ import java.awt.Color;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.dao.ThucUongDAO;
 import com.ebooks.helper.DialogHelper;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DrinksDiaLog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form SettingDiaLog
-     */
+    List<ThucUong> listTU = new ArrayList();
+    
     public DrinksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -40,12 +41,12 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         txtTenThucUong = new javax.swing.JTextField();
         txtMaThucUong = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTenThucUong = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         lblMaThucUong = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblGiaTien = new javax.swing.JLabel();
         txtGiaTien = new javax.swing.JTextField();
         btnLuu = new com.ebooks.Compoment.MyButton();
         jLabel32 = new javax.swing.JLabel();
@@ -106,9 +107,9 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         jLabel6.setText("Mô Tả");
         panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel2.setText("Tên Thức Uống");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
+        lblTenThucUong.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTenThucUong.setText("Tên Thức Uống");
+        panelRadius2.add(lblTenThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
@@ -125,9 +126,9 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         lblMaThucUong.setText("Mã Thức Uống");
         panelRadius2.add(lblMaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Giá Tiền");
-        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        lblGiaTien.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblGiaTien.setText("Giá Tiền");
+        panelRadius2.add(lblGiaTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
 
         txtGiaTien.setBackground(new java.awt.Color(222, 247, 227));
         txtGiaTien.addActionListener(new java.awt.event.ActionListener() {
@@ -197,8 +198,24 @@ public class DrinksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtGiaTienActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
-        this.insert();
+        String maThucUong = txtMaThucUong.getText();
+        int timThay = 0;
+        ThucUongDAO DaoTU = new ThucUongDAO();
+        listTU = DaoTU.selectAll();
+        
+        for(ThucUong x : listTU){
+            if(x.getMaThucUong().contains(maThucUong)){
+                timThay = 1;
+            }
+        }
+        
+        if(timThay == 0) {
+            this.insert();
+        } else {
+            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
+                this.update();
+            }
+        }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     /*tbdSetting args the command line arguments
@@ -309,15 +326,15 @@ public class DrinksDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.MyButton btnLuu;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
+    private javax.swing.JLabel lblGiaTien;
     private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblMaThucUong;
+    private javax.swing.JLabel lblTenThucUong;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private javax.swing.JTextField txtGiaTien;
@@ -333,11 +350,20 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         txtTenThucUong.setText(thucUong.getTenThucUong());
         txtGiaTien.setText(String.valueOf(thucUong.getGia()));
     }
+    
+    public ThucUong getForm() {
+        ThucUong tu = new ThucUong();
+        tu.setMaThucUong(txtMaThucUong.getText());
+        tu.setTenThucUong(txtTenThucUong.getText());
+        tu.setGia(Double.parseDouble(txtGiaTien.getText()));
+        return tu;
+    }
 
+    //them mơi
     public void insert() {
-        if (UtilityHelper.checkNullText(txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong,txtMaThucUong)) {
-            if (UtilityHelper.checkNullText(txtTenThucUong) && UtilityHelper.checkName(txtTenThucUong)) {
-                if (UtilityHelper.checkNullText(txtGiaTien) && UtilityHelper.checkGia(txtGiaTien)) {
+        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong,txtMaThucUong)) {
+            if (UtilityHelper.checkNullText(lblTenThucUong, txtTenThucUong) && UtilityHelper.checkName(lblTenThucUong, txtTenThucUong)) {
+                if (UtilityHelper.checkNullText(lblGiaTien, txtGiaTien) && UtilityHelper.checkGia(txtGiaTien)) {
                     try {
                         ThucUong TU = getForm();
                         DaoTU.insert(TU);
@@ -350,19 +376,23 @@ public class DrinksDiaLog extends javax.swing.JDialog {
             }
         }
     }
-
-    public ThucUong getForm() {
-        ThucUong tu = new ThucUong();
-        tu.setMaThucUong(txtMaThucUong.getText());
-        tu.setTenThucUong(txtTenThucUong.getText());
-        tu.setGia(Double.parseDouble(txtGiaTien.getText()));
-        return tu;
+    //cập nhật
+    public void update() {
+        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong,txtMaThucUong)) {
+            if (UtilityHelper.checkNullText(lblTenThucUong, txtTenThucUong) && UtilityHelper.checkName(lblTenThucUong, txtTenThucUong)) {
+                if (UtilityHelper.checkNullText(lblGiaTien, txtGiaTien) && UtilityHelper.checkGia(txtGiaTien)) {
+                    try {
+                        ThucUong TU = getForm();
+                        DaoTU.update(TU);
+//                                this.fillTable();
+                        DialogHelper.alert(this, "Cập nhật Thành công");
+                    } catch (Exception e) {
+                        DialogHelper.alert(this, "Cập nhật Thất Bại!");
+                    }
+                }
+            }
+        }
     }
 }
 
-/*
-về form main
-- thay sửa thông tin bằng nút refresh
-về form Drinks
-thêm nút sửa
- */
+

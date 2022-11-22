@@ -40,13 +40,13 @@ public class UtilityHelper {
     }
 
     //pass từ 3-16 kí tự
-    public static boolean checkPass(JPasswordField txt) {
+    public static boolean checkPass(JLabel lbl, JPasswordField txt) {
 
         if (txt.getPassword().length > 2 && txt.getPassword().length < 17) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có từ 3-16 kí tự.");
+            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải có từ 3-16 kí tự.");
             return false;
         }
     }
@@ -99,7 +99,7 @@ public class UtilityHelper {
 
     //gồm các ký tự chữ đấu cách
     //từ 3-25 kí tự
-    public static boolean checkName(JTextField txt) {
+    public static boolean checkName(JLabel lbl, JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[A-Za-z]{3,25}$";
@@ -107,7 +107,7 @@ public class UtilityHelper {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
+            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
             return false;
         }
     }
@@ -127,7 +127,7 @@ public class UtilityHelper {
         }
     }
 
-    public static boolean checkEmail(JTextField txt) {
+    public static boolean checkEmail(JLabel lbl, JTextField txt) {
 
         String id = txt.getText();
         String rgx = "^[a-zA-Z][a-zA-Z0-9_\\.]{2,32}@[a-zA-Z0-9]{2,10}(\\.[a-zA-Z0-9]{2,4}){1,2}$";
@@ -135,7 +135,7 @@ public class UtilityHelper {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng");
+            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " không đúng định dạng");
             return false;
         }
     }
@@ -179,32 +179,32 @@ public class UtilityHelper {
         }
     }
 
-    public static boolean checkNullText(JTextField txt) {
+    public static boolean checkNullText(JLabel lbl, JTextField txt) {
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
 
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
             return false;
         }
     }
 
-    public static boolean checkNullText(JTextArea txt) {
+    public static boolean checkNullText(JLabel lbl, JTextArea txt) {
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
             return false;
         }
     }
 
-    public static boolean checkNullPass(JPasswordField txt) {
+    public static boolean checkNullPass(JLabel lbl, JPasswordField txt) {
         if (txt.getPassword().length > 0) {
             return true;
         } else {
 //            txt.setBackground(new Color(238,238,238));
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
             return false;
         }
     }

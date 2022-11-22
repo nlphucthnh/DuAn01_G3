@@ -2232,24 +2232,27 @@ public class Main extends javax.swing.JFrame {
             String maThucUong = (String) tblThucUong.getValueAt(indexRow, 0);
             thucUong = DaoTU.findById(maThucUong);
             new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+            this.fillTableThucUong();
         }
     }//GEN-LAST:event_tblThucUongMousePressed
 
     private void btnThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThucUongActionPerformed
         // TODO add your handling code here:
         new DrinksDiaLog(this, congTac).setVisible(true);
+        this.fillTableThucUong();
     }//GEN-LAST:event_btnThucUongActionPerformed
 
     private void btnSuaThongTinThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinThucUongActionPerformed
-//        index = tblThucUong.getSelectedRow();
-//        if(index < 0) {
-//            DialogHelper.alert(this, "Chưa chọn thức uống cần chỉnh sửa!");
-//        }else {
-//            String maThucUong = (String) tblThucUong.getValueAt(index, 0);
-//            thucUong = DaoTU.findById(maThucUong);
-//            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
-//        }
-        this.fillTableThucUong();
+        index = tblThucUong.getSelectedRow();
+        if(index < 0) {
+            DialogHelper.alert(this, "Chưa chọn thức uống cần chỉnh sửa!");
+        }else {
+            String maThucUong = (String) tblThucUong.getValueAt(index, 0);
+            thucUong = DaoTU.findById(maThucUong);
+            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+            this.fillTableThucUong();
+        }
+        
     }//GEN-LAST:event_btnSuaThongTinThucUongActionPerformed
 
     private void btnXoaThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaThucUongActionPerformed
