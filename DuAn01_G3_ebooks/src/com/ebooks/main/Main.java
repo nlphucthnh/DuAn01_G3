@@ -446,7 +446,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Hệ Thống eBooks");
         setUndecorated(true);
 
-        pnlMainProjebt.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainProjebt.setBackground(new java.awt.Color(251, 251, 251));
         pnlMainProjebt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
@@ -552,7 +552,7 @@ public class Main extends javax.swing.JFrame {
         pnlBossMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlBossMain.setLayout(new java.awt.CardLayout());
 
-        pnlFrameMain.setBackground(new java.awt.Color(255, 255, 255));
+        pnlFrameMain.setBackground(new java.awt.Color(251, 251, 251));
         pnlFrameMain.setRadius(15);
         pnlFrameMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

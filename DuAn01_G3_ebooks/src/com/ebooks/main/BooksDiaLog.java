@@ -6,11 +6,17 @@ package com.ebooks.main;
 
 import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TheLoaiDAO;
+import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.Sach;
 import com.ebooks.model.TheLoai;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,15 +31,36 @@ public class BooksDiaLog extends javax.swing.JDialog {
         initComponents();
         fillComBoBox();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainBooks);
     }
     
     public BooksDiaLog(java.awt.Frame parent, boolean modal, Sach sach) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainBooks);
         txtDuongDan.setEditable(false);
         fillComBoBox();
         SetForm(sach);
+    }
+    private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog,JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
     
     
@@ -66,7 +93,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        pnlMainBooks = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         txtTenSach = new javax.swing.JTextField();
@@ -91,9 +118,9 @@ public class BooksDiaLog extends javax.swing.JDialog {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMainBooks.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainBooks.setRadius(25);
+        pnlMainBooks.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -127,25 +154,25 @@ public class BooksDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainBooks.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         txtTenSach.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
+        pnlMainBooks.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
 
         txtMaSach.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
+        pnlMainBooks.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
+        pnlMainBooks.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Tên Sách");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
+        pnlMainBooks.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Thể Loại");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        pnlMainBooks.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
         btnChonFile.setBackground(new java.awt.Color(87, 190, 110));
         btnChonFile.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,46 +180,46 @@ public class BooksDiaLog extends javax.swing.JDialog {
         btnChonFile.setBoderColor(new java.awt.Color(87, 190, 110));
         btnChonFile.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnChonFile.setRadius(10);
-        panelRadius2.add(btnChonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
+        pnlMainBooks.add(btnChonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Sách");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
+        pnlMainBooks.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
 
         lblSachImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         lblSachImg.setRadius(20);
-        panelRadius2.add(lblSachImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
+        pnlMainBooks.add(lblSachImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
+        pnlMainBooks.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Mã Sách");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
+        pnlMainBooks.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
         txtDuongDan.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
+        pnlMainBooks.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
 
         cboTheLoai.setBackground(new java.awt.Color(222, 247, 227));
         cboTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cboTheLoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        cboTheLoai.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboTheLoaiItemStateChanged(evt);
+        cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTheLoaiActionPerformed(evt);
             }
         });
-        panelRadius2.add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 210, 40));
+        pnlMainBooks.add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 210, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel5.setText("Tác Giả");
-        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+        pnlMainBooks.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
         txtTacGia.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
+        pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
 
         btnLuuThong.setBackground(new java.awt.Color(87, 190, 110));
         btnLuuThong.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,12 +227,12 @@ public class BooksDiaLog extends javax.swing.JDialog {
         btnLuuThong.setBoderColor(new java.awt.Color(87, 190, 110));
         btnLuuThong.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnLuuThong.setRadius(10);
-        panelRadius2.add(btnLuuThong, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
+        pnlMainBooks.add(btnLuuThong, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        pnlMainBooks.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -237,10 +264,12 @@ public class BooksDiaLog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_lblExit1MousePressed
 
-    private void cboTheLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTheLoaiItemStateChanged
-        TheLoai TheLoai = (TheLoai) cboTheLoai.getSelectedItem();
-      txtMaSach.setText(TheLoai.getMaTheLoai()+"00");
-    }//GEN-LAST:event_cboTheLoaiItemStateChanged
+    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
+        String tenTheLoai = (String) cboTheLoai.getSelectedItem();
+        TheLoai theLoai = DAOTL.findByName(tenTheLoai);
+        txtMaSach.setText(theLoai.getMaTheLoai());
+        
+    }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -329,8 +358,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
     private com.ebooks.Compoment.ImageBoder lblSachImg;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainBooks;
     private javax.swing.JTextField txtDuongDan;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextArea txtMoTa;

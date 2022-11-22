@@ -6,10 +6,15 @@ package com.ebooks.helper;
 
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -228,5 +233,25 @@ public class UtilityHelper {
     public static void last(int index, JTable table, List list) {
         index = list.size() - 1;
         table.setRowSelectionInterval(index, index);
+    }
+    
+    private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog,JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 }
