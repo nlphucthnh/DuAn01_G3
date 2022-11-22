@@ -168,9 +168,6 @@ public class Main extends javax.swing.JFrame {
             pnlRead.setLocation(15, 260);
             pnlListen.setLocation(15, 340);
 
-
-
-
         } else {
             pnlManage.setVisible(false);
             pnlStatistical.setVisible(false);

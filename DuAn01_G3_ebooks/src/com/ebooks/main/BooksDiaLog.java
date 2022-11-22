@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -26,6 +27,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     TacGiaDAO DAOTG = new TacGiaDAO();
     TheLoaiDAO DAOTL = new TheLoaiDAO();
+    List<TheLoai> listTL = new ArrayList<>();
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -67,8 +69,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     public void fillComBoBox(){
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
         model.removeAllElements();
-        List<TheLoai> list = DAOTL.selectAll();
-        for (TheLoai tl : list) {
+        listTL = DAOTL.selectAll();
+        for (TheLoai tl : listTL) {
             model.addElement(tl.getTenTheLoai());
         }     
     }
@@ -265,10 +267,9 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblExit1MousePressed
 
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
-        String tenTheLoai = (String) cboTheLoai.getSelectedItem();
-        TheLoai theLoai = DAOTL.findByName(tenTheLoai);
-        txtMaSach.setText(theLoai.getMaTheLoai());
-        
+      if(cboTheLoai.getSelectedIndex() != -1){
+           txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() +"00");
+      }
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     /*tbdSetting args the command line arguments
