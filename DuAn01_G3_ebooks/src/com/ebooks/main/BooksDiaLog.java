@@ -17,6 +17,7 @@ import com.ebooks.model.TacGia;
 import com.ebooks.model.TheLoai;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -40,28 +41,31 @@ import javax.swing.border.LineBorder;
  */
 public class BooksDiaLog extends javax.swing.JDialog {
 
-    TacGiaDAO DAOTG = new TacGiaDAO();
-    TheLoaiDAO DAOTL = new TheLoaiDAO();
-    SachDAO DAOS = new SachDAO();
-    LoaiSSDAO DAOLSS = new LoaiSSDAO();
-    List<TheLoai> listTL = new ArrayList<>();
-    String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
-    String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
-    Date now = new Date();
-    JFileChooser fileChooser = new JFileChooser();
+    private TacGiaDAO DAOTG = new TacGiaDAO();
+    private TheLoaiDAO DAOTL = new TheLoaiDAO();
+    private SachDAO DAOS = new SachDAO();
+    private LoaiSSDAO DAOLSS = new LoaiSSDAO();
+    private List<TheLoai> listTL = new ArrayList<>();
+    private List<Sach> listS = new ArrayList<>();
+    private String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
+    private String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
+    private Date now = new Date();
+    private JFileChooser fileChooser = new JFileChooser();
+    private String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         fillComBoBox();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainBooks);
-       
+        txtDuongDan.setEditable(false);
     }
-    
+
     public BooksDiaLog(java.awt.Frame parent, boolean modal, Sach sach) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainBooks);
         txtDuongDan.setEditable(false);
         fillComBoBox();
@@ -70,7 +74,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private int x;
     private int y;
 
-    public void initMoving(JDialog DiaLog,JPanel panel) {
+    public void initMoving(JDialog DiaLog, JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -86,18 +90,17 @@ public class BooksDiaLog extends javax.swing.JDialog {
             }
         });
     }
-    
-    
-    public void fillComBoBox(){
+
+    public void fillComBoBox() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
         model.removeAllElements();
         listTL = DAOTL.selectAll();
         for (TheLoai tl : listTL) {
             model.addElement(tl.getTenTheLoai());
-        }     
+        }
     }
-    
-     public ImageIcon ShowImg(String nameImg) {
+
+    public ImageIcon ShowImg(String nameImg) {
         ImageIcon imgIcon = new ImageIcon(UrlImg + nameImg);
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
@@ -105,15 +108,15 @@ public class BooksDiaLog extends javax.swing.JDialog {
         return imgIcon;
     }
 
-    public String checkTacGia(String TenTacGia){
+    public String checkTacGia(String TenTacGia) {
         TacGia tg = DAOTG.findByName(TenTacGia);
-        if(tg != null){
-            return tg.getHoTen();  
+        if (tg != null) {
+            return tg.getHoTen();
         }
         return null;
     }
-    
-    public void SetForm(Sach sach){
+
+    public void SetForm(Sach sach) {
         txtMaSach.setText(sach.getMaSach());
         txtTenSach.setText(sach.getTenSach());
         txtTacGia.setText(DAOTG.findById(sach.getMaTacGia()).getHoTen());
@@ -121,7 +124,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
         txtMoTa.setText(sach.getMoTa());
         lblSachImg.setIcon(ShowImg(sach.getHinh()));
     }
-    
+
     public String MovingFile() {
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
@@ -139,7 +142,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
         }
         return fileChooser.getSelectedFile().getName();
     }
-    
+
     public String SetImg() {
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
@@ -148,6 +151,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
                 if (afile.renameTo(new File(UrlImg + fileChooser.getSelectedFile().getName()))) {
                     System.out.println("File is moved successful!");
                     ImageIcon imgIcon = new ImageIcon(UrlImg + fileChooser.getSelectedFile().getName());
+                    NameImg = fileChooser.getSelectedFile().getName();
                     Image image = imgIcon.getImage();
                     Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
                     imgIcon = new ImageIcon(newimg);
@@ -159,59 +163,71 @@ public class BooksDiaLog extends javax.swing.JDialog {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
-            
+        } else {
+
         }
         return fileChooser.getSelectedFile().getName();
     }
-    
-   
-    public void InsertLoaiSS(String theLoai, String MaSach){
+
+    public void InsertLoaiSS(String theLoai, String MaSach) {
         TheLoai tl = DAOTL.findByName(theLoai);
-        DAOLSS.insert(new LoaiSS(MaSach,tl.getMaTheLoai()));
+        DAOLSS.insert(new LoaiSS(MaSach, tl.getMaTheLoai()));
     }
-    
-    Sach getForm(){
+
+    Sach getForm() {
         Sach sach = new Sach();
+        listS = DAOS.selectAll();
+        int lengthList = listS.size();
+        for (int i = 0; i < lengthList; i++) {
+            if (txtMaSach.getText().equalsIgnoreCase(listS.get(i).getMaSach())) {
+                DialogHelper.alert(this, "Mã Sách Đã Tồn Tại");
+                return null;
+            }
+        }
         sach.setMaSach(txtMaSach.getText());
         sach.setTenSach(txtTenSach.getText());
         sach.setDuongDan(txtDuongDan.getText());
-        sach.setHinh(fileChooser.getSelectedFile().getName());
+        sach.setHinh(NameImg);
         TacGia tg = DAOTG.findByName(txtTacGia.getText());
         sach.setMaTacGia(tg.getMaTacGia());
         sach.setNgayDang(now);
         sach.setMoTa(txtMoTa.getText());
         sach.setMaQuanTriVien(ShareHelper.BOSS.getMaQuanTriVien());
-       return sach; 
+        return sach;
     }
-    
-    public void InsertSach(){
-        if(UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)){
-            if(UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)){
-                if(UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)){
-                    if(checkTacGia(txtTacGia.getText()) == null){
+
+    public void InsertSach() {
+        if (UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)) {
+            if (UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)) {
+                if (UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)) {
+                    if (checkTacGia(txtTacGia.getText()) == null) {
                         try {
-                            DAOTG.insert(new TacGia(txtTacGia.getText(),ShareHelper.BOSS.getMaQuanTriVien()));
+                            TacGia tg = new TacGia(txtTacGia.getText(), true, now, "", " ", ShareHelper.BOSS.getMaQuanTriVien());
+
+                            DAOTG.insert(tg);
                         } catch (Exception e) {
-                            DialogHelper.alert(this,"Lỗi thêm tác giả");
+                            DialogHelper.alert(this, "Lỗi thêm tác giả");
+                            return;
                         }
                     }
                     Sach sach = getForm();
-                    DAOS.insert(sach);
-                    InsertLoaiSS((String) cboTheLoai.getSelectedItem(),txtMaSach.getText());
-                    
-                    try {
-                       
-                    } catch (Exception e) {
-                        DialogHelper.alert(this,"Lỗi Thêm Mới Sách");
+                    if (sach != null) {
+                        try {
+                            DAOS.insert(sach);
+                            InsertLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());
+                            DialogHelper.alert(this, "Thêm Mới Sách Thành Công");
+                        } catch (Exception e) {
+                            DialogHelper.alert(this, "Lỗi Thêm Mới Sách");
+                        }
+                    } else {
+                        DialogHelper.alert(this, "Thêm Mới Thất Bại");
                     }
+
                 }
             }
         }
-        
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -417,38 +433,38 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblExit1MousePressed
 
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
-      if(cboTheLoai.getSelectedIndex() != -1){
-           txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() +"00");
-      }
+        if (cboTheLoai.getSelectedIndex() != -1) {
+            txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() + "00");
+        }
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     private void btnChonFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile1ActionPerformed
         try {
-          MovingFile();  
+            MovingFile();
         } catch (Exception e) {
-            DialogHelper.alert(this,"Lỗi Chuyển Dữ Liệu");
+            DialogHelper.alert(this, "Lỗi Chuyển Dữ Liệu");
         }
-        
-        
+
+
     }//GEN-LAST:event_btnChonFile1ActionPerformed
 
     private void lblSachImgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMousePressed
-       if(evt.getClickCount() == 2){
-           try {
-               SetImg();
-           } catch (Exception e) {
+        if (evt.getClickCount() == 2) {
+            try {
+                SetImg();
+            } catch (Exception e) {
 //               DialogHelper.alert(this,"Lỗi Chọn Hình");
-           }
-     
-       }
+            }
+
+        }
     }//GEN-LAST:event_lblSachImgMousePressed
 
     private void lblSachImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseEntered
-       lblSachImg.setBorder(new LineBorder(new Color(249,249,249)));
+        lblSachImg.setBorder(new LineBorder(new Color(249, 249, 249)));
     }//GEN-LAST:event_lblSachImgMouseEntered
 
     private void lblSachImgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseExited
-        lblSachImg.setBorder(new LineBorder(new Color(0,0,0)));
+        lblSachImg.setBorder(new LineBorder(new Color(0, 0, 0)));
     }//GEN-LAST:event_lblSachImgMouseExited
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
@@ -457,7 +473,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     /*tbdSetting args the command line arguments
      */
-   public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

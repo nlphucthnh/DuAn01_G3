@@ -27,6 +27,15 @@ public class TacGia {
         this.maQuanTriVien = maQuanTriVien;
     }
 
+    public TacGia(String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.moTa = moTa;
+        this.hinh = hinh;
+        this.maQuanTriVien = maQuanTriVien;
+    }
+
     
 
     public TacGia(String maTacGia, String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
