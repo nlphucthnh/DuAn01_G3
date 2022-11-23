@@ -107,6 +107,7 @@ public class Main extends javax.swing.JFrame {
     List<ThucUong> listTU = new ArrayList<>();
     List<HoaDonThucUong> listHD = new ArrayList<>();
     List<Sach> listS = new ArrayList<>();
+    private List<TheLoai> listTL = new ArrayList<>();
     int index = -1;
 
     public Main() {
@@ -118,8 +119,8 @@ public class Main extends javax.swing.JFrame {
         initMoving(this, pnlMainProjebt);
         setModelAudio();
         fillTableAudio();
-        fillTableSach();
         fillComBoBoxTheLoai();
+//        fillTableSach();
         fillTableNguoiDung();
         fillTableThucUong();
     }
@@ -841,6 +842,7 @@ public class Main extends javax.swing.JFrame {
         myButton18.setRadius(10);
         panelRadius10.add(myButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 140, 40));
 
+        cboTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTheLoaiActionPerformed(evt);
@@ -2098,7 +2100,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_searchText1ActionPerformed
 
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
-        // TODO add your handling code here:
+        int index = cboTheLoai.getSelectedIndex();
+        OtionTableSach(index);
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
@@ -2627,6 +2630,23 @@ public class Main extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             listS = DAOS.selectAll();
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+    
+    
+    public void OtionTableSach(int index){
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblSach.getModel();
+        model.setRowCount(0);
+        listTL = DAOTL.selectAll();
+        try {
+            listS = DAOS.selectByTheLoai(listTL.get(index).getMaTheLoai());
             for (Sach sach : listS) {
                 Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
                 model.addRow(row);

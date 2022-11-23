@@ -6,6 +6,7 @@ package com.ebooks.dao;
 
 import com.ebooks.helper.JdbcHelper;
 import com.ebooks.model.Sach;
+import com.ebooks.model.TheLoai;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +28,11 @@ public class SachDAO {
         model.setHinh(rs.getString("Hinh"));
         model.setMaQuanTriVien(rs.getString("MaQuanTriVien"));
         return model;
+    }
+    
+     public List <Sach> selectByTheLoai(String matt){
+        String sql = "SELECT * FROM Sach JOIN LoaiSS ON Sach.maSach = LoaiSS.maSach JOIN TheLoai ON TheLoai.maTheLoai = LoaiSS.maTheLoai WHERE TheLoai.maTheLoai LIKE ?";
+        return this.select(sql,matt+"%");
     }
     
     private List<Sach> select(String sql, Object...args){
