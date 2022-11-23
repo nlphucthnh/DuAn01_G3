@@ -174,16 +174,13 @@ public class BooksDiaLog extends javax.swing.JDialog {
         DAOLSS.insert(new LoaiSS(MaSach, tl.getMaTheLoai()));
     }
 
+    public void UpdateLoaiSS(String theLoai, String MaSach) {
+        TheLoai tl = DAOTL.findByName(theLoai);
+        DAOLSS.update(new LoaiSS(MaSach, tl.getMaTheLoai()));
+    }
+
     Sach getForm() {
         Sach sach = new Sach();
-        listS = DAOS.selectAll();
-        int lengthList = listS.size();
-        for (int i = 0; i < lengthList; i++) {
-            if (txtMaSach.getText().equalsIgnoreCase(listS.get(i).getMaSach())) {
-                DialogHelper.alert(this, "Mã Sách Đã Tồn Tại");
-                return null;
-            }
-        }
         sach.setMaSach(txtMaSach.getText());
         sach.setTenSach(txtTenSach.getText());
         sach.setDuongDan(txtDuongDan.getText());
@@ -203,7 +200,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
                     if (checkTacGia(txtTacGia.getText()) == null) {
                         try {
                             TacGia tg = new TacGia(txtTacGia.getText(), true, now, "", " ", ShareHelper.BOSS.getMaQuanTriVien());
-
                             DAOTG.insert(tg);
                         } catch (Exception e) {
                             DialogHelper.alert(this, "Lỗi thêm tác giả");
@@ -211,16 +207,20 @@ public class BooksDiaLog extends javax.swing.JDialog {
                         }
                     }
                     Sach sach = getForm();
-                    if (sach != null) {
-                        try {
-                            DAOS.insert(sach);
-                            InsertLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());
-                            DialogHelper.alert(this, "Thêm Mới Sách Thành Công");
-                        } catch (Exception e) {
-                            DialogHelper.alert(this, "Lỗi Thêm Mới Sách");
+                    listS = DAOS.selectAll();
+                    int lengthList = listS.size();
+                    for (int i = 0; i < lengthList; i++) {
+                        if (txtMaSach.getText().equalsIgnoreCase(listS.get(i).getMaSach())) {
+                            DialogHelper.alert(this, "Mã Sách Đã Tồn Tại");
+                            return;
                         }
-                    } else {
-                        DialogHelper.alert(this, "Thêm Mới Thất Bại");
+                    }
+                    try {
+                        DAOS.insert(sach);
+                        InsertLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());
+                        DialogHelper.alert(this, "Thêm Mới Sách Thành Công");
+                    } catch (Exception e) {
+                        DialogHelper.alert(this, "Lỗi Thêm Mới Sách");
                     }
 
                 }
@@ -229,6 +229,27 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     }
 
+    public void UpdateSach() {
+        if (UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)) {
+            if (UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)) {
+                if (UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)) {
+                    Sach sach = getForm();
+                    if (sach != null) {
+                        try {
+                            DAOS.update(sach);
+                            UpdateLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());
+                            DialogHelper.alert(this, "Cập Nhật Sách Thành Công");
+                        } catch (Exception e) {
+                            DialogHelper.alert(this, "Lỗi Cập Nhật Sách");
+                        }
+                    } else {
+                        DialogHelper.alert(this, "Cập Nhật Thất Bại");
+                    }
+
+                }
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -468,7 +489,14 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblSachImgMouseExited
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-        InsertSach();
+//        for(Sach sach : listS){
+//            if(sach.getMaSach().contains(txtMaSach.getText())){
+//                UpdateSach();
+//            }else {
+//                InsertSach();
+//            }
+//        }  
+        UpdateSach();
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
     /*tbdSetting args the command line arguments

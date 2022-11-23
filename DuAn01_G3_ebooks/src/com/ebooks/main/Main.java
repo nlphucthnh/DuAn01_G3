@@ -5,6 +5,7 @@
 package com.ebooks.main;
 
 import com.ebooks.Compoment.MyButton;
+import com.ebooks.Compoment.Table;
 
 import com.ebooks.dao.AudioSachDAO;
 import com.ebooks.helper.ShareHelper;
@@ -13,6 +14,7 @@ import com.ebooks.audio.FileTypeFilter;
 import jaco.mp3.player.MP3Player;
 
 import com.ebooks.dao.HoaDonThucUongDAO;
+import com.ebooks.dao.LoaiSSDAO;
 import com.ebooks.dao.NguoiDungDAO;
 import com.ebooks.dao.SachDAO;
 import com.ebooks.dao.TacGiaDAO;
@@ -22,6 +24,7 @@ import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.HoaDonThucUong;
+import com.ebooks.model.LoaiSS;
 import com.ebooks.model.NguoiDung;
 import com.ebooks.model.Sach;
 import com.ebooks.model.TheLoai;
@@ -66,7 +69,6 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
     boolean congTac = true;
 
-
     DefaultTableModel model;
     AudioSachDAO daoAudio = new AudioSachDAO();
     List<AudioSach> listAudio = new ArrayList();
@@ -94,6 +96,7 @@ public class Main extends javax.swing.JFrame {
     SachDAO DAOS = new SachDAO();
     TacGiaDAO DAOTG = new TacGiaDAO();
     TheLoaiDAO DAOTL = new TheLoaiDAO();
+    LoaiSSDAO DAOLSS = new LoaiSSDAO();
     //model 
     NguoiDung nguoiDung = new NguoiDung();
     ThucUong thucUong = new ThucUong();
@@ -105,7 +108,6 @@ public class Main extends javax.swing.JFrame {
     List<HoaDonThucUong> listHD = new ArrayList<>();
     List<Sach> listS = new ArrayList<>();
     int index = -1;
-
 
     public Main() {
         initComponents();
@@ -130,7 +132,6 @@ public class Main extends javax.swing.JFrame {
 
     }
 
-
     //AudioSach
     public void setModelAudio() {
         //Show MP3 to play music audio
@@ -139,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         model.addColumn("Tên Audio");
         model.addColumn("Ngày Phát Hành");
         model.addColumn("Người Thu");
-       // model.addColumn("Đường Dẫn");
+        // model.addColumn("Đường Dẫn");
         tblAudio.setModel(model);
     }
 
@@ -162,8 +163,6 @@ public class Main extends javax.swing.JFrame {
         return mp3Player;
     }
 
-
-
     public void movedpnlMenu() {
         if (ShareHelper.isManager()) {
             pnlManage.setVisible(true);
@@ -176,9 +175,6 @@ public class Main extends javax.swing.JFrame {
             pnlStatistical.setVisible(false);
             pnlRead.setLocation(new Point(15, 100));
             pnlListen.setLocation(new Point(15, 180));
-            
-
-
 
         }
     }
@@ -222,7 +218,7 @@ public class Main extends javax.swing.JFrame {
     private int x;
     private int y;
 
-    public void initMoving(JFrame frame,JPanel panel) {
+    public void initMoving(JFrame frame, JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -238,7 +234,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -315,8 +310,8 @@ public class Main extends javax.swing.JFrame {
         cboTheLoai = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         btnThemSach = new com.ebooks.Compoment.MyButton();
-        myButton75 = new com.ebooks.Compoment.MyButton();
-        myButton76 = new com.ebooks.Compoment.MyButton();
+        btnCapNhatSach = new com.ebooks.Compoment.MyButton();
+        btnXoaSach = new com.ebooks.Compoment.MyButton();
         btnFirstSach = new com.ebooks.Compoment.MyButton();
         btnNextSach = new com.ebooks.Compoment.MyButton();
         btnPrevSach = new com.ebooks.Compoment.MyButton();
@@ -871,23 +866,28 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius10.add(btnThemSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 150, 40));
 
-        myButton75.setBackground(new java.awt.Color(87, 190, 110));
-        myButton75.setForeground(new java.awt.Color(255, 255, 255));
-        myButton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
-        myButton75.setText("Sửa Thông Tin");
-        myButton75.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton75.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton75.setRadius(10);
-        panelRadius10.add(myButton75, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 150, 40));
+        btnCapNhatSach.setBackground(new java.awt.Color(87, 190, 110));
+        btnCapNhatSach.setForeground(new java.awt.Color(255, 255, 255));
+        btnCapNhatSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
+        btnCapNhatSach.setText("Sửa Thông Tin");
+        btnCapNhatSach.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnCapNhatSach.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnCapNhatSach.setRadius(10);
+        panelRadius10.add(btnCapNhatSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 150, 40));
 
-        myButton76.setBackground(new java.awt.Color(253, 127, 127));
-        myButton76.setForeground(new java.awt.Color(255, 255, 255));
-        myButton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/delete-document.png"))); // NOI18N
-        myButton76.setText("Xóa Sách");
-        myButton76.setBoderColor(new java.awt.Color(253, 127, 127));
-        myButton76.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton76.setRadius(10);
-        panelRadius10.add(myButton76, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, 40));
+        btnXoaSach.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaSach.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/delete-document.png"))); // NOI18N
+        btnXoaSach.setText("Xóa Sách");
+        btnXoaSach.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaSach.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnXoaSach.setRadius(10);
+        btnXoaSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSachActionPerformed(evt);
+            }
+        });
+        panelRadius10.add(btnXoaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, 40));
 
         btnFirstSach.setBackground(new java.awt.Color(145, 227, 168));
         btnFirstSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
@@ -2204,7 +2204,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int index = tblAudio.getSelectedRow();
-     
+
         AudioSach au = listAudio.get(index);
         lblTenAudio.setText(au.getTenAudio());
         songFile = new File("E:\\UDPM_DuAn1\\Github\\DuAn01_G3\\DuAn01_G3_ebooks" + au.getDuongDan());
@@ -2264,15 +2264,15 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSuaThongTinThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinThucUongActionPerformed
         index = tblThucUong.getSelectedRow();
-        if(index < 0) {
+        if (index < 0) {
             DialogHelper.alert(this, "Chưa chọn thức uống cần chỉnh sửa!");
-        }else {
+        } else {
             String maThucUong = (String) tblThucUong.getValueAt(index, 0);
             thucUong = DaoTU.findById(maThucUong);
             new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
             this.fillTableThucUong();
         }
-        
+
     }//GEN-LAST:event_btnSuaThongTinThucUongActionPerformed
 
     private void btnXoaThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaThucUongActionPerformed
@@ -2306,18 +2306,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLastThucUongActionPerformed
 
     private void tblSachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSachMousePressed
-       if(evt.getClickCount() == 2){
-         int index = tblSach.getSelectedRow();
-         String maSach = (String) tblSach.getValueAt(index,0);
-         Sach sach = DAOS.findById(maSach);
-         new BooksDiaLog(this, congTac, sach).setVisible(true);
-         fillTableSach();
-       }
+        if (evt.getClickCount() == 2) {
+            int index = tblSach.getSelectedRow();
+            String maSach = (String) tblSach.getValueAt(index, 0);
+            Sach sach = DAOS.findById(maSach);
+            new BooksDiaLog(this, congTac, sach).setVisible(true);
+            fillTableSach();
+        }
+
     }//GEN-LAST:event_tblSachMousePressed
 
     private void btnFirstSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstSachActionPerformed
-       index = tblSach.getSelectedRow();
-       UtilityHelper.first(index, tblSach);
+        index = tblSach.getSelectedRow();
+        UtilityHelper.first(index, tblSach);
     }//GEN-LAST:event_btnFirstSachActionPerformed
 
     private void btnNextSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextSachActionPerformed
@@ -2331,14 +2332,32 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrevSachActionPerformed
 
     private void btnLastSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastSachActionPerformed
-       index = tblSach.getSelectedRow();
-       UtilityHelper.last(index, tblSach, listS);
+        index = tblSach.getSelectedRow();
+        UtilityHelper.last(index, tblSach, listS);
     }//GEN-LAST:event_btnLastSachActionPerformed
 
     private void btnThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSachActionPerformed
         new BooksDiaLog(this, congTac).setVisible(true);
         fillTableSach();
     }//GEN-LAST:event_btnThemSachActionPerformed
+
+    private void btnXoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSachActionPerformed
+        index = tblSach.getSelectedRow();
+        String MaSach = tblSach.getValueAt(index, 0).toString();
+        if (index < 0) {
+            DialogHelper.alert(this, "Chưa chọn Sách cần xóa!");
+        } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa Sách này?")) {
+            try {
+                LoaiSS lss = DAOLSS.findByBook(MaSach);
+                if (lss != null) {
+                    DAOLSS.delete(lss.getMaLoaiSS());
+                }
+                DAOS.delete(MaSach);
+                this.fillTableSach();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_btnXoaSachActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2378,6 +2397,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.ebooks.Compoment.MyButton btnBell;
+    private com.ebooks.Compoment.MyButton btnCapNhatSach;
     private com.ebooks.Compoment.MyButton btnFirstHoaDon;
     private com.ebooks.Compoment.MyButton btnFirstSach;
     private com.ebooks.Compoment.MyButton btnFirstThucUong;
@@ -2402,6 +2422,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnThemHoaDon;
     private com.ebooks.Compoment.MyButton btnThemSach;
     private com.ebooks.Compoment.MyButton btnThucUong;
+    private com.ebooks.Compoment.MyButton btnXoaSach;
     private com.ebooks.Compoment.MyButton btnXoaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnXoaThucUong;
     private javax.swing.JComboBox<String> cboTheLoai;
@@ -2502,8 +2523,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton71;
     private com.ebooks.Compoment.MyButton myButton72;
     private com.ebooks.Compoment.MyButton myButton73;
-    private com.ebooks.Compoment.MyButton myButton75;
-    private com.ebooks.Compoment.MyButton myButton76;
     private com.ebooks.Compoment.MyButton myButton78;
     private com.ebooks.Compoment.MyButton myButton79;
     private com.ebooks.Compoment.MyButton myButton8;
@@ -2600,31 +2619,30 @@ public class Main extends javax.swing.JFrame {
         new AccountDiaLog(this, true).setVisible(true);
 
     }
-    
+
     //FILLTABLE Sach
-    
-    public void fillTableSach(){
+    public void fillTableSach() {
         DefaultTableModel model;
         model = (DefaultTableModel) tblSach.getModel();
         model.setRowCount(0);
         try {
             listS = DAOS.selectAll();
             for (Sach sach : listS) {
-                Object[] row = {sach.getMaSach(),sach.getTenSach(),DAOTG.findById(sach.getMaTacGia()).getHoTen(),sach.getNgayDang(),sach.getMoTa()};
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
                 model.addRow(row);
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    
-     public void fillComBoBoxTheLoai(){
+
+    public void fillComBoBoxTheLoai() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
         model.removeAllElements();
         List<TheLoai> list = DAOTL.selectAll();
         for (TheLoai tl : list) {
             model.addElement(tl.getTenTheLoai());
-        }     
+        }
     }
 
 //    DefaultTableModel model;
@@ -2661,7 +2679,6 @@ public class Main extends javax.swing.JFrame {
             tblThucUong.setModel(model);
         }
     }
-    
-    
 
+    // HÀM DELETE TONG QUAT //
 }
