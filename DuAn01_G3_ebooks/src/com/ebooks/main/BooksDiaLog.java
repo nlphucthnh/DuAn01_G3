@@ -8,6 +8,7 @@ import com.ebooks.dao.LoaiSSDAO;
 import com.ebooks.dao.SachDAO;
 import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TheLoaiDAO;
+import com.ebooks.dao.ThucUongDAO;
 import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.helper.UtilityHelper;
@@ -15,6 +16,7 @@ import com.ebooks.model.LoaiSS;
 import com.ebooks.model.Sach;
 import com.ebooks.model.TacGia;
 import com.ebooks.model.TheLoai;
+import com.ebooks.model.ThucUong;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -489,14 +491,24 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblSachImgMouseExited
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-//        for(Sach sach : listS){
-//            if(sach.getMaSach().contains(txtMaSach.getText())){
-//                UpdateSach();
-//            }else {
-//                InsertSach();
-//            }
-//        }  
-        UpdateSach();
+      String maSach = txtMaSach.getText();
+        int timThay = 0;
+        ThucUongDAO DaoTU = new ThucUongDAO();
+        listS = DAOS.selectAll();
+        
+        for(Sach x : listS){
+            if(x.getMaSach().contains(maSach)){
+                timThay = 1;
+            }
+        }
+        if(timThay == 0) {
+            this.InsertSach();
+        } else {
+            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
+                this.UpdateSach();
+            }
+        }
+       
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
     /*tbdSetting args the command line arguments
