@@ -5,6 +5,11 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +24,27 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+    }
+    
+     private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -31,8 +57,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelBorder3 = new com.ebooks.Compoment.PanelBorder();
-        lblLogo = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelBorder();
         imageBoder2 = new com.ebooks.Compoment.ImageBoder();
         jLabel2 = new javax.swing.JLabel();
         btnTaoTaiKhoan = new com.ebooks.Compoment.MyButton();
@@ -50,25 +75,21 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        panelBorder3.setBackground(new java.awt.Color(255, 255, 255));
-        panelBorder3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelBorder3.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageBoder2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/2d23848e893747691e26.jpg"))); // NOI18N
         imageBoder2.setRadius(25);
-        panelBorder3.add(imageBoder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 380, 380));
+        pnlMainDialog.add(imageBoder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 380, 380));
 
         jLabel2.setFont(new java.awt.Font("Open Sans", 1, 30)); // NOI18N
         jLabel2.setText("Đăng ký vào Nerds");
-        panelBorder3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
 
         btnTaoTaiKhoan.setBackground(new java.awt.Color(87, 190, 110));
         btnTaoTaiKhoan.setBorder(null);
@@ -83,23 +104,23 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 btnTaoTaiKhoanActionPerformed(evt);
             }
         });
-        panelBorder3.add(btnTaoTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
+        pnlMainDialog.add(btnTaoTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Họ Tên");
-        panelBorder3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Vai Trò");
-        panelBorder3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Tên Đăng Nhập");
-        panelBorder3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Mật Khẩu");
-        panelBorder3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -119,28 +140,28 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 jLabel1MouseClicked(evt);
             }
         });
-        panelBorder3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 50, 50));
+        pnlMainDialog.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 50, 50));
 
         txtTenDangNhap.setBackground(new java.awt.Color(220, 250, 220));
         txtTenDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtTenDangNhap.setText(" txtFieldBoder1");
         txtTenDangNhap.setRadius(10);
-        panelBorder3.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 170, 40));
+        pnlMainDialog.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 170, 40));
 
         txtHoTen.setBackground(new java.awt.Color(220, 250, 220));
         txtHoTen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtHoTen.setText(" txtFieldBoder1");
-        panelBorder3.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 210, 40));
+        pnlMainDialog.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 210, 40));
 
         txtMatKhau.setBackground(new java.awt.Color(220, 250, 220));
         txtMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtMatKhau.setText(" txtFieldBoder1");
-        panelBorder3.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 400, 40));
+        pnlMainDialog.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 400, 40));
 
         txtXacNhan.setBackground(new java.awt.Color(220, 250, 220));
         txtXacNhan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtXacNhan.setText(" txtFieldBoder1");
-        panelBorder3.add(txtXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 400, 40));
+        pnlMainDialog.add(txtXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 400, 40));
 
         rdoQuanTriVien.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdoQuanTriVien);
@@ -150,7 +171,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 rdoQuanTriVienActionPerformed(evt);
             }
         });
-        panelBorder3.add(rdoQuanTriVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, -1, -1));
+        pnlMainDialog.add(rdoQuanTriVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, -1, -1));
 
         rdoNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdoNguoiDung);
@@ -160,15 +181,15 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 rdoNguoiDungActionPerformed(evt);
             }
         });
-        panelBorder3.add(rdoNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
+        pnlMainDialog.add(rdoNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Xác Nhận");
-        panelBorder3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Bạn muốn đăng nhập ?");
-        panelBorder3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, -1, -1));
+        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(87, 190, 110));
@@ -178,26 +199,20 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 jLabel9MouseClicked(evt);
             }
         });
-        panelBorder3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 50, -1, -1));
+        pnlMainDialog.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 50, -1, -1));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelBorder3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
-
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelBorder3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMainDialog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMainDialog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -275,18 +290,16 @@ public class SignUpDiaLog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblLogo;
-    private com.ebooks.Compoment.PanelBorder panelBorder3;
+    private com.ebooks.Compoment.PanelBorder pnlMainDialog;
     private javax.swing.JRadioButton rdoNguoiDung;
     private javax.swing.JRadioButton rdoQuanTriVien;
     private com.ebooks.Compoment.txtFieldBoder txtHoTen;

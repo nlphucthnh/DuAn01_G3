@@ -5,6 +5,11 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +24,28 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+        
+    }
+    
+     private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -31,8 +58,7 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo1 = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -49,19 +75,15 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -95,42 +117,42 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Tên Sách  :");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Thể Loại   :");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Sách");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
 
         imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageBoder1.setRadius(20);
-        panelRadius2.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 180, 180));
+        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 180, 180));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 670, 120));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 670, 120));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Mã Sách   :");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel5.setText("Tác Giả     :");
-        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
         myButton10.setBackground(new java.awt.Color(87, 190, 110));
         myButton10.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,34 +160,28 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton10.setRadius(10);
-        panelRadius2.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel1.setText("Bảo Mật - An Ninh Mạng");
-        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, -1));
+        pnlMainDialog.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, -1));
 
         jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel4.setText("Books001");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 370, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 370, -1));
 
         jLabel8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel8.setText("Hacker Lược Sử");
-        panelRadius2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 360, -1));
+        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 360, -1));
 
         jLabel9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         jLabel9.setText("Steven Levy");
-        panelRadius2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
+        pnlMainDialog.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
-
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -305,11 +321,10 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -319,9 +334,8 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblLogo1;
     private com.ebooks.Compoment.MyButton myButton10;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     // End of variables declaration//GEN-END:variables
 }

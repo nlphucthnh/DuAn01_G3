@@ -9,17 +9,23 @@ import java.awt.Color;
 import com.ebooks.helper.UtilityHelper;
 import com.ebooks.dao.ThucUongDAO;
 import com.ebooks.helper.DialogHelper;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 public class DrinksDiaLog extends javax.swing.JDialog {
 
     List<ThucUong> listTU = new ArrayList();
-    
+
     public DrinksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        initMoving(this, pnlMainDialog);
     }
 
     public DrinksDiaLog(java.awt.Frame parent, boolean modal, ThucUong thucUong) {
@@ -27,6 +33,27 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         initComponents();
         setForm(thucUong);
         setBackground(new Color(0, 0, 0, 0));
+        initMoving(this, pnlMainDialog);
+    }
+
+    private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -34,8 +61,7 @@ public class DrinksDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo1 = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         txtTenThucUong = new javax.swing.JTextField();
@@ -49,19 +75,15 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         lblGiaTien = new javax.swing.JLabel();
         txtGiaTien = new javax.swing.JTextField();
         btnLuu = new com.ebooks.Compoment.MyButton();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -95,40 +117,40 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         txtTenThucUong.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtTenThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 220, 40));
+        pnlMainDialog.add(txtTenThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 220, 40));
 
         txtMaThucUong.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtMaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, 40));
+        pnlMainDialog.add(txtMaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         lblTenThucUong.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblTenThucUong.setText("Tên Thức Uống");
-        panelRadius2.add(lblTenThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
+        pnlMainDialog.add(lblTenThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Thức Uống");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 290, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 290, -1));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 710, 220));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 710, 220));
 
         lblMaThucUong.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblMaThucUong.setText("Mã Thức Uống");
-        panelRadius2.add(lblMaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        pnlMainDialog.add(lblMaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         lblGiaTien.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblGiaTien.setText("Giá Tiền");
-        panelRadius2.add(lblGiaTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        pnlMainDialog.add(lblGiaTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
 
         txtGiaTien.setBackground(new java.awt.Color(222, 247, 227));
         txtGiaTien.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +158,7 @@ public class DrinksDiaLog extends javax.swing.JDialog {
                 txtGiaTienActionPerformed(evt);
             }
         });
-        panelRadius2.add(txtGiaTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 40));
+        pnlMainDialog.add(txtGiaTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 220, 40));
 
         btnLuu.setBackground(new java.awt.Color(87, 190, 110));
         btnLuu.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,18 +171,12 @@ public class DrinksDiaLog extends javax.swing.JDialog {
                 btnLuuActionPerformed(evt);
             }
         });
-        panelRadius2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 270, 50));
+        pnlMainDialog.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 270, 50));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
-
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -202,17 +218,17 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         int timThay = 0;
         ThucUongDAO DaoTU = new ThucUongDAO();
         listTU = DaoTU.selectAll();
-        
-        for(ThucUong x : listTU){
-            if(x.getMaThucUong().contains(maThucUong)){
+
+        for (ThucUong x : listTU) {
+            if (x.getMaThucUong().contains(maThucUong)) {
                 timThay = 1;
             }
         }
-        
-        if(timThay == 0) {
+
+        if (timThay == 0) {
             this.insert();
         } else {
-            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
+            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
                 this.update();
             }
         }
@@ -326,17 +342,15 @@ public class DrinksDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.MyButton btnLuu;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
     private javax.swing.JLabel lblGiaTien;
-    private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblMaThucUong;
     private javax.swing.JLabel lblTenThucUong;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private javax.swing.JTextField txtGiaTien;
     private javax.swing.JTextField txtMaThucUong;
     private javax.swing.JTextArea txtMoTa;
@@ -350,7 +364,7 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         txtTenThucUong.setText(thucUong.getTenThucUong());
         txtGiaTien.setText(String.valueOf(thucUong.getGia()));
     }
-    
+
     public ThucUong getForm() {
         ThucUong tu = new ThucUong();
         tu.setMaThucUong(txtMaThucUong.getText());
@@ -361,7 +375,7 @@ public class DrinksDiaLog extends javax.swing.JDialog {
 
     //them mơi
     public void insert() {
-        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong,txtMaThucUong)) {
+        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong, txtMaThucUong)) {
             if (UtilityHelper.checkNullText(lblTenThucUong, txtTenThucUong) && UtilityHelper.checkName(lblTenThucUong, txtTenThucUong)) {
                 if (UtilityHelper.checkNullText(lblGiaTien, txtGiaTien) && UtilityHelper.checkGia(txtGiaTien)) {
                     try {
@@ -376,9 +390,10 @@ public class DrinksDiaLog extends javax.swing.JDialog {
             }
         }
     }
+
     //cập nhật
     public void update() {
-        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong,txtMaThucUong)) {
+        if (UtilityHelper.checkNullText(lblMaThucUong, txtMaThucUong) && UtilityHelper.checkMa(lblMaThucUong, txtMaThucUong)) {
             if (UtilityHelper.checkNullText(lblTenThucUong, txtTenThucUong) && UtilityHelper.checkName(lblTenThucUong, txtTenThucUong)) {
                 if (UtilityHelper.checkNullText(lblGiaTien, txtGiaTien) && UtilityHelper.checkGia(txtGiaTien)) {
                     try {
@@ -394,5 +409,3 @@ public class DrinksDiaLog extends javax.swing.JDialog {
         }
     }
 }
-
-

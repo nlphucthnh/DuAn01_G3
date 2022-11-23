@@ -5,6 +5,11 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +24,27 @@ public class AccountDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+    }
+    
+     private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -31,7 +57,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroupVaiTroThongTinTK = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -61,9 +87,9 @@ public class AccountDiaLog extends javax.swing.JDialog {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -94,12 +120,12 @@ public class AccountDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(35, 98, 49));
         jLabel18.setText("Thông Tin Tài Khoản");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        pnlMainDialog.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
         materialTabbed1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
@@ -200,12 +226,12 @@ public class AccountDiaLog extends javax.swing.JDialog {
 
         materialTabbed1.addTab("Bảng Người Dùng", panelRadius3);
 
-        panelRadius2.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 880, 430));
+        pnlMainDialog.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 880, 430));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -297,9 +323,9 @@ public class AccountDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.MyButton myButton8;
     private com.ebooks.Compoment.MyButton myButton9;
     private com.ebooks.Compoment.PanelRadius panelRadius1;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private com.ebooks.Compoment.Table table1;
     // End of variables declaration//GEN-END:variables
 }

@@ -78,9 +78,15 @@ public class LogInDiaLog extends javax.swing.JDialog {
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng Nhập ");
         btnDangNhap.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnDangNhap.setColorOver(new java.awt.Color(54, 172, 63));
+        btnDangNhap.setColorClick(new java.awt.Color(47, 142, 63));
+        btnDangNhap.setColorOver(new java.awt.Color(52, 141, 59));
         btnDangNhap.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
         btnDangNhap.setRadius(10);
+        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseEntered(evt);
+            }
+        });
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -218,6 +224,10 @@ public class LogInDiaLog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtTenDangNhapKeyPressed
 
+    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDangNhapMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -229,7 +239,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

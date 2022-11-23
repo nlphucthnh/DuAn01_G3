@@ -7,6 +7,11 @@ package com.ebooks.main;
 import com.ebooks.model.NguoiDung;
 import com.sun.security.auth.NTSid;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,6 +23,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
     }
     
     public PersonDiaLog(java.awt.Frame parent, boolean modal, NguoiDung nd) {
@@ -25,6 +31,27 @@ public class PersonDiaLog extends javax.swing.JDialog {
         initComponents();
         setForm(nd);
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+    }
+    
+     private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -37,8 +64,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo1 = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -57,19 +83,15 @@ public class PersonDiaLog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -100,38 +122,38 @@ public class PersonDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(55, 149, 76));
         jLabel18.setText("người dùng");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
+        pnlMainDialog.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
         jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
         txtSoDienThoai.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
+        pnlMainDialog.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Số Điện Thoại");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
         txtHoTen.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
+        pnlMainDialog.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Giới Tính");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
+        pnlMainDialog.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Địa Chỉ Email");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
 
         buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
@@ -140,11 +162,11 @@ public class PersonDiaLog extends javax.swing.JDialog {
                 rdoNamActionPerformed(evt);
             }
         });
-        panelRadius2.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
+        pnlMainDialog.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
 
         buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
-        panelRadius2.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
+        pnlMainDialog.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
 
         btnSave.setBackground(new java.awt.Color(87, 190, 110));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,37 +174,31 @@ public class PersonDiaLog extends javax.swing.JDialog {
         btnSave.setBoderColor(new java.awt.Color(87, 190, 110));
         btnSave.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnSave.setRadius(10);
-        panelRadius2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        pnlMainDialog.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Hãy điền các thông tin");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
 
         imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageBoder1.setRadius(20);
-        panelRadius2.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 160));
+        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 160));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 670, 100));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 670, 100));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Họ Tên Người Dùng");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
-
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -288,16 +304,14 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblLogo1;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTextField txtEmail;

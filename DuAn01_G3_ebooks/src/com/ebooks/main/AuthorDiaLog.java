@@ -5,8 +5,13 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,6 +27,27 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         Calendar.setVisible(congTac);
         congTac = !congTac;
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+    }
+    
+    private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -34,9 +60,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         Calendar = new com.toedter.calendar.JCalendar();
-        lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -54,26 +79,22 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
         btnIconCld = new com.ebooks.Compoment.MyButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Calendar.setBackground(new java.awt.Color(201, 235, 201));
         Calendar.setDecorationBackgroundColor(new java.awt.Color(153, 255, 153));
         Calendar.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         Calendar.setWeekdayForeground(new java.awt.Color(51, 51, 51));
-        panelRadius2.add(Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, -1, -1));
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.add(Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, -1, -1));
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -107,43 +128,43 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jTextField3.setBackground(new java.awt.Color(222, 247, 227));
         jTextField3.setText("jTextField1");
-        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 190, 40));
+        pnlMainDialog.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Ngày Sinh");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
 
         jTextField4.setBackground(new java.awt.Color(222, 247, 227));
         jTextField4.setText("jTextField1");
-        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 210, 40));
+        pnlMainDialog.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Giới Tính");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
 
         jTextField2.setBackground(new java.awt.Color(222, 247, 227));
         jTextField2.setText("jTextField1");
-        panelRadius2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
+        pnlMainDialog.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Quê Quán");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Nam");
-        panelRadius2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        pnlMainDialog.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Nữ");
-        panelRadius2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, -1, -1));
+        pnlMainDialog.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, -1, -1));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,39 +172,29 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton9.setRadius(10);
-        panelRadius2.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        pnlMainDialog.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Tác Giả");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 240, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 240, -1));
 
         imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageBoder1.setRadius(20);
-        panelRadius2.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 160, 160));
+        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 160, 160));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 680, 120));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 680, 120));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Họ Tên Người Dùng");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
-
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
-
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
         btnIconCld.setBackground(new java.awt.Color(87, 190, 110));
         btnIconCld.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/calendar.png"))); // NOI18N
-        btnIconCld.setActionCommand("");
         btnIconCld.setAutoscrolls(true);
         btnIconCld.setBoderColor(new java.awt.Color(204, 204, 204));
         btnIconCld.addActionListener(new java.awt.event.ActionListener() {
@@ -191,9 +202,12 @@ public class AuthorDiaLog extends javax.swing.JDialog {
                 btnIconCldActionPerformed(evt);
             }
         });
-        panelRadius2.add(btnIconCld, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 55, 40));
+        pnlMainDialog.add(btnIconCld, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 55, 40));
 
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -310,9 +324,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JRadioButton jRadioButton1;
@@ -323,9 +336,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblLogo1;
     private com.ebooks.Compoment.MyButton myButton9;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     // End of variables declaration//GEN-END:variables
 }

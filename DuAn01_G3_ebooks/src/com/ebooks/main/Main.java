@@ -120,7 +120,7 @@ public class Main extends javax.swing.JFrame {
         setModelAudio();
         fillTableAudio();
         fillComBoBoxTheLoai();
-//        fillTableSach();
+        fillTableSach();
         fillTableNguoiDung();
         fillTableThucUong();
     }
@@ -2101,7 +2101,9 @@ public class Main extends javax.swing.JFrame {
 
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
         int index = cboTheLoai.getSelectedIndex();
-        OtionTableSach(index);
+        if(index != -1){
+           OtionTableSach(index); 
+        }
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
@@ -2627,6 +2629,7 @@ public class Main extends javax.swing.JFrame {
     public void fillTableSach() {
         DefaultTableModel model;
         model = (DefaultTableModel) tblSach.getModel();
+        tblSach.setSelectionBackground(new Color(87,190,110));
         model.setRowCount(0);
         try {
             listS = DAOS.selectAll();
@@ -2646,13 +2649,13 @@ public class Main extends javax.swing.JFrame {
         model.setRowCount(0);
         listTL = DAOTL.selectAll();
         try {
-            listS = DAOS.selectByTheLoai(listTL.get(index).getMaTheLoai());
+           listS = DAOS.selectByTheLoai(listTL.get(index).getMaTheLoai());
             for (Sach sach : listS) {
                 Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
                 model.addRow(row);
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+              DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
 
