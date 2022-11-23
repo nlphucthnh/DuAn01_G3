@@ -49,7 +49,7 @@ public class LoaiSSDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(LoaiSS entity) {
-        String sql = "INSERT INTO LoaiSS (MaLoaiSS, MaSach, MaTheLoai) VALUES (?, ?, ?)";
+        String sql = "SET IDENTITY_INSERT LoaiSS ON INSERT INTO LoaiSS (MaLoaiSS, MaSach, MaTheLoai) VALUES (?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaLoaiSS(),
                 entity.getMaSach(),

@@ -22,6 +22,13 @@ public class TacGia {
     public TacGia() {
     }
 
+    public TacGia(String hoTen, String maQuanTriVien) {
+        this.hoTen = hoTen;
+        this.maQuanTriVien = maQuanTriVien;
+    }
+
+    
+
     public TacGia(String maTacGia, String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
         this.maTacGia = maTacGia;
         this.hoTen = hoTen;

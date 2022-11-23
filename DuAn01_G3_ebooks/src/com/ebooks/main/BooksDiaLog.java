@@ -4,9 +4,14 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.LoaiSSDAO;
+import com.ebooks.dao.SachDAO;
 import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TheLoaiDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.ShareHelper;
 import com.ebooks.helper.UtilityHelper;
+import com.ebooks.model.LoaiSS;
 import com.ebooks.model.Sach;
 import com.ebooks.model.TacGia;
 import com.ebooks.model.TheLoai;
@@ -15,12 +20,19 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.print.attribute.standard.SheetCollate;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -30,14 +42,20 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     TacGiaDAO DAOTG = new TacGiaDAO();
     TheLoaiDAO DAOTL = new TheLoaiDAO();
+    SachDAO DAOS = new SachDAO();
+    LoaiSSDAO DAOLSS = new LoaiSSDAO();
     List<TheLoai> listTL = new ArrayList<>();
-    String Url = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
+    String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
+    String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
+    Date now = new Date();
+    JFileChooser fileChooser = new JFileChooser();
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         fillComBoBox();
         setBackground(new Color(0,0,0,0));
         initMoving(this, pnlMainBooks);
+       
     }
     
     public BooksDiaLog(java.awt.Frame parent, boolean modal, Sach sach) {
@@ -80,7 +98,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
     
      public ImageIcon ShowImg(String nameImg) {
-        ImageIcon imgIcon = new ImageIcon(Url + nameImg);
+        ImageIcon imgIcon = new ImageIcon(UrlImg + nameImg);
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(newimg);
@@ -104,17 +122,95 @@ public class BooksDiaLog extends javax.swing.JDialog {
         lblSachImg.setIcon(ShowImg(sach.getHinh()));
     }
     
+    public String MovingFile() {
+        int x = fileChooser.showDialog(this, "Chon file");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            try {
+                File afile = new File(fileChooser.getSelectedFile().getPath());
+                if (afile.renameTo(new File(UrlEbook + fileChooser.getSelectedFile().getName()))) {
+                    System.out.println("File is moved successful!");
+                    txtDuongDan.setText(fileChooser.getSelectedFile().getName());
+                } else {
+                    System.out.println("File is failed to move!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return fileChooser.getSelectedFile().getName();
+    }
+    
+    public String SetImg() {
+        int x = fileChooser.showDialog(this, "Chon file");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            try {
+                File afile = new File(fileChooser.getSelectedFile().getPath());
+                if (afile.renameTo(new File(UrlImg + fileChooser.getSelectedFile().getName()))) {
+                    System.out.println("File is moved successful!");
+                    ImageIcon imgIcon = new ImageIcon(UrlImg + fileChooser.getSelectedFile().getName());
+                    Image image = imgIcon.getImage();
+                    Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+                    imgIcon = new ImageIcon(newimg);
+                    lblSachImg.setIcon(imgIcon);
+                    System.out.println(fileChooser.getSelectedFile().getName());
+                } else {
+                    System.out.println("File is failed to move!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            
+        }
+        return fileChooser.getSelectedFile().getName();
+    }
+    
+   
+    public void InsertLoaiSS(String theLoai, String MaSach){
+        TheLoai tl = DAOTL.findByName(theLoai);
+        DAOLSS.insert(new LoaiSS(MaSach,tl.getMaTheLoai()));
+    }
+    
     Sach getForm(){
         Sach sach = new Sach();
         sach.setMaSach(txtMaSach.getText());
         sach.setTenSach(txtTenSach.getText());
         sach.setDuongDan(txtDuongDan.getText());
-        sach.setHinh(lblSachImg.getIcon().toString());
-        sach.setNgayDang();
-        
-        
+        sach.setHinh(fileChooser.getSelectedFile().getName());
+        TacGia tg = DAOTG.findByName(txtTacGia.getText());
+        sach.setMaTacGia(tg.getMaTacGia());
+        sach.setNgayDang(now);
+        sach.setMoTa(txtMoTa.getText());
+        sach.setMaQuanTriVien(ShareHelper.BOSS.getMaQuanTriVien());
        return sach; 
     }
+    
+    public void InsertSach(){
+        if(UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)){
+            if(UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)){
+                if(UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)){
+                    if(checkTacGia(txtTacGia.getText()) == null){
+                        try {
+                            DAOTG.insert(new TacGia(txtTacGia.getText(),ShareHelper.BOSS.getMaQuanTriVien()));
+                        } catch (Exception e) {
+                            DialogHelper.alert(this,"Lỗi thêm tác giả");
+                        }
+                    }
+                    Sach sach = getForm();
+                    DAOS.insert(sach);
+                    InsertLoaiSS((String) cboTheLoai.getSelectedItem(),txtMaSach.getText());
+                    
+                    try {
+                       
+                    } catch (Exception e) {
+                        DialogHelper.alert(this,"Lỗi Thêm Mới Sách");
+                    }
+                }
+            }
+        }
+        
+    }
+    
     
 
     /**
@@ -133,21 +229,20 @@ public class BooksDiaLog extends javax.swing.JDialog {
         txtTenSach = new javax.swing.JTextField();
         txtMaSach = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTenSach = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         lblSachImg = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
+        lblMaSach = new javax.swing.JLabel();
         txtDuongDan = new javax.swing.JTextField();
         cboTheLoai = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        lblTacGia = new javax.swing.JLabel();
         txtTacGia = new javax.swing.JTextField();
         btnLuuThong = new com.ebooks.Compoment.MyButton();
         jLabel1 = new javax.swing.JLabel();
         btnChonFile1 = new com.ebooks.Compoment.MyButton();
-        btnChonFile2 = new com.ebooks.Compoment.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -201,9 +296,9 @@ public class BooksDiaLog extends javax.swing.JDialog {
         jLabel6.setText("Mô Tả");
         pnlMainBooks.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel2.setText("Tên Sách");
-        pnlMainBooks.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
+        lblTenSach.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTenSach.setText("Tên Sách");
+        pnlMainBooks.add(lblTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Thể Loại");
@@ -217,6 +312,17 @@ public class BooksDiaLog extends javax.swing.JDialog {
         lblSachImg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblSachImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         lblSachImg.setRadius(20);
+        lblSachImg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSachImgMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSachImgMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSachImgMousePressed(evt);
+            }
+        });
         pnlMainBooks.add(lblSachImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
 
         txtMoTa.setColumns(20);
@@ -225,9 +331,9 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
         pnlMainBooks.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
 
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mã Sách");
-        pnlMainBooks.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
+        lblMaSach.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblMaSach.setText("Mã Sách");
+        pnlMainBooks.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
         txtDuongDan.setBackground(new java.awt.Color(222, 247, 227));
         pnlMainBooks.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
@@ -242,12 +348,12 @@ public class BooksDiaLog extends javax.swing.JDialog {
         });
         pnlMainBooks.add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 210, 40));
 
-        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Tác Giả");
-        pnlMainBooks.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+        lblTacGia.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTacGia.setText("Tác Giả");
+        pnlMainBooks.add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
         txtTacGia.setBackground(new java.awt.Color(222, 247, 227));
-        pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 170, 40));
+        pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
 
         btnLuuThong.setBackground(new java.awt.Color(87, 190, 110));
         btnLuuThong.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,6 +361,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
         btnLuuThong.setBoderColor(new java.awt.Color(87, 190, 110));
         btnLuuThong.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnLuuThong.setRadius(10);
+        btnLuuThong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuThongActionPerformed(evt);
+            }
+        });
         pnlMainBooks.add(btnLuuThong, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
@@ -272,18 +383,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
             }
         });
         pnlMainBooks.add(btnChonFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
-
-        btnChonFile2.setBackground(new java.awt.Color(87, 190, 110));
-        btnChonFile2.setForeground(new java.awt.Color(255, 255, 255));
-        btnChonFile2.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnChonFile2.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        btnChonFile2.setRadius(10);
-        btnChonFile2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChonFile2ActionPerformed(evt);
-            }
-        });
-        pnlMainBooks.add(btnChonFile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 40, 40));
 
         getContentPane().add(pnlMainBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -324,12 +423,37 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
     private void btnChonFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile1ActionPerformed
-        // TODO add your handling code here:
+        try {
+          MovingFile();  
+        } catch (Exception e) {
+            DialogHelper.alert(this,"Lỗi Chuyển Dữ Liệu");
+        }
+        
+        
     }//GEN-LAST:event_btnChonFile1ActionPerformed
 
-    private void btnChonFile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile2ActionPerformed
-      
-    }//GEN-LAST:event_btnChonFile2ActionPerformed
+    private void lblSachImgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMousePressed
+       if(evt.getClickCount() == 2){
+           try {
+               SetImg();
+           } catch (Exception e) {
+//               DialogHelper.alert(this,"Lỗi Chọn Hình");
+           }
+     
+       }
+    }//GEN-LAST:event_lblSachImgMousePressed
+
+    private void lblSachImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseEntered
+       lblSachImg.setBorder(new LineBorder(new Color(249,249,249)));
+    }//GEN-LAST:event_lblSachImgMouseEntered
+
+    private void lblSachImgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseExited
+        lblSachImg.setBorder(new LineBorder(new Color(0,0,0)));
+    }//GEN-LAST:event_lblSachImgMouseExited
+
+    private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
+        InsertSach();
+    }//GEN-LAST:event_btnLuuThongActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -387,6 +511,38 @@ public class BooksDiaLog extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -405,20 +561,19 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.ebooks.Compoment.MyButton btnChonFile1;
-    private com.ebooks.Compoment.MyButton btnChonFile2;
     private com.ebooks.Compoment.MyButton btnLuuThong;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboTheLoai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
+    private javax.swing.JLabel lblMaSach;
     private com.ebooks.Compoment.ImageBoder lblSachImg;
+    private javax.swing.JLabel lblTacGia;
+    private javax.swing.JLabel lblTenSach;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainBooks;
     private javax.swing.JTextField txtDuongDan;

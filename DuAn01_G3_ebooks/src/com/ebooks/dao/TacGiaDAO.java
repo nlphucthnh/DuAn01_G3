@@ -107,7 +107,7 @@ public class TacGiaDAO {
     }
     
     public TacGia findByName(String name) {
-        String sql="SELECT * FROM TacGia WHERE hoTen=?";
+        String sql="SELECT * FROM TacGia WHERE hoTen LIKE ?";
         List<TacGia> list=select(sql,"%"+name+"%");
         return list.size()>0?list.get(0):null;
     }

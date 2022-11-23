@@ -2337,6 +2337,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSachActionPerformed
         new BooksDiaLog(this, congTac).setVisible(true);
+        fillTableSach();
     }//GEN-LAST:event_btnThemSachActionPerformed
 
     /**
