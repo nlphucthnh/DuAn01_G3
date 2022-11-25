@@ -5,11 +5,6 @@
 package com.ebooks.main;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
 
 /**
  *
@@ -24,27 +19,6 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
-        initMoving(this, pnlMainDialog);
-    }
-    
-     private int x;
-    private int y;
-
-    public void initMoving(JDialog DiaLog, JPanel panel) {
-        panel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                x = me.getX();
-                y = me.getY();
-            }
-
-        });
-        panel.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent me) {
-                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
-            }
-        });
     }
 
     /**
@@ -57,7 +31,8 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
+        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        lblLogo1 = new javax.swing.JLabel();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -76,15 +51,19 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         jTextField6 = new javax.swing.JTextField();
         myButton10 = new com.ebooks.Compoment.MyButton();
         jTextField7 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMainDialog.setRadius(25);
-        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius2.setRadius(25);
+        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
+        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -118,27 +97,27 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jTextField3.setBackground(new java.awt.Color(222, 247, 227));
         jTextField3.setText("jTextField1");
-        pnlMainDialog.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
+        panelRadius2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
 
         jTextField4.setBackground(new java.awt.Color(222, 247, 227));
         jTextField4.setText("jTextField1");
-        pnlMainDialog.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
+        panelRadius2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
+        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Tên Sách");
-        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
+        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Mã Audio");
-        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
         myButton9.setBackground(new java.awt.Color(87, 190, 110));
         myButton9.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,38 +125,38 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton9.setRadius(10);
-        pnlMainDialog.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
+        panelRadius2.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Audio Sách");
-        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
+        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
 
         imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
         imageBoder1.setRadius(20);
-        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
+        panelRadius2.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
+        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Mã Sách");
-        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
+        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
         jTextField5.setBackground(new java.awt.Color(222, 247, 227));
         jTextField5.setText("jTextField1");
-        pnlMainDialog.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
+        panelRadius2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel5.setText("Tên Audio");
-        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+        panelRadius2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
         jTextField6.setBackground(new java.awt.Color(222, 247, 227));
         jTextField6.setText("jTextField1");
-        pnlMainDialog.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 220, 40));
+        panelRadius2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 220, 40));
 
         myButton10.setBackground(new java.awt.Color(87, 190, 110));
         myButton10.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,16 +164,22 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         myButton10.setRadius(10);
-        pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
+        panelRadius2.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
 
         jTextField7.setBackground(new java.awt.Color(222, 247, 227));
         jTextField7.setText("jTextField1");
-        pnlMainDialog.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
+        panelRadius2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("N E R D S");
+        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
 
-        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
+        jLabel33.setText("Learning is the eye of the mind");
+        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
+
+        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -336,10 +321,11 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField3;
@@ -348,9 +334,10 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblExit1;
+    private javax.swing.JLabel lblLogo1;
     private com.ebooks.Compoment.MyButton myButton10;
     private com.ebooks.Compoment.MyButton myButton9;
+    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
-    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     // End of variables declaration//GEN-END:variables
 }

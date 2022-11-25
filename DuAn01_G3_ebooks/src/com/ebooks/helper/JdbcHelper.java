@@ -1,4 +1,3 @@
-
 package com.ebooks.helper;
 
 import java.sql.Connection;
@@ -9,16 +8,17 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class JdbcHelper {
+
     public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=eBOOK;encrypt=false;trustServerCertificate=true;";
     public static String username = "sa";
     public static String password = "123";
-    
+
     static {
         try {
             Class.forName(driver);
+            System.out.println("Kết nối thành công");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JdbcHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +37,7 @@ public class JdbcHelper {
         }
         return pstmt;
     }
-    
+
     public static void executeUpdate(String sql, Object... args) {
         try {
             PreparedStatement pstmt = preparedStatement(sql, args);
@@ -50,7 +50,7 @@ public class JdbcHelper {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public static ResultSet executeQuery(String sql, Object... args) {
         try {
             PreparedStatement pstmt = preparedStatement(sql, args);

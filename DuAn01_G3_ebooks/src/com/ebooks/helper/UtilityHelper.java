@@ -6,17 +6,9 @@ package com.ebooks.helper;
 
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -26,27 +18,27 @@ import javax.swing.JTextField;
  */
 public class UtilityHelper {
 
-    public static boolean checkMa(JLabel lbl, JTextField txt) {
+    public static boolean checkMa(JTextField txt) {
 
         String id = txt.getText();
-        String rgx = "[a-zA-Z0-9]{5,10}";
+        String rgx = "[a-zA-Z0-9]{10}";
         if (id.matches(rgx)) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
+            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có 10 kí tự\nchữ hoa, thường không dấu hoặc số.");
             return false;
         }
     }
 
     //pass từ 3-16 kí tự
-    public static boolean checkPass(JLabel lbl, JPasswordField txt) {
+    public static boolean checkPass(JPasswordField txt) {
 
         if (txt.getPassword().length > 2 && txt.getPassword().length < 17) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải có từ 3-16 kí tự.");
+            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có từ 3-16 kí tự.");
             return false;
         }
     }
@@ -99,7 +91,7 @@ public class UtilityHelper {
 
     //gồm các ký tự chữ đấu cách
     //từ 3-25 kí tự
-    public static boolean checkName(JLabel lbl, JTextField txt) {
+    public static boolean checkName(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[A-Za-z]{3,25}$";
@@ -107,11 +99,11 @@ public class UtilityHelper {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
+            DialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
             return false;
         }
     }
-
+    
     //gồm 10 số 
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
@@ -126,16 +118,16 @@ public class UtilityHelper {
             return false;
         }
     }
-
-    public static boolean checkEmail(JLabel lbl, JTextField txt) {
-
+    
+    public static boolean checkEmail(JTextField txt) {
+    
         String id = txt.getText();
         String rgx = "^[a-zA-Z][a-zA-Z0-9_\\.]{2,32}@[a-zA-Z0-9]{2,10}(\\.[a-zA-Z0-9]{2,4}){1,2}$";
         if (id.matches(rgx)) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), lbl.getText() + " không đúng định dạng");
+            DialogHelper.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng");
             return false;
         }
     }
@@ -159,10 +151,10 @@ public class UtilityHelper {
 //        }
 //    }
     //================================================================================
-
+    
     //giá là float >0
     public static boolean checkGia(JTextField txt) {
-
+        
         try {
             float hp = Float.parseFloat(txt.getText());
             if (hp >= 0) {
@@ -178,80 +170,34 @@ public class UtilityHelper {
             return false;
         }
     }
-
-    public static boolean checkNullText(JLabel lbl, JTextField txt) {
+    
+    public static boolean checkNullText(JTextField txt) {
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
-
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
+            
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
-
-    public static boolean checkNullText(JLabel lbl, JTextArea txt) {
+    
+    public static boolean checkNullText(JTextArea txt) {  
         if (txt.getText().trim().length() > 0) {
             return true;
         } else {
             txt.setBackground(pink);
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
-
-    public static boolean checkNullPass(JLabel lbl, JPasswordField txt) {
+    
+    public static boolean checkNullPass(JPasswordField txt) {
         if (txt.getPassword().length > 0) {
             return true;
         } else {
 //            txt.setBackground(new Color(238,238,238));
-            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + lbl.getText());
+            DialogHelper.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
-    }
-
-    public static void first(int index, JTable table) {
-        index = 0;
-        table.setRowSelectionInterval(index, index);
-    }
-
-    public static void previous(int index, JTable table, List list) {
-        index--;
-        if (index < 0) {
-            index = list.size() - 1;
-        }
-        table.setRowSelectionInterval(index, index);
-    }
-    
-    public static void next(int index, JTable table, List list) {
-        index++;
-        if (index > list.size() - 1) {
-            index = 0;
-        }
-        table.setRowSelectionInterval(index, index);
-    }
-    
-    public static void last(int index, JTable table, List list) {
-        index = list.size() - 1;
-        table.setRowSelectionInterval(index, index);
-    }
-    
-    private int x;
-    private int y;
-
-    public void initMoving(JDialog DiaLog,JPanel panel) {
-        panel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                x = me.getX();
-                y = me.getY();
-            }
-
-        });
-        panel.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent me) {
-                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
-            }
-        });
     }
 }

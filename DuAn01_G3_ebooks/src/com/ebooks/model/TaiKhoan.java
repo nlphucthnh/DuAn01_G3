@@ -9,10 +9,22 @@ package com.ebooks.model;
  * @author Admin
  */
 public class TaiKhoan {
+
     private String tenDangNhap;
     private String matKhau;
     private String maNguoiDung;
-    private boolean TrangThai=false;
+    private boolean TrangThai;
+    private String HoTen;
+
+    public TaiKhoan() {
+    }
+
+    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, String HoTen) {
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.maNguoiDung = maNguoiDung;
+        this.HoTen = HoTen;
+    }
 
     public String getTenDangNhap() {
         return tenDangNhap;
@@ -46,8 +58,12 @@ public class TaiKhoan {
         this.TrangThai = TrangThai;
     }
 
-    
-    
-    
-    
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public void setHoTen(String HoTen) {
+        this.HoTen = HoTen;
+    }
+
 }

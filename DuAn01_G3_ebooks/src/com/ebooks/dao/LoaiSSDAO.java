@@ -49,8 +49,9 @@ public class LoaiSSDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(LoaiSS entity) {
-        String sql = "INSERT INTO LoaiSS (MaSach, MaTheLoai) VALUES (?, ?)";
+        String sql = "INSERT INTO LoaiSS (MaLoaiSS, MaSach, MaTheLoai) VALUES (?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
+                entity.getMaLoaiSS(),
                 entity.getMaSach(),
                 entity.getMaTheLoai());
     }
@@ -97,12 +98,6 @@ public class LoaiSSDAO {
     public LoaiSS findById(String id) {
         String sql = "SELECT * FROM LoaiSS WHERE MaLoaiSS=?";
         List<LoaiSS> list = select(sql, id);
-        return list.size() > 0 ? list.get(0) : null;
-    }
-    
-    public LoaiSS findByBook(String idBooks) {
-        String sql = "SELECT * FROM LoaiSS WHERE maSach=?";
-        List<LoaiSS> list = select(sql, idBooks);
         return list.size() > 0 ? list.get(0) : null;
     }
 }

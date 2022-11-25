@@ -16,84 +16,102 @@ import java.util.List;
  * @author ASUS
  */
 public class TaiKhoanDAO {
-    private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException{
-	TaiKhoan model=new TaiKhoan();
+    
+    private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException {
+        TaiKhoan model = new TaiKhoan();
         model.setTenDangNhap(rs.getString("tenDangNhap"));
         model.setMatKhau(rs.getString("matKhau"));
         model.setMaNguoiDung(rs.getString("maNguoiDung"));
         model.setTrangThai(rs.getBoolean("trangThai"));
+        model.setHoTen(rs.getString(2));
         return model;
     }
     
-    private List<TaiKhoan> select(String sql, Object...args){
-        List<TaiKhoan> list=new ArrayList<>();
+    private List<TaiKhoan> select(String sql, Object... args) {
+        List<TaiKhoan> list = new ArrayList<>();
         try {
-            ResultSet rs=null;
-            try{
-                rs=JdbcHelper.executeQuery(sql, args);
-                while(rs.next()){
+            ResultSet rs = null;
+            try {
+                rs = JdbcHelper.executeQuery(sql, args);
+                while (rs.next()) {
                     list.add(readFromResultSet(rs));
                 }
-            }finally{
+            } finally {
                 rs.getStatement().getConnection().close();
             }
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new RuntimeException();
         }
         return list;
     }
-    
+
     /**
      * Thêm mới thực thể vào CSDL
+     *
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TaiKhoan entity) {
-        String sql="INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaNguoiDung, VaiTro) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaNguoiDung, trangthai) VALUES (?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenDangNhap(),
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
                 entity.isTrangThai());
     }
+
     /**
      * Cập nhật thực thể vào CSDL
+     *
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(TaiKhoan entity) {
-        String sql="UPDATE TaiKhoan SET MatKhau=?, MaNguoiDung=?, VaiTro=? WHERE TenDangNhap=?";
+        String sql = "UPDATE TaiKhoan SET MatKhau=?, MaNguoiDung=?, VaiTro=? WHERE TenDangNhap=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
                 entity.isTrangThai(),
                 entity.getTenDangNhap());
     }
-    
+
     /**
      * Xóa bản ghi khỏi CSDL
+     *
      * @param id là mã của bản ghi cần xóa
      */
     public void delete(String id) {
-        String sql="DELETE FROM TaiKhoan WHERE TenDangNhap=?";
+        String sql = "DELETE FROM TaiKhoan WHERE TenDangNhap=?";
         JdbcHelper.executeUpdate(sql, id);
     }
-    
+
     /**
      * Truy vấn tất cả các các thực thể
+     *
      * @return list danh sách các thực thể
      */
     public List<TaiKhoan> selectAll() {
-        String sql="SELECT * FROM TaiKhoan";
+        String sql = "SELECT * FROM TaiKhoan";
         return select(sql);
     }
-    
+
     /**
      * Truy vấn thực thể theo mã id
+     *
      * @param id là mã của bản ghi được truy vấn
      * @return thực thể chứa thông tin của bản ghi
      */
     public TaiKhoan findById(String id) {
-        String sql="SELECT * FROM TaiKhoan WHERE tenDangNhap=?";
-        List<TaiKhoan> list=select(sql,id);
-        return list.size()>0?list.get(0):null;
+        String sql = "SELECT * FROM TaiKhoan WHERE tenDangNhap=?";
+        List<TaiKhoan> list = select(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public TaiKhoan SeclectTaiKhoan(String id) {
+        String sql = "SELECT TaiKhoan.maNguoiDung,hoTen,tenDangNhap,matKhau,trangThai FROM dbo.TaiKhoan \n"
+                + "INNER JOIN dbo.NguoiDung \n"
+                + "ON NguoiDung.maNguoiDung = TaiKhoan.maNguoiDung\n"
+                + "WHERE tenDangNhap = ?";
+        List<TaiKhoan> list = select(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
 }
