@@ -22,7 +22,7 @@ public class SachDAO {
         model.setTenSach(rs.getString("TenSach"));
         model.setMaTacGia(rs.getString("MaTacGia"));
         model.setMoTa(rs.getString("MoTa"));
-        model.setGia(rs.getDouble("Gia"));
+        model.setDuongDan(rs.getString("duongDan"));
         model.setNgayDang(rs.getDate("NgayDang"));
         model.setHinh(rs.getString("Hinh"));
         model.setMaQuanTriVien(rs.getString("MaQuanTriVien"));
@@ -52,13 +52,13 @@ public class SachDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(Sach entity) {
-        String sql="INSERT INTO Sach (MaSach, TenSach, MaTacGia, MoTa, Gia, NgayDang, Hinh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO Sach (MaSach, TenSach, MaTacGia, MoTa, duongDan, NgayDang, Hinh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaSach(),
                 entity.getTenSach(),
                 entity.getMaTacGia(),
                 entity.getMoTa(),
-                entity.getGia(),
+                entity.getDuongDan(),
                 entity.getNgayDang(),
                 entity.getHinh(),
                 entity.getMaQuanTriVien());
@@ -68,12 +68,12 @@ public class SachDAO {
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(Sach entity) {
-        String sql="UPDATE Sach SET TenSach=?, MaTacGia=?, MoTa=?, Gia=?, NgayDang=?, Hinh=?, MaQuanTriVien=? WHERE MaSach=?";
+        String sql="UPDATE Sach SET TenSach=?, MaTacGia=?, MoTa=?, duongDan=?, NgayDang=?, Hinh=?, MaQuanTriVien=? WHERE MaSach=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenSach(),
                 entity.getMaTacGia(),
                 entity.getMoTa(),
-                entity.getGia(),
+                entity.getDuongDan(),
                 entity.getNgayDang(),
                 entity.getHinh(),
                 entity.getMaQuanTriVien(),

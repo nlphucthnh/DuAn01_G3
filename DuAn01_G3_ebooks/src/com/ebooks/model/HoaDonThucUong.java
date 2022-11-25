@@ -13,17 +13,17 @@ import java.util.Date;
 public class HoaDonThucUong {
     private String maHoaDon;
     private String maNguoiDung;
-    private int soLuong;
+    private boolean trangThai;
     private Date ngayMua;
     
 
     public HoaDonThucUong() {
     }
 
-    public HoaDonThucUong(String maHoaDon, String maNguoiDung, int soLuong, Date ngayMua) {
+    public HoaDonThucUong(String maHoaDon, String maNguoiDung, boolean trangThai, Date ngayMua) {
         this.maHoaDon = maHoaDon;
         this.maNguoiDung = maNguoiDung;
-        this.soLuong = soLuong;
+        this.trangThai = trangThai;
         this.ngayMua = ngayMua;
     }
 
@@ -43,12 +43,12 @@ public class HoaDonThucUong {
         this.maNguoiDung = maNguoiDung;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public boolean isTrangThai() {
+        return trangThai;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayMua() {
@@ -59,6 +59,7 @@ public class HoaDonThucUong {
         this.ngayMua = ngayMua;
     }
 
+    
   
   
     

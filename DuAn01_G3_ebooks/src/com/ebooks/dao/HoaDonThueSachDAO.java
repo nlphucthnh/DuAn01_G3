@@ -15,15 +15,15 @@ import java.util.List;
  *
  * @author ASUS
  */
-public class ThueSachDAO {
+public class HoaDonThueSachDAO {
     private HoaDonThueSach readFromResultSet(ResultSet rs) throws SQLException{
 	HoaDonThueSach model=new HoaDonThueSach();
         model.setMaThueSach(rs.getString("MaThueSach"));
         model.setMaNguoiDung(rs.getString("MaNguoiDung"));
         model.setTenDangNhap(rs.getString("TenDangNhap"));
-        model.setThoiGian(rs.getInt("ThoiGian"));
-        model.setNgayThue(rs.getDate("NgayThue"));
-        model.setTienThue(rs.getDouble("TienThue"));
+        model.setThoiGian(rs.getTime("thoiGian"));
+        model.setNgayThue(rs.getDate("ngayThue"));
+        model.setMaGiaThue(rs.getString("maGiaThue"));
         return model;
     }
     
@@ -50,27 +50,27 @@ public class ThueSachDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(HoaDonThueSach entity) {
-        String sql="INSERT INTO ThueSach (MaThueSach, MaNguoiDung, TenDangNhap, ThoiGian, NgayThue, TienThue) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO HoaDonThueSach (MaThueSach, MaNguoiDung, TenDangNhap, ThoiGian, NgayThue, maGiaThue) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaThueSach(),
                 entity.getMaNguoiDung(),
                 entity.getTenDangNhap(),
                 entity.getThoiGian(),
                 entity.getNgayThue(),
-                entity.getTienThue());
+                entity.getMaGiaThue());
     }
     /**
      * Cập nhật thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(HoaDonThueSach entity) {
-        String sql="UPDATE ThueSach SET MaNguoiDung=?, TenDangNhap=?, ThoiGian=?, NgayThue=?, TienThue=? WHERE MaThueSach=?";
+        String sql="UPDATE HoaDonThueSach SET MaNguoiDung=?, TenDangNhap=?, ThoiGian=?, NgayThue=?, maGiathue=? WHERE MaThueSach=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaNguoiDung(),
                 entity.getTenDangNhap(),
                 entity.getThoiGian(),
                 entity.getNgayThue(),
-                entity.getTienThue(),
+                entity.getMaGiaThue(),
                 entity.getMaThueSach());
     }
     
@@ -79,7 +79,7 @@ public class ThueSachDAO {
      * @param id là mã của bản ghi cần xóa
      */
     public void delete(String id) {
-        String sql="DELETE FROM ThueSach WHERE MaThueSach=?";
+        String sql="DELETE FROM HoaDonThueSach WHERE MaThueSach=?";
         JdbcHelper.executeUpdate(sql, id);
     }
     
@@ -88,7 +88,7 @@ public class ThueSachDAO {
      * @return list danh sách các thực thể
      */
     public List<HoaDonThueSach> selectAll() {
-        String sql="SELECT * FROM ThueSach";
+        String sql="SELECT * FROM HoaDonThueSach";
         return select(sql);
     }
     
@@ -98,7 +98,7 @@ public class ThueSachDAO {
      * @return thực thể chứa thông tin của bản ghi
      */
     public HoaDonThueSach findById(String id) {
-        String sql="SELECT * FROM ThueSach WHERE MaThueSach=?";
+        String sql="SELECT * FROM HoaDonThueSach WHERE MaThueSach=?";
         List<HoaDonThueSach> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
