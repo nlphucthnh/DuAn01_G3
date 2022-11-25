@@ -23,7 +23,7 @@ public class TaiKhoanDAO {
         model.setMatKhau(rs.getString("matKhau"));
         model.setMaNguoiDung(rs.getString("maNguoiDung"));
         model.setTrangThai(rs.getBoolean("trangThai"));
-        model.setHoTen(rs.getString(2));
+        model.setThoiLuong(rs.getTime("thoiLuong"));
         return model;
     }
     
@@ -52,12 +52,13 @@ public class TaiKhoanDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TaiKhoan entity) {
-        String sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaNguoiDung, trangthai) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaNguoiDung, trangthai, thoiLuong) VALUES (?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenDangNhap(),
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
-                entity.isTrangThai());
+                entity.isTrangThai(),
+                entity.getThoiLuong());
     }
 
     /**
@@ -66,11 +67,12 @@ public class TaiKhoanDAO {
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(TaiKhoan entity) {
-        String sql = "UPDATE TaiKhoan SET MatKhau=?, MaNguoiDung=?, VaiTro=? WHERE TenDangNhap=?";
+        String sql = "UPDATE TaiKhoan SET MatKhau=?, MaNguoiDung=?, VaiTro=? , trangThai=? , thoiLuong=? WHERE TenDangNhap=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getMatKhau(),
                 entity.getMaNguoiDung(),
                 entity.isTrangThai(),
+                entity.getThoiLuong(),
                 entity.getTenDangNhap());
     }
 
