@@ -10,7 +10,9 @@ import com.ebooks.dao.TaiKhoanDAO;
 import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.NguoiDung;
+import com.ebooks.model.Sach;
 import com.ebooks.model.TaiKhoan;
+import com.ebooks.model.TheLoai;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
@@ -51,8 +54,45 @@ public class Main extends javax.swing.JFrame {
     public static List<NguoiDung> listND;
     public static List<TaiKhoan> listTK;
 
+
     public NguoiDungDAO DaoND = new NguoiDungDAO();
     public TaiKhoanDAO DaoTK = new TaiKhoanDAO();
+
+    // Define MP3Player Class From JACO MP3Player Lib
+    MP3Player player;
+    // Define File For Song
+    File songFile;
+    // Define Current Directory Like If We Use JFileChooser then where it statys.
+    String currentDirectory = "home.user"; // I am using home.user this will call file chooser in user documents.
+    // Here I define currentPath of the running app class
+    String currentPath;
+    // This String Will Be For Image Name or Path
+    String imagePath;
+    // Now Check If Repeat Button is Enabled or not
+    boolean repeat = false;
+    // Here I am making a boolean for windowCollapsed
+    boolean windowCollapsed = false;
+
+    //model DAO
+    NguoiDungDAO DaoND = new NguoiDungDAO();
+    ThucUongDAO DaoTU = new ThucUongDAO();
+    HoaDonThucUongDAO DaoHD = new HoaDonThucUongDAO();
+    SachDAO DAOS = new SachDAO();
+    TacGiaDAO DAOTG = new TacGiaDAO();
+    TheLoaiDAO DAOTL = new TheLoaiDAO();
+    LoaiSSDAO DAOLSS = new LoaiSSDAO();
+    //model 
+    NguoiDung nguoiDung = new NguoiDung();
+    ThucUong thucUong = new ThucUong();
+    HoaDonThucUong hoaDonThucUong = new HoaDonThucUong();
+    Sach sach = new Sach();
+    //List
+    List<NguoiDung> listND = new ArrayList<>();
+    List<ThucUong> listTU = new ArrayList<>();
+    List<HoaDonThucUong> listHD = new ArrayList<>();
+    List<Sach> listS = new ArrayList<>();
+    int index = -1;
+
 
     public Main() {
         initComponents();
@@ -60,7 +100,16 @@ public class Main extends javax.swing.JFrame {
         movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
         Date();
+
         AppStatus.mainApp = this;
+
+        initMoving(this, pnlMainProjebt);
+        setModelAudio();
+        fillTableAudio();
+        fillTableSach();
+        fillComBoBoxTheLoai();
+        fillTableNguoiDung();
+        fillTableThucUong();
     }
 
     public void init() {
@@ -815,8 +864,12 @@ public class Main extends javax.swing.JFrame {
         myButton18.setRadius(10);
         panelRadius10.add(myButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 140, 40));
 
+<<<<<<< HEAD
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+=======
+        cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> parent of 958c9d2 (thinh)
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
@@ -2016,9 +2069,15 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_searchText1ActionPerformed
 
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTheLoaiActionPerformed
+
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
         // TODO add your handling code here:
@@ -2433,5 +2492,78 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table tblNguoiDung;
     private com.ebooks.Compoment.Table tblTaiKhoan;
     // End of variables declaration//GEN-END:variables
+
+
+    public void OpenSetting() {
+        new SettingDiaLog(this, true).setVisible(true);
+
+    }
+
+    public void OpenPerson() {
+        new AccountDiaLog(this, true).setVisible(true);
+
+    }
+
+    //FILLTABLE Sach
+    public void fillTableSach() {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblSach.getModel();
+        model.setRowCount(0);
+        try {
+            listS = DAOS.selectAll();
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
+    public void fillComBoBoxTheLoai() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
+        model.removeAllElements();
+        List<TheLoai> list = DAOTL.selectAll();
+        for (TheLoai tl : list) {
+            model.addElement(tl.getTenTheLoai());
+        }
+    }
+
+//    DefaultTableModel model;
+    public void fillTableNguoiDung() {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblNguoiDung.getModel();
+        model.setRowCount(0);
+        try {
+            listND = DaoND.selectAll();
+            for (NguoiDung nd : listND) {
+                Object[] row = {nd.getMaNguoiDung(), nd.getHoTen(), nd.getSoDienThoai(), nd.isGioiTinh() ? "Nam" : "Nữ"};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
+    //FILL DỮ LIỆU LÊN BẢNG THỨC UỐNG
+    public void fillTableThucUong() {
+        DefaultTableModel model;
+        model = new DefaultTableModel();
+        model.setRowCount(0);
+        //set COLUMN
+        model.addColumn("MÃ THỨC UỐNG");
+        model.addColumn("TÊN THỨC UỐNG");
+        model.addColumn("GIÁ TIỀN");
+
+        listTU = DaoTU.selectAll();
+        //tạo hàng và do du lieu
+        for (ThucUong tu : listTU) {
+            Object[] row = {tu.getMaThucUong(), tu.getTenThucUong(), tu.getGia()};
+            model.addRow(row);
+            tblThucUong.setModel(model);
+        }
+    }
+
+    // HÀM DELETE TONG QUAT //
 
 }
