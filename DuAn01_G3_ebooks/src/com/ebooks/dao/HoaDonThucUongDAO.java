@@ -21,8 +21,8 @@ public class HoaDonThucUongDAO {
 	HoaDonThucUong model=new HoaDonThucUong();
         model.setMaHoaDon(rs.getString("MaHoaDon"));
         model.setMaNguoiDung(rs.getString("MaNguoiDung"));
-        model.setMaThucUong(rs.getString("MaThucUong"));
-        model.setSoLuong(rs.getInt("SoLuong"));
+        model.setNgayMua(rs.getDate("NgayMua"));
+        model.setTrangThai(rs.getBoolean("trangThai"));
         return model;
     }
     
@@ -49,12 +49,12 @@ public class HoaDonThucUongDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(HoaDonThucUong entity) {
-        String sql="INSERT INTO HoaDonThucUong (MaHoaDon, MaNGuoiDung, MaThucUong, SoLuong) VALUES (?, ?, ?, ?)";
+        String sql="INSERT INTO HoaDonThucUong (MaHoaDon, MaNGuoiDung, NgayMua, trangThai) VALUES (?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaHoaDon(),
                 entity.getMaNguoiDung(),
-                entity.getMaThucUong(),
-                entity.getSoLuong());
+                entity.getNgayMua(),
+                entity.isTrangThai());
     }
     
     /**
@@ -62,12 +62,12 @@ public class HoaDonThucUongDAO {
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(HoaDonThucUong entity) {
-        String sql="UPDATE HoaDonThucUong SET MaNguoiDung=?, MaThucUong=?, SoLuong=? WHERE MaHoaDon=?";
+        String sql="UPDATE HoaDonThucUong SET MaNguoiDung=?, NgayMua=?, trangThai=? WHERE MaHoaDon=?";
         JdbcHelper.executeUpdate(sql,
-                entity.getMaHoaDon(),
                 entity.getMaNguoiDung(),
-                entity.getMaThucUong(),
-                entity.getSoLuong());
+                entity.getNgayMua(),
+                entity.isTrangThai(),
+                entity.getMaHoaDon());
     }
     
     /**

@@ -51,8 +51,9 @@ public class TacGiaDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TacGia entity) {
-        String sql="INSERT INTO TacGia ( HoTen, GioiTinh, NgaySinh, MoTa, Hinh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO TacGia (MaTacGia, HoTen, GioiTinh, NgaySinh, MoTa, Hinh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
+                entity.getMaTacGia(),
                 entity.getHoTen(),
                 entity.isGioiTinh(),
                 entity.getNgaySinh(),
@@ -106,8 +107,9 @@ public class TacGiaDAO {
     }
     
     public TacGia findByName(String name) {
-        String sql="SELECT * FROM TacGia WHERE hoTen LIKE ?";
+        String sql="SELECT * FROM TacGia WHERE hoTen like ?";
         List<TacGia> list=select(sql,"%"+name+"%");
         return list.size()>0?list.get(0):null;
     }
+    
 }

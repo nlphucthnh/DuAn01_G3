@@ -5,7 +5,7 @@
 package com.ebooks.dao;
 
 import com.ebooks.helper.JdbcHelper;
-import com.ebooks.model.ThueSach;
+import com.ebooks.model.HoaDonThueSach;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,20 +15,20 @@ import java.util.List;
  *
  * @author ASUS
  */
-public class ThueSachDAO {
-    private ThueSach readFromResultSet(ResultSet rs) throws SQLException{
-	ThueSach model=new ThueSach();
+public class HoaDonThueSachDAO {
+    private HoaDonThueSach readFromResultSet(ResultSet rs) throws SQLException{
+	HoaDonThueSach model=new HoaDonThueSach();
         model.setMaThueSach(rs.getString("MaThueSach"));
         model.setMaNguoiDung(rs.getString("MaNguoiDung"));
         model.setTenDangNhap(rs.getString("TenDangNhap"));
-        model.setThoiGian(rs.getInt("ThoiGian"));
-        model.setNgayThue(rs.getDate("NgayThue"));
-        model.setTienThue(rs.getDouble("TienThue"));
+        model.setThoiGian(rs.getTime("thoiGian"));
+        model.setNgayThue(rs.getDate("ngayThue"));
+        model.setMaGiaThue(rs.getString("maGiaThue"));
         return model;
     }
     
-    private List<ThueSach> select(String sql, Object...args){
-        List<ThueSach> list=new ArrayList<>();
+    private List<HoaDonThueSach> select(String sql, Object...args){
+        List<HoaDonThueSach> list=new ArrayList<>();
         try {
             ResultSet rs=null;
             try{
@@ -49,28 +49,28 @@ public class ThueSachDAO {
      * Thêm mới thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
-    public void insert(ThueSach entity) {
-        String sql="INSERT INTO ThueSach (MaThueSach, MaNguoiDung, TenDangNhap, ThoiGian, NgayThue, TienThue) VALUES (?, ?, ?, ?, ?, ?)";
+    public void insert(HoaDonThueSach entity) {
+        String sql="INSERT INTO HoaDonThueSach (MaThueSach, MaNguoiDung, TenDangNhap, ThoiGian, NgayThue, maGiaThue) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaThueSach(),
                 entity.getMaNguoiDung(),
                 entity.getTenDangNhap(),
                 entity.getThoiGian(),
                 entity.getNgayThue(),
-                entity.getTienThue());
+                entity.getMaGiaThue());
     }
     /**
      * Cập nhật thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
-    public void update(ThueSach entity) {
-        String sql="UPDATE ThueSach SET MaNguoiDung=?, TenDangNhap=?, ThoiGian=?, NgayThue=?, TienThue=? WHERE MaThueSach=?";
+    public void update(HoaDonThueSach entity) {
+        String sql="UPDATE HoaDonThueSach SET MaNguoiDung=?, TenDangNhap=?, ThoiGian=?, NgayThue=?, maGiathue=? WHERE MaThueSach=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaNguoiDung(),
                 entity.getTenDangNhap(),
                 entity.getThoiGian(),
                 entity.getNgayThue(),
-                entity.getTienThue(),
+                entity.getMaGiaThue(),
                 entity.getMaThueSach());
     }
     
@@ -79,7 +79,7 @@ public class ThueSachDAO {
      * @param id là mã của bản ghi cần xóa
      */
     public void delete(String id) {
-        String sql="DELETE FROM ThueSach WHERE MaThueSach=?";
+        String sql="DELETE FROM HoaDonThueSach WHERE MaThueSach=?";
         JdbcHelper.executeUpdate(sql, id);
     }
     
@@ -87,8 +87,8 @@ public class ThueSachDAO {
      * Truy vấn tất cả các các thực thể
      * @return list danh sách các thực thể
      */
-    public List<ThueSach> selectAll() {
-        String sql="SELECT * FROM ThueSach";
+    public List<HoaDonThueSach> selectAll() {
+        String sql="SELECT * FROM HoaDonThueSach";
         return select(sql);
     }
     
@@ -97,9 +97,9 @@ public class ThueSachDAO {
      * @param id là mã của bản ghi được truy vấn
      * @return thực thể chứa thông tin của bản ghi
      */
-    public ThueSach findById(String id) {
-        String sql="SELECT * FROM ThueSach WHERE MaThueSach=?";
-        List<ThueSach> list=select(sql,id);
+    public HoaDonThueSach findById(String id) {
+        String sql="SELECT * FROM HoaDonThueSach WHERE MaThueSach=?";
+        List<HoaDonThueSach> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
 }

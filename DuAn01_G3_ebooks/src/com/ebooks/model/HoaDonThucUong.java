@@ -4,6 +4,8 @@
  */
 package com.ebooks.model;
 
+import java.util.Date;
+
 /**
  *
  * @author ASUS
@@ -11,17 +13,18 @@ package com.ebooks.model;
 public class HoaDonThucUong {
     private String maHoaDon;
     private String maNguoiDung;
-    private String maThucUong;
-    private int soLuong;
+    private boolean trangThai;
+    private Date ngayMua;
+    
 
     public HoaDonThucUong() {
     }
 
-    public HoaDonThucUong(String maHoaDon, String maNguoiDung, String maThucUong, int soLuong) {
+    public HoaDonThucUong(String maHoaDon, String maNguoiDung, boolean trangThai, Date ngayMua) {
         this.maHoaDon = maHoaDon;
         this.maNguoiDung = maNguoiDung;
-        this.maThucUong = maThucUong;
-        this.soLuong = soLuong;
+        this.trangThai = trangThai;
+        this.ngayMua = ngayMua;
     }
 
     public String getMaHoaDon() {
@@ -40,21 +43,24 @@ public class HoaDonThucUong {
         this.maNguoiDung = maNguoiDung;
     }
 
-    public String getMaThucUong() {
-        return maThucUong;
+    public boolean isTrangThai() {
+        return trangThai;
     }
 
-    public void setMaThucUong(String maThucUong) {
-        this.maThucUong = maThucUong;
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public Date getNgayMua() {
+        return ngayMua;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setNgayMua(Date ngayMua) {
+        this.ngayMua = ngayMua;
     }
+
     
+  
+  
     
 }

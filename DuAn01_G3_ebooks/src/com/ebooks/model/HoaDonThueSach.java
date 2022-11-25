@@ -1,33 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.ebooks.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
  *
  * @author ASUS
  */
-public class ThueSach {
+public class HoaDonThueSach {
     private String maThueSach;
     private String maNguoiDung;
     private String tenDangNhap;
-    private int thoiGian;
+    private Time thoiGian;
     private Date ngayThue;
-    private double tienThue;
+    private String maGiaThue;
 
-    public ThueSach() {
+    public HoaDonThueSach() {
+        
     }
 
-    public ThueSach(String maThueSach, String maNguoiDung, String tenDangNhap, int thoiGian, Date ngayThue, double tienThue) {
+    public HoaDonThueSach(String maThueSach, String maNguoiDung, String tenDangNhap, Time thoiGian, Date ngayThue, String maGiaThue) {
         this.maThueSach = maThueSach;
         this.maNguoiDung = maNguoiDung;
         this.tenDangNhap = tenDangNhap;
         this.thoiGian = thoiGian;
         this.ngayThue = ngayThue;
-        this.tienThue = tienThue;
+        this.maGiaThue = maGiaThue;
     }
 
     public String getMaThueSach() {
@@ -54,11 +53,11 @@ public class ThueSach {
         this.tenDangNhap = tenDangNhap;
     }
 
-    public int getThoiGian() {
+    public Time getThoiGian() {
         return thoiGian;
     }
 
-    public void setThoiGian(int thoiGian) {
+    public void setThoiGian(Time thoiGian) {
         this.thoiGian = thoiGian;
     }
 
@@ -70,12 +69,14 @@ public class ThueSach {
         this.ngayThue = ngayThue;
     }
 
-    public double getTienThue() {
-        return tienThue;
+    public String getMaGiaThue() {
+        return maGiaThue;
     }
 
-    public void setTienThue(double tienThue) {
-        this.tienThue = tienThue;
+    public void setMaGiaThue(String maGiaThue) {
+        this.maGiaThue = maGiaThue;
     }
+
+    
     
 }
