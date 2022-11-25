@@ -4,6 +4,8 @@
  */
 package com.ebooks.model;
 
+import java.sql.Time;
+
 /**
  *
  * @author Admin
@@ -15,15 +17,18 @@ public class TaiKhoan {
     private String maNguoiDung;
     private boolean TrangThai;
     private String HoTen;
+    private Time thoiLuong;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, String HoTen) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, boolean TrangThai, String HoTen, Time thoiLuong) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.maNguoiDung = maNguoiDung;
+        this.TrangThai = TrangThai;
         this.HoTen = HoTen;
+        this.thoiLuong = thoiLuong;
     }
 
     public String getTenDangNhap() {
@@ -65,5 +70,14 @@ public class TaiKhoan {
     public void setHoTen(String HoTen) {
         this.HoTen = HoTen;
     }
+
+    public Time getThoiLuong() {
+        return thoiLuong;
+    }
+
+    public void setThoiLuong(Time thoiLuong) {
+        this.thoiLuong = thoiLuong;
+    }
+
 
 }

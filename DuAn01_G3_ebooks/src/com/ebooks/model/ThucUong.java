@@ -12,14 +12,17 @@ public class ThucUong {
     private String maThucUong;
     private String tenThucUong;
     private double gia;
-
+    private String moTa;
+    
+    
     public ThucUong() {
     }
 
-    public ThucUong(String maThucUong, String tenThucUong, double gia) {
+    public ThucUong(String maThucUong, String tenThucUong, double gia, String moTa) {
         this.maThucUong = maThucUong;
         this.tenThucUong = tenThucUong;
         this.gia = gia;
+        this.moTa = moTa;
     }
 
     public String getMaThucUong() {
@@ -45,5 +48,14 @@ public class ThucUong {
     public void setGia(double gia) {
         this.gia = gia;
     }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     
 }

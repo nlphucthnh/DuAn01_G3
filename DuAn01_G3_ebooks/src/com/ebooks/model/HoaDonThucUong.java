@@ -4,6 +4,8 @@
  */
 package com.ebooks.model;
 
+import java.util.Date;
+
 /**
  *
  * @author ASUS
@@ -11,17 +13,18 @@ package com.ebooks.model;
 public class HoaDonThucUong {
     private String maHoaDon;
     private String maNguoiDung;
-    private String maThucUong;
     private int soLuong;
+    private Date ngayMua;
+    
 
     public HoaDonThucUong() {
     }
 
-    public HoaDonThucUong(String maHoaDon, String maNguoiDung, String maThucUong, int soLuong) {
+    public HoaDonThucUong(String maHoaDon, String maNguoiDung, int soLuong, Date ngayMua) {
         this.maHoaDon = maHoaDon;
         this.maNguoiDung = maNguoiDung;
-        this.maThucUong = maThucUong;
         this.soLuong = soLuong;
+        this.ngayMua = ngayMua;
     }
 
     public String getMaHoaDon() {
@@ -40,14 +43,6 @@ public class HoaDonThucUong {
         this.maNguoiDung = maNguoiDung;
     }
 
-    public String getMaThucUong() {
-        return maThucUong;
-    }
-
-    public void setMaThucUong(String maThucUong) {
-        this.maThucUong = maThucUong;
-    }
-
     public int getSoLuong() {
         return soLuong;
     }
@@ -55,6 +50,16 @@ public class HoaDonThucUong {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
-    
+
+    public Date getNgayMua() {
+        return ngayMua;
+    }
+
+    public void setNgayMua(Date ngayMua) {
+        this.ngayMua = ngayMua;
+    }
+
+  
+  
     
 }

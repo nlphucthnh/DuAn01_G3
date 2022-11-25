@@ -5,7 +5,7 @@
 package com.ebooks.dao;
 
 import com.ebooks.helper.JdbcHelper;
-import com.ebooks.model.ThueSach;
+import com.ebooks.model.HoaDonThueSach;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ import java.util.List;
  * @author ASUS
  */
 public class ThueSachDAO {
-    private ThueSach readFromResultSet(ResultSet rs) throws SQLException{
-	ThueSach model=new ThueSach();
+    private HoaDonThueSach readFromResultSet(ResultSet rs) throws SQLException{
+	HoaDonThueSach model=new HoaDonThueSach();
         model.setMaThueSach(rs.getString("MaThueSach"));
         model.setMaNguoiDung(rs.getString("MaNguoiDung"));
         model.setTenDangNhap(rs.getString("TenDangNhap"));
@@ -27,8 +27,8 @@ public class ThueSachDAO {
         return model;
     }
     
-    private List<ThueSach> select(String sql, Object...args){
-        List<ThueSach> list=new ArrayList<>();
+    private List<HoaDonThueSach> select(String sql, Object...args){
+        List<HoaDonThueSach> list=new ArrayList<>();
         try {
             ResultSet rs=null;
             try{
@@ -49,7 +49,7 @@ public class ThueSachDAO {
      * Thêm mới thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
-    public void insert(ThueSach entity) {
+    public void insert(HoaDonThueSach entity) {
         String sql="INSERT INTO ThueSach (MaThueSach, MaNguoiDung, TenDangNhap, ThoiGian, NgayThue, TienThue) VALUES (?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaThueSach(),
@@ -63,7 +63,7 @@ public class ThueSachDAO {
      * Cập nhật thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
-    public void update(ThueSach entity) {
+    public void update(HoaDonThueSach entity) {
         String sql="UPDATE ThueSach SET MaNguoiDung=?, TenDangNhap=?, ThoiGian=?, NgayThue=?, TienThue=? WHERE MaThueSach=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getMaNguoiDung(),
@@ -87,7 +87,7 @@ public class ThueSachDAO {
      * Truy vấn tất cả các các thực thể
      * @return list danh sách các thực thể
      */
-    public List<ThueSach> selectAll() {
+    public List<HoaDonThueSach> selectAll() {
         String sql="SELECT * FROM ThueSach";
         return select(sql);
     }
@@ -97,9 +97,9 @@ public class ThueSachDAO {
      * @param id là mã của bản ghi được truy vấn
      * @return thực thể chứa thông tin của bản ghi
      */
-    public ThueSach findById(String id) {
+    public HoaDonThueSach findById(String id) {
         String sql="SELECT * FROM ThueSach WHERE MaThueSach=?";
-        List<ThueSach> list=select(sql,id);
+        List<HoaDonThueSach> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
 }

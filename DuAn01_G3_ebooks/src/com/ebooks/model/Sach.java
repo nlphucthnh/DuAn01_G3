@@ -15,22 +15,22 @@ public class Sach {
     private String tenSach;
     private String maTacGia;
     private String moTa;
-    private double gia;
     private Date ngayDang;
     private String hinh;
+    private String duongDan;
     private String maQuanTriVien;
 
     public Sach() {
     }
 
-    public Sach(String maSach, String tenSach, String maTacGia, String moTa, double gia, Date ngayDang, String hinh, String maQuanTriVien) {
+    public Sach(String maSach, String tenSach, String maTacGia, String moTa, Date ngayDang, String hinh, String duongDan, String maQuanTriVien) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.maTacGia = maTacGia;
         this.moTa = moTa;
-        this.gia = gia;
         this.ngayDang = ngayDang;
         this.hinh = hinh;
+        this.duongDan = duongDan;
         this.maQuanTriVien = maQuanTriVien;
     }
 
@@ -66,14 +66,6 @@ public class Sach {
         this.moTa = moTa;
     }
 
-    public double getGia() {
-        return gia;
-    }
-
-    public void setGia(double gia) {
-        this.gia = gia;
-    }
-
     public Date getNgayDang() {
         return ngayDang;
     }
@@ -90,6 +82,14 @@ public class Sach {
         this.hinh = hinh;
     }
 
+    public String getDuongDan() {
+        return duongDan;
+    }
+
+    public void setDuongDan(String duongDan) {
+        this.duongDan = duongDan;
+    }
+
     public String getMaQuanTriVien() {
         return maQuanTriVien;
     }
@@ -97,5 +97,8 @@ public class Sach {
     public void setMaQuanTriVien(String maQuanTriVien) {
         this.maQuanTriVien = maQuanTriVien;
     }
+    
+    
+    
     
 }
