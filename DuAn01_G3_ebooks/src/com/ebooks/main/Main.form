@@ -1427,6 +1427,9 @@
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblAudioQLMousePressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>

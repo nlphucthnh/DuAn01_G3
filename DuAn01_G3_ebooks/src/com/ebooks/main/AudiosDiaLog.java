@@ -4,10 +4,12 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.model.AudioSach;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
@@ -16,7 +18,15 @@ import javax.swing.JPanel;
  * @author Thinh
  */
 public class AudiosDiaLog extends javax.swing.JDialog {
-
+    
+    public AudiosDiaLog(java.awt.Frame parent, boolean modal,AudioSach audio ) {
+        super(parent, modal);
+        initComponents();
+        setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+        SetForm(audio);
+    }
+    
     /**
      * Creates new form SettingDiaLog
      */
@@ -27,7 +37,17 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         initMoving(this, pnlMainDialog);
     }
     
-     private int x;
+    private void SetForm(AudioSach audio){
+        txtMaSach.setText(audio.getMaSach());
+        txtTenAudio.setText(audio.getTenAudio());
+        txtNgayDang.setText(String.valueOf(audio.getNgayPhatHanh()));
+        txtNguoiThu.setText(audio.getNguoiThu());
+        txtDuongDan.setText(audio.getDuongDan());
+        txtMoTa.setText(audio.getMoTa());
+    }
+    
+    
+    private int x;
     private int y;
 
     public void initMoving(JDialog DiaLog, JPanel panel) {
@@ -190,7 +210,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         btnFile1.setBoderColor(new java.awt.Color(87, 190, 110));
         btnFile1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnFile1.setRadius(10);
-        panelRadius1.add(btnFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 180, 40));
+        panelRadius1.add(btnFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 180, 40));
 
         materialTabbed1.addTab("Audio", panelRadius1);
 
@@ -245,12 +265,12 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
     private void lblExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MousePressed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_lblExit1MousePressed
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
