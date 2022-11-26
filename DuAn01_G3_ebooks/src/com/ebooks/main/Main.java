@@ -139,8 +139,8 @@ public class Main extends javax.swing.JFrame {
     public void init() {
         //Set icon, show from
         setIconImage(ShareHelper.APP_ICON);
-//        new StartUpDiaLog(this, true).setVisible(true);
-//        new LogInDiaLog(this, true).setVisible(true);
+        new StartUpDiaLog(this, true).setVisible(true);
+        new LogInDiaLog(this, true).setVisible(true);
         LoadTaiKhoan();
         fillTableTaiKhoan(listTK);
 
