@@ -100,4 +100,10 @@ public class LoaiSSDAO {
         List<LoaiSS> list = select(sql, id);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public LoaiSS findByBook(String idBooks) {
+        String sql = "SELECT * FROM LoaiSS WHERE maSach=?";
+        List<LoaiSS> list = select(sql, idBooks);
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }

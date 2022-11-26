@@ -5,6 +5,11 @@
 package com.ebooks.main;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +24,27 @@ public class SettingDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+    }
+    
+     private int x;
+    private int y;
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -30,8 +56,7 @@ public class SettingDiaLog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         jLabel1 = new javax.swing.JLabel();
         tbdSetting = new com.ebooks.Compoment.MaterialTabbed();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
@@ -66,24 +91,20 @@ public class SettingDiaLog extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         pnlExit = new com.ebooks.Compoment.PanelRound();
         lblExit = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius1.setRadius(25);
-        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cài Đặt ");
-        panelRadius1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, -1));
+        pnlMainDialog.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, -1));
 
         tbdSetting.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         tbdSetting.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
@@ -233,7 +254,7 @@ public class SettingDiaLog extends javax.swing.JDialog {
 
         tbdSetting.addTab("Xóa Tài Khoản", panelRadius3);
 
-        panelRadius1.add(tbdSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 830, 390));
+        pnlMainDialog.add(tbdSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 830, 390));
 
         pnlExit.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit.setRoundBottomLeft(25);
@@ -261,18 +282,12 @@ public class SettingDiaLog extends javax.swing.JDialog {
         });
         pnlExit.add(lblExit, new java.awt.GridBagConstraints());
 
-        panelRadius1.add(pnlExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
-
-        getContentPane().add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -352,10 +367,9 @@ public class SettingDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -371,16 +385,15 @@ public class SettingDiaLog extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblExit;
-    private javax.swing.JLabel lblLogo;
     private com.ebooks.Compoment.MyButton myButton10;
     private com.ebooks.Compoment.MyButton myButton8;
     private com.ebooks.Compoment.MyButton myButton9;
-    private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius4;
     private com.ebooks.Compoment.PanelRadius panelRadius5;
     private com.ebooks.Compoment.PanelRound pnlExit;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private com.ebooks.Compoment.MaterialTabbed tbdSetting;
     // End of variables declaration//GEN-END:variables
 }

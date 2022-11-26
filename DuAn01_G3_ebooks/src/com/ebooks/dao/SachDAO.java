@@ -108,4 +108,10 @@ public class SachDAO {
         List<Sach> list=select(sql,id);
         return list.size()>0?list.get(0):null;
     }
+    
+    public List <Sach> selectByTheLoai(String matt){
+        String sql = "SELECT * FROM Sach JOIN LoaiSS ON Sach.maSach = LoaiSS.maSach JOIN TheLoai ON TheLoai.maTheLoai = LoaiSS.maTheLoai WHERE TheLoai.maTheLoai LIKE ?";
+        return this.select(sql,matt+"%");
+    }
+    
 }

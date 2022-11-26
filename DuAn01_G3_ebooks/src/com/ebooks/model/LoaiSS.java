@@ -16,6 +16,13 @@ public class LoaiSS {
     public LoaiSS() {
     }
 
+    public LoaiSS(String maSach, String maTheLoai) {
+        this.maSach = maSach;
+        this.maTheLoai = maTheLoai;
+    }
+    
+    
+
     public LoaiSS(String maLoaiSS, String maSach, String maTheLoai) {
         this.maLoaiSS = maLoaiSS;
         this.maSach = maSach;

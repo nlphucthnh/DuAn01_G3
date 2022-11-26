@@ -4,148 +4,54 @@
  */
 package com.ebooks.main;
 
-import com.ebooks.dao.NguoiDungDAO;
-import com.ebooks.helper.DialogHelper;
-import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.NguoiDung;
 import com.sun.security.auth.NTSid;
 import java.awt.Color;
-import java.io.File;
-import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Thinh
  */
 public class PersonDiaLog extends javax.swing.JDialog {
-
-    File file;
-    private NguoiDungDAO daoND = new NguoiDungDAO();
-
+    
     public PersonDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0, 0, 0, 0));
-        init();
+        setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
     }
-
+    
     public PersonDiaLog(java.awt.Frame parent, boolean modal, NguoiDung nd) {
         super(parent, modal);
         initComponents();
         setForm(nd);
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
     }
+    
+     private int x;
+    private int y;
 
-//////////////////////////////////////
-    void init() {
-        if (Main.MaND != null) {
-            initForm();
-        }
-    }
-
-    void insert() {
-        NguoiDung model = getModel();
-        if (model == null) {
-            return;
-        }
-        try {
-            daoND.insert(model);
-            LoadNguoiDung();
-            this.fillTable(Main.listND);
-            DialogHelper.alert(this, "Thêm mới thành công!");
-        } catch (Exception e) {
-            System.out.println(e);
-            DialogHelper.alert(this, "Thêm mới thất bại!");
-        }
-    }
-
-    void update() {
-        try {
-            NguoiDung model = getModel();
-            daoND.update(model);
-            LoadNguoiDung();
-            this.fillTable(Main.listND);
-        } catch (Exception e) {
-            System.out.println(e);
-            DialogHelper.alert(this, "Cập nhật thất bại!");
-        }
-    }
-
-    void LoadNguoiDung() {
-        Main.listND = daoND.selectAll();
-    }
-
-    void fillTable(List<NguoiDung> list) {
-        Main.tblTable.setRowCount(0);
-        try {
-
-            for (NguoiDung emp : list) {
-                Object[] row = {
-                    emp.getMaNguoiDung(),
-                    emp.getHoTen(),
-                    emp.isGioiTinh() == true ? "Nam" : "Nữ",
-                    emp.getSoDienThoai(),
-                    emp.getEmail(),
-                    emp.getHinh()};
-                Main.tblTable.addRow(row);
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
             }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
 
-    NguoiDung getModel() {
-
-        NguoiDung model = new NguoiDung();
-        model.setMaNguoiDung(txtMaNguoiDung.getText());
-        model.setHoTen(txtHoTen.getText());
-        model.setGioiTinh(rdoNam.isSelected() == true ? true : false);
-        model.setSoDienThoai(txtSoDienThoai.getText());
-        model.setEmail(txtEmail.getText());
-        model.setHinh(file.toString());
-        return model;
-    }
-
-    void selectImage() {
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-
-            file = fileChooser.getSelectedFile();
-
-            if (ShareHelper.saveLogo(file)) {
-                // Hiển thị hình lên form
-                imgHinh.setIcon(ShareHelper.readLogo(file.getName()));
-                imgHinh.setToolTipText(file.getName());
-                repaint();
-            } else {
-                DialogHelper.alert(this, "Vui lòng chọn file hình ảnh");
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
             }
-        }
-    }
-
-    void initForm() {
-
-        NguoiDung nguoiDung = daoND.findById(Main.MaND);
-
-        txtMaNguoiDung.setText(nguoiDung.getMaNguoiDung());
-        txtHoTen.setText(nguoiDung.getHoTen());
-        if (nguoiDung.isGioiTinh()) {
-            rdoNam.setSelected(true);
-        } else {
-            rdoNu.setSelected(true);
-        }
-        txtSoDienThoai.setText(nguoiDung.getSoDienThoai());
-        txtEmail.setText(nguoiDung.getEmail());
-
-        ImageIcon icon = ShareHelper.readLogo(nguoiDung.getHinh());
-        imgHinh.setIcon(icon);
-        imgHinh.setToolTipText(nguoiDung.getHinh());
-
-        repaint();
-
+        });
     }
 
     /**
@@ -158,8 +64,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        lblLogo1 = new javax.swing.JLabel();
+        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -174,32 +79,19 @@ public class PersonDiaLog extends javax.swing.JDialog {
         rdoNu = new javax.swing.JRadioButton();
         btnSave = new com.ebooks.Compoment.MyButton();
         jLabel19 = new javax.swing.JLabel();
+        imageBoder1 = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        imgHinh = new javax.swing.JLabel();
-        txtMaNguoiDung = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        btnLuu = new com.ebooks.Compoment.MyButton();
-        myButton106 = new com.ebooks.Compoment.MyButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setRadius(25);
-        panelRadius2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                panelRadius2MouseMoved(evt);
-            }
-        });
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds.png"))); // NOI18N
-        panelRadius2.add(lblLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog.setRadius(25);
+        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit1.setRoundBottomLeft(25);
@@ -230,38 +122,38 @@ public class PersonDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        panelRadius2.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         jLabel18.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(55, 149, 76));
         jLabel18.setText("người dùng");
-        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
+        pnlMainDialog.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
         jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
         txtSoDienThoai.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 220, 40));
+        pnlMainDialog.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Số Điện Thoại");
-        panelRadius2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, -1, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
         txtHoTen.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 210, 40));
+        pnlMainDialog.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        panelRadius2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Giới Tính");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 210, 40));
+        pnlMainDialog.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Địa Chỉ Email");
-        panelRadius2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
 
         buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
@@ -270,11 +162,11 @@ public class PersonDiaLog extends javax.swing.JDialog {
                 rdoNamActionPerformed(evt);
             }
         });
-        panelRadius2.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        pnlMainDialog.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
 
         buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
-        panelRadius2.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
+        pnlMainDialog.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
 
         btnSave.setBackground(new java.awt.Color(87, 190, 110));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -282,83 +174,31 @@ public class PersonDiaLog extends javax.swing.JDialog {
         btnSave.setBoderColor(new java.awt.Color(87, 190, 110));
         btnSave.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnSave.setRadius(10);
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-        panelRadius2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        pnlMainDialog.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Hãy điền các thông tin");
-        panelRadius2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
+
+        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
+        imageBoder1.setRadius(20);
+        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 160));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        panelRadius2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 670, 60));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 670, 100));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Họ Tên Người Dùng");
-        panelRadius2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
 
-        jLabel32.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 24)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("N E R D S");
-        panelRadius2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Adobe Myungjo Std M", 2, 10)); // NOI18N
-        jLabel33.setText("Learning is the eye of the mind");
-        panelRadius2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
-
-        imgHinh.setBackground(new java.awt.Color(255, 255, 255));
-        imgHinh.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        imgHinh.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 0)));
-        imgHinh.setOpaque(true);
-        imgHinh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgHinhMouseClicked(evt);
-            }
-        });
-        panelRadius2.add(imgHinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 140, 170));
-
-        txtMaNguoiDung.setBackground(new java.awt.Color(222, 247, 227));
-        panelRadius2.add(txtMaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 210, 40));
-
-        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Mã người dùng");
-        panelRadius2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
-
-        btnLuu.setBackground(new java.awt.Color(87, 190, 110));
-        btnLuu.setForeground(new java.awt.Color(255, 255, 255));
-        btnLuu.setText("Cập nhật thông tin");
-        btnLuu.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnLuu.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        btnLuu.setRadius(10);
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
-        panelRadius2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, 230, 50));
-
-        myButton106.setBackground(new java.awt.Color(87, 190, 110));
-        myButton106.setForeground(new java.awt.Color(255, 255, 255));
-        myButton106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/refresh (1).png"))); // NOI18N
-        myButton106.setText("Làm mới");
-        myButton106.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton106.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton106.setRadius(10);
-        myButton106.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton106ActionPerformed(evt);
-            }
-        });
-        panelRadius2.add(myButton106, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 140, 50));
-
-        getContentPane().add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -371,7 +211,6 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_pnlExit1MouseClicked
 
     private void pnlExit1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseEntered
@@ -384,59 +223,26 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-        this.dispose();
+         this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
     private void rdoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoNamActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        insert();
-        LoadNguoiDung();
-        AppStatus.mainApp.fillTableNguoiDung(Main.listND);
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void panelRadius2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius2MouseMoved
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_panelRadius2MouseMoved
-
-    private void imgHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgHinhMouseClicked
-        // TODO add your handling code here:
-        selectImage();
-    }//GEN-LAST:event_imgHinhMouseClicked
-
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
-        update();
-    }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void myButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton106ActionPerformed
-        // TODO add your handling code here:
-        txtMaNguoiDung.setText("");
-        txtHoTen.setText("");
-        txtMoTa.setText("");
-        txtSoDienThoai.setText("");
-        txtEmail.setText("");
-        txtMoTa.setText("");
-        buttonGroup1.clearSelection();
-    }//GEN-LAST:event_myButton106ActionPerformed
-
-    public void setForm(NguoiDung nd) {
+    
+    public void setForm(NguoiDung nd){
         txtHoTen.setText(nd.getHoTen());
         txtSoDienThoai.setText(nd.getSoDienThoai());
-        if (nd.isGioiTinh()) {
+        if(nd.isGioiTinh()){
             rdoNam.setEnabled(true);
-        } else {
+        }else {
             rdoNam.setEnabled(false);
         }
     }
-
     /*tbdSetting args the command line arguments
      */
-    public static void main(String args[]) {
+   public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -491,31 +297,25 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.ebooks.Compoment.MyButton btnLuu;
     private com.ebooks.Compoment.MyButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel imgHinh;
+    private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblLogo1;
-    private com.ebooks.Compoment.MyButton myButton106;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables

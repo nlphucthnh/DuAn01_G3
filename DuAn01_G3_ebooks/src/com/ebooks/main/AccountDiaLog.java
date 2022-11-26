@@ -49,7 +49,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
 
         TaiKhoan taiKhoan = daoTK.SeclectTaiKhoan(Main.TenDangNhap);
         txtMaNguoiDung.setText(taiKhoan.getMaNguoiDung());
-        txtHoTen.setText(taiKhoan.getHoTen());
+//        txtHoTen.setText(taiKhoan.getHoTen());
         txtTenDangNhap.setText(taiKhoan.getMaNguoiDung());
         txtMatKhau.setText(taiKhoan.getMatKhau());
         if (taiKhoan.isTrangThai()) {
@@ -58,7 +58,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
             rdoQuanTriVien.setSelected(true);
         }
         
-        System.out.println(taiKhoan.getHoTen());
+//        System.out.println(taiKhoan.getHoTen());
     }
 
     void LoadNguoiDung() {
@@ -378,6 +378,8 @@ public class AccountDiaLog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AccountDiaLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
