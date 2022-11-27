@@ -31,6 +31,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private List<AudioSach> listAudio = new ArrayList<>();
     private TacGiaDAO DAOTG = new TacGiaDAO();
     private AudioSachDAO DAOAS = new AudioSachDAO();
+
     public AudiosDiaLog(java.awt.Frame parent, boolean modal, AudioSach audio) {
         super(parent, modal);
         initComponents();
@@ -40,7 +41,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         fillTableEbooks();
         tabAudioSach.setEnabledAt(1, false);
     }
-
+    
     public AudiosDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,7 +49,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         initMoving(this, pnlMainDialog);
         fillTableEbooks();
     }
-
+    
     private void SetForm(AudioSach audio) {
         txtMaSach.setText(audio.getMaSach());
         txtTenAudio.setText(audio.getTenAudio());
@@ -57,10 +58,10 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         txtDuongDan.setText(audio.getDuongDan());
         txtMoTa.setText(audio.getMoTa());
     }
-
+    
     private int x;
     private int y;
-
+    
     public void initMoving(JDialog DiaLog, JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -68,7 +69,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
                 x = me.getX();
                 y = me.getY();
             }
-
+            
         });
         panel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -231,18 +232,23 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
         tblEbook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Sách", "Tên Sách", "Tác Giả"
             }
         ));
+        tblEbook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblEbookMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEbook);
 
-        pnlEbooks.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 340));
+        pnlEbooks.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 690, 340));
 
         btnFile2.setBackground(new java.awt.Color(87, 190, 110));
         btnFile2.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,6 +256,11 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         btnFile2.setBoderColor(new java.awt.Color(87, 190, 110));
         btnFile2.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnFile2.setRadius(10);
+        btnFile2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFile2ActionPerformed(evt);
+            }
+        });
         pnlEbooks.add(btnFile2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 180, 40));
 
         tabAudioSach.addTab("Ebook", pnlEbooks);
@@ -285,7 +296,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
     private void lblExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MousePressed
@@ -296,6 +307,27 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFileActionPerformed
+
+    private void tblEbookMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEbookMousePressed
+        if (evt.getClickCount() == 2) {
+            int index = tblEbook.getSelectedRow();
+            String maEbook = (String) tblEbook.getValueAt(index, 0);
+            txtMaSach.setText(maEbook);
+            tabAudioSach.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_tblEbookMousePressed
+
+    private void btnFile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFile2ActionPerformed
+       
+        int index = tblEbook.getSelectedRow();
+        if (index != -1) {
+            String maEbook = (String) tblEbook.getValueAt(index, 0);
+            txtMaSach.setText(maEbook);
+            tabAudioSach.setSelectedIndex(0);
+        }else {
+            DialogHelper.alert(this,"Hãy Chọn Ebook");
+        }
+    }//GEN-LAST:event_btnFile2ActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -430,8 +462,8 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField txtTenAudio;
     // End of variables declaration//GEN-END:variables
     
-    public void fillTableEbooks(){
-         DefaultTableModel model;
+    public void fillTableEbooks() {
+        DefaultTableModel model;
         model = (DefaultTableModel) tblEbook.getModel();
         tblEbook.setSelectionBackground(new Color(87, 190, 110));
         model.setRowCount(0);
@@ -444,7 +476,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
         }
-    
+        
     }
-
+    
 }
