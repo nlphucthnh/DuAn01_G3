@@ -2618,8 +2618,6 @@ public class Main extends javax.swing.JFrame {
 
     private void myButton78ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton78ActionPerformed
         SortAudio();
-        
-
     }//GEN-LAST:event_myButton78ActionPerformed
 
     private void myButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton18ActionPerformed
