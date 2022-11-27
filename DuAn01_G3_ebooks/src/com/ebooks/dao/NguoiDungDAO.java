@@ -61,6 +61,7 @@ public class NguoiDungDAO {
                 entity.getSoDienThoai(),
                 entity.getEmail(),
                 entity.getHinh());
+        DialogHelper.alert(null, "Cập nhật thành công");
     }
 
     /**
@@ -69,15 +70,12 @@ public class NguoiDungDAO {
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(NguoiDung entity) {
-        String sql = "UPDATE dbo.NguoiDung SET hoTen = ?, gioiTinh = ?, soDienThoai = ?, email = ?, hinh = ? WHERE maNguoiDung = ?";
+        String sql = "UPDATE NguoiDung SET HoTen=?, GioiTinh=?, SoDienThoai=? WHERE MaNguoiDung=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getHoTen(),
                 entity.isGioiTinh(),
                 entity.getSoDienThoai(),
-                entity.getEmail(),
-                entity.getHinh(),
-                entity.getMaNguoiDung()
-        );
+                entity.getMaNguoiDung());
 
     }
 

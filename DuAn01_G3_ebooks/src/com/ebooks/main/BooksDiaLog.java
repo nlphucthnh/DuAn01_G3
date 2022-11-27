@@ -107,7 +107,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(newimg);
-        repaint();
         return imgIcon;
     }
 
@@ -126,7 +125,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
         txtDuongDan.setText(sach.getDuongDan());
         txtMoTa.setText(sach.getMoTa());
         lblSachImg.setIcon(ShowImg(sach.getHinh()));
-        repaint();
     }
 
     public String MovingFile() {
@@ -254,7 +252,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
             }
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -494,24 +491,24 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblSachImgMouseExited
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-        String maSach = txtMaSach.getText();
+      String maSach = txtMaSach.getText();
         int timThay = 0;
         ThucUongDAO DaoTU = new ThucUongDAO();
         listS = DAOS.selectAll();
-
-        for (Sach x : listS) {
-            if (x.getMaSach().contains(maSach)) {
+        
+        for(Sach x : listS){
+            if(x.getMaSach().contains(maSach)){
                 timThay = 1;
             }
         }
-        if (timThay == 0) {
+        if(timThay == 0) {
             this.InsertSach();
         } else {
-            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
                 this.UpdateSach();
             }
         }
-
+       
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
     /*tbdSetting args the command line arguments

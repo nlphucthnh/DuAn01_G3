@@ -17,18 +17,16 @@ public class TaiKhoan {
     private String maNguoiDung;
     private boolean TrangThai;
     private Time thoiLuong;
-    private String hoten;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, boolean TrangThai, Time thoiLuong, String hoten) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String maNguoiDung, boolean TrangThai, Time thoiLuong) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.maNguoiDung = maNguoiDung;
         this.TrangThai = TrangThai;
         this.thoiLuong = thoiLuong;
-        this.hoten = hoten;
     }
 
     public String getTenDangNhap() {
@@ -71,12 +69,6 @@ public class TaiKhoan {
         this.thoiLuong = thoiLuong;
     }
 
-    public String getHoten() {
-        return hoten;
-    }
-
-    public void setHoten(String hoten) {
-        this.hoten = hoten;
-    }
+   
 
 }
