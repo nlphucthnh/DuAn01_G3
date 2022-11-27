@@ -983,11 +983,6 @@ public class Main extends javax.swing.JFrame {
                 "Mã Audio", "Tên Audio", "Ngày Đăng", "Người Thu"
             }
         ));
-        tblAudioQL.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblAudioQLMousePressed(evt);
-            }
-        });
         jScrollPane14.setViewportView(tblAudioQL);
 
         panelRadius11.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 860, 300));
@@ -2476,15 +2471,6 @@ public class Main extends javax.swing.JFrame {
         index = tblAudioQL.getSelectedRow();
         UtilityHelper.last(index, tblAudioQL, listAudio);
     }//GEN-LAST:event_btnLastAudioActionPerformed
-
-    private void tblAudioQLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioQLMousePressed
-       if(evt.getClickCount() == 2){
-           int index = tblAudioQL.getSelectedRow();
-           String maAudio = tblAudioQL.getValueAt(index, 0).toString();
-           AudioSach audio  = daoAudio.findById(maAudio);
-           new AudiosDiaLog(this, congTac, audio).setVisible(true);
-       }
-    }//GEN-LAST:event_tblAudioQLMousePressed
 
     /**
      * @param args the command line arguments
