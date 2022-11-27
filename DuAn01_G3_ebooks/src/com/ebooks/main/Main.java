@@ -983,6 +983,11 @@ public class Main extends javax.swing.JFrame {
                 "Mã Audio", "Tên Audio", "Ngày Đăng", "Người Thu"
             }
         ));
+        tblAudioQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblAudioQLMousePressed(evt);
+            }
+        });
         jScrollPane14.setViewportView(tblAudioQL);
 
         panelRadius11.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 860, 300));
@@ -1002,6 +1007,11 @@ public class Main extends javax.swing.JFrame {
         btnThemAudio.setBoderColor(new java.awt.Color(87, 190, 110));
         btnThemAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         btnThemAudio.setRadius(10);
+        btnThemAudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemAudioActionPerformed(evt);
+            }
+        });
         panelRadius11.add(btnThemAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 150, 40));
 
         btnSuaAudio.setBackground(new java.awt.Color(87, 190, 110));
@@ -1011,6 +1021,11 @@ public class Main extends javax.swing.JFrame {
         btnSuaAudio.setBoderColor(new java.awt.Color(87, 190, 110));
         btnSuaAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         btnSuaAudio.setRadius(10);
+        btnSuaAudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaAudioActionPerformed(evt);
+            }
+        });
         panelRadius11.add(btnSuaAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 150, 40));
 
         btnXoaAudio.setBackground(new java.awt.Color(253, 127, 127));
@@ -1020,6 +1035,11 @@ public class Main extends javax.swing.JFrame {
         btnXoaAudio.setBoderColor(new java.awt.Color(253, 127, 127));
         btnXoaAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         btnXoaAudio.setRadius(10);
+        btnXoaAudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaAudioActionPerformed(evt);
+            }
+        });
         panelRadius11.add(btnXoaAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, 40));
 
         btnFirstAudio.setBackground(new java.awt.Color(145, 227, 168));
@@ -2457,13 +2477,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFirstAudioActionPerformed
 
     private void btnPrevAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevAudioActionPerformed
-       index = tblAudioQL.getSelectedRow();
+        index = tblAudioQL.getSelectedRow();
         UtilityHelper.previous(index, tblAudioQL, listAudio);
     }//GEN-LAST:event_btnPrevAudioActionPerformed
 
     private void btnNextAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextAudioActionPerformed
-        
-          index = tblAudioQL.getSelectedRow();
+
+        index = tblAudioQL.getSelectedRow();
         UtilityHelper.next(index, tblAudioQL, listAudio);
     }//GEN-LAST:event_btnNextAudioActionPerformed
 
@@ -2471,6 +2491,43 @@ public class Main extends javax.swing.JFrame {
         index = tblAudioQL.getSelectedRow();
         UtilityHelper.last(index, tblAudioQL, listAudio);
     }//GEN-LAST:event_btnLastAudioActionPerformed
+
+    private void tblAudioQLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioQLMousePressed
+        if (evt.getClickCount() == 2) {
+            int index = tblAudioQL.getSelectedRow();
+            String maAudio = tblAudioQL.getValueAt(index, 0).toString();
+            AudioSach audio = daoAudio.findById(maAudio);
+            new AudiosDiaLog(this, true, audio).setVisible(true);
+            fillTableAudio(tblAudioQL);
+            fillTableAudio(tblAudio);
+        }
+    }//GEN-LAST:event_tblAudioQLMousePressed
+
+    private void btnThemAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemAudioActionPerformed
+        new AudiosDiaLog(this, true).setVisible(true);
+        fillTableAudio(tblAudioQL);
+        fillTableAudio(tblAudio);
+    }//GEN-LAST:event_btnThemAudioActionPerformed
+
+    private void btnSuaAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaAudioActionPerformed
+
+        int index = tblAudioQL.getSelectedRow();
+        if (index != -1) {
+            String maAudio = tblAudioQL.getValueAt(index, 0).toString();
+            AudioSach audio = daoAudio.findById(maAudio);
+            new AudiosDiaLog(this, true, audio).setVisible(true);
+            fillTableAudio(tblAudioQL);
+            fillTableAudio(tblAudio);
+        }else {
+            DialogHelper.alert(this,"Bạn Hãy Chọn Audio");
+        }
+
+
+    }//GEN-LAST:event_btnSuaAudioActionPerformed
+
+    private void btnXoaAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaAudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoaAudioActionPerformed
 
     /**
      * @param args the command line arguments
