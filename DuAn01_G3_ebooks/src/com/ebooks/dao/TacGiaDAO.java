@@ -51,9 +51,9 @@ public class TacGiaDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TacGia entity) {
-        String sql="INSERT INTO TacGia (MaTacGia, HoTen, GioiTinh, NgaySinh, MoTa, Hinh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO TacGia (HoTen, GioiTinh, NgaySinh, MoTa, Hinh, MaQuanTriVien) VALUES ( ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
-                entity.getMaTacGia(),
+               
                 entity.getHoTen(),
                 entity.isGioiTinh(),
                 entity.getNgaySinh(),

@@ -52,9 +52,8 @@ public class AudioSachDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(AudioSach entity) {
-        String sql="INSERT INTO AudioSach (MaAudio, TenAudio, MaSach, NgayPhatHanh, NguoiThu, MoTa, DuongDan, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO AudioSach ( TenAudio, MaSach, NgayPhatHanh, NguoiThu, MoTa, DuongDan, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
-                entity.getMaAudio(),
                 entity.getTenAudio(),
                 entity.getMaSach(),
                 entity.getNgayPhatHanh(),

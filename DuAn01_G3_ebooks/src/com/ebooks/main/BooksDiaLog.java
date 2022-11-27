@@ -200,9 +200,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
             if (UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)) {
                 if (UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)) {
                     if (checkTacGia(txtTacGia.getText()) == null) {
-                        try {
-                            TacGia tg = new TacGia(txtTacGia.getText(), true, now, "", " ", ShareHelper.BOSS.getMaQuanTriVien());
+                        TacGia tg = new TacGia(txtTacGia.getText(), true, now, "", " ", ShareHelper.BOSS.getMaQuanTriVien());
                             DAOTG.insert(tg);
+                        
+                        try {
+                            
                         } catch (Exception e) {
                             DialogHelper.alert(this, "Lỗi thêm tác giả");
                             return;
@@ -217,6 +219,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
                             return;
                         }
                     }
+                    
+                    
                     try {
                         DAOS.insert(sach);
                         InsertLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());

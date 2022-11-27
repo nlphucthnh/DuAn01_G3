@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.text.SimpleDateFormat;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
@@ -17,12 +18,15 @@ import javax.swing.JPanel;
  */
 public class ReceiptDiaLog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form SettingDiaLog
-     */
+    boolean congTac = false;
+    boolean congTac1 = false;
     public ReceiptDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Calendar.setVisible(congTac);
+        congTac = !congTac;
+        Calendar1.setVisible(congTac1);
+        congTac1 = !congTac1;
         setBackground(new Color(0,0,0,0));
         initMoving(this, pnlMainDialog);
     }
@@ -59,24 +63,69 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        myButton10 = new com.ebooks.Compoment.MyButton();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
+        materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
+        jLabel10 = new javax.swing.JLabel();
+        txtMaNguoiDung = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtMaHoaDon = new javax.swing.JTextField();
+        materialTabbed2 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius3 = new com.ebooks.Compoment.PanelRadius();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table2 = new com.ebooks.Compoment.Table();
+        myButton13 = new com.ebooks.Compoment.MyButton();
+        myButton14 = new com.ebooks.Compoment.MyButton();
+        panelRadius4 = new com.ebooks.Compoment.PanelRadius();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table1 = new com.ebooks.Compoment.Table();
+        myButton10 = new com.ebooks.Compoment.MyButton();
+        Calendar = new com.toedter.calendar.JCalendar();
+        txtNgayMua = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtSoLuong = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        myButton11 = new com.ebooks.Compoment.MyButton();
+        btnIconCld = new com.ebooks.Compoment.MyButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        txtMaNguoiDung1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtTenDangNhap = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtNgayThue = new javax.swing.JTextField();
+        Calendar1 = new com.toedter.calendar.JCalendar();
+        btnIconCld1 = new com.ebooks.Compoment.MyButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        myButton12 = new com.ebooks.Compoment.MyButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -114,81 +163,407 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
 
         pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
-        jTextField3.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField3.setText("jTextField1");
-        pnlMainDialog.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 220, 40));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField4.setText("jTextField1");
-        pnlMainDialog.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 210, 40));
+        panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel2.setText("Mã Tài Khoản");
-        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
+        jLabel10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel10.setText("Mã Hóa Đơn");
+        panelRadius1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        txtMaNguoiDung.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaNguoiDung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaNguoiDungActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(txtMaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 230, 40));
+
+        jLabel11.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel11.setText("Mã Người Dùng");
+        panelRadius1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+
+        txtMaHoaDon.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaHoaDonActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(txtMaHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 230, 40));
+
+        panelRadius3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        table2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(table2);
+
+        panelRadius3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 190));
+
+        myButton13.setBackground(new java.awt.Color(255, 102, 102));
+        myButton13.setForeground(new java.awt.Color(255, 255, 255));
+        myButton13.setText("Xóa");
+        myButton13.setBoderColor(new java.awt.Color(255, 102, 102));
+        myButton13.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton13.setRadius(10);
+        myButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton13ActionPerformed(evt);
+            }
+        });
+        panelRadius3.add(myButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 100, 40));
+
+        myButton14.setBackground(new java.awt.Color(87, 190, 110));
+        myButton14.setForeground(new java.awt.Color(255, 255, 255));
+        myButton14.setText("Cập Nhật");
+        myButton14.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton14.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton14.setRadius(10);
+        myButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton14ActionPerformed(evt);
+            }
+        });
+        panelRadius3.add(myButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 100, 40));
+
+        materialTabbed2.addTab("Hóa Đơn Chi Tiêt", panelRadius3);
+
+        panelRadius4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table1);
+
+        panelRadius4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 190));
+
+        myButton10.setBackground(new java.awt.Color(87, 190, 110));
+        myButton10.setForeground(new java.awt.Color(255, 255, 255));
+        myButton10.setText("Thêm Thức Uống");
+        myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton10.setRadius(10);
+        panelRadius4.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 170, 40));
+
+        materialTabbed2.addTab("Thức Uống Chọn", panelRadius4);
+
+        panelRadius1.add(materialTabbed2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 480, 310));
+
+        Calendar.setBackground(new java.awt.Color(201, 235, 201));
+        Calendar.setDecorationBackgroundColor(new java.awt.Color(153, 255, 153));
+        Calendar.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        Calendar.setWeekdayForeground(new java.awt.Color(51, 51, 51));
+        Calendar.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                CalendarAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                CalendarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                CalendarMouseExited(evt);
+            }
+        });
+        Calendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                CalendarPropertyChange(evt);
+            }
+        });
+        panelRadius1.add(Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
+
+        txtNgayMua.setBackground(new java.awt.Color(222, 247, 227));
+        txtNgayMua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayMuaActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(txtNgayMua, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 230, 40));
+
+        jLabel13.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel13.setText("Ngày Mua");
+        panelRadius1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+
+        txtSoLuong.setBackground(new java.awt.Color(222, 247, 227));
+        txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSoLuongActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 280, 40));
+
+        jLabel14.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel14.setText("Số Lượng");
+        panelRadius1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, -1, -1));
+
+        myButton11.setBackground(new java.awt.Color(87, 190, 110));
+        myButton11.setForeground(new java.awt.Color(255, 255, 255));
+        myButton11.setText("Lưu Thông Tin");
+        myButton11.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton11.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton11.setRadius(10);
+        panelRadius1.add(myButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 280, 50));
+
+        btnIconCld.setBackground(new java.awt.Color(87, 190, 110));
+        btnIconCld.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/calendar.png"))); // NOI18N
+        btnIconCld.setAutoscrolls(true);
+        btnIconCld.setBoderColor(new java.awt.Color(204, 204, 204));
+        btnIconCld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIconCldActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnIconCld, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 55, 40));
+        panelRadius1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, 280, 10));
+
+        jLabel1.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
+        jLabel1.setText("Mã Người Dùng :");
+        panelRadius1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Nguyễn Văn A");
+        jLabel2.setFocusable(false);
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel2.setInheritsPopupMenu(false);
+        panelRadius1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 160, 30));
+
+        jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
+        jLabel3.setText("Tổng Tiền Thức Uống");
+        panelRadius1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("1000");
+        jLabel4.setFocusable(false);
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel4.setInheritsPopupMenu(false);
+        panelRadius1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 80, 30));
+
+        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
+        jLabel5.setText("Mã Hóa Đơn");
+        panelRadius1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("HD001");
+        jLabel7.setFocusable(false);
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel7.setInheritsPopupMenu(false);
+        panelRadius1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 160, 30));
+        panelRadius1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 280, 10));
+
+        materialTabbed1.addTab("Thức Uống", panelRadius1);
+
+        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtMaNguoiDung1.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaNguoiDung1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaNguoiDung1ActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(txtMaNguoiDung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 230, 40));
+
+        jLabel12.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel12.setText("Thời Gian Thuê");
+        panelRadius2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        txtTenDangNhap.setBackground(new java.awt.Color(222, 247, 227));
+        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenDangNhapActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 230, 40));
+
+        jLabel15.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel15.setText("Tên Đăng Nhập");
+        panelRadius2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+
+        txtNgayThue.setBackground(new java.awt.Color(222, 247, 227));
+        txtNgayThue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayThueActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(txtNgayThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 170, 40));
+
+        Calendar1.setBackground(new java.awt.Color(201, 235, 201));
+        Calendar1.setDecorationBackgroundColor(new java.awt.Color(153, 255, 153));
+        Calendar1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        Calendar1.setWeekdayForeground(new java.awt.Color(51, 51, 51));
+        Calendar1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                Calendar1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Calendar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Calendar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Calendar1MouseExited(evt);
+            }
+        });
+        Calendar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                Calendar1PropertyChange(evt);
+            }
+        });
+        panelRadius2.add(Calendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
+
+        btnIconCld1.setBackground(new java.awt.Color(87, 190, 110));
+        btnIconCld1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/calendar.png"))); // NOI18N
+        btnIconCld1.setAutoscrolls(true);
+        btnIconCld1.setBoderColor(new java.awt.Color(204, 204, 204));
+        btnIconCld1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIconCld1ActionPerformed(evt);
+            }
+        });
+        panelRadius2.add(btnIconCld1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 55, 40));
+
+        jLabel16.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel16.setText("Ngày Thuê");
+        panelRadius2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel17.setText("Mã Người Dùng");
+        panelRadius2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelRadius2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 40));
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelRadius2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 10, 270));
+        panelRadius2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 490, 10));
+
+        jLabel8.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel8.setText("Thời Lượng");
+        panelRadius2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel9.setText("Mã Người Dùng");
+        panelRadius2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel18.setText("Tên Người Dùng");
+        panelRadius2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel20.setText("Tên Đăng Nhập");
+        panelRadius2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel21.setText("Ngày Thuê");
+        panelRadius2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel22.setText("Tổng Tiền Thuê Sách");
+        panelRadius2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("2");
+        jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 170, -1));
+
+        jLabel24.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel24.setText("2h");
+        jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 120, -1));
+
+        jLabel25.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel25.setText("27/11/2022");
+        jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 110, -1));
+
+        jLabel26.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel26.setText("abc123");
+        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 150, -1));
+
+        jLabel27.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel27.setText("Nguyễn Văn A");
+        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 130, -1));
+
+        jLabel28.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel28.setText("100.000 đ");
+        jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 333, 130, 30));
+
+        jLabel29.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel29.setText("Mức Gia Áp Dụng");
+        panelRadius2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel30.setText("ND001");
+        jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 130, -1));
+
+        myButton12.setBackground(new java.awt.Color(87, 190, 110));
+        myButton12.setForeground(new java.awt.Color(255, 255, 255));
+        myButton12.setText("Lưu Thông Tin");
+        myButton12.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton12.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton12.setRadius(10);
+        panelRadius2.add(myButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 260, 50));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelRadius2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 260, 40));
+
+        jLabel31.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel31.setText("Bảng Giá Thuê");
+        panelRadius2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        materialTabbed1.addTab("Thuê Sách", panelRadius2);
+
+        pnlMainDialog.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 840, 460));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
         jLabel19.setText("Thông Tin Hóa Đơn");
-        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 250, -1));
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 250, -1));
 
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mã Thuê ebook");
-        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Thời Gian Thuê ");
-        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));
-
-        myButton10.setBackground(new java.awt.Color(87, 190, 110));
-        myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Lưu Thông Tin");
-        myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton10.setRadius(10);
-        pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
-
-        jTextField7.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField7.setText("jTextField1");
-        pnlMainDialog.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 220, 40));
-
-        jTextField8.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField8.setText("jTextField1");
-        pnlMainDialog.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 210, 40));
-
-        jLabel8.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel8.setText("Thông Tin Thanh Toán");
-        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
-
-        jTextField9.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField9.setText("jTextField1");
-        pnlMainDialog.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 220, 40));
-
-        jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel4.setText("Mã Người Dùng");
-        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
-
-        jTextField10.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField10.setText("jTextField1");
-        pnlMainDialog.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 220, 40));
-
-        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Số Lượng");
-        pnlMainDialog.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel10.setText("Thức Uống");
-        pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        pnlMainDialog.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 690, 130));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 570));
 
         pack();
         setLocationRelativeTo(null);
@@ -212,6 +587,87 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlExit1MouseExited
 
+    private void txtMaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaHoaDonActionPerformed
+
+    private void txtMaNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNguoiDungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaNguoiDungActionPerformed
+
+    private void txtNgayMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayMuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayMuaActionPerformed
+
+    private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoLuongActionPerformed
+
+    private void btnIconCldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIconCldActionPerformed
+        Calendar.setVisible(congTac);
+        congTac = !congTac;
+    }//GEN-LAST:event_btnIconCldActionPerformed
+
+    private void myButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton13ActionPerformed
+
+    private void myButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton14ActionPerformed
+
+    private void CalendarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CalendarAncestorAdded
+        
+    }//GEN-LAST:event_CalendarAncestorAdded
+
+    private void CalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_CalendarPropertyChange
+        SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+        txtNgayMua.setText(String.valueOf(formats.format(Calendar.getDate())));
+    }//GEN-LAST:event_CalendarPropertyChange
+
+    private void CalendarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalendarMouseExited
+       
+    }//GEN-LAST:event_CalendarMouseExited
+
+    private void CalendarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalendarMouseEntered
+        //        Calendar.setVisible(false);
+
+    }//GEN-LAST:event_CalendarMouseEntered
+
+    private void txtMaNguoiDung1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNguoiDung1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaNguoiDung1ActionPerformed
+
+    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenDangNhapActionPerformed
+
+    private void txtNgayThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayThueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayThueActionPerformed
+
+    private void Calendar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Calendar1AncestorAdded
+      
+    }//GEN-LAST:event_Calendar1AncestorAdded
+
+    private void Calendar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Calendar1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Calendar1MouseEntered
+
+    private void Calendar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Calendar1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Calendar1MouseExited
+
+    private void Calendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_Calendar1PropertyChange
+        SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+        txtNgayThue.setText(String.valueOf(formats.format(Calendar1.getDate())));
+    }//GEN-LAST:event_Calendar1PropertyChange
+
+    private void btnIconCld1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIconCld1ActionPerformed
+       Calendar1.setVisible(congTac1);
+       congTac1 = !congTac1;
+    }//GEN-LAST:event_btnIconCld1ActionPerformed
+
     /*tbdSetting args the command line arguments
      */
    public static void main(String args[]) {
@@ -222,7 +678,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -381,27 +837,72 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar Calendar;
+    private com.toedter.calendar.JCalendar Calendar1;
+    private com.ebooks.Compoment.MyButton btnIconCld;
+    private com.ebooks.Compoment.MyButton btnIconCld1;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblExit1;
+    private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
+    private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
     private com.ebooks.Compoment.MyButton myButton10;
+    private com.ebooks.Compoment.MyButton myButton11;
+    private com.ebooks.Compoment.MyButton myButton12;
+    private com.ebooks.Compoment.MyButton myButton13;
+    private com.ebooks.Compoment.MyButton myButton14;
+    private com.ebooks.Compoment.PanelRadius panelRadius1;
+    private com.ebooks.Compoment.PanelRadius panelRadius2;
+    private com.ebooks.Compoment.PanelRadius panelRadius3;
+    private com.ebooks.Compoment.PanelRadius panelRadius4;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
+    private com.ebooks.Compoment.Table table1;
+    private com.ebooks.Compoment.Table table2;
+    private javax.swing.JTextField txtMaHoaDon;
+    private javax.swing.JTextField txtMaNguoiDung;
+    private javax.swing.JTextField txtMaNguoiDung1;
+    private javax.swing.JTextField txtNgayMua;
+    private javax.swing.JTextField txtNgayThue;
+    private javax.swing.JTextField txtSoLuong;
+    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

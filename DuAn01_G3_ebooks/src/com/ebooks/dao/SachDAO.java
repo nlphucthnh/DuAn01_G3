@@ -98,11 +98,18 @@ public class SachDAO {
         return select(sql);
     }
     
+    public List<Sach> selectSachNotAudio() {
+        String sql="SELECT * FROM SACH WHERE maSach NOT IN (SELECT Sach.maSach FROM Sach JOIN AudioSach ON Sach.maSach = AudioSach.maSach)";
+        return select(sql);
+    }
+    
     /**
      * Truy vấn thực thể theo mã id
      * @param id là mã của bản ghi được truy vấn
      * @return thực thể chứa thông tin của bản ghi
      */
+    
+    
     public Sach findById(String id) {
         String sql="SELECT * FROM Sach WHERE MaSach=?";
         List<Sach> list=select(sql,id);
