@@ -60,23 +60,27 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
         pnlExit1 = new com.ebooks.Compoment.PanelRound();
         lblExit1 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        myButton9 = new com.ebooks.Compoment.MyButton();
-        jLabel19 = new javax.swing.JLabel();
-        imageBoder1 = new com.ebooks.Compoment.ImageBoder();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        myButton10 = new com.ebooks.Compoment.MyButton();
-        jTextField7 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
+        txtMaSach = new javax.swing.JTextField();
+        btnFile = new com.ebooks.Compoment.MyButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtDuongDan = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtTenAudio = new javax.swing.JTextField();
+        txtNguoiThu = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtNgayDang = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtMoTa = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        btnFile1 = new com.ebooks.Compoment.MyButton();
+        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEbook = new com.ebooks.Compoment.Table();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -118,83 +122,106 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
-
-        jTextField3.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField3.setText("jTextField1");
-        pnlMainDialog.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
-
-        jTextField4.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField4.setText("jTextField1");
-        pnlMainDialog.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
-
-        jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel6.setText("Mô Tả");
-        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel2.setText("Tên Sách");
-        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel3.setText("Mã Audio");
-        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
-
-        myButton9.setBackground(new java.awt.Color(87, 190, 110));
-        myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("File");
-        myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton9.setRadius(10);
-        pnlMainDialog.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 70, 40));
-
-        jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel19.setText("Thông Tin Audio Sách");
-        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
-
-        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
-        imageBoder1.setRadius(20);
-        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 180));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
-
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mã Sách");
-        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
-
-        jTextField5.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField5.setText("jTextField1");
-        pnlMainDialog.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 370, 40));
-
-        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Tên Audio");
-        pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
-
-        jTextField6.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField6.setText("jTextField1");
-        pnlMainDialog.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 220, 40));
-
-        myButton10.setBackground(new java.awt.Color(87, 190, 110));
-        myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Lưu Thông Tin");
-        myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton10.setRadius(10);
-        pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 270, 50));
-
-        jTextField7.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField7.setText("jTextField1");
-        pnlMainDialog.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 50, 50));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtMaSach.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius1.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 310, 40));
+
+        btnFile.setBackground(new java.awt.Color(87, 190, 110));
+        btnFile.setForeground(new java.awt.Color(255, 255, 255));
+        btnFile.setText("File");
+        btnFile.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnFile.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnFile.setRadius(10);
+        btnFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFileActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 40));
+
+        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel7.setText("Mã Sách");
+        panelRadius1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        txtDuongDan.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius1.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 560, 40));
+
+        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel5.setText("Tên Audio");
+        panelRadius1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+
+        txtTenAudio.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius1.add(txtTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 310, 40));
+
+        txtNguoiThu.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius1.add(txtNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 310, 40));
+
+        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel9.setText("Người Thu");
+        panelRadius1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        txtNgayDang.setBackground(new java.awt.Color(222, 247, 227));
+        panelRadius1.add(txtNgayDang, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 310, 40));
+
+        jLabel10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel10.setText("Ngày Đăng");
+        panelRadius1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+
+        txtMoTa.setColumns(20);
+        txtMoTa.setRows(5);
+        jScrollPane1.setViewportView(txtMoTa);
+
+        panelRadius1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 690, -1));
+
+        jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel6.setText("Mô Tả");
+        panelRadius1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+
+        btnFile1.setBackground(new java.awt.Color(87, 190, 110));
+        btnFile1.setForeground(new java.awt.Color(255, 255, 255));
+        btnFile1.setText("File");
+        btnFile1.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnFile1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnFile1.setRadius(10);
+        panelRadius1.add(btnFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 180, 40));
+
+        materialTabbed1.addTab("Audio", panelRadius1);
+
+        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblEbook.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblEbook);
+
+        panelRadius2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 390));
+
+        materialTabbed1.addTab("Ebook", panelRadius2);
+
+        pnlMainDialog.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 720, 470));
+
+        jLabel20.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(55, 149, 76));
+        jLabel20.setText("Thông Tin Audio Sách");
+        pnlMainDialog.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 290, -1));
+
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 590));
 
         pack();
         setLocationRelativeTo(null);
@@ -225,6 +252,10 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_lblExit1MousePressed
+
+    private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFileActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -331,26 +362,30 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnFile;
+    private com.ebooks.Compoment.MyButton btnFile1;
     private javax.swing.ButtonGroup buttonGroup1;
-    private com.ebooks.Compoment.ImageBoder imageBoder1;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblExit1;
-    private com.ebooks.Compoment.MyButton myButton10;
-    private com.ebooks.Compoment.MyButton myButton9;
+    private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
+    private com.ebooks.Compoment.PanelRadius panelRadius1;
+    private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
+    private com.ebooks.Compoment.Table tblEbook;
+    private javax.swing.JTextField txtDuongDan;
+    private javax.swing.JTextField txtMaSach;
+    private javax.swing.JTextArea txtMoTa;
+    private javax.swing.JTextField txtNgayDang;
+    private javax.swing.JTextField txtNguoiThu;
+    private javax.swing.JTextField txtTenAudio;
     // End of variables declaration//GEN-END:variables
 }
