@@ -8,15 +8,20 @@ import com.ebooks.dao.AudioSachDAO;
 import com.ebooks.dao.SachDAO;
 import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.ShareHelper;
+import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.AudioSach;
 import com.ebooks.model.Sach;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +36,9 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private List<AudioSach> listAudio = new ArrayList<>();
     private TacGiaDAO DAOTG = new TacGiaDAO();
     private AudioSachDAO DAOAS = new AudioSachDAO();
-
+    private JFileChooser fileChooser = new JFileChooser();
+    private String UrlAudio = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\audioEbook\\";
+    private String maAudio = null;
     public AudiosDiaLog(java.awt.Frame parent, boolean modal, AudioSach audio) {
         super(parent, modal);
         initComponents();
@@ -40,23 +47,118 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         SetForm(audio);
         fillTableEbooks();
         tabAudioSach.setEnabledAt(1, false);
+        maAudio = audio.getMaAudio();
+        txtMaSach.setEnabled(false);
+        txtDuongDan.setEnabled(false);
     }
     
+    
+    
+     
     public AudiosDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
         fillTableEbooks();
+        txtMaSach.setEnabled(false);
+        txtDuongDan.setEnabled(false);
     }
+    
+    public AudioSach getForm(){
+        AudioSach audio = new AudioSach();
+        audio.setMaSach(txtMaSach.getText());
+        audio.setTenAudio(txtTenAudio.getText());
+        audio.setNguoiThu(txtNguoiThu.getText());
+        audio.setDuongDan(txtDuongDan.getText());
+        audio.setMoTa(txtMoTa.getText());
+        audio.setNgayPhatHanh(new Date());
+        audio.setMaQuanTriVien(ShareHelper.BOSS.getMaQuanTriVien());
+        return audio;
+    }
+    
+    public AudioSach getForm(AudioSach audio){
+        audio.setMaSach(txtMaSach.getText());
+        audio.setTenAudio(txtTenAudio.getText());
+        audio.setNguoiThu(txtNguoiThu.getText());
+        audio.setDuongDan(txtDuongDan.getText());
+        audio.setMoTa(txtMoTa.getText());
+        return audio;
+    }
+    
+    private void InsertAudio(){
+        if(UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkNullText(lblTenAudio, txtTenAudio)){
+            if(UtilityHelper.checkNullText(lblDuongDan, txtDuongDan)){
+                AudioSach audio = getForm();
+                try {
+                     DAOAS.insert(audio);
+                     DialogHelper.alert(this,"Thêm Audio cho Sách Thành Công");
+                } catch (Exception e) {
+                     DialogHelper.alert(this,"Thêm Audio cho Sách Thất Bại");
+                }
+            }
+        }
+    }
+    
+    private void UpdateAudio(){
+        if(UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkNullText(lblTenAudio, txtTenAudio)){
+            if(UtilityHelper.checkNullText(lblDuongDan, txtDuongDan)){
+                AudioSach audio = DAOAS.findById(maAudio);
+                
+                
+                try {
+                    DAOAS.update(getForm(audio));
+                    DialogHelper.alert(this,"Cập Nhật Audio cho Sách Thành Công");
+                } catch (Exception e) {
+                     DialogHelper.alert(this,"Cập Nhật Audio cho Sách Thất Bại");
+                }
+            }
+        }
+    }
+    
     
     private void SetForm(AudioSach audio) {
         txtMaSach.setText(audio.getMaSach());
         txtTenAudio.setText(audio.getTenAudio());
-        txtNgayDang.setText(String.valueOf(audio.getNgayPhatHanh()));
         txtNguoiThu.setText(audio.getNguoiThu());
         txtDuongDan.setText(audio.getDuongDan());
         txtMoTa.setText(audio.getMoTa());
+    }
+    
+     public String MovingFile() {
+        int x = fileChooser.showDialog(this, "Chon file");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            try {
+                File afile = new File(fileChooser.getSelectedFile().getPath());
+                if (afile.renameTo(new File(UrlAudio + fileChooser.getSelectedFile().getName()))) {
+                    System.out.println("File is moved successful!");
+                    txtDuongDan.setText(fileChooser.getSelectedFile().getName());
+                } else {
+                    System.out.println("File is failed to move!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return fileChooser.getSelectedFile().getName();
+    }
+    
+    
+    public void fillTableEbooks() {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblEbook.getModel();
+        tblEbook.setSelectionBackground(new Color(87, 190, 110));
+        model.setRowCount(0);
+        try {
+            listS = DAOS.selectSachNotAudio();
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+        
     }
     
     private int x;
@@ -97,18 +199,17 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         pnlAudio = new com.ebooks.Compoment.PanelRadius();
         txtMaSach = new javax.swing.JTextField();
         btnFile = new com.ebooks.Compoment.MyButton();
-        jLabel7 = new javax.swing.JLabel();
+        lblMaSach = new javax.swing.JLabel();
         txtDuongDan = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblTenAudio = new javax.swing.JLabel();
         txtTenAudio = new javax.swing.JTextField();
         txtNguoiThu = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtNgayDang = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        lblNguoiThu = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         btnFile1 = new com.ebooks.Compoment.MyButton();
+        lblDuongDan = new javax.swing.JLabel();
         pnlEbooks = new com.ebooks.Compoment.PanelRadius();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEbook = new com.ebooks.Compoment.Table();
@@ -177,18 +278,18 @@ public class AudiosDiaLog extends javax.swing.JDialog {
                 btnFileActionPerformed(evt);
             }
         });
-        pnlAudio.add(btnFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 40));
+        pnlAudio.add(btnFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 70, 40));
 
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mã Sách");
-        pnlAudio.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblMaSach.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblMaSach.setText("Mã Sách");
+        pnlAudio.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         txtDuongDan.setBackground(new java.awt.Color(222, 247, 227));
-        pnlAudio.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 560, 40));
+        pnlAudio.add(txtDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 220, 40));
 
-        jLabel5.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Tên Audio");
-        pnlAudio.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        lblTenAudio.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTenAudio.setText("Tên Audio");
+        pnlAudio.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
         txtTenAudio.setBackground(new java.awt.Color(222, 247, 227));
         pnlAudio.add(txtTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 310, 40));
@@ -196,26 +297,19 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         txtNguoiThu.setBackground(new java.awt.Color(222, 247, 227));
         pnlAudio.add(txtNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 310, 40));
 
-        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Người Thu");
-        pnlAudio.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-
-        txtNgayDang.setBackground(new java.awt.Color(222, 247, 227));
-        pnlAudio.add(txtNgayDang, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 310, 40));
-
-        jLabel10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel10.setText("Ngày Đăng");
-        pnlAudio.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        lblNguoiThu.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblNguoiThu.setText("Người Thu");
+        pnlAudio.add(lblNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        pnlAudio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 690, -1));
+        pnlAudio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 206, 690, 150));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        pnlAudio.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        pnlAudio.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         btnFile1.setBackground(new java.awt.Color(87, 190, 110));
         btnFile1.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,7 +317,16 @@ public class AudiosDiaLog extends javax.swing.JDialog {
         btnFile1.setBoderColor(new java.awt.Color(87, 190, 110));
         btnFile1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnFile1.setRadius(10);
+        btnFile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFile1ActionPerformed(evt);
+            }
+        });
         pnlAudio.add(btnFile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 180, 40));
+
+        lblDuongDan.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblDuongDan.setText("Dường Dẫn");
+        pnlAudio.add(lblDuongDan, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
 
         tabAudioSach.addTab("Audio", pnlAudio);
 
@@ -305,7 +408,11 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblExit1MousePressed
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
-        // TODO add your handling code here:
+        try {
+            MovingFile();
+        } catch (Exception e) {
+            
+        }
     }//GEN-LAST:event_btnFileActionPerformed
 
     private void tblEbookMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEbookMousePressed
@@ -328,6 +435,11 @@ public class AudiosDiaLog extends javax.swing.JDialog {
             DialogHelper.alert(this,"Hãy Chọn Ebook");
         }
     }//GEN-LAST:event_btnFile2ActionPerformed
+
+    private void btnFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFile1ActionPerformed
+//        InsertAudio();
+        UpdateAudio();
+    }//GEN-LAST:event_btnFile1ActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -438,16 +550,16 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.MyButton btnFile1;
     private com.ebooks.Compoment.MyButton btnFile2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblDuongDan;
     private javax.swing.JLabel lblExit1;
+    private javax.swing.JLabel lblMaSach;
+    private javax.swing.JLabel lblNguoiThu;
+    private javax.swing.JLabel lblTenAudio;
     private com.ebooks.Compoment.PanelRadius pnlAudio;
     private com.ebooks.Compoment.PanelRadius pnlEbooks;
     private com.ebooks.Compoment.PanelRound pnlExit1;
@@ -457,26 +569,10 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField txtDuongDan;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextArea txtMoTa;
-    private javax.swing.JTextField txtNgayDang;
     private javax.swing.JTextField txtNguoiThu;
     private javax.swing.JTextField txtTenAudio;
     // End of variables declaration//GEN-END:variables
     
-    public void fillTableEbooks() {
-        DefaultTableModel model;
-        model = (DefaultTableModel) tblEbook.getModel();
-        tblEbook.setSelectionBackground(new Color(87, 190, 110));
-        model.setRowCount(0);
-        try {
-            listS = DAOS.selectSachNotAudio();
-            for (Sach sach : listS) {
-                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
-        }
-        
-    }
+    
     
 }

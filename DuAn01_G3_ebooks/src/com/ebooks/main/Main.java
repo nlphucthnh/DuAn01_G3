@@ -43,6 +43,8 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -196,6 +198,52 @@ public class Main extends javax.swing.JFrame {
             pnlListen.setLocation(new Point(15, 180));
 
         }
+    }
+
+    public void SortSach() {
+        try {
+            Comparator<Sach> comp = new Comparator<Sach>() {
+
+                @Override
+                public int compare(Sach o1, Sach o2) {
+                    return o1.getTenSach().compareTo(o2.getTenSach());
+                }
+            };
+            Collections.sort(listS, comp);
+            DefaultTableModel model;
+            model = (DefaultTableModel) tblSach.getModel();
+            tblSach.setSelectionBackground(new Color(87, 190, 110));
+            model.setRowCount(0);//tăng dần
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void SortAudio() {
+        try {
+            Comparator<AudioSach> comp = new Comparator<AudioSach>() {
+
+                @Override
+                public int compare(AudioSach o1, AudioSach o2) {
+                    return o1.getTenAudio().compareTo(o2.getTenAudio());
+                }
+            };
+            Collections.sort(listAudio, comp);            //tăng dần
+            model = (DefaultTableModel) tblAudioQL.getModel();
+            model.setRowCount(0);
+            tblAudioQL.setSelectionBackground(new Color(87, 190, 110));
+            for (AudioSach au : listAudio) {
+                model.addRow(new Object[]{au.getMaAudio(), au.getTenAudio(), au.getNgayPhatHanh(), au.getNguoiThu()});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void Date() {
@@ -856,6 +904,11 @@ public class Main extends javax.swing.JFrame {
         myButton18.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton18.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton18.setRadius(10);
+        myButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton18ActionPerformed(evt);
+            }
+        });
         panelRadius10.add(myButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 140, 40));
 
         cboTheLoaiSach.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -891,6 +944,11 @@ public class Main extends javax.swing.JFrame {
         btnCapNhatSach.setBoderColor(new java.awt.Color(87, 190, 110));
         btnCapNhatSach.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         btnCapNhatSach.setRadius(10);
+        btnCapNhatSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatSachActionPerformed(evt);
+            }
+        });
         panelRadius10.add(btnCapNhatSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 120, 150, 40));
 
         btnXoaSach.setBackground(new java.awt.Color(253, 127, 127));
@@ -998,6 +1056,11 @@ public class Main extends javax.swing.JFrame {
         myButton78.setBoderColor(new java.awt.Color(87, 190, 110));
         myButton78.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         myButton78.setRadius(10);
+        myButton78.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton78ActionPerformed(evt);
+            }
+        });
         panelRadius11.add(myButton78, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 140, 40));
 
         btnThemAudio.setBackground(new java.awt.Color(87, 190, 110));
@@ -2518,16 +2581,50 @@ public class Main extends javax.swing.JFrame {
             new AudiosDiaLog(this, true, audio).setVisible(true);
             fillTableAudio(tblAudioQL);
             fillTableAudio(tblAudio);
-        }else {
-            DialogHelper.alert(this,"Bạn Hãy Chọn Audio");
+        } else {
+            DialogHelper.alert(this, "Bạn Hãy Chọn Audio");
         }
 
 
     }//GEN-LAST:event_btnSuaAudioActionPerformed
 
     private void btnXoaAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaAudioActionPerformed
-        // TODO add your handling code here:
+        index = tblAudioQL.getSelectedRow();
+        String MaAuido = tblAudioQL.getValueAt(index, 0).toString();
+        if (index < 0) {
+            DialogHelper.alert(this, "Chưa chọn Audio cần xóa!");
+        } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa Audio này?")) {
+            try {
+
+                daoAudio.delete(MaAuido);
+                this.fillTableAudio(tblAudioQL);
+            } catch (Exception e) {
+            }
+        }
     }//GEN-LAST:event_btnXoaAudioActionPerformed
+
+    private void btnCapNhatSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatSachActionPerformed
+
+        if (index != -1) {
+            String maSach = (String) tblSach.getValueAt(index, 0);
+            Sach sach = DAOS.findById(maSach);
+            new BooksDiaLog(this, congTac, sach).setVisible(true);
+            fillTableSach();
+        } else {
+            DialogHelper.alert(this, "Hãy Chọn Sách");
+        }
+
+    }//GEN-LAST:event_btnCapNhatSachActionPerformed
+
+    private void myButton78ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton78ActionPerformed
+        SortAudio();
+        
+
+    }//GEN-LAST:event_myButton78ActionPerformed
+
+    private void myButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton18ActionPerformed
+        SortSach();
+    }//GEN-LAST:event_myButton18ActionPerformed
 
     /**
      * @param args the command line arguments
