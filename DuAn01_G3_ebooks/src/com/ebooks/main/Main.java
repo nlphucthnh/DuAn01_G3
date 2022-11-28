@@ -21,6 +21,7 @@ import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TaiKhoanDAO;
 import com.ebooks.dao.TheLoaiDAO;
 import com.ebooks.dao.ThucUongDAO;
+import com.ebooks.helper.DateHelper;
 import com.ebooks.helper.DialogHelper;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.helper.UtilityHelper;
@@ -45,6 +46,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -58,7 +65,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class Main extends javax.swing.JFrame {
-    
+
     static String MaND;
     static String TenDangNhap;
     public static DefaultTableModel tblTable;
@@ -94,11 +101,10 @@ public class Main extends javax.swing.JFrame {
     boolean repeat = false;
     // Here I am making a boolean for windowCollapsed
     boolean windowCollapsed = false;
-    
+
     public static List<NguoiDung> listND;
     public static List<TaiKhoan> listTK;
 
-    
     //model DAO
     TaiKhoanDAO DaoTK = new TaiKhoanDAO();
     NguoiDungDAO DaoND = new NguoiDungDAO();
@@ -129,7 +135,6 @@ public class Main extends javax.swing.JFrame {
         Date();
         AppStatus.mainApp = this;
         initMoving(this, pnlMainProjebt);
-        setModelAudio();
         fillTableAudio();
         fillComBoBoxTheLoai();
         fillTableSach();
@@ -150,24 +155,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     //AudioSach
-    public void setModelAudio() {
-        //Show MP3 to play music audio
-        model = new DefaultTableModel();
-        model.addColumn("Mã Audio");
-        model.addColumn("Tên Audio");
-        model.addColumn("Ngày Phát Hành");
-        model.addColumn("Người Thu");
-        // model.addColumn("Đường Dẫn");
-        tblAudio.setModel(model);
-    }
-
     public void fillTableAudio() {
         model = (DefaultTableModel) tblAudio.getModel();
         model.setRowCount(0);
         try {
             listAudio = daoAudio.selectAll();
             for (AudioSach au : listAudio) {
-                model.addRow(new Object[]{au.getMaAudio(), au.getTenAudio(), au.getNgayPhatHanh(), au.getNguoiThu()});
+                model.addRow(new Object[]{au.getMaAudio(), au.getTenAudio(), DateHelper.toString(au.getNgayPhatHanh()), au.getNguoiThu(), au.getMoTa()});
             }
         } catch (Exception e) {
 
@@ -178,6 +172,150 @@ public class Main extends javax.swing.JFrame {
     private MP3Player mp3Player() {
         MP3Player mp3Player = new MP3Player();
         return mp3Player;
+    }
+// Let's Set Volume Down Method It's not necessary to remeber this code.
+
+    private void volumeDownControl(Double valueToPlusMinus) {
+        // Get Mixer Information From AudioSystem
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        // Now use a for loop to list all mixers
+        for (Mixer.Info mixerInfo : mixers) {
+            // Get Mixer
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            // Now Get Target Line
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            // Here again use for loop to list lines
+            for (Line.Info lineInfo : lineInfos) {
+                // Make a null line
+                Line line = null;
+                // Make a boolean as opened
+                boolean opened = true;
+                // Now use try exception for opening a line
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    // Now Check If Line Is not Opened
+                    if (!opened) {
+                        // Open Line
+                        line.open();
+                    }
+                    // Make a float control
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    // Get Current Volume Now
+                    float currentVolume = volControl.getValue();
+                    // Make a temp double variable and store valuePlusMinus
+                    Double volumeToCut = valueToPlusMinus;
+                    // Make a float and calculate the addition or subtraction in volume
+                    float changedCalc = (float) ((float) currentVolume - (double) volumeToCut);
+                    // Now Set This Changed Value Into Volume Line.
+                    volControl.setValue(changedCalc);
+
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    // Close Line If it opened
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
+
+    // Let's Set Volume Up Method It's not necessary to remeber this code.
+    private void volumeUpControl(Double valueToPlusMinus) {
+        // Get Mixer Information From AudioSystem
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        // Now use a for loop to list all mixers
+        for (Mixer.Info mixerInfo : mixers) {
+            // Get Mixer
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            // Now Get Target Line
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            // Here again use for loop to list lines
+            for (Line.Info lineInfo : lineInfos) {
+                // Make a null line
+                Line line = null;
+                // Make a boolean as opened
+                boolean opened = true;
+                // Now use try exception for opening a line
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    // Now Check If Line Is not Opened
+                    if (!opened) {
+                        // Open Line
+                        line.open();
+                    }
+                    // Make a float control
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    // Get Current Volume Now
+                    float currentVolume = volControl.getValue();
+                    // Make a temp double variable and store valuePlusMinus
+                    Double volumeToCut = valueToPlusMinus;
+                    // Make a float and calculate the addition or subtraction in volume
+                    float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
+                    // Now Set This Changed Value Into Volume Line.
+                    volControl.setValue(changedCalc);
+
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    // Close Line If it opened
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
+
+    // Let's Set Volume Method It's not necessary to remeber this code.
+    private void volumeControl(Double valueToPlusMinus) {
+        // Get Mixer Information From AudioSystem
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        // Now use a for loop to list all mixers
+        for (Mixer.Info mixerInfo : mixers) {
+            // Get Mixer
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            // Now Get Target Line
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            // Here again use for loop to list lines
+            for (Line.Info lineInfo : lineInfos) {
+                // Make a null line
+                Line line = null;
+                // Make a boolean as opened
+                boolean opened = true;
+                // Now use try exception for opening a line
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    // Now Check If Line Is not Opened
+                    if (!opened) {
+                        // Open Line
+                        line.open();
+                    }
+                    // Make a float control
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    // Get Current Volume Now
+                    float currentVolume = volControl.getValue();
+                    // Make a temp double variable and store valuePlusMinus
+                    Double volumeToCut = valueToPlusMinus;
+                    // Make a float and calculate the addition or subtraction in volume
+                    float changedCalc = (float) ((double) volumeToCut);
+                    // Now Set This Changed Value Into Volume Line.
+                    volControl.setValue(changedCalc);
+
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    // Close Line If it opened
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
     }
 
     public void movedpnlMenu() {
@@ -461,6 +599,11 @@ public class Main extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         slider1 = new com.ebooks.Compoment.Slider();
         lblTenAudio = new javax.swing.JLabel();
+        lblVolumeRepeat = new javax.swing.JLabel();
+        lblVolumeDown = new javax.swing.JLabel();
+        lblVolumeUp = new javax.swing.JLabel();
+        lblVolumeFull = new javax.swing.JLabel();
+        lblVolumeMute = new javax.swing.JLabel();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
         jLabel1 = new javax.swing.JLabel();
         searchText1 = new com.ebooks.Compoment.SearchText();
@@ -1807,7 +1950,7 @@ public class Main extends javax.swing.JFrame {
 
         imageBoder5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/stock-photo-28962631.jpg"))); // NOI18N
         imageBoder5.setRadius(20);
-        pnlFrameListen.add(imageBoder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 300, 300));
+        pnlFrameListen.add(imageBoder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 300));
 
         panelRadius30.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius30.setRadius(15);
@@ -1818,11 +1961,11 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Audio", "Tên Audio", "Ngày Phát Hành", "Người Thu", "Mô Tả"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1847,14 +1990,14 @@ public class Main extends javax.swing.JFrame {
         lblTenNguoiThu.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblTenNguoiThu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenNguoiThu.setText("Steven Levy");
-        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 390, 300, -1));
+        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 300, -1));
 
         myButton7.setBackground(new java.awt.Color(254, 254, 254));
         myButton7.setBorder(null);
         myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/rewind-button.png"))); // NOI18N
         myButton7.setBoderColor(new java.awt.Color(255, 255, 255));
         myButton7.setColorClick(new java.awt.Color(255, 255, 255));
-        pnlFrameListen.add(myButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 40, 40));
+        pnlFrameListen.add(myButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 40, 40));
 
         btnPlay.setBackground(new java.awt.Color(254, 254, 254));
         btnPlay.setBorder(null);
@@ -1871,28 +2014,68 @@ public class Main extends javax.swing.JFrame {
                 btnPlayActionPerformed(evt);
             }
         });
-        pnlFrameListen.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 40, 40));
+        pnlFrameListen.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 40, 40));
 
         myButton14.setBackground(new java.awt.Color(254, 254, 254));
         myButton14.setBorder(null);
         myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/fast-forward-double-black-arrows-multimedia-symbol.png"))); // NOI18N
         myButton14.setBoderColor(new java.awt.Color(255, 255, 255));
         myButton14.setColorClick(new java.awt.Color(255, 255, 255));
-        pnlFrameListen.add(myButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 40, 40));
+        pnlFrameListen.add(myButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 40, 40));
 
         jLabel30.setText("5:00");
-        pnlFrameListen.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+        pnlFrameListen.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
 
         jLabel31.setText("00:00");
-        pnlFrameListen.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        pnlFrameListen.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
 
         slider1.setColorSlider(new java.awt.Color(87, 190, 110));
-        pnlFrameListen.add(slider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 220, -1));
+        pnlFrameListen.add(slider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 220, -1));
 
         lblTenAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         lblTenAudio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenAudio.setText("Hacker Lược Sử");
-        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 350, 300, -1));
+        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 300, -1));
+
+        lblVolumeRepeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/repeat.png"))); // NOI18N
+        lblVolumeRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVolumeRepeatMouseClicked(evt);
+            }
+        });
+        pnlFrameListen.add(lblVolumeRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
+
+        lblVolumeDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_down.png"))); // NOI18N
+        lblVolumeDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVolumeDownMouseClicked(evt);
+            }
+        });
+        pnlFrameListen.add(lblVolumeDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+
+        lblVolumeUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_up.png"))); // NOI18N
+        lblVolumeUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVolumeUpMouseClicked(evt);
+            }
+        });
+        pnlFrameListen.add(lblVolumeUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, -1, -1));
+
+        lblVolumeFull.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_full.png"))); // NOI18N
+        lblVolumeFull.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVolumeFullMouseClicked(evt);
+            }
+        });
+        pnlFrameListen.add(lblVolumeFull, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, -1, -1));
+
+        lblVolumeMute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/mute.png"))); // NOI18N
+        lblVolumeMute.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVolumeMuteMouseClicked(evt);
+            }
+        });
+        pnlFrameListen.add(lblVolumeMute, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, -1, -1));
 
         pnlBossMain.add(pnlFrameListen, "card3");
 
@@ -2147,8 +2330,8 @@ public class Main extends javax.swing.JFrame {
 
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
         int index = cboTheLoai.getSelectedIndex();
-        if(index != -1){
-           OtionTableSach(index); 
+        if (index != -1) {
+            OtionTableSach(index);
         }
     }//GEN-LAST:event_cboTheLoaiActionPerformed
 
@@ -2265,7 +2448,8 @@ public class Main extends javax.swing.JFrame {
         player.skipForward();
         btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
 
-
+        currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+        imagePath = "\\Icon";
     }//GEN-LAST:event_tblAudioMouseClicked
 
     private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
@@ -2281,7 +2465,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlayMouseClicked
 
     private void btnThemNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNguoiDungActionPerformed
-         MaND = null;
+        MaND = null;
         new PersonDiaLog(this, true).setVisible(true);
     }//GEN-LAST:event_btnThemNguoiDungActionPerformed
 
@@ -2419,7 +2603,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNguoiDungActionPerformed
 
     private void btnThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTaiKhoanActionPerformed
-         new AccountDiaLog(this, true).setVisible(true);
+        new AccountDiaLog(this, true).setVisible(true);
     }//GEN-LAST:event_btnThemTaiKhoanActionPerformed
 
     private void btnXoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTaiKhoanActionPerformed
@@ -2447,6 +2631,41 @@ public class Main extends javax.swing.JFrame {
         System.out.println(TenDangNhap);
         new PersonDiaLog(this, true).setVisible(true);
     }//GEN-LAST:event_btnSuaTaiKhoanMouseClicked
+
+    private void lblVolumeDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeDownMouseClicked
+        volumeDownControl(0.1);
+    }//GEN-LAST:event_lblVolumeDownMouseClicked
+
+    private void lblVolumeUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeUpMouseClicked
+        volumeUpControl(0.1);
+    }//GEN-LAST:event_lblVolumeUpMouseClicked
+
+    private void lblVolumeFullMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeFullMouseClicked
+        volumeControl(1.0);
+    }//GEN-LAST:event_lblVolumeFullMouseClicked
+
+    private void lblVolumeMuteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeMuteMouseClicked
+        volumeControl(0.0);
+    }//GEN-LAST:event_lblVolumeMuteMouseClicked
+
+    private void lblVolumeRepeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeRepeatMouseClicked
+        // TODO add your handling code here:
+        if (repeat == false) {
+            repeat = true;
+            player.setRepeat(repeat);
+
+            String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat_enabled.png";
+            lblVolumeRepeat.setIcon(new ImageIcon(image));
+            System.out.println(image);
+        } else if (repeat == true) {
+            repeat = false;
+            player.setRepeat(repeat);
+
+            String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat.png";
+            lblVolumeRepeat.setIcon(new ImageIcon(image));
+            System.out.println(image);
+        }
+    }//GEN-LAST:event_lblVolumeRepeatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2587,6 +2806,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenAudio;
     private javax.swing.JLabel lblTenNguoiThu;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JLabel lblVolumeDown;
+    private javax.swing.JLabel lblVolumeFull;
+    private javax.swing.JLabel lblVolumeMute;
+    private javax.swing.JLabel lblVolumeRepeat;
+    private javax.swing.JLabel lblVolumeUp;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;
@@ -2713,7 +2937,7 @@ public class Main extends javax.swing.JFrame {
     public void fillTableSach() {
         DefaultTableModel model;
         model = (DefaultTableModel) tblSach.getModel();
-        tblSach.setSelectionBackground(new Color(87,190,110));
+        tblSach.setSelectionBackground(new Color(87, 190, 110));
         model.setRowCount(0);
         try {
             listS = DAOS.selectAll();
@@ -2725,21 +2949,20 @@ public class Main extends javax.swing.JFrame {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    
-    
-    public void OtionTableSach(int index){
+
+    public void OtionTableSach(int index) {
         DefaultTableModel model;
         model = (DefaultTableModel) tblSach.getModel();
         model.setRowCount(0);
         listTL = DAOTL.selectAll();
         try {
-           listS = DAOS.selectByTheLoai(listTL.get(index).getMaTheLoai());
+            listS = DAOS.selectByTheLoai(listTL.get(index).getMaTheLoai());
             for (Sach sach : listS) {
                 Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
                 model.addRow(row);
             }
         } catch (Exception e) {
-              DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
 
@@ -2786,7 +3009,7 @@ public class Main extends javax.swing.JFrame {
             tblThucUong.setModel(model);
         }
     }
-    
+
     public void LoadNguoiDung() {
 
         listND = DaoND.selectAll();
@@ -2865,7 +3088,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }
-
 
     // HÀM DELETE TONG QUAT //
 }
