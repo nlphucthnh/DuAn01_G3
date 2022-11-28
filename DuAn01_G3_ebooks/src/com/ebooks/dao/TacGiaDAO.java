@@ -51,12 +51,6 @@ public class TacGiaDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TacGia entity) {
-        //Tại tác giả khi ínert nó không cần maTacGia nên trong câu lệnh SQL CŨNG KO CÓ
-        //LÚC TRƯỚC LỖI LÀ DO BÀ KO UPDATE BẢN MỚI VÌ TRONG BẢN MỚI TUIII ĐÃ XỬ LỸ LỖI NÀY RÙI 
-        // BÀ MUỐN TÁC GIẢ CÓ QUÊN QUÁN HAY KHỎI CHO KHỎE
-        // TẠI THẤY TRONG FORM CÓ TEXTFIELD QQUE QUÁN KÌA
-        //XÓA FLELD ĐÓ ĐI CHO KHỎE BẢN NẾU TÊN THÌ PHỈA KIÊU CẢ NHÓM LÀM LẠI DATABASE
-        // OK Z XÓA
         String sql="INSERT INTO TacGia (HoTen, GioiTinh, NgaySinh, MoTa, Hinh, MaQuanTriVien) VALUES ( ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                

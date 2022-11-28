@@ -14,7 +14,6 @@ public class TacGia {
     private String maTacGia;
     private String hoTen;
     private boolean gioiTinh;
-   
     private Date ngaySinh;
     private String moTa;
     private String hinh;
@@ -23,8 +22,7 @@ public class TacGia {
     public TacGia() {
     }
 
-    public TacGia(String maTacGia, String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
-        this.maTacGia = maTacGia;
+    public TacGia(String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -32,8 +30,11 @@ public class TacGia {
         this.hinh = hinh;
         this.maQuanTriVien = maQuanTriVien;
     }
+    
+    
 
-    public TacGia(String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
+    public TacGia(String maTacGia, String hoTen, boolean gioiTinh, Date ngaySinh, String moTa, String hinh, String maQuanTriVien) {
+        this.maTacGia = maTacGia;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -97,12 +98,5 @@ public class TacGia {
     public void setMaQuanTriVien(String maQuanTriVien) {
         this.maQuanTriVien = maQuanTriVien;
     }
-
-    
-    
-    
-
-    
-    
     
 }
