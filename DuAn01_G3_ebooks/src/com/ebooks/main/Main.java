@@ -2259,7 +2259,7 @@ public class Main extends javax.swing.JFrame {
         AudioSach au = listAudio.get(index);
         lblTenAudio.setText(au.getTenAudio());
         lblTenNguoiThu.setText(au.getNguoiThu());
-        songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\" + au.getDuongDan());
+        songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
         player = mp3Player();
         player.addToPlayList(songFile);
         player.skipForward();
