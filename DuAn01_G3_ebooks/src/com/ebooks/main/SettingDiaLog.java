@@ -23,14 +23,15 @@ import javax.swing.JPanel;
  */
 public class SettingDiaLog extends javax.swing.JDialog {
 
-    boolean DangXuat = false;
+
     TaiKhoanDAO DAOTK = new TaiKhoanDAO();
-    public  SettingDiaLog(java.awt.Frame parent, boolean modal) {
+    public SettingDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        DangXuat(parent);
+        
         setBackground(new Color(0,0,0,0));
         initMoving(this, pnlMainDialog);
+                
     }
     
     private int x;
@@ -53,11 +54,7 @@ public class SettingDiaLog extends javax.swing.JDialog {
         });
     }
     
-    public void DangXuat(Frame frame){
-        if(DangXuat){
-            frame.setVisible(false);
-        }
-    }
+   
     
     public void DoiMatKhau(){
          if (UtilityHelper.checkNullText(lblTenDangNhap,txtTenDangNhap)) {
@@ -381,7 +378,7 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLuuTaiKhoanActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        DangXuat = true;
+      
         
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
