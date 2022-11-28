@@ -453,7 +453,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         tblAudio = new com.ebooks.Compoment.Table();
         jLabel27 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
+        lblTenNguoiThu = new javax.swing.JLabel();
         myButton7 = new com.ebooks.Compoment.MyButton();
         btnPlay = new com.ebooks.Compoment.MyButton();
         myButton14 = new com.ebooks.Compoment.MyButton();
@@ -1844,10 +1844,10 @@ public class Main extends javax.swing.JFrame {
 
         pnlFrameListen.add(panelRadius30, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 700, 500));
 
-        jLabel29.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setText("Steven Levy");
-        pnlFrameListen.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 390, 300, -1));
+        lblTenNguoiThu.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTenNguoiThu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTenNguoiThu.setText("Steven Levy");
+        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 390, 300, -1));
 
         myButton7.setBackground(new java.awt.Color(254, 254, 254));
         myButton7.setBorder(null);
@@ -2258,6 +2258,7 @@ public class Main extends javax.swing.JFrame {
 
         AudioSach au = listAudio.get(index);
         lblTenAudio.setText(au.getTenAudio());
+        lblTenNguoiThu.setText(au.getNguoiThu());
         songFile = new File("E:\\UDPM_DuAn1\\Github\\DuAn01_G3\\DuAn01_G3_ebooks" + au.getDuongDan());
         player = mp3Player();
         player.addToPlayList(songFile);
@@ -2553,7 +2554,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -2585,6 +2585,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
     private javax.swing.JLabel lblTenAudio;
+    private javax.swing.JLabel lblTenNguoiThu;
     private javax.swing.JLabel lblTime;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
