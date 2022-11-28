@@ -4,7 +4,13 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.TaiKhoanDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.ShareHelper;
+import com.ebooks.helper.UtilityHelper;
+import com.ebooks.model.TaiKhoan;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -17,17 +23,17 @@ import javax.swing.JPanel;
  */
 public class SettingDiaLog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form SettingDiaLog
-     */
-    public SettingDiaLog(java.awt.Frame parent, boolean modal) {
+    boolean DangXuat = false;
+    TaiKhoanDAO DAOTK = new TaiKhoanDAO();
+    public  SettingDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DangXuat(parent);
         setBackground(new Color(0,0,0,0));
         initMoving(this, pnlMainDialog);
     }
     
-     private int x;
+    private int x;
     private int y;
 
     public void initMoving(JDialog DiaLog, JPanel panel) {
@@ -46,6 +52,53 @@ public class SettingDiaLog extends javax.swing.JDialog {
             }
         });
     }
+    
+    public void DangXuat(Frame frame){
+        if(DangXuat){
+            frame.setVisible(false);
+        }
+    }
+    
+    public void DoiMatKhau(){
+         if (UtilityHelper.checkNullText(lblTenDangNhap,txtTenDangNhap)) {
+            String TenDangNhap = txtTenDangNhap.getText();
+            if (UtilityHelper.checkPass(lblMatKhau,txtPass)) {
+                String matKhau = new String(txtPass.getPassword());
+                if (UtilityHelper.checkPass(lblMatKhauMoi,txtNewPass)) {
+                    String matKhauMoi = new String(txtNewPass.getPassword());
+                    if (UtilityHelper.checkPass(lblXacNhan,txtConfirm)) {
+                        String XacNhanMK = new String(txtConfirm.getPassword());
+                        if (!TenDangNhap.equalsIgnoreCase(ShareHelper.USER.getTenDangNhap())) {
+                            DialogHelper.alert(this, "Sai Tên Đăng Nhập");
+                            txtTenDangNhap.setText("");
+                            txtTenDangNhap.requestFocus();
+                            return;
+                        } else if (!matKhau.equals(ShareHelper.USER.getMatKhau())) {
+                            DialogHelper.alert(this, "Sai Mật Khẩu");
+                            txtPass.setText("");
+                            txtPass.requestFocus();
+                            return;
+                        } else if (!matKhauMoi.equals(XacNhanMK)) {
+                            DialogHelper.alert(this, "Xác Nhận Không Đúng");
+                            txtNewPass.setText("");
+                            txtConfirm.setText("");
+                            txtNewPass.requestFocus();
+                            return;
+                        } else {
+                            ShareHelper.USER.setMatKhau(matKhauMoi);
+                            DAOTK.update(ShareHelper.USER);
+                            DialogHelper.alert(this, "Đổi Mật Khẩu Thành Công");
+                            this.dispose();
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,29 +118,29 @@ public class SettingDiaLog extends javax.swing.JDialog {
         panelRadius4 = new com.ebooks.Compoment.PanelRadius();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        myButton8 = new com.ebooks.Compoment.MyButton();
+        lblTenDangNhap = new javax.swing.JLabel();
+        txtTenDangNhap = new javax.swing.JTextField();
+        lblMatKhau = new javax.swing.JLabel();
+        lblMatKhauMoi = new javax.swing.JLabel();
+        lblXacNhan = new javax.swing.JLabel();
+        txtConfirm = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JPasswordField();
+        txtNewPass = new javax.swing.JPasswordField();
+        btnLuuTaiKhoan = new com.ebooks.Compoment.MyButton();
         panelRadius5 = new com.ebooks.Compoment.PanelRadius();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        myButton9 = new com.ebooks.Compoment.MyButton();
+        btnDangXuat = new com.ebooks.Compoment.MyButton();
         panelRadius3 = new com.ebooks.Compoment.PanelRadius();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        myButton10 = new com.ebooks.Compoment.MyButton();
+        btnXoaTaiKhoan = new com.ebooks.Compoment.MyButton();
         jLabel16 = new javax.swing.JLabel();
         pnlExit = new com.ebooks.Compoment.PanelRound();
         lblExit = new javax.swing.JLabel();
@@ -127,54 +180,55 @@ public class SettingDiaLog extends javax.swing.JDialog {
         jLabel3.setText("Đổi Mật Khẩu Tài Khoản");
         panelRadius4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel6.setText("Tên Đăng Nhập");
-        panelRadius4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        lblTenDangNhap.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblTenDangNhap.setText("Tên Đăng Nhập");
+        panelRadius4.add(lblTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jTextField1.setText("jTextField1");
-        panelRadius4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 40));
+        txtTenDangNhap.setBackground(new java.awt.Color(222, 247, 227));
+        txtTenDangNhap.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius4.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 40));
 
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mật Khẩu");
-        panelRadius4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+        lblMatKhau.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblMatKhau.setText("Mật Khẩu");
+        panelRadius4.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel8.setText("Mật Khẩu Mới ");
-        panelRadius4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        lblMatKhauMoi.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblMatKhauMoi.setText("Mật Khẩu Mới ");
+        panelRadius4.add(lblMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Xác Nhận");
-        panelRadius4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        lblXacNhan.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblXacNhan.setText("Xác Nhận");
+        panelRadius4.add(lblXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
-        panelRadius4.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 260, 40));
+        txtConfirm.setBackground(new java.awt.Color(222, 247, 227));
+        txtConfirm.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius4.add(txtConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 260, 40));
 
-        jPasswordField2.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField2.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField2.setText("jPasswordField1");
-        panelRadius4.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 260, 40));
+        txtPass.setBackground(new java.awt.Color(222, 247, 227));
+        txtPass.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius4.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 260, 40));
 
-        jPasswordField3.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField3.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField3.setText("jPasswordField1");
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
+        txtNewPass.setBackground(new java.awt.Color(222, 247, 227));
+        txtNewPass.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txtNewPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
+                txtNewPassActionPerformed(evt);
             }
         });
-        panelRadius4.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, 40));
+        panelRadius4.add(txtNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, 40));
 
-        myButton8.setBackground(new java.awt.Color(87, 190, 110));
-        myButton8.setForeground(new java.awt.Color(255, 255, 255));
-        myButton8.setText("Lưu Tài Khoản");
-        myButton8.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton8.setRadius(10);
-        panelRadius4.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 220, 40));
+        btnLuuTaiKhoan.setBackground(new java.awt.Color(87, 190, 110));
+        btnLuuTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        btnLuuTaiKhoan.setText("Lưu Tài Khoản");
+        btnLuuTaiKhoan.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnLuuTaiKhoan.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnLuuTaiKhoan.setRadius(10);
+        btnLuuTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuTaiKhoanActionPerformed(evt);
+            }
+        });
+        panelRadius4.add(btnLuuTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 220, 40));
 
         tbdSetting.addTab("Đổi Mật Khẩu", panelRadius4);
 
@@ -201,13 +255,18 @@ public class SettingDiaLog extends javax.swing.JDialog {
         jLabel12.setText("khác để tiếp tục sữ dụng phần mềm của chúng tôi.");
         panelRadius5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        myButton9.setBackground(new java.awt.Color(87, 190, 110));
-        myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("Đăng Xuất Tài Khoản");
-        myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton9.setRadius(10);
-        panelRadius5.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 40));
+        btnDangXuat.setBackground(new java.awt.Color(87, 190, 110));
+        btnDangXuat.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangXuat.setText("Đăng Xuất Tài Khoản");
+        btnDangXuat.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnDangXuat.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnDangXuat.setRadius(10);
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+        panelRadius5.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 40));
 
         tbdSetting.addTab("Đăng Xuất", panelRadius5);
 
@@ -234,18 +293,18 @@ public class SettingDiaLog extends javax.swing.JDialog {
         jLabel15.setText("dụng này.");
         panelRadius3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        myButton10.setBackground(new java.awt.Color(253, 127, 127));
-        myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Xóa Tài Khoản");
-        myButton10.setBoderColor(new java.awt.Color(253, 127, 127));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton10.setRadius(10);
-        myButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaTaiKhoan.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaTaiKhoan.setText("Xóa Tài Khoản");
+        btnXoaTaiKhoan.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaTaiKhoan.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnXoaTaiKhoan.setRadius(10);
+        btnXoaTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton10ActionPerformed(evt);
+                btnXoaTaiKhoanActionPerformed(evt);
             }
         });
-        panelRadius3.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 40));
+        panelRadius3.add(btnXoaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 40));
 
         jLabel16.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
@@ -293,13 +352,13 @@ public class SettingDiaLog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
+    private void txtNewPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
+    }//GEN-LAST:event_txtNewPassActionPerformed
 
-    private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
+    private void btnXoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTaiKhoanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myButton10ActionPerformed
+    }//GEN-LAST:event_btnXoaTaiKhoanActionPerformed
 
     private void pnlExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExitMouseClicked
         this.dispose();
@@ -314,8 +373,17 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_pnlExitMouseEntered
 
     private void pnlExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExitMouseExited
-         pnlExit.setBackground(new Color(253,127,127));
+        pnlExit.setBackground(new Color(253,127,127));
     }//GEN-LAST:event_pnlExitMouseExited
+
+    private void btnLuuTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTaiKhoanActionPerformed
+       DoiMatKhau();
+    }//GEN-LAST:event_btnLuuTaiKhoanActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        DangXuat = true;
+        
+    }//GEN-LAST:event_btnDangXuatActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -359,6 +427,9 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnDangXuat;
+    private com.ebooks.Compoment.MyButton btnLuuTaiKhoan;
+    private com.ebooks.Compoment.MyButton btnXoaTaiKhoan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -372,22 +443,15 @@ public class SettingDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblExit;
-    private com.ebooks.Compoment.MyButton myButton10;
-    private com.ebooks.Compoment.MyButton myButton8;
-    private com.ebooks.Compoment.MyButton myButton9;
+    private javax.swing.JLabel lblMatKhau;
+    private javax.swing.JLabel lblMatKhauMoi;
+    private javax.swing.JLabel lblTenDangNhap;
+    private javax.swing.JLabel lblXacNhan;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius4;
@@ -395,5 +459,9 @@ public class SettingDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.PanelRound pnlExit;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private com.ebooks.Compoment.MaterialTabbed tbdSetting;
+    private javax.swing.JPasswordField txtConfirm;
+    private javax.swing.JPasswordField txtNewPass;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

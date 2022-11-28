@@ -32,6 +32,13 @@ public class LogInDiaLog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
     }
+    
+    
+    public LogInDiaLog(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setBackground(new Color(0, 0, 0, 0));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
