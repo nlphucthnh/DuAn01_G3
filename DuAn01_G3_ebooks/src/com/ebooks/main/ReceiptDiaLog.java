@@ -65,6 +65,23 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         lblExit1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius5 = new com.ebooks.Compoment.PanelRadius();
+        jSeparator5 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        table3 = new com.ebooks.Compoment.Table();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        myButton15 = new com.ebooks.Compoment.MyButton();
+        jLabel19 = new javax.swing.JLabel();
         panelRadius1 = new com.ebooks.Compoment.PanelRadius();
         jLabel10 = new javax.swing.JLabel();
         txtMaNguoiDung = new javax.swing.JTextField();
@@ -125,7 +142,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         myButton12 = new com.ebooks.Compoment.MyButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel31 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -161,10 +178,110 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         });
         pnlExit1.add(lblExit1, new java.awt.GridBagConstraints());
 
-        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 50, 50));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        panelRadius5.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        panelRadius5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 10, 400));
+
+        table3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(table3);
+
+        panelRadius5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 450, 340));
+
+        jLabel32.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel32.setText("Mã Người Dùng");
+        panelRadius5.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+
+        jLabel33.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel33.setText("ND001");
+        jLabel33.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel33.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius5.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 130, -1));
+
+        jLabel34.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel34.setText("Tên Người Dùng :");
+        panelRadius5.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel35.setText("Nguyễn Văn A");
+        jLabel35.setFocusable(false);
+        jLabel35.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel35.setInheritsPopupMenu(false);
+        panelRadius5.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 160, 30));
+
+        jLabel36.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel36.setText("Tổng Tiền Thuê Sách");
+        panelRadius5.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel37.setText("100.000 đ");
+        jLabel37.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel37.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelRadius5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 130, 30));
+
+        jLabel38.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        jLabel38.setText("Tổng Thu");
+        panelRadius5.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, -1, -1));
+
+        jLabel39.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel39.setText("120.000 đ");
+        jLabel39.setFocusable(false);
+        jLabel39.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel39.setInheritsPopupMenu(false);
+        panelRadius5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 220, 110, 30));
+        panelRadius5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 330, 10));
+
+        jLabel40.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel40.setText("Tổng Tiền Thức Uống");
+        panelRadius5.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, -1, -1));
+
+        jLabel41.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel41.setText("20.000 đ");
+        jLabel41.setFocusable(false);
+        jLabel41.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel41.setInheritsPopupMenu(false);
+        panelRadius5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 80, 30));
+
+        myButton15.setBackground(new java.awt.Color(87, 190, 110));
+        myButton15.setForeground(new java.awt.Color(255, 255, 255));
+        myButton15.setText("Thanh Toán");
+        myButton15.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton15.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        myButton15.setRadius(10);
+        myButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton15ActionPerformed(evt);
+            }
+        });
+        panelRadius5.add(myButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 330, 60));
+
+        jLabel19.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(55, 149, 76));
+        jLabel19.setText("Hóa Đơn Tổng Hợp");
+        panelRadius5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, -1));
+
+        materialTabbed1.addTab("Hóa Đơn Tổng Hợp", panelRadius5);
 
         panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -340,7 +457,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         panelRadius1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, 280, 10));
 
         jLabel1.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
-        jLabel1.setText("Mã Người Dùng :");
+        jLabel1.setText("Tên Người Dùng :");
         panelRadius1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
@@ -558,12 +675,12 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
 
         pnlMainDialog.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 840, 460));
 
-        jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel19.setText("Thông Tin Hóa Đơn");
-        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 250, -1));
+        jLabel42.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(55, 149, 76));
+        jLabel42.setText("Thông Tin Hóa Đơn");
+        pnlMainDialog.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 250, -1));
 
-        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 570));
+        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 570));
 
         pack();
         setLocationRelativeTo(null);
@@ -667,6 +784,10 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
        Calendar1.setVisible(congTac1);
        congTac1 = !congTac1;
     }//GEN-LAST:event_btnIconCld1ActionPerformed
+
+    private void myButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton15ActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -869,7 +990,18 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -877,10 +1009,13 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lblExit1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed2;
@@ -889,14 +1024,17 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     private com.ebooks.Compoment.MyButton myButton12;
     private com.ebooks.Compoment.MyButton myButton13;
     private com.ebooks.Compoment.MyButton myButton14;
+    private com.ebooks.Compoment.MyButton myButton15;
     private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius4;
+    private com.ebooks.Compoment.PanelRadius panelRadius5;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private com.ebooks.Compoment.Table table1;
     private com.ebooks.Compoment.Table table2;
+    private com.ebooks.Compoment.Table table3;
     private javax.swing.JTextField txtMaHoaDon;
     private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JTextField txtMaNguoiDung1;
