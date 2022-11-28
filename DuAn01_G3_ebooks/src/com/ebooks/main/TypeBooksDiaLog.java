@@ -133,8 +133,8 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(55, 149, 76));
-        jLabel19.setText("Hãy điền các thông tin của bạn");
-        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 360, -1));
+        jLabel19.setText("Thông Tin Loại Sách");
+        pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 280, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
