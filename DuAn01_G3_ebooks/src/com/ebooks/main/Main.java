@@ -408,24 +408,23 @@ public class Main extends javax.swing.JFrame {
         panelRadius13 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblTaiKhoan = new com.ebooks.Compoment.Table();
+        btnSuaTaiKhoan = new com.ebooks.Compoment.MyButton();
+        btnXoaTaiKhoan = new com.ebooks.Compoment.MyButton();
+        btnThemTaiKhoan = new com.ebooks.Compoment.MyButton();
         myButton93 = new com.ebooks.Compoment.MyButton();
         myButton94 = new com.ebooks.Compoment.MyButton();
         myButton95 = new com.ebooks.Compoment.MyButton();
         myButton96 = new com.ebooks.Compoment.MyButton();
-        myButton97 = new com.ebooks.Compoment.MyButton();
-        btnSuaTaiKhoan = new com.ebooks.Compoment.MyButton();
-        btnXoaTaiKhoan = new com.ebooks.Compoment.MyButton();
-        btnThemTaiKhoan = new com.ebooks.Compoment.MyButton();
         panelRadius14 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblNguoiDung = new com.ebooks.Compoment.Table();
-        myButton101 = new com.ebooks.Compoment.MyButton();
-        myButton102 = new com.ebooks.Compoment.MyButton();
-        myButton103 = new com.ebooks.Compoment.MyButton();
-        myButton104 = new com.ebooks.Compoment.MyButton();
         btnXoaNguoiDung = new com.ebooks.Compoment.MyButton();
         btnSuaNguoiDung = new com.ebooks.Compoment.MyButton();
         btnThemNguoiDung = new com.ebooks.Compoment.MyButton();
+        myButton104 = new com.ebooks.Compoment.MyButton();
+        myButton103 = new com.ebooks.Compoment.MyButton();
+        myButton102 = new com.ebooks.Compoment.MyButton();
+        myButton101 = new com.ebooks.Compoment.MyButton();
         pnlThucUong = new com.ebooks.Compoment.PanelRadius();
         jScrollPane9 = new javax.swing.JScrollPane();
         tblThucUong = new com.ebooks.Compoment.Table();
@@ -1227,15 +1226,20 @@ public class Main extends javax.swing.JFrame {
 
         tblTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tên đăng nhập", "Mật khẩu", "Mã người dùng", "Chức vụ", "Thời lượng đọc sách"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTaiKhoanMouseClicked(evt);
@@ -1244,39 +1248,6 @@ public class Main extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tblTaiKhoan);
 
         panelRadius13.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
-
-        myButton93.setBackground(new java.awt.Color(145, 227, 168));
-        myButton93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
-        myButton93.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton93.setRadius(10);
-        panelRadius13.add(myButton93, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
-
-        myButton94.setBackground(new java.awt.Color(145, 227, 168));
-        myButton94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
-        myButton94.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton94.setRadius(10);
-        panelRadius13.add(myButton94, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
-
-        myButton95.setBackground(new java.awt.Color(145, 227, 168));
-        myButton95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
-        myButton95.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton95.setRadius(10);
-        panelRadius13.add(myButton95, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
-
-        myButton96.setBackground(new java.awt.Color(145, 227, 168));
-        myButton96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
-        myButton96.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton96.setRadius(10);
-        panelRadius13.add(myButton96, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
-
-        myButton97.setBackground(new java.awt.Color(87, 190, 110));
-        myButton97.setForeground(new java.awt.Color(255, 255, 255));
-        myButton97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/user-add (1).png"))); // NOI18N
-        myButton97.setText("Thêm Quản Trị");
-        myButton97.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton97.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        myButton97.setRadius(10);
-        panelRadius13.add(myButton97, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
         btnSuaTaiKhoan.setBackground(new java.awt.Color(87, 190, 110));
         btnSuaTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
@@ -1290,7 +1261,7 @@ public class Main extends javax.swing.JFrame {
                 btnSuaTaiKhoanMouseClicked(evt);
             }
         });
-        panelRadius13.add(btnSuaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
+        panelRadius13.add(btnSuaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
 
         btnXoaTaiKhoan.setBackground(new java.awt.Color(253, 127, 127));
         btnXoaTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
@@ -1304,7 +1275,7 @@ public class Main extends javax.swing.JFrame {
                 btnXoaTaiKhoanActionPerformed(evt);
             }
         });
-        panelRadius13.add(btnXoaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, 150, 40));
+        panelRadius13.add(btnXoaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
         btnThemTaiKhoan.setBackground(new java.awt.Color(87, 190, 110));
         btnThemTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
@@ -1318,7 +1289,51 @@ public class Main extends javax.swing.JFrame {
                 btnThemTaiKhoanActionPerformed(evt);
             }
         });
-        panelRadius13.add(btnThemTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
+        panelRadius13.add(btnThemTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+
+        myButton93.setBackground(new java.awt.Color(145, 227, 168));
+        myButton93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
+        myButton93.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton93.setRadius(10);
+        myButton93.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton93ActionPerformed(evt);
+            }
+        });
+        panelRadius13.add(myButton93, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
+
+        myButton94.setBackground(new java.awt.Color(145, 227, 168));
+        myButton94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
+        myButton94.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton94.setRadius(10);
+        myButton94.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton94ActionPerformed(evt);
+            }
+        });
+        panelRadius13.add(myButton94, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
+
+        myButton95.setBackground(new java.awt.Color(145, 227, 168));
+        myButton95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
+        myButton95.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton95.setRadius(10);
+        myButton95.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton95ActionPerformed(evt);
+            }
+        });
+        panelRadius13.add(myButton95, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
+
+        myButton96.setBackground(new java.awt.Color(145, 227, 168));
+        myButton96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
+        myButton96.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton96.setRadius(10);
+        myButton96.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton96ActionPerformed(evt);
+            }
+        });
+        panelRadius13.add(myButton96, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
 
         materialTabbed1.addTab("Tài Khoản", panelRadius13);
 
@@ -1327,15 +1342,20 @@ public class Main extends javax.swing.JFrame {
 
         tblNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã người dùng", "Họ tên", "Số điện thoại", "Giới tính", "Email", "Hình"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblNguoiDungMousePressed(evt);
@@ -1344,30 +1364,6 @@ public class Main extends javax.swing.JFrame {
         jScrollPane8.setViewportView(tblNguoiDung);
 
         panelRadius14.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
-
-        myButton101.setBackground(new java.awt.Color(145, 227, 168));
-        myButton101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
-        myButton101.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton101.setRadius(10);
-        panelRadius14.add(myButton101, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
-
-        myButton102.setBackground(new java.awt.Color(145, 227, 168));
-        myButton102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
-        myButton102.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton102.setRadius(10);
-        panelRadius14.add(myButton102, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
-
-        myButton103.setBackground(new java.awt.Color(145, 227, 168));
-        myButton103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
-        myButton103.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton103.setRadius(10);
-        panelRadius14.add(myButton103, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
-
-        myButton104.setBackground(new java.awt.Color(145, 227, 168));
-        myButton104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
-        myButton104.setBoderColor(new java.awt.Color(145, 227, 168));
-        myButton104.setRadius(10);
-        panelRadius14.add(myButton104, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
 
         btnXoaNguoiDung.setBackground(new java.awt.Color(253, 127, 127));
         btnXoaNguoiDung.setForeground(new java.awt.Color(255, 255, 255));
@@ -1410,6 +1406,50 @@ public class Main extends javax.swing.JFrame {
             }
         });
         panelRadius14.add(btnThemNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+
+        myButton104.setBackground(new java.awt.Color(145, 227, 168));
+        myButton104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
+        myButton104.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton104.setRadius(10);
+        myButton104.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton104ActionPerformed(evt);
+            }
+        });
+        panelRadius14.add(myButton104, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
+
+        myButton103.setBackground(new java.awt.Color(145, 227, 168));
+        myButton103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
+        myButton103.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton103.setRadius(10);
+        myButton103.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton103ActionPerformed(evt);
+            }
+        });
+        panelRadius14.add(myButton103, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
+
+        myButton102.setBackground(new java.awt.Color(145, 227, 168));
+        myButton102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
+        myButton102.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton102.setRadius(10);
+        myButton102.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton102ActionPerformed(evt);
+            }
+        });
+        panelRadius14.add(myButton102, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
+
+        myButton101.setBackground(new java.awt.Color(145, 227, 168));
+        myButton101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
+        myButton101.setBoderColor(new java.awt.Color(145, 227, 168));
+        myButton101.setRadius(10);
+        myButton101.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton101ActionPerformed(evt);
+            }
+        });
+        panelRadius14.add(myButton101, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
         materialTabbed1.addTab("Người Dùng", panelRadius14);
 
@@ -2383,6 +2423,8 @@ public class Main extends javax.swing.JFrame {
             nguoiDung = DaoND.findById(MaNguoiDung);
             new PersonDiaLog(this, congTac, nguoiDung).setVisible(true);
         }
+
+
     }//GEN-LAST:event_tblNguoiDungMousePressed
 
     private void tblThucUongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThucUongMousePressed
@@ -2505,6 +2547,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaNguoiDungActionPerformed
 
     private void btnThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTaiKhoanActionPerformed
+        TenDangNhap = null;
         new AccountDiaLog(this, true).setVisible(true);
     }//GEN-LAST:event_btnThemTaiKhoanActionPerformed
 
@@ -2513,9 +2556,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaTaiKhoanActionPerformed
 
     private void btnSuaNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNguoiDungActionPerformed
-        int index = tblNguoiDung.getSelectedRow();
-        MaND = tblNguoiDung.getValueAt(index, 0).toString();
-        new PersonDiaLog(this, true).setVisible(true);
+        int indexRow = tblNguoiDung.getSelectedRow();
+        if (indexRow == -1) {
+            DialogHelper.alert(this, "Chưa chọn người dùng");
+            return;
+        }
+        String MaNguoiDung = (String) tblNguoiDung.getValueAt(indexRow, 0);
+        nguoiDung = DaoND.findById(MaNguoiDung);
+        new PersonDiaLog(this, congTac, nguoiDung).setVisible(true);
     }//GEN-LAST:event_btnSuaNguoiDungActionPerformed
 
     private void tblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMouseClicked
@@ -2529,9 +2577,14 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSuaTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaTaiKhoanMouseClicked
         int index = tblTaiKhoan.getSelectedRow();
+
+        if (index == -1) {
+            DialogHelper.alert(this, "Chưa chọn tài khoản");
+            return;
+        }
+
         TenDangNhap = tblTaiKhoan.getValueAt(index, 0).toString();
-        System.out.println(TenDangNhap);
-        new PersonDiaLog(this, true).setVisible(true);
+        new AccountDiaLog(this, true).setVisible(true);
     }//GEN-LAST:event_btnSuaTaiKhoanMouseClicked
 
     private void btnFirstAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstAudioActionPerformed
@@ -2623,6 +2676,52 @@ public class Main extends javax.swing.JFrame {
     private void myButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton18ActionPerformed
         SortSach();
     }//GEN-LAST:event_myButton18ActionPerformed
+
+    private void myButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton104ActionPerformed
+        index = tblNguoiDung.getSelectedRow();
+        UtilityHelper.first(index, tblNguoiDung);
+    }//GEN-LAST:event_myButton104ActionPerformed
+
+    private void myButton103ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton103ActionPerformed
+        // TODO add your handling code here:
+        index = tblNguoiDung.getSelectedRow();
+        UtilityHelper.previous(index, tblNguoiDung, listND);
+    }//GEN-LAST:event_myButton103ActionPerformed
+
+    private void myButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton102ActionPerformed
+        // TODO add your handling code here:
+        index = tblNguoiDung.getSelectedRow();
+        UtilityHelper.next(index, tblNguoiDung, listND);
+    }//GEN-LAST:event_myButton102ActionPerformed
+
+    private void myButton101ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton101ActionPerformed
+        // TODO add your handling code here:
+        index = tblNguoiDung.getSelectedRow();
+        UtilityHelper.last(index, tblNguoiDung, listND);
+    }//GEN-LAST:event_myButton101ActionPerformed
+
+    private void myButton93ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton93ActionPerformed
+        index = tblTaiKhoan.getSelectedRow();
+        UtilityHelper.last(index, tblTaiKhoan, listTK);
+    }//GEN-LAST:event_myButton93ActionPerformed
+
+    private void myButton94ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton94ActionPerformed
+        // TODO add your handling code here:
+        index = tblTaiKhoan.getSelectedRow();
+        UtilityHelper.next(index, tblTaiKhoan, listTK);
+    }//GEN-LAST:event_myButton94ActionPerformed
+
+    private void myButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton95ActionPerformed
+        // TODO add your handling code here:
+        index = tblTaiKhoan.getSelectedRow();
+        UtilityHelper.previous(index, tblTaiKhoan, listTK);
+    }//GEN-LAST:event_myButton95ActionPerformed
+
+    private void myButton96ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton96ActionPerformed
+        // TODO add your handling code here:
+        index = tblTaiKhoan.getSelectedRow();
+        UtilityHelper.first(index, tblTaiKhoan);
+    }//GEN-LAST:event_myButton96ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2809,7 +2908,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton myButton94;
     private com.ebooks.Compoment.MyButton myButton95;
     private com.ebooks.Compoment.MyButton myButton96;
-    private com.ebooks.Compoment.MyButton myButton97;
     private com.ebooks.Compoment.PanelRadius panelRadius10;
     private com.ebooks.Compoment.PanelRadius panelRadius11;
     private com.ebooks.Compoment.PanelRadius panelRadius12;
@@ -2933,7 +3031,7 @@ public class Main extends javax.swing.JFrame {
         try {
             listND = DaoND.selectAll();
             for (NguoiDung nd : listND) {
-                Object[] row = {nd.getMaNguoiDung(), nd.getHoTen(), nd.getSoDienThoai(), nd.isGioiTinh() ? "Nam" : "Nữ"};
+                Object[] row = {nd.getMaNguoiDung(), nd.getHoTen(), nd.getSoDienThoai(), nd.isGioiTinh() ? "Nam" : "Nữ", nd.getEmail(), nd.getHinh()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -3000,7 +3098,8 @@ public class Main extends javax.swing.JFrame {
                     tk.getTenDangNhap(),
                     tk.getMatKhau(),
                     tk.getMaNguoiDung(),
-                    tk.isTrangThai() == true ? "Quản trị viên" : "Người dùng"};
+                    tk.isTrangThai() == true ? "Quản trị viên" : "Người dùng",
+                    tk.getThoiLuong()};
                 tblTable.addRow(row);
             }
         } catch (Exception e) {
@@ -3011,6 +3110,10 @@ public class Main extends javax.swing.JFrame {
 
     void deleteNguoiDung() {
         int index = tblNguoiDung.getSelectedRow();
+        if (index == -1) {
+            DialogHelper.alert(this, "Chưa chọn người dùng");
+            return;
+        }
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
             String MaND = tblNguoiDung.getValueAt(index, 0).toString();
             try {
@@ -3019,13 +3122,17 @@ public class Main extends javax.swing.JFrame {
                 this.fillTableNguoiDung(listND);
                 DialogHelper.alert(this, "Xóa thành công!");
             } catch (Exception e) {
-                DialogHelper.alert(this, "Xóa thất bại!");
+                DialogHelper.alert(this, "Người dùng này đã có tài khoản. Xóa thất bại!");
             }
         }
     }
 
     void deleteTaiKhoan() {
         int index = tblTaiKhoan.getSelectedRow();
+        if (index == -1) {
+            DialogHelper.alert(this, "Chưa chọn tài khoản");
+            return;
+        }
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
             String TenDangNhap = tblTaiKhoan.getValueAt(index, 0).toString();
             try {

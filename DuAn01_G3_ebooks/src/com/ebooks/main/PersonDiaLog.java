@@ -4,13 +4,22 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.NguoiDungDAO;
+import com.ebooks.dao.TaiKhoanDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.NguoiDung;
 import com.sun.security.auth.NTSid;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 /**
@@ -18,23 +27,31 @@ import javax.swing.JPanel;
  * @author Thinh
  */
 public class PersonDiaLog extends javax.swing.JDialog {
-    
+
+    TaiKhoanDAO daoTK = new TaiKhoanDAO();
+    NguoiDungDAO daoND = new NguoiDungDAO();
+    private String UrlImg = "..\\DuAn01_G3_ebooks\\logos\\";
+    private JFileChooser fileChooser = new JFileChooser();
+    private String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+    File file;
+
     public PersonDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
+
     }
-    
+
     public PersonDiaLog(java.awt.Frame parent, boolean modal, NguoiDung nd) {
         super(parent, modal);
         initComponents();
         setForm(nd);
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
     }
-    
-     private int x;
+
+    private int x;
     private int y;
 
     public void initMoving(JDialog DiaLog, JPanel panel) {
@@ -52,6 +69,159 @@ public class PersonDiaLog extends javax.swing.JDialog {
                 DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
             }
         });
+    }
+
+    public ImageIcon ShowImg(String nameImg) {
+        ImageIcon imgIcon = new ImageIcon(UrlImg + nameImg);
+        Image image = imgIcon.getImage();
+        Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+        imgIcon = new ImageIcon(newimg);
+        return imgIcon;
+    }
+
+    void selectImage() {
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+
+            file = fileChooser.getSelectedFile();
+
+            if (ShareHelper.saveLogo(file)) {
+                // Hiển thị hình lên form
+                lblHinh.setIcon(ShareHelper.readLogo(file.getName()));
+                lblHinh.setToolTipText(file.getName());
+                repaint();
+            } else {
+                DialogHelper.alert(this, "Vui lòng chọn file hình ảnh");
+            }
+        }
+    }
+
+    public void setForm(NguoiDung nd) {
+
+        txtMaNguoiDung.setEditable(false);
+        txtMaNguoiDung.setText(nd.getMaNguoiDung());
+        txtHoTen.setText(nd.getHoTen());
+        txtEmail.setText(nd.getEmail());
+        txtSoDienThoai.setText(nd.getSoDienThoai());
+        if (nd.isGioiTinh()) {
+            rdoNam.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
+        }
+        lblHinh.setIcon(ShowImg(nd.getHinh()));
+    }
+
+    void insert() {
+        if (checkBugs()) {
+            NguoiDung model = getModel();
+            if (model == null) {
+                return;
+            }
+            try {
+                daoND.insert(model);
+                AppStatus.mainApp.LoadNguoiDung();
+                AppStatus.mainApp.fillTableNguoiDung();
+                DialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Mã người dùng đã tồn tại!");
+            }
+        }
+    }
+
+    void update() {
+        if (checkBugs()) {
+            NguoiDung model = getModel();
+            if (model == null) {
+                return;
+            }
+            try {
+                daoND.update(model);
+                AppStatus.mainApp.LoadNguoiDung();
+                AppStatus.mainApp.fillTableNguoiDung();
+
+                if (file == null) {
+                    return;
+                }
+
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+            }
+        }
+    }
+
+    NguoiDung getModel() {
+
+        NguoiDung model = new NguoiDung();
+        model.setMaNguoiDung(txtMaNguoiDung.getText());
+        model.setHoTen(txtHoTen.getText());
+        model.setEmail(txtEmail.getText());
+        model.setSoDienThoai(txtSoDienThoai.getText());
+        model.setGioiTinh(rdoNam.isSelected() == true ? true : false);
+
+        try {
+            model.setHinh(file.toString());
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Chưa chọn file hình ảnh");
+            return null;
+        }
+        return model;
+    }
+
+    boolean checkBugs() {
+
+        Pattern pattern;
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        String numberPhone = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        pattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+
+        if (txtMaNguoiDung.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập mã người dùng");
+            return false;
+        } else if (txtHoTen.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập họ tên");
+            return false;
+        } else if (txtEmail.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập Email");
+            return false;
+        } else if (txtSoDienThoai.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập số điện thoại");
+            return false;
+        } else if (!pattern.matcher(txtEmail.getText()).find()) {
+            DialogHelper.alert(this, "Email không đúng định dạng");
+            return false;
+        } else if (!txtSoDienThoai.getText().matches(numberPhone)) {
+            DialogHelper.alert(this, "Số điện thoại không đúng định dạng");
+            return false;
+        }
+        return true;
+    }
+
+    public String SetImg() {
+        int x = fileChooser.showDialog(this, "Chon file");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            try {
+                File afile = new File(fileChooser.getSelectedFile().getPath());
+                if (afile.renameTo(new File(UrlImg + fileChooser.getSelectedFile().getName()))) {
+                    System.out.println("File is moved successful!");
+                    ImageIcon imgIcon = new ImageIcon(UrlImg + fileChooser.getSelectedFile().getName());
+                    NameImg = fileChooser.getSelectedFile().getName();
+                    Image image = imgIcon.getImage();
+                    Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+                    imgIcon = new ImageIcon(newimg);
+                    lblHinh.setIcon(imgIcon);
+                    System.out.println(fileChooser.getSelectedFile().getName());
+                } else {
+                    System.out.println("File is failed to move!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+
+        }
+        return fileChooser.getSelectedFile().getName();
     }
 
     /**
@@ -79,11 +249,14 @@ public class PersonDiaLog extends javax.swing.JDialog {
         rdoNu = new javax.swing.JRadioButton();
         btnSave = new com.ebooks.Compoment.MyButton();
         jLabel19 = new javax.swing.JLabel();
-        imageBoder1 = new com.ebooks.Compoment.ImageBoder();
+        lblHinh = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtMaNguoiDung = new javax.swing.JTextField();
+        btnUpdate = new com.ebooks.Compoment.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -128,45 +301,45 @@ public class PersonDiaLog extends javax.swing.JDialog {
         jLabel18.setForeground(new java.awt.Color(55, 149, 76));
         jLabel18.setText("người dùng");
         pnlMainDialog.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
-        jLabel18.getAccessibleContext().setAccessibleName("Hãy điền các thông tin");
 
         txtSoDienThoai.setBackground(new java.awt.Color(222, 247, 227));
-        pnlMainDialog.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, 40));
+        pnlMainDialog.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel4.setText("Số Điện Thoại");
-        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
+        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, -1, -1));
 
         txtHoTen.setBackground(new java.awt.Color(222, 247, 227));
-        pnlMainDialog.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 210, 40));
+        pnlMainDialog.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
-        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+        pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel2.setText("Giới Tính");
-        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
+        pnlMainDialog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(222, 247, 227));
-        pnlMainDialog.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 210, 40));
+        pnlMainDialog.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel3.setText("Địa Chỉ Email");
-        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
+        pnlMainDialog.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
 
         buttonGroup1.add(rdoNam);
+        rdoNam.setSelected(true);
         rdoNam.setText("Nam");
         rdoNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoNamActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
+        pnlMainDialog.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
 
         buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
-        pnlMainDialog.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
+        pnlMainDialog.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, -1, -1));
 
         btnSave.setBackground(new java.awt.Color(87, 190, 110));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,6 +347,11 @@ public class PersonDiaLog extends javax.swing.JDialog {
         btnSave.setBoderColor(new java.awt.Color(87, 190, 110));
         btnSave.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         btnSave.setRadius(10);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         pnlMainDialog.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         jLabel19.setFont(new java.awt.Font("Inter ExtraBold", 0, 26)); // NOI18N
@@ -181,22 +359,48 @@ public class PersonDiaLog extends javax.swing.JDialog {
         jLabel19.setText("Hãy điền các thông tin");
         pnlMainDialog.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 290, -1));
 
-        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
-        imageBoder1.setRadius(20);
-        pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 160));
+        lblHinh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/41b92ec3eab97e4c24b3f6e8fe75ddec.png"))); // NOI18N
+        lblHinh.setRadius(20);
+        lblHinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHinhMouseClicked(evt);
+            }
+        });
+        pnlMainDialog.add(lblHinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 160, 160));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
-        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 670, 100));
+        pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 670, 70));
 
         jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel7.setText("Họ Tên Người Dùng");
-        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel8.setText("Mã người dùng");
+        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+
+        txtMaNguoiDung.setBackground(new java.awt.Color(222, 247, 227));
+        pnlMainDialog.add(txtMaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 210, 40));
+
+        btnUpdate.setBackground(new java.awt.Color(87, 190, 110));
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("Cập nhật thông tin");
+        btnUpdate.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnUpdate.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        btnUpdate.setRadius(10);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        pnlMainDialog.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 270, 50));
 
         getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
@@ -223,26 +427,30 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
 
     private void rdoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoNamActionPerformed
 
-    
-    public void setForm(NguoiDung nd){
-        txtHoTen.setText(nd.getHoTen());
-        txtSoDienThoai.setText(nd.getSoDienThoai());
-        if(nd.isGioiTinh()){
-            rdoNam.setEnabled(true);
-        }else {
-            rdoNam.setEnabled(false);
-        }
-    }
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        insert();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
+        // TODO add your handling code here:
+        selectImage();
+    }//GEN-LAST:event_lblHinhMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     /*tbdSetting args the command line arguments
      */
-   public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -298,8 +506,8 @@ public class PersonDiaLog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.ebooks.Compoment.MyButton btnSave;
+    private com.ebooks.Compoment.MyButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -308,14 +516,17 @@ public class PersonDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExit1;
+    private com.ebooks.Compoment.ImageBoder lblHinh;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables

@@ -4,6 +4,9 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.TaiKhoanDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.model.TaiKhoan;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,17 +20,19 @@ import javax.swing.JPanel;
  */
 public class SettingDiaLog extends javax.swing.JDialog {
 
+    TaiKhoanDAO daoTK = new TaiKhoanDAO();
+
     /**
      * Creates new form SettingDiaLog
      */
     public SettingDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0,0,0,0));
-        initMoving(this, pnlMainDialog);
+        setBackground(new Color(0, 0, 0, 0));
+        initMoving(this, pnlMainDialog1);
     }
-    
-     private int x;
+
+    private int x;
     private int y;
 
     public void initMoving(JDialog DiaLog, JPanel panel) {
@@ -47,6 +52,80 @@ public class SettingDiaLog extends javax.swing.JDialog {
         });
     }
 
+    void initFrom() {
+        TaiKhoan tk = daoTK.findById(LogInDiaLog.tendangNhapApp);
+        txtTenDangNhap.setText(tk.getTenDangNhap());
+        txtMatKhau.setText(tk.getMatKhau());
+    }
+
+    TaiKhoan getModel() {
+
+        TaiKhoan model = new TaiKhoan();
+        model.setTenDangNhap(txtTenDangNhap.getText());
+        model.setMatKhau(txtXacNhanMatKhau.getText());
+        return model;
+    }
+
+    void update() {
+        if (checkBugs()) {
+            TaiKhoan model = getModel();
+            if (model == null) {
+                return;
+            }
+            try {
+
+                daoTK.updateMatKhau(model);
+                AppStatus.mainApp.LoadTaiKhoan();
+                AppStatus.mainApp.fillTableTaiKhoan(Main.listTK);
+                DialogHelper.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+            }
+        }
+    }
+
+    boolean checkBugs() {
+
+        if (txtTenDangNhap.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập tên đăng nhập");
+            return false;
+        } else if (txtMatKhau.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập mật khẩu cũ");
+            return false;
+        } else if (txtMatKhauMoi.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập mật khẩu mới");
+            return false;
+        } else if (txtXacNhanMatKhau.getText().equals("")) {
+            DialogHelper.alert(this, "Chưa nhập xác nhận mật khẩu");
+            return false;
+        } else if (!txtMatKhauMoi.getText().equals(txtXacNhanMatKhau.getText())) {
+            DialogHelper.alert(this, "Mật khẩu mới không đúng");
+            return false;
+        }
+
+        return true;
+
+    }
+
+    void deleteTaiKhoan() {
+
+        try {
+            boolean choose = DialogHelper.confirm(this, "Bạn có chắn chắn xóa?");
+
+            if (choose) {
+                daoTK.delete(LogInDiaLog.tendangNhapApp);
+                DialogHelper.alert(this, "Xóa thành công!");
+                dispose();
+                new LogInDiaLog(null, true).setVisible(true);
+            } else {
+                return;
+            }
+
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Xóa thất bại!");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,270 +135,296 @@ public class SettingDiaLog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlMainDialog = new com.ebooks.Compoment.PanelRadius();
-        jLabel1 = new javax.swing.JLabel();
-        tbdSetting = new com.ebooks.Compoment.MaterialTabbed();
-        panelRadius2 = new com.ebooks.Compoment.PanelRadius();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        panelRadius4 = new com.ebooks.Compoment.PanelRadius();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        myButton8 = new com.ebooks.Compoment.MyButton();
-        panelRadius5 = new com.ebooks.Compoment.PanelRadius();
-        jSeparator3 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        myButton9 = new com.ebooks.Compoment.MyButton();
-        panelRadius3 = new com.ebooks.Compoment.PanelRadius();
-        jSeparator7 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        myButton10 = new com.ebooks.Compoment.MyButton();
-        jLabel16 = new javax.swing.JLabel();
+        pnlMainDialog1 = new com.ebooks.Compoment.PanelRadius();
+        jLabel18 = new javax.swing.JLabel();
+        tbdSetting1 = new com.ebooks.Compoment.MaterialTabbed();
+        panelRadius6 = new com.ebooks.Compoment.PanelRadius();
+        jLabel19 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        panelRadius7 = new com.ebooks.Compoment.PanelRadius();
+        jSeparator9 = new javax.swing.JSeparator();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        txtTenDangNhap = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        txtXacNhanMatKhau = new javax.swing.JPasswordField();
+        txtMatKhau = new javax.swing.JPasswordField();
+        txtMatKhauMoi = new javax.swing.JPasswordField();
+        myButton1 = new com.ebooks.Compoment.MyButton();
+        panelRadius8 = new com.ebooks.Compoment.PanelRadius();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        myButton12 = new com.ebooks.Compoment.MyButton();
+        panelRadius9 = new com.ebooks.Compoment.PanelRadius();
+        jSeparator10 = new javax.swing.JSeparator();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        myButton13 = new com.ebooks.Compoment.MyButton();
+        jLabel33 = new javax.swing.JLabel();
         pnlExit = new com.ebooks.Compoment.PanelRound();
-        lblExit = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblExit1 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMainDialog.setRadius(25);
-        pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMainDialog1.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMainDialog1.setRadius(25);
+        pnlMainDialog1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cài Đặt ");
-        pnlMainDialog.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, -1));
+        jLabel18.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Cài Đặt ");
+        pnlMainDialog1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, -1));
 
-        tbdSetting.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        tbdSetting.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        tbdSetting1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        tbdSetting1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
 
-        panelRadius2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius6.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        jLabel2.setText("Thông Tin Về Ứng Dụng ");
-        panelRadius2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        panelRadius2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
+        jLabel19.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        jLabel19.setText("Thông Tin Về Ứng Dụng ");
+        panelRadius6.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelRadius6.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
 
-        tbdSetting.addTab("Giới Thiệu", panelRadius2);
+        tbdSetting1.addTab("Giới Thiệu", panelRadius6);
 
-        panelRadius4.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRadius4.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
+        panelRadius7.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius7.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
 
-        jLabel3.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        jLabel3.setText("Đổi Mật Khẩu Tài Khoản");
-        panelRadius4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLabel20.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        jLabel20.setText("Đổi Mật Khẩu Tài Khoản");
+        panelRadius7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel6.setText("Tên Đăng Nhập");
-        panelRadius4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jLabel21.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel21.setText("Tên Đăng Nhập");
+        panelRadius7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(222, 247, 227));
-        jTextField1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jTextField1.setText("jTextField1");
-        panelRadius4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 40));
+        txtTenDangNhap.setBackground(new java.awt.Color(222, 247, 227));
+        txtTenDangNhap.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius7.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 40));
 
-        jLabel7.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel7.setText("Mật Khẩu");
-        panelRadius4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+        jLabel22.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel22.setText("Mật Khẩu");
+        panelRadius7.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel8.setText("Mật Khẩu Mới ");
-        panelRadius4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jLabel23.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel23.setText("Mật Khẩu Mới ");
+        panelRadius7.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Xác Nhận");
-        panelRadius4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        jLabel24.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel24.setText("Xác Nhận");
+        panelRadius7.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField1.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
-        panelRadius4.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 260, 40));
+        txtXacNhanMatKhau.setBackground(new java.awt.Color(222, 247, 227));
+        txtXacNhanMatKhau.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius7.add(txtXacNhanMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 260, 40));
 
-        jPasswordField2.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField2.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField2.setText("jPasswordField1");
-        panelRadius4.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 260, 40));
+        txtMatKhau.setBackground(new java.awt.Color(222, 247, 227));
+        txtMatKhau.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius7.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 260, 40));
 
-        jPasswordField3.setBackground(new java.awt.Color(222, 247, 227));
-        jPasswordField3.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jPasswordField3.setText("jPasswordField1");
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
+        txtMatKhauMoi.setBackground(new java.awt.Color(222, 247, 227));
+        txtMatKhauMoi.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        panelRadius7.add(txtMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, 40));
+
+        myButton1.setBackground(new java.awt.Color(87, 190, 110));
+        myButton1.setForeground(new java.awt.Color(255, 255, 255));
+        myButton1.setText("Lưu Tài Khoản");
+        myButton1.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton1.setRadius(10);
+        myButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
+                myButton1ActionPerformed(evt);
             }
         });
-        panelRadius4.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, 40));
+        panelRadius7.add(myButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 220, 40));
 
-        myButton8.setBackground(new java.awt.Color(87, 190, 110));
-        myButton8.setForeground(new java.awt.Color(255, 255, 255));
-        myButton8.setText("Lưu Tài Khoản");
-        myButton8.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton8.setRadius(10);
-        panelRadius4.add(myButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 220, 40));
+        tbdSetting1.addTab("Đổi Mật Khẩu", panelRadius7);
 
-        tbdSetting.addTab("Đổi Mật Khẩu", panelRadius4);
+        panelRadius8.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius8.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
 
-        panelRadius5.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRadius5.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
+        jLabel25.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        jLabel25.setText("Đăng Xuất Tài Khoản");
+        panelRadius8.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        jLabel4.setText("Đăng Xuất Tài Khoản");
-        panelRadius5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLabel26.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel26.setText("Sau khi đăng xuất bạn sẽ phải rời khỏi giao diện chính của ứng dụng và chỉ vào giao");
+        panelRadius8.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 650, -1));
 
-        jLabel10.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel10.setText("Sau khi đăng xuất bạn sẽ phải rời khỏi giao diện chính của ứng dụng và chỉ vào giao");
-        panelRadius5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 650, -1));
+        jLabel27.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel27.setText("giao diện chính lần nữa thì phải đăng nhập vào ứng dụng hoạt đăng ký một tài khoản");
+        panelRadius8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 650, -1));
 
-        jLabel11.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel11.setText("giao diện chính lần nữa thì phải đăng nhập vào ứng dụng hoạt đăng ký một tài khoản");
-        panelRadius5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 650, -1));
+        jLabel28.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel28.setText("khác để tiếp tục sữ dụng phần mềm của chúng tôi.");
+        panelRadius8.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setText("khác để tiếp tục sữ dụng phần mềm của chúng tôi.");
-        panelRadius5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
-        myButton9.setBackground(new java.awt.Color(87, 190, 110));
-        myButton9.setForeground(new java.awt.Color(255, 255, 255));
-        myButton9.setText("Đăng Xuất Tài Khoản");
-        myButton9.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton9.setRadius(10);
-        panelRadius5.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 40));
-
-        tbdSetting.addTab("Đăng Xuất", panelRadius5);
-
-        panelRadius3.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelRadius3.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
-
-        jLabel5.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        jLabel5.setText("Xóa Tài Khoản");
-        panelRadius3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setText("Sau khi bạn xóa tài khoản bạn không thể đăng nhập vào ứng dụng bằng tài khoản ");
-        panelRadius3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 660, -1));
-
-        jLabel14.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel14.setText("bị xóa và tài khoản sau khi xóa sẽ vĩnh viễn mất. Nếu bạn muốn sử dụng ứng dụng ");
-        panelRadius3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 640, -1));
-
-        jLabel15.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("dụng này.");
-        panelRadius3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        myButton10.setBackground(new java.awt.Color(253, 127, 127));
-        myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Xóa Tài Khoản");
-        myButton10.setBoderColor(new java.awt.Color(253, 127, 127));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        myButton10.setRadius(10);
-        myButton10.addActionListener(new java.awt.event.ActionListener() {
+        myButton12.setBackground(new java.awt.Color(87, 190, 110));
+        myButton12.setForeground(new java.awt.Color(255, 255, 255));
+        myButton12.setText("Đăng Xuất Tài Khoản");
+        myButton12.setBoderColor(new java.awt.Color(87, 190, 110));
+        myButton12.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton12.setRadius(10);
+        myButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton10ActionPerformed(evt);
+                myButton12ActionPerformed(evt);
             }
         });
-        panelRadius3.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 40));
+        panelRadius8.add(myButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 40));
 
-        jLabel16.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel16.setText("dụng tiếp tục thì phải đăng ký một tài khoản mới để có thể tiếp tục trãi nghiệm ứng");
-        panelRadius3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        tbdSetting1.addTab("Đăng Xuất", panelRadius8);
 
-        tbdSetting.addTab("Xóa Tài Khoản", panelRadius3);
+        panelRadius9.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRadius9.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
 
-        pnlMainDialog.add(tbdSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 830, 390));
+        jLabel29.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        jLabel29.setText("Xóa Tài Khoản");
+        panelRadius9.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel30.setText("Sau khi bạn xóa tài khoản bạn không thể đăng nhập vào ứng dụng bằng tài khoản ");
+        panelRadius9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 660, -1));
+
+        jLabel31.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel31.setText("bị xóa và tài khoản sau khi xóa sẽ vĩnh viễn mất. Nếu bạn muốn sử dụng ứng dụng ");
+        panelRadius9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 640, -1));
+
+        jLabel32.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel32.setText("dụng này.");
+        panelRadius9.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        myButton13.setBackground(new java.awt.Color(253, 127, 127));
+        myButton13.setForeground(new java.awt.Color(255, 255, 255));
+        myButton13.setText("Xóa Tài Khoản");
+        myButton13.setBoderColor(new java.awt.Color(253, 127, 127));
+        myButton13.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton13.setRadius(10);
+        myButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton13ActionPerformed(evt);
+            }
+        });
+        panelRadius9.add(myButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 220, 40));
+
+        jLabel33.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel33.setText("dụng tiếp tục thì phải đăng ký một tài khoản mới để có thể tiếp tục trãi nghiệm ứng");
+        panelRadius9.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+
+        tbdSetting1.addTab("Xóa Tài Khoản", panelRadius9);
+
+        pnlMainDialog1.add(tbdSetting1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 830, 390));
 
         pnlExit.setBackground(new java.awt.Color(253, 127, 127));
         pnlExit.setRoundBottomLeft(25);
         pnlExit.setRoundTopRight(25);
-        pnlExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlExitMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlExitMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlExitMouseExited(evt);
-            }
-        });
         pnlExit.setLayout(new java.awt.GridBagLayout());
 
-        lblExit.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        lblExit.setForeground(new java.awt.Color(255, 255, 255));
-        lblExit.setText("X");
-        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblExit1.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        lblExit1.setForeground(new java.awt.Color(255, 255, 255));
+        lblExit1.setText("X");
+        lblExit1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblExitMouseClicked(evt);
+                lblExit1MouseClicked(evt);
             }
         });
-        pnlExit.add(lblExit, new java.awt.GridBagConstraints());
+        pnlExit.add(lblExit1, new java.awt.GridBagConstraints());
 
-        pnlMainDialog.add(pnlExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+        pnlMainDialog1.add(pnlExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
-        pnlMainDialog.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
+        pnlMainDialog1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(pnlMainDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
+        getContentPane().add(pnlMainDialog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 550));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        update();        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton8ActionPerformed
+
+    private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
+        dispose();
+        new LogInDiaLog(null, true).setVisible(true);
+    }//GEN-LAST:event_myButton9ActionPerformed
 
     private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myButton10ActionPerformed
+        deleteTaiKhoan();
 
-    private void pnlExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExitMouseClicked
-        this.dispose();
-    }//GEN-LAST:event_pnlExitMouseClicked
+    }//GEN-LAST:event_myButton10ActionPerformed
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
         this.dispose();
     }//GEN-LAST:event_lblExitMouseClicked
 
-    private void pnlExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExitMouseEntered
-        pnlExit.setBackground(new Color(233,111,111));
-    }//GEN-LAST:event_pnlExitMouseEntered
+    private void txtXacNhanMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXacNhanMatKhau1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtXacNhanMatKhau1ActionPerformed
 
-    private void pnlExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExitMouseExited
-         pnlExit.setBackground(new Color(253,127,127));
-    }//GEN-LAST:event_pnlExitMouseExited
+    private void txtMatKhauMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauMoi1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMatKhauMoi1ActionPerformed
+
+    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        update();        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton1ActionPerformed
+
+    private void myButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton12ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new LogInDiaLog(null, true).setVisible(true);
+    }//GEN-LAST:event_myButton12ActionPerformed
+
+    private void myButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton13ActionPerformed
+        // TODO add your handling code here:
+        deleteTaiKhoan();
+
+    }//GEN-LAST:event_myButton13ActionPerformed
+
+    private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblExit1MouseClicked
+
+    private void pnlExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_pnlExit1MouseClicked
+
+    private void pnlExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseEntered
+        pnlExit.setBackground(new Color(233, 111, 111));
+    }//GEN-LAST:event_pnlExit1MouseEntered
+
+    private void pnlExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MouseExited
+        pnlExit.setBackground(new Color(253, 127, 127));
+    }//GEN-LAST:event_pnlExit1MouseExited
 
     /*tbdSetting args the command line arguments
      */
-   public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -359,41 +464,41 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblExit;
-    private com.ebooks.Compoment.MyButton myButton10;
-    private com.ebooks.Compoment.MyButton myButton8;
-    private com.ebooks.Compoment.MyButton myButton9;
-    private com.ebooks.Compoment.PanelRadius panelRadius2;
-    private com.ebooks.Compoment.PanelRadius panelRadius3;
-    private com.ebooks.Compoment.PanelRadius panelRadius4;
-    private com.ebooks.Compoment.PanelRadius panelRadius5;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JLabel lblExit1;
+    private com.ebooks.Compoment.MyButton myButton1;
+    private com.ebooks.Compoment.MyButton myButton12;
+    private com.ebooks.Compoment.MyButton myButton13;
+    private com.ebooks.Compoment.PanelRadius panelRadius6;
+    private com.ebooks.Compoment.PanelRadius panelRadius7;
+    private com.ebooks.Compoment.PanelRadius panelRadius8;
+    private com.ebooks.Compoment.PanelRadius panelRadius9;
     private com.ebooks.Compoment.PanelRound pnlExit;
-    private com.ebooks.Compoment.PanelRadius pnlMainDialog;
-    private com.ebooks.Compoment.MaterialTabbed tbdSetting;
+    private com.ebooks.Compoment.PanelRadius pnlMainDialog1;
+    private com.ebooks.Compoment.MaterialTabbed tbdSetting1;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhauMoi;
+    private javax.swing.JTextField txtTenDangNhap;
+    private javax.swing.JPasswordField txtXacNhanMatKhau;
     // End of variables declaration//GEN-END:variables
 }

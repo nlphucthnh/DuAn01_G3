@@ -23,6 +23,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
 
     TaiKhoanDAO tkDao = new TaiKhoanDAO();
     QuanTriVienDAO qtvDao = new QuanTriVienDAO();
+    public static String tendangNhapApp;
 
     /**
      * Creates new form SignUpDiaLog
@@ -185,7 +186,8 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-
+        dispose();
+        new SignUpDiaLog(null, true).setVisible(true);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -213,14 +215,14 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-             DangNhap();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DangNhap();
         }
     }//GEN-LAST:event_txtMatKhauKeyPressed
 
     private void txtTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenDangNhapKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-             DangNhap();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DangNhap();
         }
     }//GEN-LAST:event_txtTenDangNhapKeyPressed
 
@@ -277,6 +279,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
             if (UtilityHelper.checkNullText(lblMatKhau, txtMatKhau) && UtilityHelper.checkPass(lblMatKhau, txtMatKhau)) {
                 String matKhau = new String(txtMatKhau.getPassword());
                 TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
+                tendangNhapApp = taiKhoan.getTenDangNhap();
                 QuanTriVien quanTri = qtvDao.findById(tenDangNhap);
                 if (taiKhoan == null) {
                     DialogHelper.alert(this, "Sai Tên Đăng Nhập");
