@@ -97,6 +97,12 @@ public class TheLoaiDAO {
         return list.size()>0?list.get(0):null;
     }
     
+    public TheLoai findByidSach(String id) {
+        String sql="SELECT * FROM TheLoai WHERE MaSach=?";
+        List<TheLoai> list=select(sql,id);
+        return list.size()>0?list.get(0):null;
+    }
+    
      public TheLoai findByName(String name) {
         String sql="SELECT * FROM TheLoai WHERE tenTheLoai Like ?";
         List<TheLoai> list=select(sql,name);

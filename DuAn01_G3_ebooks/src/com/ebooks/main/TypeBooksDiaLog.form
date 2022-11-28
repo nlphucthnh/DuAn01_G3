@@ -172,11 +172,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="4c" green="95" red="37" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="H&#xe3;y &#x111;i&#x1ec1;n c&#xe1;c th&#xf4;ng tin c&#x1ee7;a b&#x1ea1;n"/>
+            <Property name="text" type="java.lang.String" value="Th&#xf4;ng Tin Lo&#x1ea1;i S&#xe1;ch"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="70" width="360" height="-1"/>
+              <AbsoluteConstraints x="110" y="70" width="280" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -4,6 +4,9 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.TacGiaDAO;
+import com.ebooks.dao.TheLoaiDAO;
+import com.ebooks.model.Sach;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,16 +19,34 @@ import javax.swing.JPanel;
  * @author Thinh
  */
 public class BooksDisplayDiaLog extends javax.swing.JDialog {
+    
+    TacGiaDAO DAOTG = new TacGiaDAO();
+    TheLoaiDAO DAOTL = new TheLoaiDAO();
 
-    /**
-     * Creates new form SettingDiaLog
-     */
+    public BooksDisplayDiaLog(java.awt.Frame parent, boolean modal, Sach sach) {
+        super(parent, modal);
+        initComponents();
+        setBackground(new Color(0,0,0,0));
+        initMoving(this, pnlMainDialog);
+        setLbl(sach);
+    }
+    
+    
     public BooksDisplayDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
         initMoving(this, pnlMainDialog);
         
+    }
+    
+    
+    public void setLbl(Sach sach){
+        lblMaSach.setText(sach.getMaSach());
+        lblTenSach.setText(sach.getTenSach());
+        lblTacGia.setText(DAOTG.findById(sach.getMaTacGia()).getHoTen());
+        lblTheLoai.setText(DAOTL.findByidSach(sach.getMaSach()).getTenTheLoai());
+        txtMoTa.setText(sach.getMoTa());
     }
     
      private int x;
@@ -67,14 +88,14 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         imageBoder1 = new com.ebooks.Compoment.ImageBoder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         myButton10 = new com.ebooks.Compoment.MyButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblTheLoai = new javax.swing.JLabel();
+        lblMaSach = new javax.swing.JLabel();
+        lblTenSach = new javax.swing.JLabel();
+        lblTacGia = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -140,9 +161,9 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         imageBoder1.setRadius(20);
         pnlMainDialog.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 180, 180));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtMoTa.setColumns(20);
+        txtMoTa.setRows(5);
+        jScrollPane1.setViewportView(txtMoTa);
 
         pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 670, 120));
 
@@ -156,27 +177,27 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
 
         myButton10.setBackground(new java.awt.Color(87, 190, 110));
         myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Lưu Thông Tin");
+        myButton10.setText("Đọc Ngay");
         myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         myButton10.setRadius(10);
         pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
-        jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        jLabel1.setText("Bảo Mật - An Ninh Mạng");
-        pnlMainDialog.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, -1));
+        lblTheLoai.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        lblTheLoai.setText("Bảo Mật - An Ninh Mạng");
+        pnlMainDialog.add(lblTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 370, -1));
 
-        jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        jLabel4.setText("Books001");
-        pnlMainDialog.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 370, -1));
+        lblMaSach.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        lblMaSach.setText("Books001");
+        pnlMainDialog.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 370, -1));
 
-        jLabel8.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        jLabel8.setText("Hacker Lược Sử");
-        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 360, -1));
+        lblTenSach.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        lblTenSach.setText("Hacker Lược Sử");
+        pnlMainDialog.add(lblTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 360, -1));
 
-        jLabel9.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
-        jLabel9.setText("Steven Levy");
-        pnlMainDialog.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
+        lblTacGia.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
+        lblTacGia.setText("Steven Levy");
+        pnlMainDialog.add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -320,22 +341,22 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblExit1;
+    private javax.swing.JLabel lblMaSach;
+    private javax.swing.JLabel lblTacGia;
+    private javax.swing.JLabel lblTenSach;
+    private javax.swing.JLabel lblTheLoai;
     private com.ebooks.Compoment.MyButton myButton10;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
+    private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
 }

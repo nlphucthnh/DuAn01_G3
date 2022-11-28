@@ -459,12 +459,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_lblExit1MousePressed
 
-    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
-        if (cboTheLoai.getSelectedIndex() != -1) {
-            txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() + "00");
-        }
-    }//GEN-LAST:event_cboTheLoaiActionPerformed
-
     private void btnChonFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFile1ActionPerformed
         try {
             MovingFile();
@@ -472,34 +466,14 @@ public class BooksDiaLog extends javax.swing.JDialog {
             DialogHelper.alert(this, "Lỗi Chuyển Dữ Liệu");
         }
 
-
     }//GEN-LAST:event_btnChonFile1ActionPerformed
 
-    private void lblSachImgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMousePressed
-        if (evt.getClickCount() == 2) {
-            try {
-                SetImg();
-            } catch (Exception e) {
-//               DialogHelper.alert(this,"Lỗi Chọn Hình");
-            }
-
-        }
-    }//GEN-LAST:event_lblSachImgMousePressed
-
-    private void lblSachImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseEntered
-        lblSachImg.setBorder(new LineBorder(new Color(249, 249, 249)));
-    }//GEN-LAST:event_lblSachImgMouseEntered
-
-    private void lblSachImgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseExited
-        lblSachImg.setBorder(new LineBorder(new Color(0, 0, 0)));
-    }//GEN-LAST:event_lblSachImgMouseExited
-
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-      String maSach = txtMaSach.getText();
+        String maSach = txtMaSach.getText();
         int timThay = 0;
         ThucUongDAO DaoTU = new ThucUongDAO();
         listS = DAOS.selectAll();
-        
+
         for(Sach x : listS){
             if(x.getMaSach().contains(maSach)){
                 timThay = 1;
@@ -512,8 +486,33 @@ public class BooksDiaLog extends javax.swing.JDialog {
                 this.UpdateSach();
             }
         }
-       
+
     }//GEN-LAST:event_btnLuuThongActionPerformed
+
+    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
+        if (cboTheLoai.getSelectedIndex() != -1) {
+            txtMaSach.setText(listTL.get(cboTheLoai.getSelectedIndex()).getMaTheLoai() + "00");
+        }
+    }//GEN-LAST:event_cboTheLoaiActionPerformed
+
+    private void lblSachImgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMousePressed
+        if (evt.getClickCount() == 2) {
+            try {
+                SetImg();
+            } catch (Exception e) {
+                //               DialogHelper.alert(this,"Lỗi Chọn Hình");
+            }
+
+        }
+    }//GEN-LAST:event_lblSachImgMousePressed
+
+    private void lblSachImgMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseExited
+        lblSachImg.setBorder(new LineBorder(new Color(0, 0, 0)));
+    }//GEN-LAST:event_lblSachImgMouseExited
+
+    private void lblSachImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseEntered
+        lblSachImg.setBorder(new LineBorder(new Color(249, 249, 249)));
+    }//GEN-LAST:event_lblSachImgMouseEntered
 
     /*tbdSetting args the command line arguments
      */
