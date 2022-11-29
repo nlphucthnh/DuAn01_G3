@@ -145,6 +145,7 @@ public class Main extends javax.swing.JFrame {
         fillTableSach();
         fillTableNguoiDung();
         fillTableThucUong();
+        fillTableListSachDoc();
     }
 
     public void init() {
@@ -598,7 +599,7 @@ public class Main extends javax.swing.JFrame {
         btnReadPDF = new javax.swing.JButton();
         panelRadius23 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane5 = new javax.swing.JScrollPane();
-        table5 = new com.ebooks.Compoment.Table();
+        tblListSachDoc = new com.ebooks.Compoment.Table();
         jLabel19 = new javax.swing.JLabel();
         pnlFrameListen = new com.ebooks.Compoment.PanelRadius();
         lblAnhAudio = new com.ebooks.Compoment.ImageBoder();
@@ -1953,18 +1954,26 @@ public class Main extends javax.swing.JFrame {
         panelRadius23.setRadius(15);
         panelRadius23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        table5.setModel(new javax.swing.table.DefaultTableModel(
+        tblListSachDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã Sách", "Tên Sách", "Họ Tên Tác Giả", "Ngày Đăng", "Mô Tả"
             }
-        ));
-        jScrollPane5.setViewportView(table5);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblListSachDoc);
 
         panelRadius23.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 940, 440));
 
@@ -2997,10 +3006,10 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table table14;
     private com.ebooks.Compoment.Table table2;
     private com.ebooks.Compoment.Table table4;
-    private com.ebooks.Compoment.Table table5;
     private com.ebooks.Compoment.Table table6;
     private com.ebooks.Compoment.Table tblAudio;
     private com.ebooks.Compoment.Table tblHoaDon;
+    private com.ebooks.Compoment.Table tblListSachDoc;
     private com.ebooks.Compoment.Table tblNguoiDung;
     private com.ebooks.Compoment.Table tblSach;
     private com.ebooks.Compoment.Table tblTaiKhoan;
@@ -3194,4 +3203,20 @@ public class Main extends javax.swing.JFrame {
         }
         System.out.println(file);
 }
+    
+        public void fillTableListSachDoc() {
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblListSachDoc.getModel();
+        tblListSachDoc.setSelectionBackground(new Color(87, 190, 110));
+        model.setRowCount(0);
+        try {
+            listS = DAOS.selectAll();
+            for (Sach sach : listS) {
+                Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
 }

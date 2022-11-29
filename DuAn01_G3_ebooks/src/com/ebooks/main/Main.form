@@ -3584,14 +3584,15 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="com.ebooks.Compoment.Table" name="table5">
+                            <Component class="com.ebooks.Compoment.Table" name="tblListSachDoc">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="4" rowCount="4">
-                                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                                  <Table columnCount="5" rowCount="4">
+                                    <Column editable="false" title="M&#xe3; S&#xe1;ch" type="java.lang.Object"/>
+                                    <Column editable="false" title="T&#xea;n S&#xe1;ch" type="java.lang.Object"/>
+                                    <Column editable="false" title="H&#x1ecd; T&#xea;n T&#xe1;c Gi&#x1ea3;" type="java.lang.Object"/>
+                                    <Column editable="false" title="Ng&#xe0;y &#x110;&#x103;ng" type="java.lang.Object"/>
+                                    <Column editable="false" title="M&#xf4; T&#x1ea3;" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
                               </Properties>
