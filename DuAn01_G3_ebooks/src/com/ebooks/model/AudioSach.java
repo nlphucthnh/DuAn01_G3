@@ -18,12 +18,13 @@ public class AudioSach {
     private String nguoiThu;
     private String moTa;
     private String duongDan;
+    private String hinhAnh;
     private String maQuanTriVien;
 
     public AudioSach() {
     }
 
-    public AudioSach(String maAudio, String tenAudio, String maSach, Date ngayPhatHanh, String nguoiThu, String moTa, String duongDan, String maQuanTriVien) {
+    public AudioSach(String maAudio, String tenAudio, String maSach, Date ngayPhatHanh, String nguoiThu, String moTa, String duongDan, String hinhAnh, String maQuanTriVien) {
         this.maAudio = maAudio;
         this.tenAudio = tenAudio;
         this.maSach = maSach;
@@ -31,6 +32,7 @@ public class AudioSach {
         this.nguoiThu = nguoiThu;
         this.moTa = moTa;
         this.duongDan = duongDan;
+        this.hinhAnh = hinhAnh;
         this.maQuanTriVien = maQuanTriVien;
     }
 
@@ -90,6 +92,14 @@ public class AudioSach {
         this.duongDan = duongDan;
     }
 
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+
     public String getMaQuanTriVien() {
         return maQuanTriVien;
     }
@@ -97,6 +107,5 @@ public class AudioSach {
     public void setMaQuanTriVien(String maQuanTriVien) {
         this.maQuanTriVien = maQuanTriVien;
     }
-    
-    
+
 }

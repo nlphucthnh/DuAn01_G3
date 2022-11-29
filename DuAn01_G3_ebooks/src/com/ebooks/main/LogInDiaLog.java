@@ -93,6 +93,11 @@ public class LogInDiaLog extends javax.swing.JDialog {
                 btnDangNhapActionPerformed(evt);
             }
         });
+        btnDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDangNhapKeyPressed(evt);
+            }
+        });
         panelBorder3.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 160, 40));
 
         lblTenDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -229,6 +234,10 @@ public class LogInDiaLog extends javax.swing.JDialog {
     private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDangNhapMouseEntered
+
+    private void btnDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDangNhapKeyPressed
+        
+    }//GEN-LAST:event_btnDangNhapKeyPressed
 
     /**
      * @param args the command line arguments

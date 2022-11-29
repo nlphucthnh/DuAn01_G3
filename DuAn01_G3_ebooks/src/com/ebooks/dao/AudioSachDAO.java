@@ -25,6 +25,7 @@ public class AudioSachDAO {
         model.setNguoiThu(rs.getString("NguoiThu"));
         model.setMoTa(rs.getString("MoTa"));
         model.setDuongDan(rs.getString("DuongDan"));
+        model.setHinhAnh(rs.getString("HinhAnh"));
         model.setMaQuanTriVien(rs.getString("MaQuanTriVien"));
         return model;
     }
@@ -52,7 +53,7 @@ public class AudioSachDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(AudioSach entity) {
-        String sql="INSERT INTO AudioSach ( TenAudio, MaSach, NgayPhatHanh, NguoiThu, MoTa, DuongDan, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO AudioSach ( TenAudio, MaSach, NgayPhatHanh, NguoiThu, MoTa, DuongDan, HinhAnh, MaQuanTriVien) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenAudio(),
                 entity.getMaSach(),
@@ -60,6 +61,7 @@ public class AudioSachDAO {
                 entity.getNguoiThu(),
                 entity.getMoTa(),
                 entity.getDuongDan(),
+                entity.getHinhAnh(),
                 entity.getMaQuanTriVien());
     }
     /**
@@ -67,7 +69,7 @@ public class AudioSachDAO {
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
     public void update(AudioSach entity) {
-        String sql="UPDATE AudioSach SET TenAudio=?, MaSach=?, NgayPhatHanh=?, NguoiThu=?, MoTa=?, DuongDan=?, MaQuanTriVien=? WHERE MaAudio=?";
+        String sql="UPDATE AudioSach SET TenAudio=?, MaSach=?, NgayPhatHanh=?, NguoiThu=?, MoTa=?, DuongDan=?, HinhAnh=?, MaQuanTriVien=? WHERE MaAudio=?";
         JdbcHelper.executeUpdate(sql,
                 entity.getTenAudio(),
                 entity.getMaSach(),
@@ -75,6 +77,7 @@ public class AudioSachDAO {
                 entity.getNguoiThu(),
                 entity.getMoTa(),
                 entity.getDuongDan(),
+                entity.getHinhAnh(),
                 entity.getMaQuanTriVien(),
                 entity.getMaAudio());
     }
