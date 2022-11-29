@@ -2742,8 +2742,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btnReadPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReadPDFMouseClicked
         
-     //openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pfd\\bucxuc.pdf");
-     openpdf("src//com//ebooks//pdf//1tuanlamviec4gio.pdf");
+    openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\1tuanlamviec4gio.pdf");
+    // openpdf("E:/UDPM_DuAn1/Github/DuAn01_G3/DuAn01_G3_ebooks/src/com/ebooks/pdf/bancothedamphan.pdf");
     
     }//GEN-LAST:event_btnReadPDFMouseClicked
 
