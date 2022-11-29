@@ -594,10 +594,9 @@ public class Main extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         pnlFrameRead = new com.ebooks.Compoment.PanelRadius();
         materialTabbed3 = new com.ebooks.Compoment.MaterialTabbed();
-        panelRadius22 = new com.ebooks.Compoment.PanelRadius();
+        pnlReader = new com.ebooks.Compoment.PanelRadius();
         scrollpanePDF = new javax.swing.JScrollPane();
-        btnReadPDF = new javax.swing.JButton();
-        panelRadius23 = new com.ebooks.Compoment.PanelRadius();
+        pnlListSachDoc = new com.ebooks.Compoment.PanelRadius();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblListSachDoc = new com.ebooks.Compoment.Table();
         jLabel19 = new javax.swing.JLabel();
@@ -1915,44 +1914,25 @@ public class Main extends javax.swing.JFrame {
         materialTabbed3.setClorSroll(new java.awt.Color(87, 190, 110));
         materialTabbed3.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
 
-        panelRadius22.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius22.setRadius(15);
+        pnlReader.setBackground(new java.awt.Color(255, 255, 255));
+        pnlReader.setRadius(15);
 
-        btnReadPDF.setText("Read");
-        btnReadPDF.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReadPDFMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRadius22Layout = new javax.swing.GroupLayout(panelRadius22);
-        panelRadius22.setLayout(panelRadius22Layout);
-        panelRadius22Layout.setHorizontalGroup(
-            panelRadius22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRadius22Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollpanePDF)
-                .addContainerGap())
-            .addGroup(panelRadius22Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnReadPDF)
-                .addContainerGap(853, Short.MAX_VALUE))
+        javax.swing.GroupLayout pnlReaderLayout = new javax.swing.GroupLayout(pnlReader);
+        pnlReader.setLayout(pnlReaderLayout);
+        pnlReaderLayout.setHorizontalGroup(
+            pnlReaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollpanePDF, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
         );
-        panelRadius22Layout.setVerticalGroup(
-            panelRadius22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRadius22Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
-                .addComponent(btnReadPDF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollpanePDF, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        pnlReaderLayout.setVerticalGroup(
+            pnlReaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollpanePDF, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
         );
 
-        materialTabbed3.addTab("Đọc Sách", panelRadius22);
+        materialTabbed3.addTab("Đọc Sách", pnlReader);
 
-        panelRadius23.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius23.setRadius(15);
-        panelRadius23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlListSachDoc.setBackground(new java.awt.Color(255, 255, 255));
+        pnlListSachDoc.setRadius(15);
+        pnlListSachDoc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblListSachDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1973,15 +1953,23 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListSachDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListSachDocMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblListSachDocMousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblListSachDoc);
 
-        panelRadius23.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 940, 440));
+        pnlListSachDoc.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 940, 440));
 
         jLabel19.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLabel19.setText("Danh Sách Sách Đọc");
-        panelRadius23.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        pnlListSachDoc.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        materialTabbed3.addTab("Danh Sách", panelRadius23);
+        materialTabbed3.addTab("Danh Sách", pnlListSachDoc);
 
         pnlFrameRead.add(materialTabbed3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1050, 528));
 
@@ -2505,7 +2493,7 @@ public class Main extends javax.swing.JFrame {
         player.addToPlayList(songFile);
         player.skipForward();
         btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-        
+
         currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
         imagePath = "\\Icon";
     }//GEN-LAST:event_tblAudioMouseClicked
@@ -2730,8 +2718,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_lblTimeLastAncestorAdded
 
     private void tblAudioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblAudioPropertyChange
+
 //        player = mp3Player();
-//        player.stop();
 //        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
 //        int index = tblAudio.getSelectedRow();
 //        System.out.println(index);
@@ -2749,13 +2737,20 @@ public class Main extends javax.swing.JFrame {
 //        imagePath = "\\Icon";
     }//GEN-LAST:event_tblAudioPropertyChange
 
-    private void btnReadPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReadPDFMouseClicked
+    private void tblListSachDocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMouseClicked
+        int index = tblListSachDoc.getSelectedRow();
+        Sach s = listS.get(index);
+        System.out.println(s.getDuongDan());
+        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
         
-    openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\1tuanlamviec4gio.pdf");
-    //openpdf("..//DuAn01_G3_ebooks//src//com//ebooks//pdf//1tuanlamviec4gio.pdf");
-    // openpdf("E:/UDPM_DuAn1/Github/DuAn01_G3/DuAn01_G3_ebooks/src/com/ebooks/pdf/bancothedamphan.pdf");
-    
-    }//GEN-LAST:event_btnReadPDFMouseClicked
+        pnlListSachDoc.show(false);
+        pnlReader.show(true);
+        pnlRead.show(true);
+    }//GEN-LAST:event_tblListSachDocMouseClicked
+
+    private void tblListSachDocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMousePressed
+
+    }//GEN-LAST:event_tblListSachDocMousePressed
 
     /**
      * @param args the command line arguments
@@ -2815,7 +2810,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnPreThucUong;
     private com.ebooks.Compoment.MyButton btnPrevSach;
     private com.ebooks.Compoment.MyButton btnRead;
-    private javax.swing.JButton btnReadPDF;
     private com.ebooks.Compoment.MyButton btnSetting;
     private com.ebooks.Compoment.MyButton btnStatistical;
     private com.ebooks.Compoment.MyButton btnSuaNguoiDung;
@@ -2963,8 +2957,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius2;
     private com.ebooks.Compoment.PanelRadius panelRadius20;
     private com.ebooks.Compoment.PanelRadius panelRadius21;
-    private com.ebooks.Compoment.PanelRadius panelRadius22;
-    private com.ebooks.Compoment.PanelRadius panelRadius23;
     private com.ebooks.Compoment.PanelRadius panelRadius24;
     private com.ebooks.Compoment.PanelRadius panelRadius25;
     private com.ebooks.Compoment.PanelRadius panelRadius26;
@@ -2987,6 +2979,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlFrameRead;
     private com.ebooks.Compoment.PanelRadius pnlFrameStatistical;
     private com.ebooks.Compoment.PanelRadius pnlHoaDon;
+    private com.ebooks.Compoment.PanelRadius pnlListSachDoc;
     private com.ebooks.Compoment.PanelRadius pnlListen;
     private com.ebooks.Compoment.PanelRadius pnlMain;
     private com.ebooks.Compoment.PanelBorder pnlMainProjebt;
@@ -2995,6 +2988,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlMenuBooks;
     private com.ebooks.Compoment.PanelRadius pnlOff;
     private com.ebooks.Compoment.PanelRadius pnlRead;
+    private com.ebooks.Compoment.PanelRadius pnlReader;
     private com.ebooks.Compoment.PanelRadius pnlSetting;
     private com.ebooks.Compoment.PanelRadius pnlStatistical;
     private com.ebooks.Compoment.PanelRadius pnlThucUong;
@@ -3184,28 +3178,26 @@ public class Main extends javax.swing.JFrame {
     }
 
     // HÀM DELETE TONG QUAT //
-    
-    
     //Read File FDF
-    public void openpdf(String file){
-    
-    try {
-           SwingController control=new SwingController();
-            SwingViewBuilder factry=new SwingViewBuilder(control);
-            JPanel veiwerCompntpnl=factry.buildViewerPanel();
+    public void openpdf(String file) {
+
+        try {
+            SwingController control = new SwingController();
+            SwingViewBuilder factry = new SwingViewBuilder(control);
+            JPanel veiwerCompntpnl = factry.buildViewerPanel();
             ComponentKeyBinding.install(control, veiwerCompntpnl);
             control.getDocumentViewController().setAnnotationCallback(
                     new org.icepdf.ri.common.MyAnnotationCallback(
-                    control.getDocumentViewController()));
-                   control.openDocument(file);
-        scrollpanePDF.setViewportView(veiwerCompntpnl); 
+                            control.getDocumentViewController()));
+            control.openDocument(file);
+            scrollpanePDF.setViewportView(veiwerCompntpnl);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,"Cannot Load Pdf");
+            JOptionPane.showMessageDialog(this, "Cannot Load Pdf");
         }
         System.out.println(file);
-}
-    
-        public void fillTableListSachDoc() {
+    }
+
+    public void fillTableListSachDoc() {
         DefaultTableModel model;
         model = (DefaultTableModel) tblListSachDoc.getModel();
         tblListSachDoc.setSelectionBackground(new Color(87, 190, 110));
