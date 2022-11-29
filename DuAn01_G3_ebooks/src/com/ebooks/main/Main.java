@@ -168,8 +168,8 @@ public class Main extends javax.swing.JFrame {
 
         }
     }
-    
-      public ImageIcon ShowImg(String nameImg) {
+
+    public ImageIcon ShowImg(String nameImg) {
         ImageIcon imgIcon = new ImageIcon(Url + nameImg);
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
@@ -1986,6 +1986,11 @@ public class Main extends javax.swing.JFrame {
                 tblAudioMouseClicked(evt);
             }
         });
+        tblAudio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tblAudioPropertyChange(evt);
+            }
+        });
         jScrollPane13.setViewportView(tblAudio);
 
         panelRadius30.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 680, 420));
@@ -1999,7 +2004,7 @@ public class Main extends javax.swing.JFrame {
         lblTenNguoiThu.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblTenNguoiThu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenNguoiThu.setText("Steven Levy");
-        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 300, -1));
+        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 379, 300, 30));
 
         myButton7.setBackground(new java.awt.Color(254, 254, 254));
         myButton7.setBorder(null);
@@ -2042,18 +2047,18 @@ public class Main extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        pnlFrameListen.add(lblTimeLast, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
+        pnlFrameListen.add(lblTimeLast, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
 
         jLabel31.setText("00:00");
-        pnlFrameListen.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        pnlFrameListen.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         slider1.setColorSlider(new java.awt.Color(87, 190, 110));
-        pnlFrameListen.add(slider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 220, -1));
+        pnlFrameListen.add(slider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 220, -1));
 
         lblTenAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         lblTenAudio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenAudio.setText("Hacker Lược Sử");
-        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 300, -1));
+        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 280, 70));
 
         lblVolumeRepeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/repeat.png"))); // NOI18N
         lblVolumeRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2675,20 +2680,40 @@ public class Main extends javax.swing.JFrame {
 
             String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat_enabled.png";
             lblVolumeRepeat.setIcon(new ImageIcon(image));
-            
+
         } else if (repeat == true) {
             repeat = false;
             player.setRepeat(repeat);
 
             String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat.png";
             lblVolumeRepeat.setIcon(new ImageIcon(image));
-            
+
         }
     }//GEN-LAST:event_lblVolumeRepeatMouseClicked
 
     private void lblTimeLastAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblTimeLastAncestorAdded
 
     }//GEN-LAST:event_lblTimeLastAncestorAdded
+
+    private void tblAudioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblAudioPropertyChange
+        player = mp3Player();
+        player.stop();
+        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
+//        int index = tblAudio.getSelectedRow();
+//        System.out.println(index);
+//        AudioSach au = listAudio.get(index);
+//        lblTenAudio.setText(au.getTenAudio());
+//        lblTenNguoiThu.setText(au.getNguoiThu());
+//        lblAnhAudio.setIcon(ShowImg(au.getHinhAnh()));
+//        songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
+//        player = mp3Player();
+//        player.addToPlayList(songFile);
+//        player.skipForward();
+//        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
+//        
+//        currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+//        imagePath = "\\Icon";
+    }//GEN-LAST:event_tblAudioPropertyChange
 
     /**
      * @param args the command line arguments
