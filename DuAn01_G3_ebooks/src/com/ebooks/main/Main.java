@@ -55,6 +55,7 @@ import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -177,13 +178,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    public ImageIcon ShowImg(String nameImg) {
-        ImageIcon imgIcon = new ImageIcon(Url + nameImg);
-        Image image = imgIcon.getImage();
-        Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
-        imgIcon = new ImageIcon(newimg);
-        return imgIcon;
-    }
+
     // I am going to create a custom MP3Player Method
 
     private MP3Player mp3Player() {
@@ -604,7 +599,6 @@ public class Main extends javax.swing.JFrame {
         tblListSachDoc = new com.ebooks.Compoment.Table();
         jLabel19 = new javax.swing.JLabel();
         pnlFrameListen = new com.ebooks.Compoment.PanelRadius();
-        lblAnhAudio = new com.ebooks.Compoment.ImageBoder();
         panelRadius30 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane13 = new javax.swing.JScrollPane();
         tblAudio = new com.ebooks.Compoment.Table();
@@ -622,6 +616,7 @@ public class Main extends javax.swing.JFrame {
         lblVolumeUp = new javax.swing.JLabel();
         lblVolumeFull = new javax.swing.JLabel();
         lblVolumeMute = new javax.swing.JLabel();
+        lblAnhAudio = new javax.swing.JLabel();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
         jLabel1 = new javax.swing.JLabel();
         searchText1 = new com.ebooks.Compoment.SearchText();
@@ -1992,10 +1987,6 @@ public class Main extends javax.swing.JFrame {
         pnlFrameListen.setRadius(15);
         pnlFrameListen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAnhAudio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/stock-photo-28962631.jpg"))); // NOI18N
-        lblAnhAudio.setRadius(20);
-        pnlFrameListen.add(lblAnhAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 300));
-
         panelRadius30.setBackground(new java.awt.Color(205, 239, 215));
         panelRadius30.setRadius(15);
         panelRadius30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2019,6 +2010,9 @@ public class Main extends javax.swing.JFrame {
         tblAudio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblAudioMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblAudioMousePressed(evt);
             }
         });
         tblAudio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2134,6 +2128,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         pnlFrameListen.add(lblVolumeMute, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, -1, -1));
+
+        lblAnhAudio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/Content/imgEbooks/5PhuongThuc.png"))); // NOI18N
+        pnlFrameListen.add(lblAnhAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, 310));
 
         pnlBossMain.add(pnlFrameListen, "card3");
 
@@ -2500,7 +2497,7 @@ public class Main extends javax.swing.JFrame {
         AudioSach au = listAudio.get(index);
         lblTenAudio.setText(au.getTenAudio());
         lblTenNguoiThu.setText(au.getNguoiThu());
-        lblAnhAudio.setIcon(ShowImg(au.getHinhAnh()));
+       lblAnhAudio.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\"+au.getHinhAnh()));
         songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
         player = mp3Player();
         player.addToPlayList(songFile);
@@ -2754,11 +2751,12 @@ public class Main extends javax.swing.JFrame {
         int index = tblListSachDoc.getSelectedRow();
         Sach s = listS.get(index);
         System.out.println(s.getDuongDan());
-        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());    
-        pnlFrameRead.show(true);
-        pnlListSachDoc.show(false);
+        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
+        materialTabbed3.setSelectedIndex(0);
         pnlReader.show(true);
-        pnlRead.show(true);
+        pnlListSachDoc.show(false);
+
+
     }//GEN-LAST:event_tblListSachDocMouseClicked
 
     private void tblListSachDocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMousePressed
@@ -2766,8 +2764,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tblListSachDocMousePressed
 
     private void scrollpanePDFAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_scrollpanePDFAncestorAdded
-       
+
     }//GEN-LAST:event_scrollpanePDFAncestorAdded
+
+    private void tblAudioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioMousePressed
+        tblAudioMouseClicked(evt);
+    }//GEN-LAST:event_tblAudioMousePressed
 
     /**
      * @param args the command line arguments
@@ -2902,7 +2904,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private com.ebooks.Compoment.ImageBoder lblAnhAudio;
+    private javax.swing.JLabel lblAnhAudio;
     private javax.swing.JLabel lblDay;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblOff;
