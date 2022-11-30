@@ -12,7 +12,8 @@ import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.AudioSach;
 import com.ebooks.audio.FileTypeFilter;
 import jaco.mp3.player.MP3Player;
-
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
 import com.ebooks.dao.HoaDonThucUongDAO;
 import com.ebooks.dao.LoaiSSDAO;
 import com.ebooks.dao.NguoiDungDAO;
@@ -61,6 +62,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
 import org.icepdf.ri.common.ComponentKeyBinding;
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
@@ -1917,6 +1920,16 @@ public class Main extends javax.swing.JFrame {
         pnlReader.setBackground(new java.awt.Color(255, 255, 255));
         pnlReader.setRadius(15);
 
+        scrollpanePDF.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                scrollpanePDFAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout pnlReaderLayout = new javax.swing.GroupLayout(pnlReader);
         pnlReader.setLayout(pnlReaderLayout);
         pnlReaderLayout.setHorizontalGroup(
@@ -2741,8 +2754,8 @@ public class Main extends javax.swing.JFrame {
         int index = tblListSachDoc.getSelectedRow();
         Sach s = listS.get(index);
         System.out.println(s.getDuongDan());
-        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
-        
+        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());    
+        pnlFrameRead.show(true);
         pnlListSachDoc.show(false);
         pnlReader.show(true);
         pnlRead.show(true);
@@ -2751,6 +2764,10 @@ public class Main extends javax.swing.JFrame {
     private void tblListSachDocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMousePressed
 
     }//GEN-LAST:event_tblListSachDocMousePressed
+
+    private void scrollpanePDFAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_scrollpanePDFAncestorAdded
+       
+    }//GEN-LAST:event_scrollpanePDFAncestorAdded
 
     /**
      * @param args the command line arguments

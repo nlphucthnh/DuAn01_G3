@@ -3525,6 +3525,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JScrollPane" name="scrollpanePDF">
+                          <Events>
+                            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="scrollpanePDFAncestorAdded"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                         </Container>
