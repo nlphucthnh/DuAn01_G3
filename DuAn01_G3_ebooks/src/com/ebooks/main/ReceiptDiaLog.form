@@ -102,6 +102,9 @@
           </Constraints>
         </Component>
         <Container class="com.ebooks.Compoment.MaterialTabbed" name="TabThongTinHoaDon">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="TabThongTinHoaDonStateChanged"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="20" y="100" width="840" height="460"/>
@@ -392,6 +395,9 @@
                   </Constraints>
                 </Component>
                 <Container class="com.ebooks.Compoment.MaterialTabbed" name="tabHDTU">
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tabHDTUStateChanged"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="20" y="100" width="480" height="310"/>

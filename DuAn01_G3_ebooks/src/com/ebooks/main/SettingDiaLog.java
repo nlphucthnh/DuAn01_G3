@@ -21,11 +21,11 @@ import javax.swing.JPanel;
 public class SettingDiaLog extends javax.swing.JDialog {
 
     TaiKhoanDAO daoTK = new TaiKhoanDAO();
-
+    static boolean TacMain = false;
     /**
      * Creates new form SettingDiaLog
      */
-    public SettingDiaLog(java.awt.Frame parent, boolean modal) {
+        public SettingDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -367,9 +367,9 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_myButton8ActionPerformed
 
     private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        new LogInDiaLog(null, true).setVisible(true);
+       
+//        super.dispose();
+//        new LogInDiaLog(null, true).setVisible(true);
     }//GEN-LAST:event_myButton9ActionPerformed
 
     private void myButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton10ActionPerformed
@@ -395,13 +395,13 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void myButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton12ActionPerformed
-        // TODO add your handling code here:
+        TacMain = true;
         dispose();
-        new LogInDiaLog(null, true).setVisible(true);
+        
     }//GEN-LAST:event_myButton12ActionPerformed
 
     private void myButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton13ActionPerformed
-        // TODO add your handling code here:
+       
         deleteTaiKhoan();
 
     }//GEN-LAST:event_myButton13ActionPerformed

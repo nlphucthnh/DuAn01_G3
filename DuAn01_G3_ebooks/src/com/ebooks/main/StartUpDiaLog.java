@@ -20,6 +20,7 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0,0,0,0));
         Loading();
+        
     }
     
     

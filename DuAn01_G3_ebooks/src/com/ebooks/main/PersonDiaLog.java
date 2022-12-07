@@ -32,11 +32,6 @@ import javax.swing.JPanel;
  */
 public class PersonDiaLog extends javax.swing.JDialog {
 
-    TaiKhoanDAO daoTK = new TaiKhoanDAO();
-    NguoiDungDAO daoND = new NguoiDungDAO();
-    private String UrlImg = "..\\DuAn01_G3_ebooks\\logos\\";
-    private JFileChooser fileChooser = new JFileChooser();
-    private String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
     File file;
     List<NguoiDung> listND = new  ArrayList<>();
     NguoiDungDAO DAOND = new NguoiDungDAO();
@@ -77,6 +72,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     public ImageIcon ShowImg(String nameImg) {
+        String UrlImg = "..\\DuAn01_G3_ebooks\\logos\\";
         ImageIcon imgIcon = new ImageIcon(UrlImg + nameImg);
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
@@ -116,6 +112,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     void insert() {
+        NguoiDungDAO daoND = new NguoiDungDAO();
         if (checkBugs()) {
             NguoiDung model = getModel();
             if (model == null) {
@@ -133,6 +130,7 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     void update() {
+        NguoiDungDAO daoND = new NguoiDungDAO();
         if (checkBugs()) {
             NguoiDung model = getModel();
             if (model == null) {
@@ -202,6 +200,9 @@ public class PersonDiaLog extends javax.swing.JDialog {
     }
 
     public String SetImg() {
+        String UrlImg = "..\\DuAn01_G3_ebooks\\logos\\";
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+        JFileChooser fileChooser = new JFileChooser();
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {

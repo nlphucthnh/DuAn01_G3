@@ -103,6 +103,11 @@ public class SachDAO {
         return select(sql);
     }
     
+    public List<Sach> selectName(String name) {
+        String sql="SELECT * FROM Sach WHERE tenSach LIKE ?";
+        return select(sql,"%"+name+"%");
+    }
+    
     /**
      * Truy vấn thực thể theo mã id
      * @param id là mã của bản ghi được truy vấn

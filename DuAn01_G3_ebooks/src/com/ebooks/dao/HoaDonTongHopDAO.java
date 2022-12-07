@@ -25,6 +25,12 @@ public class HoaDonTongHopDAO {
     List<HoaDonThucUong> lisHDTU = new ArrayList<>();
     List<HoaDonThueSach> listHSTS = new ArrayList<>();
     
+    
+     
+    
+    
+    
+    
     public List<Object[]> getHoaDonTongHop() {
         List<Object[]> list = new ArrayList<>();
         try {

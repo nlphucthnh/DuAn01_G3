@@ -36,39 +36,22 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
     boolean congTac = false;
     String maTacGia = null;
-    
     private TacGiaDAO DAOTG = new TacGiaDAO();
-    
-    private String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgAthor\\";
-    private String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
-    private JFileChooser fileChooser = new JFileChooser();
-    
-    private Date now = new Date();
-    
-    private List<TacGia> listTG = new ArrayList<>();
-    
-    // private String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
-
     public AuthorDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         Calendar.setVisible(congTac);
         congTac = !congTac;
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainDialog);
-        SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
-        txtNgaySinh.setText(String.valueOf(formats.format(Calendar.getDate())));
     }
 
     public AuthorDiaLog(java.awt.Frame parent, boolean modal, TacGia tg) {
         super(parent, modal);
         initComponents();
         setForm(tg);
+        Calendar.setVisible(congTac);
         maTacGia = tg.getMaTacGia();
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainDialog);
-        SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
-        txtNgaySinh.setText(String.valueOf(formats.format(Calendar.getDate())));
     }
 
     private int x;
@@ -93,7 +76,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
     public void setForm(TacGia tg) {
         txtHoten.setText(tg.getHoTen());
-        txtNgaySinh.setText(String.valueOf(tg.getNgaySinh()));
+        SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+        txtNgaySinh.setText(String.valueOf(formats.format(tg.getNgaySinh())));
         txtMoTa.setText(tg.getMoTa());
         rdoNam.setSelected(tg.isGioiTinh());
         rdoNu.setSelected(!tg.isGioiTinh());
@@ -102,6 +86,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     TacGia getForm() {
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
         TacGia tacGia = new TacGia();
         tacGia.setHoTen(txtHoten.getText());
         tacGia.setGioiTinh(rdoNam.isSelected()? true : false);
@@ -113,6 +98,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
     
     TacGia getForm(TacGia tg) {
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
         tg.setHoTen(txtHoten.getText());
         tg.setGioiTinh(rdoNam.isSelected()? true : false);
         tg.setNgaySinh(Calendar.getDate());
@@ -123,6 +109,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     public ImageIcon ShowImg(String nameImg) {
+        String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgAthor\\";
         ImageIcon imgIcon = new ImageIcon(UrlImg + nameImg);
         Image image = imgIcon.getImage();
         Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
@@ -131,6 +118,9 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
     
     public String SetImg() {
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+        String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgAthor\\";
+        JFileChooser fileChooser = new JFileChooser();
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {
@@ -236,6 +226,11 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainDialog.setRadius(25);
+        pnlMainDialog.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlMainDialogMouseDragged(evt);
+            }
+        });
         pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Calendar.setBackground(new java.awt.Color(201, 235, 201));
@@ -420,6 +415,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
 //        // TODO add your handling code here:
+        List<TacGia> listTG = new ArrayList<>();
         String maTG = txtHoten.getText();
         int timThay = 0;
 //        ThucUongDAO DaoTU = new ThucUongDAO();
@@ -459,6 +455,10 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_lblTacGiaImgMousePressed
+
+    private void pnlMainDialogMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainDialogMouseDragged
+       initMoving(this, pnlMainDialog);
+    }//GEN-LAST:event_pnlMainDialogMouseDragged
 
     /*tbdSetting args the command line arguments
      */

@@ -88,6 +88,11 @@ public class HoaDonThucUongDAO {
         return select(sql);
     }
     
+    public List<HoaDonThucUong> selectAllGroupBy() {
+        String sql="SELECT YEAR(NgayMua) NgayMua FROM HoaDonThucUong GROUP BY YEAR(NgayMua)";
+        return select(sql);
+    }
+    
     /**
      * Truy vấn thực thể theo mã id
      * @param id là mã của bản ghi được truy vấn

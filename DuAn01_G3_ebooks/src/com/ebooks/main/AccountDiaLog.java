@@ -58,7 +58,10 @@ public class AccountDiaLog extends javax.swing.JDialog {
         txtHoTen.setText(taiKhoan.getHoten());
         txtMatKhau.setText(taiKhoan.getMatKhau());
         txtTenDangNhap.setText(taiKhoan.getTenDangNhap());
-        txtThoiLuong.setText(String.valueOf(taiKhoan.getThoiLuong()));
+        SprHour.setValue(taiKhoan.getThoiLuong().getHours());
+        SprMin.setValue(taiKhoan.getThoiLuong().getMinutes());
+        SprSec.setValue(taiKhoan.getThoiLuong().getSeconds());
+   
         System.out.println(taiKhoan.getThoiLuong());
         if (taiKhoan.isTrangThai()) {
             rdoQuanTriVien.setSelected(true);
@@ -76,7 +79,9 @@ public class AccountDiaLog extends javax.swing.JDialog {
         txtHoTen.setText(taiKhoan.getHoten());
         txtMatKhau.setText(taiKhoan.getMatKhau());
         txtTenDangNhap.setText(taiKhoan.getTenDangNhap());
-        txtThoiLuong.setText(String.valueOf(taiKhoan.getThoiLuong()));
+        SprHour.setValue(taiKhoan.getThoiLuong().getHours());
+        SprMin.setValue(taiKhoan.getThoiLuong().getMinutes());
+        SprSec.setValue(taiKhoan.getThoiLuong().getSeconds());
         txtMaNguoiDung.setEditable(false);
         txtHoTen.setEditable(false);
         txtTenDangNhap.setEditable(false);
@@ -160,14 +165,17 @@ public class AccountDiaLog extends javax.swing.JDialog {
         model.setMatKhau(txtMatKhau.getText());
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setTrangThai(rdoQuanTriVien.isSelected() == true ? true : false);
-        model.setThoiLuong(Time.valueOf(txtThoiLuong.getText()));
+        String time = SprHour.getValue() + ":" + SprMin.getValue() +":"+ SprSec.getValue();
+        
+        model.setThoiLuong(Time.valueOf(time));
         return model;
     }
 
     TaiKhoan getModel(TaiKhoan model) {
         model.setMatKhau(String.valueOf(txtMatKhau.getPassword()));
         model.setTrangThai(rdoQuanTriVien.isSelected() == true ? true : false);
-        model.setThoiLuong(Time.valueOf(txtThoiLuong.getText()));
+        String time = SprHour.getValue() + ":" + SprMin.getValue() +":"+ SprSec.getValue();
+        model.setThoiLuong(Time.valueOf(time));
         return model;
     }
 
@@ -223,13 +231,14 @@ public class AccountDiaLog extends javax.swing.JDialog {
         } else if (txtMatKhau.getText().equals("")) {
             DialogHelper.alert(this, "Chưa nhập mật khẩu");
             return false;
-        } else if (txtThoiLuong.getText().equals("")) {
-            DialogHelper.alert(this, "Chưa nhập thời lượng");
-            return false;
-        } else if (!txtThoiLuong.getText().matches(timeRegex)) {
-            DialogHelper.alert(this, "Thời lượng chưa đúng định dạng!(HH:MM:SS)");
-            return false;
-        }
+        } 
+//        else if (txtThoiLuong.getText().equals("")) {
+//            DialogHelper.alert(this, "Chưa nhập thời lượng");
+//            return false;
+//        } else if (!txtThoiLuong.getText().matches(timeRegex)) {
+//            DialogHelper.alert(this, "Thời lượng chưa đúng định dạng!(HH:MM:SS)");
+//            return false;
+//        }
         return true;
 
     }
@@ -268,7 +277,12 @@ public class AccountDiaLog extends javax.swing.JDialog {
         rdoQuanTriVien = new javax.swing.JRadioButton();
         btnLuuTaiKhoan = new com.ebooks.Compoment.MyButton();
         jLabel9 = new javax.swing.JLabel();
-        txtThoiLuong = new javax.swing.JTextField();
+        SprHour = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
+        SprMin = new javax.swing.JSpinner();
+        jLabel11 = new javax.swing.JLabel();
+        SprSec = new javax.swing.JSpinner();
+        jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -427,17 +441,32 @@ public class AccountDiaLog extends javax.swing.JDialog {
         panelRadius1.add(btnLuuTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 260, 50));
 
         jLabel9.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jLabel9.setText("Thời lượng");
-        panelRadius1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Hour");
+        panelRadius1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 60, 20));
 
-        txtThoiLuong.setBackground(new java.awt.Color(222, 247, 227));
-        txtThoiLuong.setToolTipText("00:00:00");
-        txtThoiLuong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtThoiLuongActionPerformed(evt);
-            }
-        });
-        panelRadius1.add(txtThoiLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 270, 40));
+        SprHour.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        panelRadius1.add(SprHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 60, 40));
+
+        jLabel10.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel10.setText("Thời lượng");
+        panelRadius1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+
+        SprMin.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        panelRadius1.add(SprMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 60, 40));
+
+        jLabel11.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Min");
+        panelRadius1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 60, -1));
+
+        SprSec.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        panelRadius1.add(SprSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 60, 40));
+
+        jLabel12.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Sec");
+        panelRadius1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 60, 20));
 
         tabTaiKhoan.addTab("Form Tài Khoản", panelRadius1);
 
@@ -527,10 +556,6 @@ public class AccountDiaLog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnLuuTaiKhoanActionPerformed
 
-    private void txtThoiLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThoiLuongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtThoiLuongActionPerformed
-
     /*tbdSetting args the command line arguments
      */
     public static void main(String args[]) {
@@ -576,10 +601,16 @@ public class AccountDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner SprHour;
+    private javax.swing.JSpinner SprMin;
+    private javax.swing.JSpinner SprSec;
     private com.ebooks.Compoment.MyButton btnLuuTaiKhoan;
     private com.ebooks.Compoment.MyButton btnThemTaiKhoan;
     private javax.swing.ButtonGroup buttonGroupVaiTroThongTinTK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -602,6 +633,5 @@ public class AccountDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDangNhap;
-    private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
 }

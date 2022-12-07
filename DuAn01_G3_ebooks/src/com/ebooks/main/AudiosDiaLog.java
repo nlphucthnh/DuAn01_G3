@@ -32,36 +32,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AudiosDiaLog extends javax.swing.JDialog {
     
-    private SachDAO DAOS = new SachDAO();
-    private List<Sach> listS = new ArrayList<>();
-    private List<AudioSach> listAudio = new ArrayList<>();
-    private TacGiaDAO DAOTG = new TacGiaDAO();
+
+
     private AudioSachDAO DAOAS = new AudioSachDAO();
-    private JFileChooser fileChooser = new JFileChooser();
-    private String UrlAudio = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\audioEbook\\";
     private String maAudio = null;
     public AudiosDiaLog(java.awt.Frame parent, boolean modal, AudioSach audio) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainDialog);
         SetForm(audio);
-        fillTableEbooks();
         tabAudioSach.setEnabledAt(1, false);
         maAudio = audio.getMaAudio();
         txtMaSach.setEnabled(false);
         txtDuongDan.setEnabled(false);
     }
-    
-    
-    
-     
     public AudiosDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainDialog);
-        fillTableEbooks();
         txtMaSach.setEnabled(false);
         txtDuongDan.setEnabled(false);
     }
@@ -127,6 +115,8 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     }
     
      public String MovingFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        String UrlAudio = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\audioEbook\\";
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {
@@ -146,6 +136,9 @@ public class AudiosDiaLog extends javax.swing.JDialog {
     
     
     public void fillTableEbooks() {
+        SachDAO DAOS = new SachDAO();
+        List<Sach> listS = new ArrayList<>();
+        TacGiaDAO DAOTG = new TacGiaDAO();
         DefaultTableModel model;
         model = (DefaultTableModel) tblEbook.getModel();
         tblEbook.setSelectionBackground(new Color(87, 190, 110));
@@ -223,6 +216,11 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
         pnlMainDialog.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainDialog.setRadius(25);
+        pnlMainDialog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlMainDialogMousePressed(evt);
+            }
+        });
         pnlMainDialog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
@@ -261,6 +259,12 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        tabAudioSach.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabAudioSachStateChanged(evt);
+            }
+        });
 
         pnlAudio.setBackground(new java.awt.Color(255, 255, 255));
         pnlAudio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -439,6 +443,7 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
     private void btnLuuThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongTinActionPerformed
 //        InsertAudio();
+        List<AudioSach> listAudio = new ArrayList<>();
         int timThay = 0;
         ThucUongDAO DaoTU = new ThucUongDAO();
         listAudio = DAOAS.selectAll();
@@ -457,6 +462,19 @@ public class AudiosDiaLog extends javax.swing.JDialog {
 
         
     }//GEN-LAST:event_btnLuuThongTinActionPerformed
+
+    private void tabAudioSachStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabAudioSachStateChanged
+        int index = tabAudioSach.getSelectedIndex();
+        if(index == -1){
+            return;
+        }else if(index == 0){
+            fillTableEbooks();
+        }
+    }//GEN-LAST:event_tabAudioSachStateChanged
+
+    private void pnlMainDialogMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainDialogMousePressed
+        initMoving(this, pnlMainDialog);
+    }//GEN-LAST:event_pnlMainDialogMousePressed
 
     /*tbdSetting args the command line arguments
      */

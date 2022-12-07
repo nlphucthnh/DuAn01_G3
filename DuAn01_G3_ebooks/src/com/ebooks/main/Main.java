@@ -47,17 +47,25 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -83,8 +91,21 @@ import org.icepdf.ri.common.SwingViewBuilder;
  */
 public class Main extends javax.swing.JFrame {
 
+    boolean KiemThu = false;
     static String MaND;
     static String TenDangNhap;
+    static int timeAuido;
+    static boolean playPase = false;
+    static int indexSeletor = -1;
+    static int seconds = 0;
+    static int minute = 0;
+    static int I = -1;
+    //TimeRentalPeriod
+    int tic = -1;
+    int sec = 0;
+    int min = 0;
+    int hour = 0;
+    //TimeRentalPeriod
     public static DefaultTableModel tblTable;
     String Url = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
     ImageIcon MainA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\apps (2).png");
@@ -97,8 +118,8 @@ public class Main extends javax.swing.JFrame {
     ImageIcon ReadB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\book-alt (3).png");
     ImageIcon ListenA = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (4).png");
     ImageIcon ListenB = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\headphones (3).png");
-    boolean congTac = true;
-
+    static boolean congTac = false;
+    static boolean TimeDl = false;
     DefaultTableModel model;
     AudioSachDAO DAOAU = new AudioSachDAO();
     List<AudioSach> listAudio = new ArrayList();
@@ -116,6 +137,7 @@ public class Main extends javax.swing.JFrame {
     String imagePath;
     // Now Check If Repeat Button is Enabled or not
     boolean repeat = false;
+    boolean muteOnOff = false;
     // Here I am making a boolean for windowCollapsed
     boolean windowCollapsed = false;
 
@@ -150,30 +172,20 @@ public class Main extends javax.swing.JFrame {
     List<Sach> listS = new ArrayList<>();
     private List<TheLoai> listTL = new ArrayList<>();
     List<TacGia> listTG = new ArrayList<>();
+    TimeNotifyDialog timeDialog;
 
     public Main() {
         initComponents();
         init();
-        movedpnlMenu();
         setBackground(new Color(0, 0, 0, 0));
+        movedpnlMenu();
         Date();
-        fillTableAudio(tblAudio);
-        fillTableAudio(tblAudioQL);
+        fillTableDanhSachCacSach();    
         AppStatus.mainApp = this;
+        timeDialog = new TimeNotifyDialog(this, congTac);
         initMoving(this, pnlMainProjebt);
-        setModelAudio();
-        fillComBoBoxTheLoai(cboTheLoai);
-        fillTableDanhSachCacSach();
-        fillTableSach();
-        fillTableNguoiDung();
-        fillTableThucUong();
-        fillTableTacGia();
-        fillTableTheLoai();
-        fillTableHoaDon();
-        fillTableDTTU();
-        fillTableDTTS();
-        fillTableListSachDoc();
-        fillTableAudio();
+        RentalPeriod();
+        
     }
 
     public void init() {
@@ -181,12 +193,6 @@ public class Main extends javax.swing.JFrame {
         setIconImage(ShareHelper.APP_ICON);
         new StartUpDiaLog(this, true).setVisible(true);
         new LogInDiaLog(this, true).setVisible(true);
-        LoadTaiKhoan();
-        fillTableTaiKhoan(listTK);
-        fillTableNguoiDung();
-//        fillComBoBoxNamTU();
-//        fillComBoBoxNamTS();
-
     }
 
     //-------------------------------------------FILL TABLE------------------------------------------//
@@ -213,7 +219,7 @@ public class Main extends javax.swing.JFrame {
         tblDanhSachCacSach.setSelectionBackground(new Color(87, 190, 110));
         model.setRowCount(0);
         try {
-            listS = DAOS.selectAll();
+            listS = DAOS.selectName(txtSearch.getText());
             for (Sach sach : listS) {
                 Object[] row = {sach.getMaSach(), sach.getTenSach(), DAOTG.findById(sach.getMaTacGia()).getHoTen(), sach.getNgayDang(), sach.getMoTa()};
                 model.addRow(row);
@@ -414,25 +420,97 @@ public class Main extends javax.swing.JFrame {
     }
 
     // I am going to create a custom MP3Player Method
-//AudioSach
-    public void fillTableAudio() {
-        model = (DefaultTableModel) tblAudio.getModel();
-        model.setRowCount(0);
-        try {
-            listAudio = DAOAU.selectAll();
-            for (AudioSach au : listAudio) {
-                model.addRow(new Object[]{au.getMaAudio(), au.getTenAudio(), DateHelper.toString(au.getNgayPhatHanh()), au.getNguoiThu(), au.getMoTa()});
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
     private MP3Player mp3Player() {
         MP3Player mp3Player = new MP3Player();
         return mp3Player;
     }
 // Let's Set Volume Down Method It's not necessary to remeber this code.
+
+    private void RentalPeriod() {
+        TaiKhoan tk = ShareHelper.USER;
+        int Hours = tk.getThoiLuong().getHours();
+        int Minute = tk.getThoiLuong().getMinutes();
+        int Seconds = tk.getThoiLuong().getSeconds();
+        System.out.println(tk.getThoiLuong().getTime());
+        new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sec += 1;
+                if (sec == 60) {
+                    min += 1;
+                    sec = 0;
+                }
+                if (min == 60) {
+                    hour += 1;
+                    min = 0;
+                }
+                if (Hours == hour) {
+                    if (Minute == min) {
+                        if (Seconds == sec) {
+                            tk.setThoiLuong(Time.valueOf("00:00:00"));
+                            DaoTK.update(tk);
+                            DialogHelper.alert(null, "Đã Hết Thời Gian Thuê");
+                            System.exit(0);
+
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private void runtimeFirst() {
+        int timeDislay = timeAuido / 125;
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        if (!playPase) {
+                            break;
+                        }
+                        I++;
+                        seconds++;
+                        if (seconds == 60) {
+                            minute++;
+                            seconds = 0;
+                        }
+                        sliderAudio.setValue(I);
+                        sliderAudio.setMaximum(timeDislay);
+                        if (seconds < 10) {
+                            lblTimeFirst.setText(minute + ":0" + seconds);
+                        } else {
+                            lblTimeFirst.setText(minute + ":" + seconds);
+                        }
+
+                        if (I == timeDislay) {
+                            break;
+                        }
+
+                        Thread.sleep(1000);   //thread tạm dừng hoạt động trong 20 ms
+                    } catch (InterruptedException ex) {
+                        break;
+                    }
+                }
+            }
+        };
+        t.start();
+
+    }
+    
+
+    private void displayTimeAudio() {
+
+        int timeDislay = timeAuido / 125;
+        int timeEven = timeDislay / 60;
+        int timeSurplus = timeDislay % 60;
+        if (timeSurplus < 10) {
+            lblTimeLast.setText(timeEven + ":0" + timeSurplus);
+        } else {
+            lblTimeLast.setText(timeEven + ":" + timeSurplus);
+        }
+
+    }
 
     private void volumeDownControl(Double valueToPlusMinus) {
         // Get Mixer Information From AudioSystem
@@ -583,13 +661,15 @@ public class Main extends javax.swing.JFrame {
             pnlStatistical.setVisible(true);
             pnlRead.setLocation(15, 260);
             pnlListen.setLocation(15, 340);
-
+            ImageIcon icon = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Image\\AvataQTV.png");
+            imageAvatar1.setIcon(icon);
         } else {
             pnlManage.setVisible(false);
             pnlStatistical.setVisible(false);
             pnlRead.setLocation(new Point(15, 100));
             pnlListen.setLocation(new Point(15, 180));
-
+            ImageIcon icon = new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Image\\AvataND.png");
+            imageAvatar1.setIcon(icon);
         }
     }
 
@@ -695,6 +775,26 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
+    public void DisplayReadPanel() {
+        SetColorPanel(pnlMain, false);
+        SetColorPanel(pnlManage, false);
+        SetColorPanel(pnlStatistical, false);
+        SetColorPanel(pnlRead, true);
+        SetColorPanel(pnlListen, false);
+        //SetColorBtn
+        SetColorIconBtn(btnMain, false, MainA, MainB);
+        SetColorIconBtn(btnManage, false, ManageA, ManageB);
+        SetColorIconBtn(btnStatistical, false, StatisticalA, StatisticalB);
+        SetColorIconBtn(btnRead, true, ReadA, ReadB);
+        SetColorIconBtn(btnListen, false, ListenA, ListenB);
+        //SetFrameHienThi
+        pnlFrameMain.show(false);
+        pnlFrameManage.show(false);
+        pnlFrameStatistical.show(false);
+        pnlFrameRead.show(true);
+        pnlFrameListen.show(false);
+    }
+
     //----------------------------------------Methor other-------------------------------------//
     //---------------------------------------DELETE METHOD------------------------------------//
     //method deleteNguoiDung
@@ -711,6 +811,8 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }
+    
+    
 
     //method deleteTaiKhoan
     private void deleteTaiKhoan() {
@@ -847,7 +949,7 @@ public class Main extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         pnlFrameManage = new com.ebooks.Compoment.PanelRadius();
         jLabel17 = new javax.swing.JLabel();
-        materialTabbed1 = new com.ebooks.Compoment.MaterialTabbed();
+        tabQuanLy = new com.ebooks.Compoment.MaterialTabbed();
         panelRadius9 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTheLoai = new com.ebooks.Compoment.Table();
@@ -975,37 +1077,38 @@ public class Main extends javax.swing.JFrame {
         tblAudio = new com.ebooks.Compoment.Table();
         jLabel27 = new javax.swing.JLabel();
         lblTenNguoiThu = new javax.swing.JLabel();
-        myButton7 = new com.ebooks.Compoment.MyButton();
         btnPlay = new com.ebooks.Compoment.MyButton();
-        myButton14 = new com.ebooks.Compoment.MyButton();
         lblTimeLast = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        slider1 = new com.ebooks.Compoment.Slider();
+        lblTimeFirst = new javax.swing.JLabel();
+        sliderAudio = new com.ebooks.Compoment.Slider();
         lblTenAudio = new javax.swing.JLabel();
         lblVolumeRepeat = new javax.swing.JLabel();
         lblVolumeDown = new javax.swing.JLabel();
         lblVolumeUp = new javax.swing.JLabel();
         lblVolumeFull = new javax.swing.JLabel();
-        lblVolumeMute = new javax.swing.JLabel();
         lblAnhAudio = new javax.swing.JLabel();
         panelRadius2 = new com.ebooks.Compoment.PanelRadius();
         jLabel1 = new javax.swing.JLabel();
-        searchText1 = new com.ebooks.Compoment.SearchText();
+        txtSearch = new com.ebooks.Compoment.SearchText();
         imageAvatar1 = new com.ebooks.Compoment.ImageAvatar();
         pnlSetting = new com.ebooks.Compoment.PanelRadius();
         btnSetting = new com.ebooks.Compoment.MyButton();
-        pnlBell = new com.ebooks.Compoment.PanelRadius();
-        btnBell = new com.ebooks.Compoment.MyButton();
         pnlOff = new com.ebooks.Compoment.PanelRadius();
         lblOff = new javax.swing.JLabel();
         lblDay = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
+        btnBell = new com.ebooks.Compoment.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ Thống eBooks");
         setUndecorated(true);
 
         pnlMainProjebt.setBackground(new java.awt.Color(251, 251, 251));
+        pnlMainProjebt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlMainProjebtMousePressed(evt);
+            }
+        });
         pnlMainProjebt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
@@ -1116,7 +1219,7 @@ public class Main extends javax.swing.JFrame {
         pnlFrameMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlMenuBooks.setBackground(new java.awt.Color(205, 239, 215));
-        pnlMenuBooks.setRadius(25);
+        pnlMenuBooks.setRadius(15);
         pnlMenuBooks.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRadius3.setBackground(new java.awt.Color(255, 255, 255));
@@ -1233,6 +1336,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
         tblDanhSachCacSach.setRadius(10);
+        tblDanhSachCacSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDanhSachCacSachMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDanhSachCacSach);
 
         pnlFrameMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 700, 260));
@@ -1245,7 +1353,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 260, 140));
 
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/181-removebg-preview.png"))); // NOI18N
-        panelRadius4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, -1, -1));
+        panelRadius4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, -1));
 
         jLabel34.setFont(new java.awt.Font("Inter SemiBold", 0, 36)); // NOI18N
         jLabel34.setText("NERDS");
@@ -1267,8 +1375,13 @@ public class Main extends javax.swing.JFrame {
         jLabel17.setText("Quản Lý");
         pnlFrameManage.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        materialTabbed1.setClorSroll(new java.awt.Color(87, 190, 110));
-        materialTabbed1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tabQuanLy.setClorSroll(new java.awt.Color(87, 190, 110));
+        tabQuanLy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tabQuanLy.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabQuanLyStateChanged(evt);
+            }
+        });
 
         panelRadius9.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1379,7 +1492,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius9.add(btnXoaLoaiSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
-        materialTabbed1.addTab("Loại Sách", panelRadius9);
+        tabQuanLy.addTab("Loại Sách", panelRadius9);
 
         panelRadius10.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1531,7 +1644,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius10.add(btnXoaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, 40));
 
-        materialTabbed1.addTab("Sách", panelRadius10);
+        tabQuanLy.addTab("Sách", panelRadius10);
 
         panelRadius11.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1671,7 +1784,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius11.add(btnLastAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
-        materialTabbed1.addTab("Audio", panelRadius11);
+        tabQuanLy.addTab("Audio", panelRadius11);
 
         panelRadius12.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1790,7 +1903,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius12.add(btnXoaTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
-        materialTabbed1.addTab("Tác Giả", panelRadius12);
+        tabQuanLy.addTab("Tác Giả", panelRadius12);
 
         panelRadius13.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1902,7 +2015,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius13.add(btnThemTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
-        materialTabbed1.addTab("Tài Khoản", panelRadius13);
+        tabQuanLy.addTab("Tài Khoản", panelRadius13);
 
         panelRadius14.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2014,7 +2127,7 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius14.add(btnThemNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
-        materialTabbed1.addTab("Người Dùng", panelRadius14);
+        tabQuanLy.addTab("Người Dùng", panelRadius14);
 
         pnlThucUong.setBackground(new java.awt.Color(255, 255, 255));
         pnlThucUong.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2124,7 +2237,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlThucUong.add(btnXoaThucUong, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
-        materialTabbed1.addTab("Thực Đơn", pnlThucUong);
+        tabQuanLy.addTab("Thực Đơn", pnlThucUong);
 
         pnlHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         pnlHoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2170,6 +2283,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
         pnlHoaDon.add(btnXoaThongTinHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 170, 150, 40));
+
+        tabDoanhThu.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabDoanhThuStateChanged(evt);
+            }
+        });
 
         panelRadius5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2245,9 +2364,9 @@ public class Main extends javax.swing.JFrame {
 
         pnlHoaDon.add(tabDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 420));
 
-        materialTabbed1.addTab("Hóa Đơn", pnlHoaDon);
+        tabQuanLy.addTab("Hóa Đơn", pnlHoaDon);
 
-        pnlFrameManage.add(materialTabbed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1060, 480));
+        pnlFrameManage.add(tabQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1060, 480));
 
         pnlBossMain.add(pnlFrameManage, "card6");
 
@@ -2300,11 +2419,6 @@ public class Main extends javax.swing.JFrame {
         cboNamTU.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboNamTUItemStateChanged(evt);
-            }
-        });
-        cboNamTU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboNamTUActionPerformed(evt);
             }
         });
         panelRadius27.add(cboNamTU, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 160, 30));
@@ -2387,11 +2501,6 @@ public class Main extends javax.swing.JFrame {
         cboNamTS.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboNamTSItemStateChanged(evt);
-            }
-        });
-        cboNamTS.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                cboNamTSComponentHidden(evt);
             }
         });
         panelRadius25.add(cboNamTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 160, 30));
@@ -2521,7 +2630,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlBossMain.add(pnlFrameRead, "card4");
 
-        pnlFrameListen.setBackground(new java.awt.Color(255, 255, 255));
+        pnlFrameListen.setBackground(new java.awt.Color(251, 251, 251));
         pnlFrameListen.setRadius(15);
         pnlFrameListen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2549,10 +2658,8 @@ public class Main extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblAudioMouseClicked(evt);
             }
-        });
-        tblAudio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                tblAudioPropertyChange(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblAudioMousePressed(evt);
             }
         });
         jScrollPane13.setViewportView(tblAudio);
@@ -2568,39 +2675,21 @@ public class Main extends javax.swing.JFrame {
         lblTenNguoiThu.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         lblTenNguoiThu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenNguoiThu.setText("Steven Levy");
-        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 379, 300, 30));
+        pnlFrameListen.add(lblTenNguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 300, 30));
 
-        myButton7.setBackground(new java.awt.Color(254, 254, 254));
-        myButton7.setBorder(null);
-        myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/rewind-button.png"))); // NOI18N
-        myButton7.setBoderColor(new java.awt.Color(255, 255, 255));
-        myButton7.setColorClick(new java.awt.Color(255, 255, 255));
-        pnlFrameListen.add(myButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 40, 40));
-
-        btnPlay.setBackground(new java.awt.Color(254, 254, 254));
+        btnPlay.setBackground(new java.awt.Color(251, 251, 251));
         btnPlay.setBorder(null);
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/play-button-arrowhead.png"))); // NOI18N
-        btnPlay.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnPlay.setBoderColor(new java.awt.Color(251, 251, 251));
         btnPlay.setColorClick(new java.awt.Color(255, 255, 255));
-        btnPlay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPlayMouseClicked(evt);
-            }
-        });
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
             }
         });
-        pnlFrameListen.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 40, 40));
+        pnlFrameListen.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 40, 40));
 
-        myButton14.setBackground(new java.awt.Color(254, 254, 254));
-        myButton14.setBorder(null);
-        myButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/fast-forward-double-black-arrows-multimedia-symbol.png"))); // NOI18N
-        myButton14.setBoderColor(new java.awt.Color(255, 255, 255));
-        myButton14.setColorClick(new java.awt.Color(255, 255, 255));
-        pnlFrameListen.add(myButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 40, 40));
-
+        lblTimeLast.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTimeLast.setText("5:00");
         lblTimeLast.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -2611,18 +2700,23 @@ public class Main extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        pnlFrameListen.add(lblTimeLast, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
+        pnlFrameListen.add(lblTimeLast, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 100, -1));
 
-        jLabel31.setText("00:00");
-        pnlFrameListen.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+        lblTimeFirst.setText("00:00");
+        pnlFrameListen.add(lblTimeFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
-        slider1.setColorSlider(new java.awt.Color(87, 190, 110));
-        pnlFrameListen.add(slider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 220, -1));
+        sliderAudio.setColorSlider(new java.awt.Color(87, 190, 110));
+        sliderAudio.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderAudioStateChanged(evt);
+            }
+        });
+        pnlFrameListen.add(sliderAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 220, -1));
 
         lblTenAudio.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         lblTenAudio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenAudio.setText("Hacker Lược Sử");
-        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 280, 70));
+        pnlFrameListen.add(lblTenAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 280, 70));
 
         lblVolumeRepeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/repeat.png"))); // NOI18N
         lblVolumeRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2630,42 +2724,34 @@ public class Main extends javax.swing.JFrame {
                 lblVolumeRepeatMouseClicked(evt);
             }
         });
-        pnlFrameListen.add(lblVolumeRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, -1, -1));
+        pnlFrameListen.add(lblVolumeRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, -1, 40));
 
-        lblVolumeDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_down.png"))); // NOI18N
+        lblVolumeDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume-down.png"))); // NOI18N
         lblVolumeDown.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblVolumeDownMouseClicked(evt);
             }
         });
-        pnlFrameListen.add(lblVolumeDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+        pnlFrameListen.add(lblVolumeDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, 40));
 
-        lblVolumeUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_up.png"))); // NOI18N
+        lblVolumeUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume.png"))); // NOI18N
         lblVolumeUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblVolumeUpMouseClicked(evt);
             }
         });
-        pnlFrameListen.add(lblVolumeUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, -1));
+        pnlFrameListen.add(lblVolumeUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, -1, 40));
 
-        lblVolumeFull.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/volume_full.png"))); // NOI18N
+        lblVolumeFull.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/speaker-filled-audio-tool.png"))); // NOI18N
         lblVolumeFull.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblVolumeFullMouseClicked(evt);
             }
         });
-        pnlFrameListen.add(lblVolumeFull, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, -1, -1));
-
-        lblVolumeMute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/mute.png"))); // NOI18N
-        lblVolumeMute.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblVolumeMuteMouseClicked(evt);
-            }
-        });
-        pnlFrameListen.add(lblVolumeMute, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, -1, -1));
+        pnlFrameListen.add(lblVolumeFull, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, -1, 40));
 
         lblAnhAudio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/5PhuongThuc.png"))); // NOI18N
-        pnlFrameListen.add(lblAnhAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 200, 310));
+        pnlFrameListen.add(lblAnhAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 200, 310));
 
         pnlBossMain.add(pnlFrameListen, "card3");
 
@@ -2677,16 +2763,26 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/search (1).png"))); // NOI18N
-        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
-
-        searchText1.setBackground(new java.awt.Color(205, 239, 215));
-        searchText1.setBorder(null);
-        searchText1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchText1ActionPerformed(evt);
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
             }
         });
-        panelRadius2.add(searchText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 410, 40));
+        panelRadius2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 40));
+
+        txtSearch.setBackground(new java.awt.Color(205, 239, 215));
+        txtSearch.setBorder(null);
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+        panelRadius2.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 410, 40));
 
         pnlMainProjebt.add(panelRadius2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 480, 60));
 
@@ -2731,37 +2827,12 @@ public class Main extends javax.swing.JFrame {
 
         pnlMainProjebt.add(pnlSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 40, 40));
 
-        pnlBell.setBackground(new java.awt.Color(205, 239, 215));
-        pnlBell.setRadius(10);
-        pnlBell.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlBellMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlBellMouseExited(evt);
-            }
-        });
-        pnlBell.setLayout(new java.awt.GridBagLayout());
-
-        btnBell.setBackground(new java.awt.Color(205, 239, 215));
-        btnBell.setBorder(null);
-        btnBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/bell (1).png"))); // NOI18N
-        btnBell.setBoderColor(new java.awt.Color(205, 239, 215));
-        btnBell.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBellMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBellMouseExited(evt);
-            }
-        });
-        pnlBell.add(btnBell, new java.awt.GridBagConstraints());
-
-        pnlMainProjebt.add(pnlBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
-
         pnlOff.setBackground(new java.awt.Color(205, 239, 215));
         pnlOff.setRadius(10);
         pnlOff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlOffMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnlOffMouseEntered(evt);
             }
@@ -2795,6 +2866,25 @@ public class Main extends javax.swing.JFrame {
         lblTime.setFont(new java.awt.Font("Inter Medium", 0, 18)); // NOI18N
         lblTime.setText("22 : 30 CH");
         pnlMainProjebt.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, -1, -1));
+
+        btnBell.setBackground(new java.awt.Color(205, 239, 215));
+        btnBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/bell (1).png"))); // NOI18N
+        btnBell.setBoderColor(new java.awt.Color(205, 239, 215));
+        btnBell.setRadius(10);
+        btnBell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBellMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBellMouseExited(evt);
+            }
+        });
+        btnBell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBellActionPerformed(evt);
+            }
+        });
+        pnlMainProjebt.add(btnBell, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2855,6 +2945,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnManageActionPerformed
 
     private void btnStatisticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalActionPerformed
+        fillComBoBoxNamTU();
         SetColorPanel(pnlMain, false);
         SetColorPanel(pnlManage, false);
         SetColorPanel(pnlStatistical, true);
@@ -2875,6 +2966,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStatisticalActionPerformed
 
     private void btnListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListenActionPerformed
+        setModelAudio();
+        fillTableAudio(tblAudio);
         SetColorPanel(pnlMain, false);
         SetColorPanel(pnlManage, false);
         SetColorPanel(pnlStatistical, false);
@@ -2895,6 +2988,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListenActionPerformed
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        fillTableListSachDoc();
         SetColorPanel(pnlMain, false);
         SetColorPanel(pnlManage, false);
         SetColorPanel(pnlStatistical, false);
@@ -2914,14 +3008,6 @@ public class Main extends javax.swing.JFrame {
         pnlFrameListen.show(false);
     }//GEN-LAST:event_btnReadActionPerformed
 
-    private void searchText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchText1ActionPerformed
-
-    }//GEN-LAST:event_searchText1ActionPerformed
-
-    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-
-    }//GEN-LAST:event_btnPlayActionPerformed
-
     private void lblOffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lblOffMouseClicked
@@ -2929,28 +3015,6 @@ public class Main extends javax.swing.JFrame {
     private void panelBorder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBorder1MouseClicked
 
     }//GEN-LAST:event_panelBorder1MouseClicked
-
-    private void pnlBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseEntered
-        pnlBell.setBackground(new Color(130, 219, 150));
-        btnBell.setBackground(new Color(130, 219, 150));
-        btnBell.setBoderColor(new Color(0, 0, 0, 0));
-    }//GEN-LAST:event_pnlBellMouseEntered
-
-    private void pnlBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBellMouseExited
-        pnlBell.setBackground(new Color(205, 239, 215));
-        btnBell.setBackground(new Color(205, 239, 215));
-    }//GEN-LAST:event_pnlBellMouseExited
-
-    private void btnBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseEntered
-        pnlBell.setBackground(new Color(130, 219, 150));
-        btnBell.setBackground(new Color(130, 219, 150));
-        btnBell.setBoderColor(new Color(0, 0, 0, 0));
-    }//GEN-LAST:event_btnBellMouseEntered
-
-    private void btnBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseExited
-        pnlBell.setBackground(new Color(205, 239, 215));
-        btnBell.setBackground(new Color(205, 239, 215));
-    }//GEN-LAST:event_btnBellMouseExited
 
     private void btnSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingMouseEntered
         pnlSetting.setBackground(new Color(130, 219, 150));
@@ -2985,6 +3049,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_lblOffMouseExited
 
     private void pnlOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseEntered
+
         lblOff.setBackground(new Color(0, 0, 0, 0));
         pnlOff.setBackground(new Color(253, 127, 127));
     }//GEN-LAST:event_pnlOffMouseEntered
@@ -2995,44 +3060,17 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingActionPerformed
         OpenSetting();
+        if (SettingDiaLog.TacMain) {
+            this.setVisible(false);
+            new LogInDiaLog(this, true).setVisible(true);
+            this.setVisible(true);
+        }
     }//GEN-LAST:event_btnSettingActionPerformed
 
     private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
-        OpenPerson();
+
     }//GEN-LAST:event_imageAvatar1MouseClicked
     int i = 0;
-    private void tblAudioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioMouseClicked
-        // TODO add your handling code here:
-
-        int index = tblAudio.getSelectedRow();
-        System.out.println(index);
-        Sach s = listS.get(index);
-        AudioSach au = listAudio.get(index);
-        lblTenAudio.setText(au.getTenAudio());
-        lblTenNguoiThu.setText(au.getNguoiThu());
-        lblAnhAudio.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\" + DAOS.findById(au.getMaSach()).getHinh()));
-        songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
-        player = mp3Player();
-        player.addToPlayList(songFile);
-        player.skipForward();
-        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-
-        currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
-        imagePath = "\\Icon";
-    }//GEN-LAST:event_tblAudioMouseClicked
-
-    private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
-        if (congTac == true) {
-            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
-            congTac = false;
-            player.play();
-        } else {
-            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-            congTac = true;
-            player.pause();
-        }
-    }//GEN-LAST:event_btnPlayMouseClicked
-
     private void btnThemNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNguoiDungActionPerformed
         MaND = null;
         new PersonDiaLog(this, true).setVisible(true);
@@ -3155,55 +3193,45 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVolumeUpMouseClicked
 
     private void lblVolumeFullMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeFullMouseClicked
-        volumeControl(1.0);
+        try {
+            if (muteOnOff) {
+                muteOnOff = false;
+                volumeControl(1.0);
+                String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\speaker-filled-audio-tool.png";
+                lblVolumeFull.setIcon(new ImageIcon(image));
+            } else {
+                muteOnOff = true;
+                volumeControl(0.0);
+                String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\mute.png";
+                lblVolumeFull.setIcon(new ImageIcon(image));
+            }
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_lblVolumeFullMouseClicked
 
-    private void lblVolumeMuteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeMuteMouseClicked
-        volumeControl(0.0);
-    }//GEN-LAST:event_lblVolumeMuteMouseClicked
-
     private void lblVolumeRepeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVolumeRepeatMouseClicked
-        // TODO add your handling code here:
-        if (repeat == false) {
-            repeat = true;
-            player.setRepeat(repeat);
 
-            String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat_enabled.png";
-            lblVolumeRepeat.setIcon(new ImageIcon(image));
-
-        } else if (repeat == true) {
-            repeat = false;
-            player.setRepeat(repeat);
-
-            String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat.png";
-            lblVolumeRepeat.setIcon(new ImageIcon(image));
-
+        try {
+            if (repeat == false) {
+                repeat = true;
+                player.setRepeat(repeat);
+                String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat-once.png";
+                lblVolumeRepeat.setIcon(new ImageIcon(image));
+            } else if (repeat == true) {
+                repeat = false;
+                player.setRepeat(repeat);
+                String image = "..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\repeat.png";
+                lblVolumeRepeat.setIcon(new ImageIcon(image));
+            }
+        } catch (Exception e) {
         }
+
     }//GEN-LAST:event_lblVolumeRepeatMouseClicked
 
     private void lblTimeLastAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblTimeLastAncestorAdded
 
     }//GEN-LAST:event_lblTimeLastAncestorAdded
-
-    private void tblAudioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblAudioPropertyChange
-//        player = mp3Player();
-//        player.stop();
-//        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-//        int index = tblAudio.getSelectedRow();
-//        System.out.println(index);
-//        AudioSach au = listAudio.get(index);
-//        lblTenAudio.setText(au.getTenAudio());
-//        lblTenNguoiThu.setText(au.getNguoiThu());
-//        lblAnhAudio.setIcon(ShowImg(au.getHinhAnh()));
-//        songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
-//        player = mp3Player();
-//        player.addToPlayList(songFile);
-//        player.skipForward();
-//        btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-//        
-//        currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
-//        imagePath = "\\Icon";
-    }//GEN-LAST:event_tblAudioPropertyChange
 
     private void tblAudioQLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioQLMousePressed
         if (evt.getClickCount() == 2) {
@@ -3654,10 +3682,6 @@ public class Main extends javax.swing.JFrame {
         UtilityHelper.last(index, tblDoanhThuThucUong, listTU);
     }//GEN-LAST:event_btnLastDTTUActionPerformed
 
-    private void cboNamTSComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cboNamTSComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboNamTSComponentHidden
-
     private void cboNamTSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboNamTSItemStateChanged
         int index = cboNamTS.getSelectedIndex();
         if (index != -1) {
@@ -3673,10 +3697,6 @@ public class Main extends javax.swing.JFrame {
             fillTableTKTU(nam);
         }
     }//GEN-LAST:event_cboNamTUItemStateChanged
-
-    private void cboNamTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamTUActionPerformed
-
-    }//GEN-LAST:event_cboNamTUActionPerformed
 
     private void btnFirstDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstDTTSActionPerformed
         int index = tblDoanhThuThueSach.getSelectedRow();
@@ -3720,14 +3740,191 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextDTTSActionPerformed
 
     private void tblListSachDocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMousePressed
-        int index = tblListSachDoc.getSelectedRow();
-        Sach s = listS.get(index);
-        System.out.println(s.getDuongDan());
-        openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
-        materialTabbed3.setSelectedIndex(0);
-        pnlReader.show(true);
-        pnlListSachDoc.show(false);
+        try {
+            int index = tblListSachDoc.getSelectedRow();
+            Sach s = listS.get(index);
+            System.out.println(s.getDuongDan());
+            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
+            materialTabbed3.setSelectedIndex(0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_tblListSachDocMousePressed
+
+    private void tblDanhSachCacSachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachCacSachMousePressed
+        if (evt.getClickCount() == 2) {
+            int index = tblDanhSachCacSach.getSelectedRow();
+            listS = DAOS.selectAll();
+            if (index != -1) {
+                try {
+                    Sach sach = listS.get(index);
+                    DisplayReadPanel();
+                    openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + sach.getDuongDan());
+                    materialTabbed3.setSelectedIndex(0);
+                } catch (Exception e) {
+                }
+
+            }
+        }
+    }//GEN-LAST:event_tblDanhSachCacSachMousePressed
+
+    private void tblAudioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioMousePressed
+        if (player != null) {
+            playPase = false;
+            runtimeFirst();
+            player.pause();
+        }
+        if (evt.getClickCount() == 2) {
+            int index = tblAudio.getSelectedRow();
+            if (indexSeletor != index) {
+                if (player != null) {
+                    timeAuido = 0;
+                    player.pause();
+                    indexSeletor = index;
+                }
+            }
+            Sach s = listS.get(index);
+            AudioSach au = listAudio.get(index);
+            lblTenAudio.setText(au.getTenAudio());
+            lblTenNguoiThu.setText(au.getNguoiThu());
+            lblAnhAudio.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\" + DAOS.findById(au.getMaSach()).getHinh()));
+            songFile = new File("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\audio\\" + au.getDuongDan());
+            player = mp3Player();
+            player.addToPlayList(songFile);
+            player.skipForward();
+            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
+            player.play();
+            currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+            imagePath = "\\Icon";
+            FileInputStream fileInputStream = null;
+            long duration = 0;
+            try {
+                fileInputStream = new FileInputStream(songFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                duration = Objects.requireNonNull(fileInputStream).getChannel().size() / 128;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(duration);
+            if (timeAuido != duration) {
+                I = 0;
+                seconds = 0;
+                minute = 0;
+                timeAuido = (int) duration;
+            }
+            playPase = true;
+            displayTimeAudio();
+            runtimeFirst();
+            congTac = false;
+
+        }
+    }//GEN-LAST:event_tblAudioMousePressed
+
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+
+        if (congTac) {
+            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
+            congTac = false;
+            playPase = true;
+            runtimeFirst();
+            player.play();
+        } else {
+            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
+            congTac = true;
+            playPase = false;
+            runtimeFirst();
+            player.pause();
+        }
+    }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void sliderAudioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderAudioStateChanged
+
+    }//GEN-LAST:event_sliderAudioStateChanged
+
+    private void tblAudioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAudioMouseClicked
+
+    }//GEN-LAST:event_tblAudioMouseClicked
+
+    private void pnlOffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlOffMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_pnlOffMouseClicked
+
+    private void tabQuanLyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabQuanLyStateChanged
+        int index = tabQuanLy.getSelectedIndex();
+        if (index == -1) {
+            return;
+        } else if (index == 0) {
+            fillTableTheLoai();
+        } else if (index == 1) {
+            fillComBoBoxTheLoai(cboTheLoai);
+        } else if (index == 2) {
+            fillTableAudio(tblAudioQL);
+        } else if (index == 3) {
+            fillTableTacGia();
+        } else if (index == 4) {
+            LoadTaiKhoan();
+            fillTableTaiKhoan(listTK);
+        } else if (index == 5) {
+            fillTableNguoiDung();
+        } else if (index == 6) {
+            fillTableThucUong();
+        } else {
+            fillTableHoaDon();
+        }
+
+
+    }//GEN-LAST:event_tabQuanLyStateChanged
+
+    private void tabDoanhThuStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabDoanhThuStateChanged
+        int index = tabDoanhThu.getSelectedIndex();
+        if (index == -1) {
+            return;
+        } else if (index == 0) {
+            fillTableHoaDon();
+        } else if (index == 1) {
+            fillTableDTTU();
+        } else {
+            fillTableDTTS();
+        }
+    }//GEN-LAST:event_tabDoanhThuStateChanged
+
+    private void pnlMainProjebtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainProjebtMousePressed
+//        initMoving(this, pnlMainProjebt);
+    }//GEN-LAST:event_pnlMainProjebtMousePressed
+
+    private void btnBellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBellActionPerformed
+        if (!TimeDl) {
+            timeDialog.setVisible(true);
+            TimeDl = false;
+        }
+    }//GEN-LAST:event_btnBellActionPerformed
+
+    private void btnBellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseEntered
+        btnBell.setBackground(new Color(130, 219, 150));
+    }//GEN-LAST:event_btnBellMouseEntered
+
+    private void btnBellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBellMouseExited
+        btnBell.setBackground(new Color(205, 239, 215));
+    }//GEN-LAST:event_btnBellMouseExited
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            fillTableDanhSachCacSach();
+        }
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        fillTableDanhSachCacSach();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -3863,7 +4060,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -3896,16 +4092,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenAudio;
     private javax.swing.JLabel lblTenNguoiThu;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JLabel lblTimeFirst;
     private javax.swing.JLabel lblTimeLast;
     private javax.swing.JLabel lblVolumeDown;
     private javax.swing.JLabel lblVolumeFull;
-    private javax.swing.JLabel lblVolumeMute;
     private javax.swing.JLabel lblVolumeRepeat;
     private javax.swing.JLabel lblVolumeUp;
-    private com.ebooks.Compoment.MaterialTabbed materialTabbed1;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;
-    private com.ebooks.Compoment.MyButton myButton14;
-    private com.ebooks.Compoment.MyButton myButton7;
     private com.ebooks.Compoment.PanelRadius panelRadius10;
     private com.ebooks.Compoment.PanelRadius panelRadius11;
     private com.ebooks.Compoment.PanelRadius panelRadius12;
@@ -3928,7 +4121,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius7;
     private com.ebooks.Compoment.PanelRadius panelRadius8;
     private com.ebooks.Compoment.PanelRadius panelRadius9;
-    private com.ebooks.Compoment.PanelRadius pnlBell;
     private javax.swing.JPanel pnlBossMain;
     private com.ebooks.Compoment.PanelRadius pnlFrameListen;
     private com.ebooks.Compoment.PanelRadius pnlFrameMain;
@@ -3950,9 +4142,9 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius pnlStatistical;
     private com.ebooks.Compoment.PanelRadius pnlThucUong;
     private javax.swing.JScrollPane scrollpanePDF;
-    private com.ebooks.Compoment.SearchText searchText1;
-    private com.ebooks.Compoment.Slider slider1;
+    private com.ebooks.Compoment.Slider sliderAudio;
     private com.ebooks.Compoment.MaterialTabbed tabDoanhThu;
+    private com.ebooks.Compoment.MaterialTabbed tabQuanLy;
     private com.ebooks.Compoment.MaterialTabbed tabThongKe;
     private com.ebooks.Compoment.Table tblAudio;
     private com.ebooks.Compoment.Table tblAudioQL;
@@ -3968,6 +4160,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table tblTaiKhoan;
     private com.ebooks.Compoment.Table tblTheLoai;
     private com.ebooks.Compoment.Table tblThucUong;
+    private com.ebooks.Compoment.SearchText txtSearch;
     // End of variables declaration//GEN-END:variables
 
     public void OpenSetting() {
@@ -3994,7 +4187,10 @@ public class Main extends javax.swing.JFrame {
         model.removeAllElements();
         List<HoaDonThucUong> list = DaoHDTU.selectAll();
         for (HoaDonThucUong hdtu : list) {
-            model.addElement(hdtu.getNgayMua().getYear());
+            SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+            String ngay = formats.format(hdtu.getNgayMua());
+            String NamMua =  ngay.substring(ngay.lastIndexOf("/")+1); 
+            model.addElement(NamMua);
         }
     }
 
@@ -4003,7 +4199,10 @@ public class Main extends javax.swing.JFrame {
         model.removeAllElements();
         List<HoaDonThueSach> list = DaoHDTS.selectAll();
         for (HoaDonThueSach hdts : list) {
-            model.addElement(hdts.getNgayThue().getYear());
+            SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+            String ngay = formats.format(hdts.getNgayThue());
+            String NamThue =  ngay.substring(ngay.lastIndexOf("/")+1); 
+            model.addElement(NamThue);
         }
     }
 

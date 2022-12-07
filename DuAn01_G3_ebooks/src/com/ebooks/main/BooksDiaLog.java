@@ -44,23 +44,14 @@ import javax.swing.border.LineBorder;
 public class BooksDiaLog extends javax.swing.JDialog {
 
     private TacGiaDAO DAOTG = new TacGiaDAO();
-    private TheLoaiDAO DAOTL = new TheLoaiDAO();
     private SachDAO DAOS = new SachDAO();
-    private LoaiSSDAO DAOLSS = new LoaiSSDAO();
     private List<TheLoai> listTL = new ArrayList<>();
-    private List<Sach> listS = new ArrayList<>();
     private String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
-    private String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
-    private Date now = new Date();
-    private JFileChooser fileChooser = new JFileChooser();
-    private String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
-
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         fillComBoBox();
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainBooks);
         txtDuongDan.setEditable(false);
     }
 
@@ -68,7 +59,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        initMoving(this, pnlMainBooks);
         txtDuongDan.setEditable(false);
         fillComBoBox();
         SetForm(sach);
@@ -94,6 +84,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     public void fillComBoBox() {
+        TheLoaiDAO DAOTL = new TheLoaiDAO();
+        
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
         model.removeAllElements();
         listTL = DAOTL.selectAll();
@@ -128,6 +120,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     public String MovingFile() {
+        String UrlEbook = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\contentEbooks\\";
+        JFileChooser fileChooser = new JFileChooser();
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {
@@ -146,6 +140,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     public String SetImg() {
+        JFileChooser fileChooser = new JFileChooser();
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {
@@ -172,16 +168,22 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     public void InsertLoaiSS(String theLoai, String MaSach) {
+        LoaiSSDAO DAOLSS = new LoaiSSDAO();
+        TheLoaiDAO DAOTL = new TheLoaiDAO();
         TheLoai tl = DAOTL.findByName(theLoai);
         DAOLSS.insert(new LoaiSS(MaSach, tl.getMaTheLoai()));
     }
 
     public void UpdateLoaiSS(String theLoai, String MaSach) {
+        LoaiSSDAO DAOLSS = new LoaiSSDAO();
+        TheLoaiDAO DAOTL = new TheLoaiDAO();
         TheLoai tl = DAOTL.findByName(theLoai);
         DAOLSS.update(new LoaiSS(MaSach, tl.getMaTheLoai()));
     }
 
     Sach getForm() {
+        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+        Date now = new Date();
         Sach sach = new Sach();
         sach.setMaSach(txtMaSach.getText());
         sach.setTenSach(txtTenSach.getText());
@@ -196,6 +198,8 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     public void InsertSach() {
+        Date now = new Date();
+        List<Sach> listS = new ArrayList<>();
         if (UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)) {
             if (UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)) {
                 if (UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)) {
@@ -293,6 +297,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
         pnlMainBooks.setBackground(new java.awt.Color(255, 255, 255));
         pnlMainBooks.setRadius(25);
+        pnlMainBooks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlMainBooksMousePressed(evt);
+            }
+        });
         pnlMainBooks.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlExit1.setBackground(new java.awt.Color(253, 127, 127));
@@ -470,6 +479,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
         String maSach = txtMaSach.getText();
+        List<Sach> listS = new ArrayList<>();
         int timThay = 0;
         ThucUongDAO DaoTU = new ThucUongDAO();
         listS = DAOS.selectAll();
@@ -513,6 +523,10 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private void lblSachImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSachImgMouseEntered
         lblSachImg.setBorder(new LineBorder(new Color(249, 249, 249)));
     }//GEN-LAST:event_lblSachImgMouseEntered
+
+    private void pnlMainBooksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainBooksMousePressed
+          initMoving(this, pnlMainBooks);
+    }//GEN-LAST:event_pnlMainBooksMousePressed
 
     /*tbdSetting args the command line arguments
      */

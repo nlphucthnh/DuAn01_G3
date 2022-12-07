@@ -52,15 +52,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     List<HoaDonChiTiet> listHDCT = new ArrayList<>();
     List<HoaDonThucUong> listHDTU = new ArrayList<>();
     List<HoaDonThueSach> listHSTS = new ArrayList<>();
-    HoaDonTongHopDAO DAOHDTH = new HoaDonTongHopDAO();
-    List<HoaDonTongHop> listHDTH = new ArrayList<>();
-    ThucUongDAO DAOTU = new ThucUongDAO();
-    List<ThucUong> listTU = new ArrayList<>();
-    List<TaiKhoan> listTK = new ArrayList<>();
-    TaiKhoanDAO DAOTK = new TaiKhoanDAO();
     NguoiDungDAO DAOND = new NguoiDungDAO();
-    BangGiaThueDAO DAOBGT = new BangGiaThueDAO();
-
     public ReceiptDiaLog(java.awt.Frame parent, boolean modal, HoaDonTongHop hdth) {
         super(parent, modal);
         initComponents();
@@ -73,14 +65,10 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         setLabelTH(hdth);
         setFormThucUong(hdth);
         setFormThueSach(hdth);
-        fillTableHDCT();
-        fillTableTU();
         tabHDTU.setSelectedIndex(0);
         tabHDTU.setEnabledAt(1, false);
         tabHDTU.setEnabledAt(2, false);
         txtMaHoaDon.setEnabled(false);
-        fillTableNguoiDung();
-        fillComBoxBangGiaThue();
 
     }
 
@@ -97,10 +85,6 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         lblMaHDThucUong.setText(txtMaHoaDon.getText());
         TabThongTinHoaDon.setSelectedIndex(1);
         tabHDTU.setEnabledAt(2, false);
-        fillTableHDCT();
-        fillTableTU();
-        fillTableNguoiDung();
-        fillComBoxBangGiaThue();
     }
 
     public ReceiptDiaLog(java.awt.Frame parent, boolean modal, HoaDonThueSach hdts) {
@@ -113,10 +97,6 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         TabThongTinHoaDon.setSelectedIndex(2);
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
-        fillTableHDCT();
-        fillTableTU();
-        fillTableNguoiDung();
-        fillComBoxBangGiaThue();
         setFormThueSach(hdts);
     }
 
@@ -129,13 +109,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         congTac1 = !congTac1;
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
-        fillTableHDCT();
-        fillTableTU();
-        fillTableNguoiDung();
-        fillComBoxBangGiaThue();
-        lblNgayThueTS.setText(String.valueOf(Calendar1.getDate()));
-        lblMuaGiaTS.setText(String.valueOf(cboBangGiaThue.getSelectedItem()));
-        lblThoiLuongTS.setText(String.valueOf(cboGioThue.getSelectedItem()));
+       
     }
 
     public void setLabelTH(HoaDonTongHop hdth) {
@@ -209,6 +183,8 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }
 
     public void setFormThueSach(HoaDonTongHop hdth) {
+        List<TaiKhoan> listTK = new ArrayList<>();
+        TaiKhoanDAO DAOTK = new TaiKhoanDAO();
         txtTenDangNhap.setText(hdth.getTenDangNhap());
         txtMaNguoiDung1.setText(hdth.getMaNguoiDung());
         lblMaNguoiDungTS.setText(txtMaNguoiDung1.getText());
@@ -239,6 +215,8 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }
 
     public void setFormThueSach(HoaDonThueSach hdts1) {
+        List<TaiKhoan> listTK = new ArrayList<>();
+        TaiKhoanDAO DAOTK = new TaiKhoanDAO();
         txtTenDangNhap.setText(hdts1.getTenDangNhap());
         txtMaNguoiDung1.setText(hdts1.getMaNguoiDung());
         Calendar1.setDate(hdts1.getNgayThue());
@@ -271,6 +249,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
 
     public void fillTableHDCT() {
         DefaultTableModel model;
+        ThucUongDAO DAOTU = new ThucUongDAO();
         model = (DefaultTableModel) tblHDCT.getModel();
         model.setRowCount(0);
         try {
@@ -285,6 +264,7 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }
 
     public void fillComBoxBangGiaThue() {
+        BangGiaThueDAO DAOBGT = new BangGiaThueDAO();
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboBangGiaThue.getModel();
         model.removeAllElements();
         List<BangGiaThue> list = DAOBGT.selectAll();
@@ -336,6 +316,8 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }
 
     public void fillTableTU() {
+        List<ThucUong> listTU = new ArrayList<>();
+        ThucUongDAO DAOTU = new ThucUongDAO();
         DefaultTableModel model;
         model = (DefaultTableModel) tblThucUongChon.getModel();
         model.setRowCount(0);
@@ -497,6 +479,12 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        TabThongTinHoaDon.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabThongTinHoaDonStateChanged(evt);
+            }
+        });
+
         panelRadius5.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -608,6 +596,12 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
             }
         });
         panelRadius1.add(txtMaHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 230, 40));
+
+        tabHDTU.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabHDTUStateChanged(evt);
+            }
+        });
 
         panelRadius3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1223,6 +1217,8 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLuuThongTinTSActionPerformed
 
     private void txtMaNguoiDung1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaNguoiDung1FocusLost
+        TaiKhoanDAO DAOTK = new TaiKhoanDAO();
+        List<TaiKhoan> listTK = new ArrayList<>();
         listTK = DAOTK.selectAll();
 
         Main.listND = DAOND.selectAll();
@@ -1251,6 +1247,33 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     private void cboBangGiaThueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboBangGiaThueItemStateChanged
         lblMuaGiaTS.setText(String.valueOf(cboBangGiaThue.getSelectedItem()));
     }//GEN-LAST:event_cboBangGiaThueItemStateChanged
+
+    private void TabThongTinHoaDonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabThongTinHoaDonStateChanged
+       int index = TabThongTinHoaDon.getSelectedIndex();
+       if(index == -1){
+           return;
+       }else if(index == 1){
+           fillTableHDCT();
+       }else {
+           fillComBoxBangGiaThue();
+            lblNgayThueTS.setText(String.valueOf(Calendar1.getDate()));
+            lblMuaGiaTS.setText(String.valueOf(cboBangGiaThue.getSelectedItem()));
+            lblThoiLuongTS.setText(String.valueOf(cboGioThue.getSelectedItem()));
+       }
+    }//GEN-LAST:event_TabThongTinHoaDonStateChanged
+
+    private void tabHDTUStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHDTUStateChanged
+       int index = tabHDTU.getSelectedIndex();
+       if(index == -1){
+           return;
+       }else if(index == 0){
+           fillTableHDCT();
+       }else if(index == 1){
+           fillTableTU();
+       }else {
+           fillTableNguoiDung();
+       }
+    }//GEN-LAST:event_tabHDTUStateChanged
 
     /*tbdSetting args the command line arguments
      */
@@ -1499,7 +1522,5 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
     private javax.swing.JTextField txtNgayThue;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenDangNhap;
-    private javax.swing.JTextField txtThoiLuong;
-    private javax.swing.JTextField txtThoiLuong1;
     // End of variables declaration//GEN-END:variables
 }

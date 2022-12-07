@@ -4,9 +4,11 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.dao.LoaiSSDAO;
 import com.ebooks.dao.TacGiaDAO;
 import com.ebooks.dao.TheLoaiDAO;
 import com.ebooks.model.Sach;
+import com.ebooks.model.TheLoai;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,7 +24,8 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     
     TacGiaDAO DAOTG = new TacGiaDAO();
     TheLoaiDAO DAOTL = new TheLoaiDAO();
-
+    LoaiSSDAO DAOLSS = new LoaiSSDAO();
+    static String maSach;
     public BooksDisplayDiaLog(java.awt.Frame parent, boolean modal, Sach sach) {
         super(parent, modal);
         initComponents();
@@ -45,19 +48,21 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         lblMaSach.setText(sach.getMaSach());
         lblTenSach.setText(sach.getTenSach());
         lblTacGia.setText(DAOTG.findById(sach.getMaTacGia()).getHoTen());
-        lblTheLoai.setText(DAOTL.findByidSach(sach.getMaSach()).getTenTheLoai());
+        TheLoai theLoai = DAOTL.findById(DAOLSS.findByBook(sach.getMaSach()).getMaTheLoai());
+        lblTheLoai.setText(theLoai.getTenTheLoai());
         txtMoTa.setText(sach.getMoTa());
     }
     
-     private int x;
+    private int x;
     private int y;
-
+    
     public void initMoving(JDialog DiaLog, JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 x = me.getX();
                 y = me.getY();
+                System.out.println("");
             }
 
         });
@@ -91,7 +96,7 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         txtMoTa = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        myButton10 = new com.ebooks.Compoment.MyButton();
+        btnDocNgay = new com.ebooks.Compoment.MyButton();
         lblTheLoai = new javax.swing.JLabel();
         lblMaSach = new javax.swing.JLabel();
         lblTenSach = new javax.swing.JLabel();
@@ -175,13 +180,18 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
         jLabel5.setText("Tác Giả     :");
         pnlMainDialog.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
-        myButton10.setBackground(new java.awt.Color(87, 190, 110));
-        myButton10.setForeground(new java.awt.Color(255, 255, 255));
-        myButton10.setText("Đọc Ngay");
-        myButton10.setBoderColor(new java.awt.Color(87, 190, 110));
-        myButton10.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        myButton10.setRadius(10);
-        pnlMainDialog.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
+        btnDocNgay.setBackground(new java.awt.Color(87, 190, 110));
+        btnDocNgay.setForeground(new java.awt.Color(255, 255, 255));
+        btnDocNgay.setText("Đọc Ngay");
+        btnDocNgay.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnDocNgay.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        btnDocNgay.setRadius(10);
+        btnDocNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocNgayActionPerformed(evt);
+            }
+        });
+        pnlMainDialog.add(btnDocNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 270, 50));
 
         lblTheLoai.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         lblTheLoai.setText("Bảo Mật - An Ninh Mạng");
@@ -197,7 +207,7 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
 
         lblTacGia.setFont(new java.awt.Font("Inter SemiBold", 0, 14)); // NOI18N
         lblTacGia.setText("Steven Levy");
-        pnlMainDialog.add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 370, -1));
+        pnlMainDialog.add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 140, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -226,13 +236,21 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
 
     private void lblExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MousePressed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_lblExit1MousePressed
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
+
+    private void btnDocNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocNgayActionPerformed
+        if(maSach != null){
+            maSach = null;
+        }
+        maSach = lblMaSach.getText();
+        this.dispose();
+    }//GEN-LAST:event_btnDocNgayActionPerformed
 
     /*tbdSetting args the command line arguments
      */
@@ -339,6 +357,7 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.MyButton btnDocNgay;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel10;
@@ -354,9 +373,9 @@ public class BooksDisplayDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel lblTacGia;
     private javax.swing.JLabel lblTenSach;
     private javax.swing.JLabel lblTheLoai;
-    private com.ebooks.Compoment.MyButton myButton10;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private com.ebooks.Compoment.PanelRadius pnlMainDialog;
     private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
+    
 }

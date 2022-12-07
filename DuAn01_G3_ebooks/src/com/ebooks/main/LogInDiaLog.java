@@ -236,7 +236,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDangNhapMouseEntered
 
     private void btnDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDangNhapKeyPressed
-        
+
     }//GEN-LAST:event_btnDangNhapKeyPressed
 
     /**
@@ -305,11 +305,20 @@ public class LogInDiaLog extends javax.swing.JDialog {
                         ShareHelper.USER = taiKhoan;
                         ShareHelper.BOSS = null;
                         DialogHelper.alert(this, "Đăng Nhập Thành Công");
+                        if (taiKhoan.getThoiLuong().getTime() == -28800000) {
+                            DialogHelper.alert(this, "Tài Khoản Đã Hết Thời Gian Thuê");
+                            System.exit(0);
+                        }
                         this.dispose();
                     } else {
                         if (taiKhoan.getTenDangNhap().equals(quanTri.getTenDangNhap())) {
                             ShareHelper.BOSS = quanTri;
+                            ShareHelper.USER = taiKhoan;
                             DialogHelper.alert(this, "Quản Trị Viên Đăng Nhập Thành Công");
+                            if (taiKhoan.getThoiLuong().getTime() == -28800000) {
+                                DialogHelper.alert(this, "Tài Khoản Đã Hết Thời Gian Thuê");
+                                System.exit(0);
+                            }
                             this.dispose();
                         }
                     }
