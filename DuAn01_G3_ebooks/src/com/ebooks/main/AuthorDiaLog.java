@@ -36,6 +36,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
     boolean congTac = false;
     String maTacGia = null;
+    static String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
     private TacGiaDAO DAOTG = new TacGiaDAO();
     public AuthorDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -77,6 +78,9 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     public void setForm(TacGia tg) {
         txtHoten.setText(tg.getHoTen());
         SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
+        if(tg.getNgaySinh() == null){
+            tg.setNgaySinh(new Date());
+        }
         txtNgaySinh.setText(String.valueOf(formats.format(tg.getNgaySinh())));
         txtMoTa.setText(tg.getMoTa());
         rdoNam.setSelected(tg.isGioiTinh());
@@ -86,7 +90,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     TacGia getForm() {
-        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+      
         TacGia tacGia = new TacGia();
         tacGia.setHoTen(txtHoten.getText());
         tacGia.setGioiTinh(rdoNam.isSelected()? true : false);
@@ -98,7 +102,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
     
     TacGia getForm(TacGia tg) {
-        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+       
         tg.setHoTen(txtHoten.getText());
         tg.setGioiTinh(rdoNam.isSelected()? true : false);
         tg.setNgaySinh(Calendar.getDate());
@@ -118,7 +122,6 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
     
     public String SetImg() {
-        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
         String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgAthor\\";
         JFileChooser fileChooser = new JFileChooser();
         int x = fileChooser.showDialog(this, "Chon file");

@@ -11,6 +11,7 @@ import com.ebooks.helper.UtilityHelper;
 import com.ebooks.model.LoaiSS;
 import com.ebooks.model.TheLoai;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -80,7 +81,7 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
     // CAC NUT BUTTON
     public void InsertTacGia() {
-        if (UtilityHelper.checkNullText(lblMaTL, txtMaTheLoai) && UtilityHelper.checkMa(lblMaTL, txtMaTheLoai)) {
+        if (UtilityHelper.checkNullText(lblMaTL, txtMaTheLoai)) {
             if (UtilityHelper.checkNullText(lblTenTL, txtTenTheLoai)) {
                 TheLoai theLoai = getForm();
                 DAOTL.insert(theLoai);
@@ -97,13 +98,12 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
     }
 
     public void UpdateSach() {
-        if (UtilityHelper.checkNullText(lblMaTL, txtMaTheLoai) && UtilityHelper.checkMa(lblMaTL, txtMaTheLoai)) {
+        if (UtilityHelper.checkNullText(lblMaTL, txtMaTheLoai) ) {
             if (UtilityHelper.checkNullText(lblTenTL, txtTenTheLoai)) {
               //  TacGia tacGia = DAOTG.findById(maTacGia);
               TheLoai tenTL = getForm();
                 System.out.println(tenTL);
                 if (tenTL != null) {
-                   
                     try {
                         DAOTL.update(tenTL);
                         DialogHelper.alert(this, "Cập Nhật Thành Công");
@@ -114,6 +114,26 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
                     DialogHelper.alert(this, "Cập Nhật Thất Bại");
                 }
 
+            }
+        }
+    }
+    
+    
+    public void LuuThongTin(){
+        String maTL = txtMaTheLoai.getText();
+        int timThay = 0;
+//        ThucUongDAO DaoTU = new ThucUongDAO();
+        listTL = DAOTL.selectAll();
+        for (TheLoai x : listTL) {
+            if (x.getMaTheLoai().contains(maTL)) {
+                timThay = 1;
+            }
+        }
+        if (timThay == 0) {
+            this.InsertTacGia();
+        } else {
+            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+                this.UpdateSach();
             }
         }
     }
@@ -182,6 +202,11 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         txtMaTheLoai.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaTheLoai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMaTheLoaiKeyPressed(evt);
+            }
+        });
         pnlMainDialog.add(txtMaTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 200, 40));
 
         lblMoTaTL.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -189,6 +214,11 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         pnlMainDialog.add(lblMoTaTL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         txtTenTheLoai.setBackground(new java.awt.Color(222, 247, 227));
+        txtTenTheLoai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTenTheLoaiKeyPressed(evt);
+            }
+        });
         pnlMainDialog.add(txtTenTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 200, 40));
 
         lblTenTL.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -215,6 +245,11 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
 
         txtMoTaTL.setColumns(20);
         txtMoTaTL.setRows(5);
+        txtMoTaTL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMoTaTLKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtMoTaTL);
 
         pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 670, 210));
@@ -251,30 +286,31 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblExit1MouseClicked
 
     private void btnLuuTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTLActionPerformed
-        // TODO add your handling code here:
-        String maTL = txtMaTheLoai.getText();
-        int timThay = 0;
-//        ThucUongDAO DaoTU = new ThucUongDAO();
-        listTL = DAOTL.selectAll();
-
-        for (TheLoai x : listTL) {
-            if (x.getMaTheLoai().contains(maTL)) {
-                timThay = 1;
-            }
-        }
-        if (timThay == 0) {
-            this.InsertTacGia();
-        } else {
-            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
-                this.UpdateSach();
-            }
-        }
+           LuuThongTin();
     }//GEN-LAST:event_btnLuuTLActionPerformed
 
     private void pnlExit1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlExit1MousePressed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_pnlExit1MousePressed
+
+    private void txtMaTheLoaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaTheLoaiKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtMaTheLoaiKeyPressed
+
+    private void txtTenTheLoaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenTheLoaiKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtTenTheLoaiKeyPressed
+
+    private void txtMoTaTLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoTaTLKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtMoTaTLKeyPressed
 
     /*tbdSetting args the command line arguments
      */

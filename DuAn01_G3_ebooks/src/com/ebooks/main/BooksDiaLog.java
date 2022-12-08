@@ -47,6 +47,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private SachDAO DAOS = new SachDAO();
     private List<TheLoai> listTL = new ArrayList<>();
     private String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgEbooks\\";
+    static String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
     public BooksDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -141,7 +142,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
     public String SetImg() {
         JFileChooser fileChooser = new JFileChooser();
-        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
+       
         int x = fileChooser.showDialog(this, "Chon file");
         if (x == JFileChooser.APPROVE_OPTION) {
             try {
@@ -182,7 +183,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }
 
     Sach getForm() {
-        String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
         Date now = new Date();
         Sach sach = new Sach();
         sach.setMaSach(txtMaSach.getText());
@@ -196,6 +196,14 @@ public class BooksDiaLog extends javax.swing.JDialog {
         sach.setMaQuanTriVien(ShareHelper.BOSS.getMaQuanTriVien());
         return sach;
     }
+    
+    
+    Sach getForm(Sach sach) {
+        sach.setTenSach(txtTenSach.getText());
+        sach.setDuongDan(txtDuongDan.getText());
+        sach.setMoTa(txtMoTa.getText());
+        return sach;
+    }
 
     public void InsertSach() {
         Date now = new Date();
@@ -206,7 +214,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
                     if (checkTacGia(txtTacGia.getText()) == null) {
                         TacGia tg = new TacGia(txtTacGia.getText(), true, now, "", " ", ShareHelper.BOSS.getMaQuanTriVien());
                             DAOTG.insert(tg);
-                        
                         try {
                             
                         } catch (Exception e) {
@@ -223,8 +230,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
                             return;
                         }
                     }
-                    
-                    
                     try {
                         DAOS.insert(sach);
                         InsertLoaiSS((String) cboTheLoai.getSelectedItem(), txtMaSach.getText());
@@ -232,18 +237,16 @@ public class BooksDiaLog extends javax.swing.JDialog {
                     } catch (Exception e) {
                         DialogHelper.alert(this, "Lỗi Thêm Mới Sách");
                     }
-
                 }
             }
         }
 
     }
-
     public void UpdateSach() {
         if (UtilityHelper.checkNullText(lblMaSach, txtMaSach) && UtilityHelper.checkMa(lblMaSach, txtMaSach)) {
             if (UtilityHelper.checkNullText(lblTenSach, txtTenSach) && UtilityHelper.checkNullText(lblTacGia, txtTacGia)) {
                 if (UtilityHelper.checkNullText(new JLabel("File"), txtDuongDan)) {
-                    Sach sach = getForm();
+                    Sach sach = getForm(DAOS.findById(txtMaSach.getText()));
                     if (sach != null) {
                         try {
                             DAOS.update(sach);
@@ -255,10 +258,31 @@ public class BooksDiaLog extends javax.swing.JDialog {
                     } else {
                         DialogHelper.alert(this, "Cập Nhật Thất Bại");
                     }
-
                 }
             }
         }
+    }
+    
+    
+    public void LuuThongTin(){
+        String maSach = txtMaSach.getText();
+        List<Sach> listS = new ArrayList<>();
+        int timThay = 0;
+        ThucUongDAO DaoTU = new ThucUongDAO();
+        listS = DAOS.selectAll();
+        for(Sach x : listS){
+            if(x.getMaSach().contains(maSach)){
+                timThay = 1;
+            }
+        }
+        if(timThay == 0) {
+            this.InsertSach();
+        } else {
+            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
+                this.UpdateSach();
+            }
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -339,9 +363,19 @@ public class BooksDiaLog extends javax.swing.JDialog {
         pnlMainBooks.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         txtTenSach.setBackground(new java.awt.Color(222, 247, 227));
+        txtTenSach.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTenSachKeyPressed(evt);
+            }
+        });
         pnlMainBooks.add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 220, 40));
 
         txtMaSach.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaSach.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMaSachKeyPressed(evt);
+            }
+        });
         pnlMainBooks.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 210, 40));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -379,6 +413,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
+        txtMoTa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMoTaKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtMoTa);
 
         pnlMainBooks.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 384, 670, -1));
@@ -405,6 +444,11 @@ public class BooksDiaLog extends javax.swing.JDialog {
         pnlMainBooks.add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
         txtTacGia.setBackground(new java.awt.Color(222, 247, 227));
+        txtTacGia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTacGiaKeyPressed(evt);
+            }
+        });
         pnlMainBooks.add(txtTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 220, 40));
 
         btnLuuThong.setBackground(new java.awt.Color(87, 190, 110));
@@ -478,24 +522,7 @@ public class BooksDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnChonFile1ActionPerformed
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-        String maSach = txtMaSach.getText();
-        List<Sach> listS = new ArrayList<>();
-        int timThay = 0;
-        ThucUongDAO DaoTU = new ThucUongDAO();
-        listS = DAOS.selectAll();
-
-        for(Sach x : listS){
-            if(x.getMaSach().contains(maSach)){
-                timThay = 1;
-            }
-        }
-        if(timThay == 0) {
-            this.InsertSach();
-        } else {
-            if(DialogHelper.confirm(this, "Chắc chắn cập nhật?")){
-                this.UpdateSach();
-            }
-        }
+        LuuThongTin();
 
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
@@ -512,7 +539,6 @@ public class BooksDiaLog extends javax.swing.JDialog {
             } catch (Exception e) {
                 //               DialogHelper.alert(this,"Lỗi Chọn Hình");
             }
-
         }
     }//GEN-LAST:event_lblSachImgMousePressed
 
@@ -527,6 +553,30 @@ public class BooksDiaLog extends javax.swing.JDialog {
     private void pnlMainBooksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainBooksMousePressed
           initMoving(this, pnlMainBooks);
     }//GEN-LAST:event_pnlMainBooksMousePressed
+
+    private void txtMaSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSachKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtMaSachKeyPressed
+
+    private void txtTenSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenSachKeyPressed
+      if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtTenSachKeyPressed
+
+    private void txtTacGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTacGiaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtTacGiaKeyPressed
+
+    private void txtMoTaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoTaKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LuuThongTin();
+        }
+    }//GEN-LAST:event_txtMoTaKeyPressed
 
     /*tbdSetting args the command line arguments
      */

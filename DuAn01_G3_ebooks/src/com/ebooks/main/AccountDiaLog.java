@@ -144,6 +144,7 @@ public class AccountDiaLog extends javax.swing.JDialog {
     void update() {
         if (checkBugs()) {
             TaiKhoan model = daoTK.findByIdND(txtMaNguoiDung.getText());
+            
             if (model == null) {
                 return;
             }
@@ -175,6 +176,13 @@ public class AccountDiaLog extends javax.swing.JDialog {
         model.setMatKhau(String.valueOf(txtMatKhau.getPassword()));
         model.setTrangThai(rdoQuanTriVien.isSelected() == true ? true : false);
         String time = SprHour.getValue() + ":" + SprMin.getValue() +":"+ SprSec.getValue();
+        if(rdoQuanTriVien.isSelected() == true ? true : false){
+            try {
+               daoQTV.delete(model.getTenDangNhap()); 
+            } catch (Exception e) {
+            }
+            
+        }
         model.setThoiLuong(Time.valueOf(time));
         return model;
     }

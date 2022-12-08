@@ -170,7 +170,7 @@ public class Main extends javax.swing.JFrame {
     List<ThucUong> listTU = new ArrayList<>();
     List<HoaDonThucUong> listHD = new ArrayList<>();
     List<Sach> listS = new ArrayList<>();
-    private List<TheLoai> listTL = new ArrayList<>();
+    List<TheLoai> listTL = new ArrayList<>();
     List<TacGia> listTG = new ArrayList<>();
     TimeNotifyDialog timeDialog;
 
@@ -185,7 +185,6 @@ public class Main extends javax.swing.JFrame {
         timeDialog = new TimeNotifyDialog(this, congTac);
         initMoving(this, pnlMainProjebt);
         RentalPeriod();
-
     }
 
     public void init() {
@@ -915,7 +914,7 @@ public class Main extends javax.swing.JFrame {
         pnlBossMain = new javax.swing.JPanel();
         pnlFrameMain = new com.ebooks.Compoment.PanelRadius();
         pnlMenuBooks = new com.ebooks.Compoment.PanelRadius();
-        panelRadius3 = new com.ebooks.Compoment.PanelRadius();
+        pnl1tuanLamViec = new com.ebooks.Compoment.PanelRadius();
         imageBoder1 = new com.ebooks.Compoment.ImageBoder();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -1219,70 +1218,115 @@ public class Main extends javax.swing.JFrame {
         pnlMenuBooks.setRadius(15);
         pnlMenuBooks.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRadius3.setBackground(new java.awt.Color(255, 255, 255));
-        panelRadius3.setRadius(20);
-        panelRadius3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnl1tuanLamViec.setBackground(new java.awt.Color(255, 255, 255));
+        pnl1tuanLamViec.setRadius(20);
+        pnl1tuanLamViec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl1tuanLamViecMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnl1tuanLamViecMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl1tuanLamViecMouseExited(evt);
+            }
+        });
+        pnl1tuanLamViec.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageBoder1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/5PhuongThuc.png"))); // NOI18N
-        panelRadius3.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 70));
+        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/1tuanLamViec4Gio.png"))); // NOI18N
+        pnl1tuanLamViec.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 70));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("5 Phương Thức Ghi Nhân Nổ Lục Của Nhân Viên");
-        panelRadius3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
+        jLabel5.setText("1 Tuần Làm Việc 4 giờ");
+        pnl1tuanLamViec.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
 
-        jLabel6.setText("Gary D. Chapman");
-        panelRadius3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 45, -1, -1));
+        jLabel6.setText("Timothy Ferriss");
+        pnl1tuanLamViec.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 45, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel7.setText("248/248");
-        panelRadius3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+        jLabel7.setText("310/310");
+        pnl1tuanLamViec.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
-        pnlMenuBooks.add(panelRadius3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, 90));
+        pnlMenuBooks.add(pnl1tuanLamViec, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, 90));
 
         panelRadius6.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius6.setRadius(20);
+        panelRadius6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRadius6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRadius6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRadius6MouseExited(evt);
+            }
+        });
         panelRadius6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageBoder2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        imageBoder2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/AnItDeKhoe.png"))); // NOI18N
+        imageBoder2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/BanCoTheDamPhanBatCuDieuGi.jpg"))); // NOI18N
         panelRadius6.add(imageBoder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 70));
 
         jLabel10.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel10.setText("200/200");
+        jLabel10.setText("187/187");
         panelRadius6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Ăn Ít Để Khỏe");
+        jLabel9.setText("Bạn Có Thể Đàm Phán");
         panelRadius6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
 
-        jLabel8.setText("Yoshinori Nagumo");
+        jLabel8.setText("Hebr Cohen");
         panelRadius6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         pnlMenuBooks.add(panelRadius6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 290, 90));
 
         panelRadius7.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius7.setRadius(20);
+        panelRadius7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRadius7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRadius7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRadius7MouseExited(evt);
+            }
+        });
         panelRadius7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        imageBoder3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/BanChiSongCoMotLan.png"))); // NOI18N
-        panelRadius7.add(imageBoder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 80));
+        imageBoder3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        imageBoder3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/BucXucKhongLamTaVoCan.jpg"))); // NOI18N
+        panelRadius7.add(imageBoder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 70));
 
         jLabel13.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel13.setText("128/128");
+        jLabel13.setText("127/127");
         panelRadius7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("Bạn Chỉ Sống Có Một Lần");
+        jLabel12.setText("Bức Xúc Không Làm Bạn");
         panelRadius7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
 
-        jLabel11.setText("Nhã Nam ");
+        jLabel11.setText("Hoàng Giang Đặng");
         panelRadius7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         pnlMenuBooks.add(panelRadius7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 290, 90));
 
         panelRadius8.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius8.setRadius(20);
+        panelRadius8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelRadius8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelRadius8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelRadius8MouseExited(evt);
+            }
+        });
         panelRadius8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageBoder4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/imgEbooks/GiaDiepMang.png"))); // NOI18N
@@ -3006,6 +3050,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReadActionPerformed
 
     private void lblOffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOffMouseClicked
+        TaiKhoan tk = ShareHelper.USER;
+        int newHour = tk.getThoiLuong().getHours() - hour;
+        int newMin = tk.getThoiLuong().getMinutes() - min;
+        int newSec = tk.getThoiLuong().getSeconds() - sec;
+        tk.setThoiLuong(Time.valueOf(newHour + ":" + newMin + ":" + newSec));
+        DaoTK.update(tk);
         System.exit(0);
     }//GEN-LAST:event_lblOffMouseClicked
 
@@ -3075,8 +3125,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemNguoiDungActionPerformed
 
     private void btnThemLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLoaiSachActionPerformed
-        new TypeBooksDiaLog(this, congTac).setVisible(true);
+        new TypeBooksDiaLog(this, true).setVisible(true);
         fillTableTheLoai();
+
     }//GEN-LAST:event_btnThemLoaiSachActionPerformed
 
 
@@ -3085,7 +3136,7 @@ public class Main extends javax.swing.JFrame {
             int indexRow = tblNguoiDung.getSelectedRow();
             String MaNguoiDung = (String) tblNguoiDung.getValueAt(indexRow, 0);
             nguoiDung = DaoND.findById(MaNguoiDung);
-            new PersonDiaLog(this, congTac, nguoiDung).setVisible(true);
+            new PersonDiaLog(this, true, nguoiDung).setVisible(true);
         }
     }//GEN-LAST:event_tblNguoiDungMousePressed
 
@@ -3094,14 +3145,14 @@ public class Main extends javax.swing.JFrame {
             int indexRow = tblThucUong.getSelectedRow();
             String maThucUong = (String) tblThucUong.getValueAt(indexRow, 0);
             thucUong = DaoTU.findById(maThucUong);
-            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+            new DrinksDiaLog(this, true, thucUong).setVisible(true);
             this.fillTableThucUong();
         }
     }//GEN-LAST:event_tblThucUongMousePressed
 
     private void btnThucUongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThucUongActionPerformed
         // TODO add your handling code here:
-        new DrinksDiaLog(this, congTac).setVisible(true);
+        new DrinksDiaLog(this, true).setVisible(true);
         this.fillTableThucUong();
     }//GEN-LAST:event_btnThucUongActionPerformed
 
@@ -3112,7 +3163,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             String maThucUong = (String) tblThucUong.getValueAt(index, 0);
             thucUong = DaoTU.findById(maThucUong);
-            new DrinksDiaLog(this, congTac, thucUong).setVisible(true);
+            new DrinksDiaLog(this, true, thucUong).setVisible(true);
             this.fillTableThucUong();
         }
 
@@ -3149,8 +3200,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLastThucUongActionPerformed
 
     private void btnXoaNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNguoiDungActionPerformed
-        deleteNguoiDung();
-        fillTableNguoiDung();
+        int index = tblTaiKhoan.getSelectedRow();
+        if (index != -1) {
+            deleteNguoiDung();
+            fillTableNguoiDung();
+        }
+
+
     }//GEN-LAST:event_btnXoaNguoiDungActionPerformed
 
     private void btnThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTaiKhoanActionPerformed
@@ -3162,9 +3218,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemTaiKhoanActionPerformed
 
     private void btnXoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTaiKhoanActionPerformed
-        deleteTaiKhoan();
-        LoadTaiKhoan();
-        fillTableTaiKhoan(listTK);
+        int index = tblTaiKhoan.getSelectedRow();
+
+        if (index != -1) {
+            deleteTaiKhoan();
+            LoadTaiKhoan();
+            fillTableTaiKhoan(listTK);
+        }
+
     }//GEN-LAST:event_btnXoaTaiKhoanActionPerformed
 
     private void btnSuaNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNguoiDungActionPerformed
@@ -3172,7 +3233,7 @@ public class Main extends javax.swing.JFrame {
         if (index != -1) {
             MaND = tblNguoiDung.getValueAt(index, 0).toString();
             NguoiDung nd = DaoND.findById(MaND);
-            new PersonDiaLog(this, congTac, nd).setVisible(true);
+            new PersonDiaLog(this, true, nd).setVisible(true);
             fillTableNguoiDung();
         } else {
             DialogHelper.alert(this, "Hãy Chọn Người Dùng");
@@ -3268,12 +3329,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnXoaAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaAudioActionPerformed
         int index = tblAudioQL.getSelectedRow();
-        String MaAuido = tblAudioQL.getValueAt(index, 0).toString();
+
         if (index < 0) {
             DialogHelper.alert(this, "Chưa chọn Audio cần xóa!");
         } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa Audio này?")) {
             try {
-
+                String MaAuido = tblAudioQL.getValueAt(index, 0).toString();
                 DAOAU.delete(MaAuido);
                 this.fillTableAudio(tblAudioQL);
             } catch (Exception e) {
@@ -3327,7 +3388,7 @@ public class Main extends javax.swing.JFrame {
             int index = tblSach.getSelectedRow();
             String maSach = (String) tblSach.getValueAt(index, 0);
             Sach sach = DAOS.findById(maSach);
-            new BooksDiaLog(this, congTac, sach).setVisible(true);
+            new BooksDiaLog(this, true, sach).setVisible(true);
             fillTableSach();
         }
     }//GEN-LAST:event_tblSachMousePressed
@@ -3344,7 +3405,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSapXepSachActionPerformed
 
     private void btnThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSachActionPerformed
-        new BooksDiaLog(this, congTac).setVisible(true);
+        new BooksDiaLog(this, true).setVisible(true);
         fillTableSach();
     }//GEN-LAST:event_btnThemSachActionPerformed
 
@@ -3353,7 +3414,7 @@ public class Main extends javax.swing.JFrame {
         if (index != -1) {
             String maSach = (String) tblSach.getValueAt(index, 0);
             Sach sach = DAOS.findById(maSach);
-            new BooksDiaLog(this, congTac, sach).setVisible(true);
+            new BooksDiaLog(this, true, sach).setVisible(true);
             fillTableSach();
         } else {
             DialogHelper.alert(this, "Hãy Chọn Sách");
@@ -3362,10 +3423,10 @@ public class Main extends javax.swing.JFrame {
 
     private void btnXoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSachActionPerformed
         int index = tblSach.getSelectedRow();
-        String MaSach = tblSach.getValueAt(index, 0).toString();
-        if (index < 0) {
+        if (index == -1) {
             DialogHelper.alert(this, "Chưa chọn Sách cần xóa!");
         } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa Sách này?")) {
+            String MaSach = tblSach.getValueAt(index, 0).toString();
             try {
                 LoaiSS lss = DAOLSS.findByBook(MaSach);
                 if (lss != null) {
@@ -3383,7 +3444,7 @@ public class Main extends javax.swing.JFrame {
             int indexRow = tblTheLoai.getSelectedRow();
             String MaTheLoai = (String) tblTheLoai.getValueAt(indexRow, 0);
             theLoai = DAOTL.findById(MaTheLoai);
-            new TypeBooksDiaLog(this, congTac, theLoai).setVisible(true);
+            new TypeBooksDiaLog(this, true, theLoai).setVisible(true);
             fillTableTheLoai();
         }
     }//GEN-LAST:event_tblTheLoaiMousePressed
@@ -3393,7 +3454,7 @@ public class Main extends javax.swing.JFrame {
         if (index != -1) {
             String maTL = (String) tblTheLoai.getValueAt(index, 0);
             TheLoai tLoai = DAOTL.findById(maTL);
-            new TypeBooksDiaLog(this, congTac, tLoai).setVisible(true);
+            new TypeBooksDiaLog(this, true, tLoai).setVisible(true);
             fillTableTheLoai();
         } else {
             DialogHelper.alert(this, "Hãy Chọn The Loai");
@@ -3401,8 +3462,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaLoaiSachActionPerformed
 
     private void btnXoaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaLoaiSachActionPerformed
-        deleteTheLoai();
-        fillTableTheLoai();
+        int index = tblTheLoai.getSelectedRow();
+        if (index != -1) {
+            deleteTheLoai();
+            fillTableTheLoai();
+        } else {
+            DialogHelper.alert(this, "Hãy Chọn The Loai");
+        }
+
     }//GEN-LAST:event_btnXoaLoaiSachActionPerformed
 
     private void btnFirstLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstLoaiSachActionPerformed
@@ -3426,7 +3493,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLastLoaiSachActionPerformed
 
     private void btnThemTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTacGiaActionPerformed
-        new AuthorDiaLog(this, congTac).setVisible(true);
+        new AuthorDiaLog(this, true).setVisible(true);
         fillTableTacGia();
     }//GEN-LAST:event_btnThemTacGiaActionPerformed
 
@@ -3435,7 +3502,7 @@ public class Main extends javax.swing.JFrame {
         if (index != -1) {
             String maTG = (String) tblTacGia.getValueAt(index, 0);
             TacGia tgia = DAOTG.findById(maTG);
-            new AuthorDiaLog(this, congTac, tgia).setVisible(true);
+            new AuthorDiaLog(this, true, tgia).setVisible(true);
             fillTableTacGia();
         } else {
             DialogHelper.alert(this, "Hãy Chọn Tac Gia");
@@ -3452,7 +3519,7 @@ public class Main extends javax.swing.JFrame {
             int indexRow = tblTacGia.getSelectedRow();
             String MaTacGia = (String) tblTacGia.getValueAt(indexRow, 0);
             tacGia = DAOTG.findById(MaTacGia);
-            new AuthorDiaLog(this, congTac, tacGia).setVisible(true);
+            new AuthorDiaLog(this, true, tacGia).setVisible(true);
             fillTableTacGia();
         }
     }//GEN-LAST:event_tblTacGiaMousePressed
@@ -3649,7 +3716,7 @@ public class Main extends javax.swing.JFrame {
             hdtu.setMaHoaDon(String.valueOf(tblDoanhThuThucUong.getValueAt(index, 2)));
             hdtu.setMaNguoiDung(String.valueOf(tblDoanhThuThucUong.getValueAt(index, 0)));
             Float tongTienThucUong = (Float) tblDoanhThuThucUong.getValueAt(index, 3);
-            new ReceiptDiaLog(this, congTac, hdtu, tongTienThucUong).setVisible(true);
+            new ReceiptDiaLog(this, true, hdtu, tongTienThucUong).setVisible(true);
             fillTableDTTU();
         }
     }//GEN-LAST:event_tblDoanhThuThucUongMousePressed
@@ -3662,7 +3729,7 @@ public class Main extends javax.swing.JFrame {
             hdts.setMaNguoiDung(String.valueOf(tblDoanhThuThueSach.getValueAt(index, 0)));
             hdts.setTenDangNhap(String.valueOf(tblDoanhThuThueSach.getValueAt(index, 2)));
             hdts.setNgayThue(DateHelper.toDate(String.valueOf(tblDoanhThuThueSach.getValueAt(index, 5))));
-            new ReceiptDiaLog(this, congTac, hdts).setVisible(true);
+            new ReceiptDiaLog(this, true, hdts).setVisible(true);
             fillTableDTTS();
         }
     }//GEN-LAST:event_tblDoanhThuThueSachMousePressed
@@ -3739,11 +3806,12 @@ public class Main extends javax.swing.JFrame {
     private void tblListSachDocMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListSachDocMousePressed
         try {
             int index = tblListSachDoc.getSelectedRow();
-            Sach s = listS.get(index);
-            System.out.println(s.getDuongDan());
-            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
-            materialTabbed3.setSelectedIndex(0);
-
+            if (index != -1) {
+                Sach s = listS.get(index);
+                System.out.println(s.getDuongDan());
+                openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + s.getDuongDan());
+                materialTabbed3.setSelectedIndex(0);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3823,11 +3891,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tblAudioMousePressed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        if(player == null){
-            DialogHelper.alert(this,"Bạn chưa chọn sách nói");
+        if (player == null) {
+            DialogHelper.alert(this, "Bạn chưa chọn sách nói");
             return;
         }
- 
+
         try {
 
             if (congTac) {
@@ -3931,6 +3999,78 @@ public class Main extends javax.swing.JFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         fillTableDanhSachCacSach();
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void pnl1tuanLamViecMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl1tuanLamViecMouseEntered
+        pnl1tuanLamViec.setBackground(new Color(87, 190, 110));
+    }//GEN-LAST:event_pnl1tuanLamViecMouseEntered
+
+    private void pnl1tuanLamViecMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl1tuanLamViecMouseExited
+        pnl1tuanLamViec.setBackground(Color.white);
+    }//GEN-LAST:event_pnl1tuanLamViecMouseExited
+
+    private void panelRadius6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius6MouseEntered
+        panelRadius6.setBackground(new Color(87, 190, 110));
+    }//GEN-LAST:event_panelRadius6MouseEntered
+
+    private void panelRadius6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius6MouseExited
+        panelRadius6.setBackground(Color.white);
+    }//GEN-LAST:event_panelRadius6MouseExited
+
+    private void panelRadius7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius7MouseEntered
+        panelRadius7.setBackground(new Color(87, 190, 110));
+    }//GEN-LAST:event_panelRadius7MouseEntered
+
+    private void panelRadius7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius7MouseExited
+        panelRadius7.setBackground(Color.WHITE);
+    }//GEN-LAST:event_panelRadius7MouseExited
+
+    private void panelRadius8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius8MouseEntered
+        panelRadius8.setBackground(new Color(87, 190, 110));
+    }//GEN-LAST:event_panelRadius8MouseEntered
+
+    private void panelRadius8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius8MouseExited
+        panelRadius8.setBackground(Color.WHITE);
+    }//GEN-LAST:event_panelRadius8MouseExited
+
+    private void pnl1tuanLamViecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl1tuanLamViecMouseClicked
+        try {
+            Sach sach = DAOS.findById("SH001");
+            DisplayReadPanel();
+            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + sach.getDuongDan());
+            materialTabbed3.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pnl1tuanLamViecMouseClicked
+
+    private void panelRadius6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius6MouseClicked
+        try {
+            Sach sach = DAOS.findById("CTPL001");
+            DisplayReadPanel();
+            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + sach.getDuongDan());
+            materialTabbed3.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_panelRadius6MouseClicked
+
+    private void panelRadius7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius7MouseClicked
+        try {
+            Sach sach = DAOS.findById("TLH001");
+            DisplayReadPanel();
+            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + sach.getDuongDan());
+            materialTabbed3.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_panelRadius7MouseClicked
+
+    private void panelRadius8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRadius8MouseClicked
+        try {
+            Sach sach = DAOS.findById("KHCN0011");
+            DisplayReadPanel();
+            openpdf("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\pdf\\" + sach.getDuongDan());
+            materialTabbed3.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_panelRadius8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -4118,7 +4258,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius20;
     private com.ebooks.Compoment.PanelRadius panelRadius25;
     private com.ebooks.Compoment.PanelRadius panelRadius27;
-    private com.ebooks.Compoment.PanelRadius panelRadius3;
     private com.ebooks.Compoment.PanelRadius panelRadius30;
     private com.ebooks.Compoment.PanelRadius panelRadius31;
     private com.ebooks.Compoment.PanelRadius panelRadius4;
@@ -4127,6 +4266,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.PanelRadius panelRadius7;
     private com.ebooks.Compoment.PanelRadius panelRadius8;
     private com.ebooks.Compoment.PanelRadius panelRadius9;
+    private com.ebooks.Compoment.PanelRadius pnl1tuanLamViec;
     private javax.swing.JPanel pnlBossMain;
     private com.ebooks.Compoment.PanelRadius pnlFrameListen;
     private com.ebooks.Compoment.PanelRadius pnlFrameMain;
@@ -4245,6 +4385,7 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel model;
         model = (DefaultTableModel) tblListSachDoc.getModel();
         tblListSachDoc.setSelectionBackground(new Color(87, 190, 110));
+
         model.setRowCount(0);
         try {
             listS = DAOS.selectAll();

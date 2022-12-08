@@ -288,7 +288,6 @@ public class LogInDiaLog extends javax.swing.JDialog {
             if (UtilityHelper.checkNullText(lblMatKhau, txtMatKhau) && UtilityHelper.checkPass(lblMatKhau, txtMatKhau)) {
                 String matKhau = new String(txtMatKhau.getPassword());
                 TaiKhoan taiKhoan = tkDao.findById(tenDangNhap);
-                tendangNhapApp = taiKhoan.getTenDangNhap();
                 QuanTriVien quanTri = qtvDao.findById(tenDangNhap);
                 if (taiKhoan == null) {
                     DialogHelper.alert(this, "Sai Tên Đăng Nhập");
@@ -303,6 +302,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
                 } else {
                     if (quanTri == null) {
                         ShareHelper.USER = taiKhoan;
+                        tendangNhapApp = taiKhoan.getTenDangNhap();
                         ShareHelper.BOSS = null;
                         DialogHelper.alert(this, "Đăng Nhập Thành Công");
                         if (taiKhoan.getThoiLuong().getTime() == -28800000) {

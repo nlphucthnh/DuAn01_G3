@@ -141,6 +141,12 @@ public class SettingDiaLog extends javax.swing.JDialog {
         panelRadius6 = new com.ebooks.Compoment.PanelRadius();
         jLabel19 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
+        imageBoder1 = new com.ebooks.Compoment.ImageBoder();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
         panelRadius7 = new com.ebooks.Compoment.PanelRadius();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel20 = new javax.swing.JLabel();
@@ -195,6 +201,35 @@ public class SettingDiaLog extends javax.swing.JDialog {
         jLabel19.setText("Thông Tin Về Ứng Dụng ");
         panelRadius6.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
         panelRadius6.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 10));
+
+        imageBoder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/stock-photo-76398531.jpg"))); // NOI18N
+        imageBoder1.setRadius(20);
+        panelRadius6.add(imageBoder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 220, 220));
+
+        jLabel35.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel35.setText("Dự án phần mềm quản lý thuê sách ebooks và kết hợp ");
+        panelRadius6.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 430, -1));
+
+        jLabel36.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel36.setText("trong việc quản lý các thông tin cần cho hệ thống.");
+        panelRadius6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 440, 20));
+
+        jLabel38.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel38.setText("oder thức uống của nhóm chúng em hướng đến là một ");
+        panelRadius6.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 430, 20));
+
+        jLabel39.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel39.setText("phần mềm được sử dụng trong một mô hình quán cafe ");
+        panelRadius6.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 440, 20));
+
+        jLabel40.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel40.setText("sách . Phần mềm bao gồm những chức năng tích hợp ");
+        panelRadius6.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 440, 20));
 
         tbdSetting1.addTab("Giới Thiệu", panelRadius6);
 
@@ -464,6 +499,7 @@ public class SettingDiaLog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.ebooks.Compoment.ImageBoder imageBoder1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -481,6 +517,11 @@ public class SettingDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator8;
