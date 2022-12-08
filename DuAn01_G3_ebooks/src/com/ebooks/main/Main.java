@@ -180,12 +180,12 @@ public class Main extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
         movedpnlMenu();
         Date();
-        fillTableDanhSachCacSach();    
+        fillTableDanhSachCacSach();
         AppStatus.mainApp = this;
         timeDialog = new TimeNotifyDialog(this, congTac);
         initMoving(this, pnlMainProjebt);
         RentalPeriod();
-        
+
     }
 
     public void init() {
@@ -497,7 +497,6 @@ public class Main extends javax.swing.JFrame {
         t.start();
 
     }
-    
 
     private void displayTimeAudio() {
 
@@ -811,8 +810,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }
-    
-    
 
     //method deleteTaiKhoan
     private void deleteTaiKhoan() {
@@ -3826,19 +3823,28 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tblAudioMousePressed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        if(player == null){
+            DialogHelper.alert(this,"Bạn chưa chọn sách nói");
+            return;
+        }
+ 
+        try {
 
-        if (congTac) {
-            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
-            congTac = false;
-            playPase = true;
-            runtimeFirst();
-            player.play();
-        } else {
-            btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
-            congTac = true;
-            playPase = false;
-            runtimeFirst();
-            player.pause();
+            if (congTac) {
+                btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\pause-button.png"));
+                congTac = false;
+                playPase = true;
+                runtimeFirst();
+                player.play();
+            } else {
+                btnPlay.setIcon(new ImageIcon("..\\DuAn01_G3_ebooks\\src\\com\\ebooks\\Icon\\play-button-arrowhead.png"));
+                congTac = true;
+                playPase = false;
+                runtimeFirst();
+                player.pause();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnPlayActionPerformed
 
@@ -4189,7 +4195,7 @@ public class Main extends javax.swing.JFrame {
         for (HoaDonThucUong hdtu : list) {
             SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
             String ngay = formats.format(hdtu.getNgayMua());
-            String NamMua =  ngay.substring(ngay.lastIndexOf("/")+1); 
+            String NamMua = ngay.substring(ngay.lastIndexOf("/") + 1);
             model.addElement(NamMua);
         }
     }
@@ -4201,7 +4207,7 @@ public class Main extends javax.swing.JFrame {
         for (HoaDonThueSach hdts : list) {
             SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
             String ngay = formats.format(hdts.getNgayThue());
-            String NamThue =  ngay.substring(ngay.lastIndexOf("/")+1); 
+            String NamThue = ngay.substring(ngay.lastIndexOf("/") + 1);
             model.addElement(NamThue);
         }
     }
