@@ -238,11 +238,12 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    
     public void fillTableDTTS() {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuThueSach.getModel();
         model.setRowCount(0);
-        List<Object[]> list = DAOHDTH.getDoanhThuThueSach();
-        for (Object[] row : list) {
+        List<Object[]> listTKTS = DAOHDTH.getDoanhThuThueSach();
+        for (Object[] row : listTKTS) {
             model.addRow(row);
         }
 
@@ -264,21 +265,24 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    
+    List<Object[]> listTKTU;
     public void fillTableTKTU(int nam) {
-        DefaultTableModel model = (DefaultTableModel) TKDTThucUong.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblTKDTThucUong.getModel();
         model.setRowCount(0);
-        List<Object[]> list = DAOHDTH.getTKDoanhThuThucUong(nam);
-        for (Object[] row : list) {
+        /*List<Object[]>*/ listTKTU = DAOHDTH.getTKDoanhThuThucUong(nam);
+        for (Object[] row : listTKTU) {
             model.addRow(row);
         }
 
     }
 
+    List<Object[]> listTKTS;
     public void fillTableTKTS(int nam) {
         DefaultTableModel model = (DefaultTableModel) tblTKDTThueSach.getModel();
         model.setRowCount(0);
-        List<Object[]> list = DAOHDTH.getTKDoanhThuThueSach(nam);
-        for (Object[] row : list) {
+        listTKTS = DAOHDTH.getTKDoanhThuThueSach(nam);
+        for (Object[] row : listTKTS) {
             model.addRow(row);
         }
 
@@ -1041,7 +1045,7 @@ public class Main extends javax.swing.JFrame {
         tabThongKe = new com.ebooks.Compoment.MaterialTabbed();
         panelRadius18 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane4 = new javax.swing.JScrollPane();
-        TKDTThucUong = new com.ebooks.Compoment.Table();
+        tblTKDTThucUong = new com.ebooks.Compoment.Table();
         panelRadius27 = new com.ebooks.Compoment.PanelRadius();
         jLabel25 = new javax.swing.JLabel();
         cboNamTU = new javax.swing.JComboBox<>();
@@ -2425,7 +2429,7 @@ public class Main extends javax.swing.JFrame {
         panelRadius18.setBackground(new java.awt.Color(255, 255, 255));
         panelRadius18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TKDTThucUong.setModel(new javax.swing.table.DefaultTableModel(
+        tblTKDTThucUong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2444,9 +2448,9 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(TKDTThucUong);
+        jScrollPane4.setViewportView(tblTKDTThucUong);
 
-        panelRadius18.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 930, 360));
+        panelRadius18.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 930, 360));
 
         panelRadius27.setBackground(new java.awt.Color(231, 249, 234));
         panelRadius27.setRadius(10);
@@ -3736,14 +3740,14 @@ public class Main extends javax.swing.JFrame {
 
     private void btnLastDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastDTTSActionPerformed
 
-        int index = tblDoanhThuThueSach.getSelectedRow();
-        UtilityHelper.last(index, tblDoanhThuThueSach, listS);
+        int index = listTKTS.size() - 1;
+        UtilityHelper.last(index, tblTKDTThueSach, listTKTS);
     }//GEN-LAST:event_btnLastDTTSActionPerformed
 
     private void btnLastDTTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastDTTUActionPerformed
 
-        int index = tblDoanhThuThucUong.getSelectedRow();
-        UtilityHelper.last(index, tblDoanhThuThucUong, listTU);
+        int index = listTKTU.size() -1;
+        UtilityHelper.last(index, tblTKDTThucUong, listTKTU);
     }//GEN-LAST:event_btnLastDTTUActionPerformed
 
     private void cboNamTSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboNamTSItemStateChanged
@@ -3763,43 +3767,49 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cboNamTUItemStateChanged
 
     private void btnFirstDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstDTTSActionPerformed
-        int index = tblDoanhThuThueSach.getSelectedRow();
-        UtilityHelper.first(index, tblDoanhThuThueSach);
+        int index = 0;
+        UtilityHelper.first(index, tblTKDTThueSach);
 
     }//GEN-LAST:event_btnFirstDTTSActionPerformed
 
     private void btnPreDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreDTTSActionPerformed
 
-        int index = tblDoanhThuThueSach.getSelectedRow();
-        UtilityHelper.previous(index, tblDoanhThuThueSach, listS);
+        int index = tblTKDTThueSach.getSelectedRow();
+        if(index < 0){
+            index = listTKTS.size() - 1;
+        }
+        UtilityHelper.previous(index, tblTKDTThueSach, listTKTS);
 
 
     }//GEN-LAST:event_btnPreDTTSActionPerformed
 
     private void bntFistDTTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFistDTTUActionPerformed
-        int index = tblDoanhThuThucUong.getSelectedRow();
-        UtilityHelper.first(index, tblDoanhThuThucUong);
+        int index = 0;
+        UtilityHelper.first(index, tblTKDTThucUong);
 
     }//GEN-LAST:event_bntFistDTTUActionPerformed
 
     private void btnPreDTTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreDTTUActionPerformed
 
-        int index = tblDoanhThuThucUong.getSelectedRow();
-        UtilityHelper.previous(index, tblDoanhThuThucUong, listTU);
+        int index = tblTKDTThucUong.getSelectedRow();
+        UtilityHelper.previous(index, tblTKDTThucUong, listTKTU);
 
     }//GEN-LAST:event_btnPreDTTUActionPerformed
 
     private void btnNextDTTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextDTTUActionPerformed
-        int index = tblDoanhThuThucUong.getSelectedRow();
-        UtilityHelper.next(index, tblDoanhThuThucUong, listTU);
+        int index = tblTKDTThucUong.getSelectedRow();
+        UtilityHelper.next(index, tblTKDTThucUong, listTKTU);
 
 
     }//GEN-LAST:event_btnNextDTTUActionPerformed
 
     private void btnNextDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextDTTSActionPerformed
 
-        int index = tblDoanhThuThueSach.getSelectedRow();
-        UtilityHelper.next(index, tblDoanhThuThueSach, listS);
+        int index = tblTKDTThueSach.getSelectedRow();
+        if(index > listTKTS.size() - 1){
+            index = 0;
+        }
+        UtilityHelper.next(index, tblTKDTThueSach, listTKTS);
 
     }//GEN-LAST:event_btnNextDTTSActionPerformed
 
@@ -4111,7 +4121,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.ebooks.Compoment.Table TKDTThucUong;
     private com.ebooks.Compoment.MyButton bntFistDTTU;
     private com.ebooks.Compoment.MyButton btnBell;
     private com.ebooks.Compoment.MyButton btnCapNhatSach;
@@ -4301,6 +4310,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.Table tblListSachDoc;
     private com.ebooks.Compoment.Table tblNguoiDung;
     private com.ebooks.Compoment.Table tblSach;
+    private com.ebooks.Compoment.Table tblTKDTThucUong;
     private com.ebooks.Compoment.Table tblTKDTThueSach;
     private com.ebooks.Compoment.Table tblTacGia;
     private com.ebooks.Compoment.Table tblTaiKhoan;
