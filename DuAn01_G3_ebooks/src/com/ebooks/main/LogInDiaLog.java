@@ -32,6 +32,7 @@ public class LogInDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        setIconImage(ShareHelper.APP_ICON);
     }
 
     /**
@@ -169,6 +170,12 @@ public class LogInDiaLog extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel9MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel9MousePressed(evt);
             }
@@ -238,6 +245,14 @@ public class LogInDiaLog extends javax.swing.JDialog {
     private void btnDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDangNhapKeyPressed
 
     }//GEN-LAST:event_btnDangNhapKeyPressed
+
+    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
+        jLabel9.setForeground(new Color(87,170,100));
+    }//GEN-LAST:event_jLabel9MouseEntered
+
+    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
+        jLabel9.setForeground(new Color(87,190,110));
+    }//GEN-LAST:event_jLabel9MouseExited
 
     /**
      * @param args the command line arguments

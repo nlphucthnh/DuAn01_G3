@@ -29,7 +29,7 @@ public class ShareHelper {
      // Tải biểu tượng ứng dụng 
      //CÁCH TẢI ẢNH TỪ TRONG PROJECT
      //icon là thư mục con của src
-     String file = "/com/ebooks/Icon/nerds.png";      //icon là thư mục con của src
+     String file = "/com/ebooks/Icon/layers.png";      //icon là thư mục con của src
      APP_ICON = new ImageIcon(ShareHelper.class.getResource(file)).getImage();
      APP_ICON_1 = new ImageIcon(ShareHelper.class.getResource(file));
  }

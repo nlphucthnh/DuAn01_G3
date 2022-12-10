@@ -15,8 +15,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.sql.Time;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Pattern;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,15 +36,15 @@ import javax.swing.table.DefaultTableModel;
 public class SignUpDiaLog extends javax.swing.JDialog {
 
     private TaiKhoanDAO daoTK = new TaiKhoanDAO();
-
-    /**
-     * Creates new form SignUpDiaLog
-     */
+    static int code = (int) Math.floor(((Math.random() * 899999) + 100000));
+    
     public SignUpDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
+        
+        
     }
 
     private int x;
@@ -57,6 +66,9 @@ public class SignUpDiaLog extends javax.swing.JDialog {
             }
         });
     }
+    
+   
+    
 
     void insert() {
         if (checkBugs()) {
@@ -85,22 +97,20 @@ public class SignUpDiaLog extends javax.swing.JDialog {
     }
 
     boolean checkBugs() {
-
         if (txtTenDangNhap.getText().equals("")) {
             DialogHelper.alert(this, "Chưa nhập tên đăng nhập");
             return false;
         } else if (txtMatKhau.getText().equals("")) {
             DialogHelper.alert(this, "Chưa nhập mật khẩu");
             return false;
-        } else if (txtXacNhan.getText().equals("")) {
+        } else if (txtMatKhauXacNhan.getText().equals("")) {
             DialogHelper.alert(this, "Chưa nhập xác nhận mật khẩu mật khẩu");
             return false;
-        } else if (!txtMatKhau.getText().equals(txtXacNhan.getText())) {
+        } else if (!txtMatKhau.getText().equals(txtMatKhauXacNhan.getText())) {
             DialogHelper.alert(this, "Mật khẩu chưa trùng khớp");
             return false;
         }
         return true;
-
     }
 
     /**
@@ -123,12 +133,15 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtTenDangNhap = new com.ebooks.Compoment.txtFieldBoder();
         txtMatKhau = new com.ebooks.Compoment.txtFieldPassBoder();
-        txtXacNhan = new com.ebooks.Compoment.txtFieldPassBoder();
+        txtMatKhauXacNhan = new com.ebooks.Compoment.txtFieldPassBoder();
         rdoQuanTriVien = new javax.swing.JRadioButton();
-        rdoNguoiDung = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnTaoTaiKhoan1 = new com.ebooks.Compoment.MyButton();
+        txtMaXacNhan = new com.ebooks.Compoment.txtFieldBoder();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtTenDangNhap1 = new com.ebooks.Compoment.txtFieldBoder();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -148,7 +161,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         btnTaoTaiKhoan.setBorder(null);
         btnTaoTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
         btnTaoTaiKhoan.setText("Tạo Tài Khoản");
-        btnTaoTaiKhoan.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnTaoTaiKhoan.setBoderColor(new java.awt.Color(87, 190, 110));
         btnTaoTaiKhoan.setColorOver(new java.awt.Color(54, 172, 63));
         btnTaoTaiKhoan.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
         btnTaoTaiKhoan.setRadius(10);
@@ -157,7 +170,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 btnTaoTaiKhoanActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(btnTaoTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 160, 40));
+        pnlMainDialog.add(btnTaoTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 160, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Vai Trò");
@@ -176,10 +189,10 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
         jLabel1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jLabel1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -194,7 +207,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         txtTenDangNhap.setBackground(new java.awt.Color(220, 250, 220));
         txtTenDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         txtTenDangNhap.setRadius(10);
-        pnlMainDialog.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 400, 40));
+        pnlMainDialog.add(txtTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 190, 40));
 
         txtMatKhau.setBackground(new java.awt.Color(220, 250, 220));
         txtMatKhau.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -203,16 +216,16 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 txtMatKhauActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 400, 40));
+        pnlMainDialog.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 190, 40));
 
-        txtXacNhan.setBackground(new java.awt.Color(220, 250, 220));
-        txtXacNhan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtXacNhan.addActionListener(new java.awt.event.ActionListener() {
+        txtMatKhauXacNhan.setBackground(new java.awt.Color(220, 250, 220));
+        txtMatKhauXacNhan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtMatKhauXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXacNhanActionPerformed(evt);
+                txtMatKhauXacNhanActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(txtXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 400, 40));
+        pnlMainDialog.add(txtMatKhauXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 270, 190, 40));
 
         rdoQuanTriVien.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdoQuanTriVien);
@@ -222,22 +235,11 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 rdoQuanTriVienActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(rdoQuanTriVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, -1, -1));
-
-        rdoNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoNguoiDung);
-        rdoNguoiDung.setSelected(true);
-        rdoNguoiDung.setText("Người Dùng ");
-        rdoNguoiDung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNguoiDungActionPerformed(evt);
-            }
-        });
-        pnlMainDialog.add(rdoNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
+        pnlMainDialog.add(rdoQuanTriVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Xác Nhận");
-        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
+        pnlMainDialog.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Image/nerds-removebg-preview.png"))); // NOI18N
         pnlMainDialog.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -246,7 +248,7 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         btnTaoTaiKhoan1.setBorder(null);
         btnTaoTaiKhoan1.setForeground(new java.awt.Color(255, 255, 255));
         btnTaoTaiKhoan1.setText("Trở về đăng nhập");
-        btnTaoTaiKhoan1.setBoderColor(new java.awt.Color(255, 255, 255));
+        btnTaoTaiKhoan1.setBoderColor(new java.awt.Color(87, 190, 110));
         btnTaoTaiKhoan1.setColorOver(new java.awt.Color(54, 172, 63));
         btnTaoTaiKhoan1.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
         btnTaoTaiKhoan1.setRadius(10);
@@ -255,7 +257,25 @@ public class SignUpDiaLog extends javax.swing.JDialog {
                 btnTaoTaiKhoan1ActionPerformed(evt);
             }
         });
-        pnlMainDialog.add(btnTaoTaiKhoan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 440, 160, 40));
+        pnlMainDialog.add(btnTaoTaiKhoan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 160, 40));
+
+        txtMaXacNhan.setBackground(new java.awt.Color(220, 250, 220));
+        txtMaXacNhan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtMaXacNhan.setRadius(10);
+        pnlMainDialog.add(txtMaXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 400, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Mã Xác Nhận");
+        pnlMainDialog.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("Email");
+        pnlMainDialog.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
+
+        txtTenDangNhap1.setBackground(new java.awt.Color(220, 250, 220));
+        txtTenDangNhap1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtTenDangNhap1.setRadius(10);
+        pnlMainDialog.add(txtTenDangNhap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 190, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,17 +309,13 @@ public class SignUpDiaLog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoQuanTriVienActionPerformed
 
-    private void rdoNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNguoiDungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNguoiDungActionPerformed
-
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatKhauActionPerformed
 
-    private void txtXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXacNhanActionPerformed
+    private void txtMatKhauXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauXacNhanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtXacNhanActionPerformed
+    }//GEN-LAST:event_txtMatKhauXacNhanActionPerformed
 
     private void btnTaoTaiKhoan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoTaiKhoan1ActionPerformed
         // TODO add your handling code here:
@@ -361,11 +377,14 @@ public class SignUpDiaLog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private com.ebooks.Compoment.PanelBorder pnlMainDialog;
-    private javax.swing.JRadioButton rdoNguoiDung;
     private javax.swing.JRadioButton rdoQuanTriVien;
+    private com.ebooks.Compoment.txtFieldBoder txtMaXacNhan;
     private com.ebooks.Compoment.txtFieldPassBoder txtMatKhau;
+    private com.ebooks.Compoment.txtFieldPassBoder txtMatKhauXacNhan;
     private com.ebooks.Compoment.txtFieldBoder txtTenDangNhap;
-    private com.ebooks.Compoment.txtFieldPassBoder txtXacNhan;
+    private com.ebooks.Compoment.txtFieldBoder txtTenDangNhap1;
     // End of variables declaration//GEN-END:variables
 }

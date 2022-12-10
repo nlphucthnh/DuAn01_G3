@@ -4,6 +4,7 @@
  */
 package com.ebooks.main;
 
+import com.ebooks.helper.ShareHelper;
 import java.awt.Color;
 
 /**
@@ -19,6 +20,7 @@ public class StartUpDiaLog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBackground(new Color(0,0,0,0));
+        setIconImage(ShareHelper.APP_ICON);
         Loading();
         
     }
