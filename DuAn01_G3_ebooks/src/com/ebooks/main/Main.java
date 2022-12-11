@@ -746,6 +746,19 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    public List fillDuplicate(List<Integer> list) {
+        int sizeList = list.size();
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i).equals(list.get(j))) {
+                    list.remove(j);
+                }
+            }
+        }
+        
+        return list;
+    }
+
     public void SetColorIconBtn(MyButton btn, boolean bl, ImageIcon iconA, ImageIcon iconB) {
         if (bl) {
             btn.setIcon(iconA);
@@ -4359,11 +4372,18 @@ public class Main extends javax.swing.JFrame {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNamTU.getModel();
         model.removeAllElements();
         List<HoaDonThucUong> list = DaoHDTU.selectAll();
+        List<Integer> listNam = new ArrayList();
         for (HoaDonThucUong hdtu : list) {
             SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
             String ngay = formats.format(hdtu.getNgayMua());
             String NamMua = ngay.substring(ngay.lastIndexOf("/") + 1);
-            model.addElement(NamMua);
+            listNam.add(Integer.parseInt(NamMua));
+        }
+        List<Integer> listX = fillDuplicate(listNam);
+        List<Integer> listY = fillDuplicate(listX);
+        List<Integer> listZ = fillDuplicate(listY);
+        for (int i = 0; i < listZ.size(); i++) {
+            model.addElement(listZ.get(i));
         }
     }
 
@@ -4371,12 +4391,18 @@ public class Main extends javax.swing.JFrame {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNamTS.getModel();
         model.removeAllElements();
         List<HoaDonThueSach> list = DaoHDTS.selectAll();
+        List<Integer> listNam = new ArrayList();
         for (HoaDonThueSach hdts : list) {
             SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
             String ngay = formats.format(hdts.getNgayThue());
             String NamThue = ngay.substring(ngay.lastIndexOf("/") + 1);
-            model.addElement(NamThue);
+            listNam.add(Integer.parseInt(NamThue));
         }
+        List<Integer> listX = fillDuplicate(listNam);
+        for (int i = 0; i < listX.size(); i++) {
+            model.addElement(listX.get(i));
+        }
+
     }
 
     public void LoadNguoiDung() {
