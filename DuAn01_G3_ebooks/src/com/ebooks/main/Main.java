@@ -238,7 +238,6 @@ public class Main extends javax.swing.JFrame {
 
     }
 
-    
     public void fillTableDTTS() {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuThueSach.getModel();
         model.setRowCount(0);
@@ -265,8 +264,8 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    
     List<Object[]> listTKTU;
+
     public void fillTableTKTU(int nam) {
         DefaultTableModel model = (DefaultTableModel) tblTKDTThucUong.getModel();
         model.setRowCount(0);
@@ -278,6 +277,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     List<Object[]> listTKTS;
+
     public void fillTableTKTS(int nam) {
         DefaultTableModel model = (DefaultTableModel) tblTKDTThueSach.getModel();
         model.setRowCount(0);
@@ -805,6 +805,13 @@ public class Main extends javax.swing.JFrame {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
             String MaND = tblNguoiDung.getValueAt(index, 0).toString();
             try {
+                TaiKhoan tk = DaoTK.findByIdND(MaND);
+                if (tk != null) {
+                    boolean kq = DialogHelper.confirm(this, "Người Dùng Đã Có Tài khoản bạn muốn xóa ?");
+                    if (kq) {
+                        DaoTK.delete(tk.getTenDangNhap());
+                    }
+                }
                 DaoND.delete(MaND);
                 fillTableNguoiDung();
                 DialogHelper.alert(this, "Xóa thành công!");
@@ -819,7 +826,15 @@ public class Main extends javax.swing.JFrame {
         int index = tblTaiKhoan.getSelectedRow();
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
             String TenDangNhap = tblTaiKhoan.getValueAt(index, 0).toString();
+
             try {
+                QuanTriVien qtv = DAOQTV.findById(TenDangNhap);
+                if (qtv != null) {
+                    boolean kq = DialogHelper.confirm(this, "Bạn Có muốn Xóa Quản Trị Viên Này");
+                    if (kq) {
+                        DAOQTV.delete(qtv.getTenDangNhap());
+                    }
+                }
                 DaoTK.delete(TenDangNhap);
                 LoadTaiKhoan();
                 this.fillTableTaiKhoan(listTK);
@@ -3204,10 +3219,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLastThucUongActionPerformed
 
     private void btnXoaNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNguoiDungActionPerformed
-        int index = tblTaiKhoan.getSelectedRow();
+        int index = tblNguoiDung.getSelectedRow();
         if (index != -1) {
             deleteNguoiDung();
             fillTableNguoiDung();
+        } else {
+            DialogHelper.alert(this, "Hãy Chọn Người Dùng");
         }
 
 
@@ -3746,7 +3763,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnLastDTTUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastDTTUActionPerformed
 
-        int index = listTKTU.size() -1;
+        int index = listTKTU.size() - 1;
         UtilityHelper.last(index, tblTKDTThucUong, listTKTU);
     }//GEN-LAST:event_btnLastDTTUActionPerformed
 
@@ -3775,7 +3792,7 @@ public class Main extends javax.swing.JFrame {
     private void btnPreDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreDTTSActionPerformed
 
         int index = tblTKDTThueSach.getSelectedRow();
-        if(index < 0){
+        if (index < 0) {
             index = listTKTS.size() - 1;
         }
         UtilityHelper.previous(index, tblTKDTThueSach, listTKTS);
@@ -3806,7 +3823,7 @@ public class Main extends javax.swing.JFrame {
     private void btnNextDTTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextDTTSActionPerformed
 
         int index = tblTKDTThueSach.getSelectedRow();
-        if(index > listTKTS.size() - 1){
+        if (index > listTKTS.size() - 1) {
             index = 0;
         }
         UtilityHelper.next(index, tblTKDTThueSach, listTKTS);

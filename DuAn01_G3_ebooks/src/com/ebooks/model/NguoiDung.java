@@ -20,6 +20,13 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
+    public NguoiDung(String maNguoiDung, String hoTen) {
+        this.maNguoiDung = maNguoiDung;
+        this.hoTen = hoTen;
+    }
+    
+    
+
     public NguoiDung(String maNguoiDung, String hoTen, boolean gioiTinh, String soDienThoai, String email, String hinh) {
         this.maNguoiDung = maNguoiDung;
         this.hoTen = hoTen;
