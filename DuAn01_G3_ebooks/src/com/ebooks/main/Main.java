@@ -862,7 +862,7 @@ public class Main extends javax.swing.JFrame {
     private void deleteTacGia() {
         int index = tblTacGia.getSelectedRow();
         if (index != -1) {
-            if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
+            if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa?")) {
                 String MaTG = tblTacGia.getValueAt(index, 0).toString();
                 try {
                     DAOTG.delete(MaTG);
@@ -881,7 +881,7 @@ public class Main extends javax.swing.JFrame {
 
     private void deleteTheLoai() {
         int index = tblTheLoai.getSelectedRow();
-        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa?")) {
             String MaTL = tblTheLoai.getValueAt(index, 0).toString();
             try {
                 DAOTL.delete(MaTL);
@@ -3613,7 +3613,7 @@ public class Main extends javax.swing.JFrame {
             new TypeBooksDiaLog(this, true, tLoai).setVisible(true);
             fillTableTheLoai();
         } else {
-            DialogHelper.alert(this, "Hãy Chọn The Loai");
+            DialogHelper.alert(this, "Hãy Chọn Thể Loại");
         }
     }//GEN-LAST:event_btnSuaLoaiSachActionPerformed
 
@@ -3623,7 +3623,7 @@ public class Main extends javax.swing.JFrame {
             deleteTheLoai();
             fillTableTheLoai();
         } else {
-            DialogHelper.alert(this, "Hãy Chọn The Loai");
+            DialogHelper.alert(this, "Hãy Chọn Thể Loại");
         }
 
     }//GEN-LAST:event_btnXoaLoaiSachActionPerformed

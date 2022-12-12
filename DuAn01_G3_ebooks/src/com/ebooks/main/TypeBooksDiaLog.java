@@ -89,7 +89,7 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
                     DAOTL.insert(theLoai);
                     DialogHelper.alert(this, "Thêm mới Thành công");
                 } catch (Exception e) {
-                    DialogHelper.alert(this, "Lỗi thêm tác giả");
+                    DialogHelper.alert(this, "Lỗi");
                     return;
                 }
             }
