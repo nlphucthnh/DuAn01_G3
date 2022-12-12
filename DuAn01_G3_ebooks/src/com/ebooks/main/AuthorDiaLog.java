@@ -38,6 +38,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     String maTacGia = null;
     static String NameImg = "41b92ec3eab97e4c24b3f6e8fe75ddec.png";
     private TacGiaDAO DAOTG = new TacGiaDAO();
+
     public AuthorDiaLog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -53,6 +54,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         Calendar.setVisible(congTac);
         maTacGia = tg.getMaTacGia();
         setBackground(new Color(0, 0, 0, 0));
+        txtHoten.setEnabled(true);
     }
 
     private int x;
@@ -78,7 +80,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     public void setForm(TacGia tg) {
         txtHoten.setText(tg.getHoTen());
         SimpleDateFormat formats = new SimpleDateFormat("dd/MM/yyyy");
-        if(tg.getNgaySinh() == null){
+        if (tg.getNgaySinh() == null) {
             tg.setNgaySinh(new Date());
         }
         txtNgaySinh.setText(String.valueOf(formats.format(tg.getNgaySinh())));
@@ -90,21 +92,21 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     TacGia getForm() {
-      
+
         TacGia tacGia = new TacGia();
         tacGia.setHoTen(txtHoten.getText());
-        tacGia.setGioiTinh(rdoNam.isSelected()? true : false);
+        tacGia.setGioiTinh(rdoNam.isSelected() ? true : false);
         tacGia.setNgaySinh(new Date(txtNgaySinh.getText()));
         tacGia.setHinh(NameImg);
         tacGia.setMoTa(txtMoTa.getText());
         tacGia.setMaQuanTriVien(ShareHelper.BOSS.getMaQuanTriVien());
         return tacGia;
     }
-    
+
     TacGia getForm(TacGia tg) {
-       
+
         tg.setHoTen(txtHoten.getText());
-        tg.setGioiTinh(rdoNam.isSelected()? true : false);
+        tg.setGioiTinh(rdoNam.isSelected() ? true : false);
         tg.setNgaySinh(Calendar.getDate());
         tg.setHinh(NameImg);
         tg.setMoTa(txtMoTa.getText());
@@ -120,7 +122,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         imgIcon = new ImageIcon(newimg);
         return imgIcon;
     }
-    
+
     public String SetImg() {
         String UrlImg = "..\\DuAn01_G3_ebooks\\src\\com\\Content\\imgAthor\\";
         JFileChooser fileChooser = new JFileChooser();
@@ -160,11 +162,10 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     // cac button 
     public void InsertTacGia() {
         if (UtilityHelper.checkNullText(lblHoTen, txtHoten) && UtilityHelper.checkNullText(lblNgaySinh, txtNgaySinh)) {
-                TacGia tacGia = getForm();        
-                DAOTG.insert(tacGia);
+            TacGia tacGia = getForm();
 
             try {
-                                // this.fill
+                DAOTG.insert(tacGia);
                 DialogHelper.alert(this, "Thêm mới Thành công");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Lỗi thêm tác giả");
@@ -174,14 +175,12 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }
 
     public void UpdateSach() {
-        if (UtilityHelper.checkNullText(lblHoTen, txtHoten) && UtilityHelper.checkNullText(lblNgaySinh, txtNgaySinh)) {          
-            TacGia tacGia = DAOTG.findById(maTacGia); 
+        if (UtilityHelper.checkNullText(lblHoTen, txtHoten) && UtilityHelper.checkNullText(lblNgaySinh, txtNgaySinh)) {
+            TacGia tacGia = DAOTG.findById(maTacGia);
             System.out.println(tacGia);
             if (tacGia != null) {
-                
-                 DAOTG.update(getForm(tacGia));
                 try {
-                   
+                    DAOTG.update(getForm(tacGia));
                     DialogHelper.alert(this, "Cập Nhật Thành Công");
                 } catch (Exception e) {
                     DialogHelper.alert(this, "Lỗi Cập Nhật");
@@ -352,7 +351,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         pnlMainDialog.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 680, 120));
 
         lblHoTen.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        lblHoTen.setText("Họ Tên Người Dùng");
+        lblHoTen.setText("Ký Danh");
         pnlMainDialog.add(lblHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
         btnIconCld.setBackground(new java.awt.Color(87, 190, 110));
@@ -418,25 +417,29 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
 //        // TODO add your handling code here:
-        List<TacGia> listTG = new ArrayList<>();
-        String maTG = txtHoten.getText();
-        int timThay = 0;
+        try {
+            List<TacGia> listTG = new ArrayList<>();
+            String TenTG = txtHoten.getText();
+            int timThay = 0;
 //        ThucUongDAO DaoTU = new ThucUongDAO();
-        listTG = DAOTG.selectAll();
+            listTG = DAOTG.selectAll();
+            for (TacGia x : listTG) {
+                if (x.getHoTen().contains(TenTG)) {
+                    timThay = 1;
+                }
+            }
+            if (timThay == 0) {
+                this.InsertTacGia();
+            } else {
+                if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+                    this.UpdateSach();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        for (TacGia x : listTG) {
-            if (x.getHoTen().contains(maTG)) {
-                timThay = 1;
-            }
-        }
-        if (timThay == 0) {
-            this.InsertTacGia();
-        } else {
-            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
-                this.UpdateSach();
-            }
-        }
-      //   this.InsertTacGia();
+        //   this.InsertTacGia();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void lblTacGiaImgMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTacGiaImgMouseEntered
@@ -460,7 +463,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     }//GEN-LAST:event_lblTacGiaImgMousePressed
 
     private void pnlMainDialogMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMainDialogMouseDragged
-       initMoving(this, pnlMainDialog);
+        initMoving(this, pnlMainDialog);
     }//GEN-LAST:event_pnlMainDialogMouseDragged
 
     /*tbdSetting args the command line arguments

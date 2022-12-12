@@ -755,7 +755,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         return list;
     }
 
@@ -861,17 +861,22 @@ public class Main extends javax.swing.JFrame {
     //method deleteTacGia
     private void deleteTacGia() {
         int index = tblTacGia.getSelectedRow();
-        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
-            String MaTG = tblTacGia.getValueAt(index, 0).toString();
-            try {
-                DAOTG.delete(MaTG);
-                fillTableTacGia();
-                DialogHelper.alert(this, "Xóa thành công!");
-            } catch (Exception e) {
-                DialogHelper.alert(this, "Xóa thất bại!");
+        if (index != -1) {
+            if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người dùng này?")) {
+                String MaTG = tblTacGia.getValueAt(index, 0).toString();
+                try {
+                    DAOTG.delete(MaTG);
+                    fillTableTacGia();
+                    DialogHelper.alert(this, "Xóa thành công!");
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Xóa thất bại!");
 
+                }
             }
+        }else {
+            DialogHelper.alert(this,"Hãy chọn tác giả");
         }
+
     }
 
     private void deleteTheLoai() {

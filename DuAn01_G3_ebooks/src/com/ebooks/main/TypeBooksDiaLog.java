@@ -42,6 +42,7 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         setForm(tloai);
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, pnlMainDialog);
+        txtMaTheLoai.setEnabled(false);
     }
 
     private int x;
@@ -84,10 +85,8 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         if (UtilityHelper.checkNullText(lblMaTL, txtMaTheLoai)) {
             if (UtilityHelper.checkNullText(lblTenTL, txtTenTheLoai)) {
                 TheLoai theLoai = getForm();
-                DAOTL.insert(theLoai);
-
                 try {
-                    // this.fill
+                    DAOTL.insert(theLoai);
                     DialogHelper.alert(this, "Thêm mới Thành công");
                 } catch (Exception e) {
                     DialogHelper.alert(this, "Lỗi thêm tác giả");
@@ -102,7 +101,6 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
             if (UtilityHelper.checkNullText(lblTenTL, txtTenTheLoai)) {
               //  TacGia tacGia = DAOTG.findById(maTacGia);
               TheLoai tenTL = getForm();
-                System.out.println(tenTL);
                 if (tenTL != null) {
                     try {
                         DAOTL.update(tenTL);
@@ -202,6 +200,11 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
         pnlMainDialog.add(pnlExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         txtMaTheLoai.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaTheLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaTheLoaiActionPerformed(evt);
+            }
+        });
         txtMaTheLoai.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtMaTheLoaiKeyPressed(evt);
@@ -311,6 +314,10 @@ public class TypeBooksDiaLog extends javax.swing.JDialog {
             LuuThongTin();
         }
     }//GEN-LAST:event_txtMoTaTLKeyPressed
+
+    private void txtMaTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaTheLoaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaTheLoaiActionPerformed
 
     /*tbdSetting args the command line arguments
      */
