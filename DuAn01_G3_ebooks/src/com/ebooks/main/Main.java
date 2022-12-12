@@ -1068,6 +1068,16 @@ public class Main extends javax.swing.JFrame {
         panelRadius16 = new com.ebooks.Compoment.PanelRadius();
         jScrollPane12 = new javax.swing.JScrollPane();
         tblDoanhThuThueSach = new com.ebooks.Compoment.Table();
+        panelRadius1 = new com.ebooks.Compoment.PanelRadius();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        tblBangGia = new com.ebooks.Compoment.Table();
+        btnPreBangGia = new com.ebooks.Compoment.MyButton();
+        btnFirstBangGia = new com.ebooks.Compoment.MyButton();
+        btnNextBangGia = new com.ebooks.Compoment.MyButton();
+        btnLastBangGia = new com.ebooks.Compoment.MyButton();
+        btnThucUong1 = new com.ebooks.Compoment.MyButton();
+        btnSuaThongTinThucUong1 = new com.ebooks.Compoment.MyButton();
+        btnXoaThucUong1 = new com.ebooks.Compoment.MyButton();
         pnlFrameStatistical = new com.ebooks.Compoment.PanelRadius();
         jLabel20 = new javax.swing.JLabel();
         tabThongKe = new com.ebooks.Compoment.MaterialTabbed();
@@ -2438,6 +2448,113 @@ public class Main extends javax.swing.JFrame {
         pnlHoaDon.add(tabDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 420));
 
         tabQuanLy.addTab("Hóa Đơn", pnlHoaDon);
+
+        panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRadius1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblBangGia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã Bảng Giá ", "Thời Lượng", "Đơn Giá Thuê", "Mô Tả"
+            }
+        ));
+        tblBangGia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblBangGiaMousePressed(evt);
+            }
+        });
+        jScrollPane15.setViewportView(tblBangGia);
+
+        panelRadius1.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 350));
+
+        btnPreBangGia.setBackground(new java.awt.Color(145, 227, 168));
+        btnPreBangGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-left.png"))); // NOI18N
+        btnPreBangGia.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnPreBangGia.setRadius(10);
+        btnPreBangGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreBangGiaActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnPreBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 60, 40));
+
+        btnFirstBangGia.setBackground(new java.awt.Color(145, 227, 168));
+        btnFirstBangGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-left.png"))); // NOI18N
+        btnFirstBangGia.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnFirstBangGia.setRadius(10);
+        btnFirstBangGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstBangGiaActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnFirstBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 60, 40));
+
+        btnNextBangGia.setBackground(new java.awt.Color(145, 227, 168));
+        btnNextBangGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/caret-right.png"))); // NOI18N
+        btnNextBangGia.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnNextBangGia.setRadius(10);
+        btnNextBangGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextBangGiaActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnNextBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 60, 40));
+
+        btnLastBangGia.setBackground(new java.awt.Color(145, 227, 168));
+        btnLastBangGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ebooks/Icon/angle-double-small-right.png"))); // NOI18N
+        btnLastBangGia.setBoderColor(new java.awt.Color(145, 227, 168));
+        btnLastBangGia.setRadius(10);
+        btnLastBangGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastBangGiaActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnLastBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
+
+        btnThucUong1.setBackground(new java.awt.Color(87, 190, 110));
+        btnThucUong1.setForeground(new java.awt.Color(255, 255, 255));
+        btnThucUong1.setText("Thêm Bảng Giá");
+        btnThucUong1.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnThucUong1.setRadius(10);
+        btnThucUong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThucUong1ActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+
+        btnSuaThongTinThucUong1.setBackground(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinThucUong1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaThongTinThucUong1.setText("Sửa Thông Tin");
+        btnSuaThongTinThucUong1.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnSuaThongTinThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnSuaThongTinThucUong1.setRadius(10);
+        btnSuaThongTinThucUong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaThongTinThucUong1ActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnSuaThongTinThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
+
+        btnXoaThucUong1.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaThucUong1.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaThucUong1.setText("Xóa Bảng Giá");
+        btnXoaThucUong1.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnXoaThucUong1.setRadius(10);
+        btnXoaThucUong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaThucUong1ActionPerformed(evt);
+            }
+        });
+        panelRadius1.add(btnXoaThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
+
+        tabQuanLy.addTab("Bảng Giá Thuê", panelRadius1);
 
         pnlFrameManage.add(tabQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1060, 480));
 
@@ -4112,6 +4229,38 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_panelRadius8MouseClicked
 
+    private void tblBangGiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangGiaMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBangGiaMousePressed
+
+    private void btnFirstBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstBangGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFirstBangGiaActionPerformed
+
+    private void btnPreBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreBangGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPreBangGiaActionPerformed
+
+    private void btnNextBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextBangGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNextBangGiaActionPerformed
+
+    private void btnLastBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastBangGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLastBangGiaActionPerformed
+
+    private void btnThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThucUong1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThucUong1ActionPerformed
+
+    private void btnSuaThongTinThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinThucUong1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSuaThongTinThucUong1ActionPerformed
+
+    private void btnXoaThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaThucUong1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoaThucUong1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4155,6 +4304,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnBell;
     private com.ebooks.Compoment.MyButton btnCapNhatSach;
     private com.ebooks.Compoment.MyButton btnFirstAudio;
+    private com.ebooks.Compoment.MyButton btnFirstBangGia;
     private com.ebooks.Compoment.MyButton btnFirstDTTS;
     private com.ebooks.Compoment.MyButton btnFirstLoaiSach;
     private com.ebooks.Compoment.MyButton btnFirstNguoiDung;
@@ -4163,6 +4313,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnFirstTaiKhoan;
     private com.ebooks.Compoment.MyButton btnFirstThucUong;
     private com.ebooks.Compoment.MyButton btnLastAudio;
+    private com.ebooks.Compoment.MyButton btnLastBangGia;
     private com.ebooks.Compoment.MyButton btnLastDTTS;
     private com.ebooks.Compoment.MyButton btnLastDTTU;
     private com.ebooks.Compoment.MyButton btnLastLoaiSach;
@@ -4175,6 +4326,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnMain;
     private com.ebooks.Compoment.MyButton btnManage;
     private com.ebooks.Compoment.MyButton btnNextAudio;
+    private com.ebooks.Compoment.MyButton btnNextBangGia;
     private com.ebooks.Compoment.MyButton btnNextDTTS;
     private com.ebooks.Compoment.MyButton btnNextDTTU;
     private com.ebooks.Compoment.MyButton btnNextLoaiSach;
@@ -4184,6 +4336,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnNextTaiKhoan;
     private com.ebooks.Compoment.MyButton btnNextThucUong;
     private com.ebooks.Compoment.MyButton btnPlay;
+    private com.ebooks.Compoment.MyButton btnPreBangGia;
     private com.ebooks.Compoment.MyButton btnPreDTTS;
     private com.ebooks.Compoment.MyButton btnPreDTTU;
     private com.ebooks.Compoment.MyButton btnPreThucUong;
@@ -4205,6 +4358,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnSuaThongTin;
     private com.ebooks.Compoment.MyButton btnSuaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong;
+    private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong1;
     private com.ebooks.Compoment.MyButton btnThemAudio;
     private com.ebooks.Compoment.MyButton btnThemHoaDon;
     private com.ebooks.Compoment.MyButton btnThemLoaiSach;
@@ -4213,6 +4367,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnThemTacGia;
     private com.ebooks.Compoment.MyButton btnThemTaiKhoan;
     private com.ebooks.Compoment.MyButton btnThucUong;
+    private com.ebooks.Compoment.MyButton btnThucUong1;
     private com.ebooks.Compoment.MyButton btnXoaAudio;
     private com.ebooks.Compoment.MyButton btnXoaLoaiSach;
     private com.ebooks.Compoment.MyButton btnXoaNguoiDung;
@@ -4221,6 +4376,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnXoaTaiKhoan;
     private com.ebooks.Compoment.MyButton btnXoaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnXoaThucUong;
+    private com.ebooks.Compoment.MyButton btnXoaThucUong1;
     private javax.swing.JComboBox<String> cboNamTS;
     private javax.swing.JComboBox<String> cboNamTU;
     private javax.swing.JComboBox<String> cboTheLoai;
@@ -4261,6 +4417,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -4284,6 +4441,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblVolumeRepeat;
     private javax.swing.JLabel lblVolumeUp;
     private com.ebooks.Compoment.MaterialTabbed materialTabbed3;
+    private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRadius panelRadius10;
     private com.ebooks.Compoment.PanelRadius panelRadius11;
     private com.ebooks.Compoment.PanelRadius panelRadius12;
@@ -4333,6 +4491,7 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MaterialTabbed tabThongKe;
     private com.ebooks.Compoment.Table tblAudio;
     private com.ebooks.Compoment.Table tblAudioQL;
+    private com.ebooks.Compoment.Table tblBangGia;
     private com.ebooks.Compoment.Table tblDanhSachCacSach;
     private com.ebooks.Compoment.Table tblDoanhThuThucUong;
     private com.ebooks.Compoment.Table tblDoanhThuThueSach;
