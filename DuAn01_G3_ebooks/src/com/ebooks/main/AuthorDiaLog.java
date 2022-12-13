@@ -54,7 +54,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         Calendar.setVisible(congTac);
         maTacGia = tg.getMaTacGia();
         setBackground(new Color(0, 0, 0, 0));
-        txtHoten.setEnabled(true);
+        txtHoten.setEnabled(false);
     }
 
     private int x;
@@ -85,8 +85,13 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         }
         txtNgaySinh.setText(String.valueOf(formats.format(tg.getNgaySinh())));
         txtMoTa.setText(tg.getMoTa());
-        rdoNam.setSelected(tg.isGioiTinh());
-        rdoNu.setSelected(!tg.isGioiTinh());
+        if (tg.isGioiTinh()) {
+            rdoNam.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
+        }
+//        rdoNam.setSelected(tg.isGioiTinh());
+//        rdoNu.setSelected(!tg.isGioiTinh());
         lblTacGiaImg.setIcon(ShowImg(tg.getHinh()));
 
     }
@@ -95,7 +100,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
 
         TacGia tacGia = new TacGia();
         tacGia.setHoTen(txtHoten.getText());
-        tacGia.setGioiTinh(rdoNam.isSelected() ? true : false);
+    //    tacGia.setGioiTinh(rdoNam.isSelected() ? true : false);
+        tacGia.setGioiTinh(rdoNam.isSelected() == true ? true : false);
         tacGia.setNgaySinh(new Date(txtNgaySinh.getText()));
         tacGia.setHinh(NameImg);
         tacGia.setMoTa(txtMoTa.getText());
@@ -106,7 +112,8 @@ public class AuthorDiaLog extends javax.swing.JDialog {
     TacGia getForm(TacGia tg) {
 
         tg.setHoTen(txtHoten.getText());
-        tg.setGioiTinh(rdoNam.isSelected() ? true : false);
+    //    tg.setGioiTinh(rdoNam.isSelected() ? true : false);
+        tg.setGioiTinh(rdoNam.isSelected() == true ? true : false);
         tg.setNgaySinh(Calendar.getDate());
         tg.setHinh(NameImg);
         tg.setMoTa(txtMoTa.getText());
@@ -299,6 +306,7 @@ public class AuthorDiaLog extends javax.swing.JDialog {
         pnlMainDialog.add(lblGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
         buttonGroup1.add(rdoNam);
+        rdoNam.setSelected(true);
         rdoNam.setText("Nam");
         rdoNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
