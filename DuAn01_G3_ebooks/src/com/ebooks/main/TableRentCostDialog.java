@@ -1,25 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.ebooks.main;
 
+import com.ebooks.dao.BangGiaThueDAO;
+import com.ebooks.dao.ThucUongDAO;
+import com.ebooks.helper.DialogHelper;
+import com.ebooks.helper.UtilityHelper;
+import com.ebooks.model.BangGiaThue;
+import com.ebooks.model.ThucUong;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author Thinh
- */
 public class TableRentCostDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form TableRentCostDialog
-     */
     public TableRentCostDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
+        initMoving(this, panelRadius1);
+    }
+    
+    public TableRentCostDialog(java.awt.Frame parent, boolean modal, BangGiaThue bangGiaThue) {
+        super(parent, modal);
+        initComponents();
+        setForm(bangGiaThue);
+        setBackground(new Color(0, 0, 0, 0));
+        initMoving(this, panelRadius1);
+        txtMaGiaThue.setEditable(false);
+    }
+
+    private int x;
+    private int y;
+    List<BangGiaThue> listGT = new ArrayList();
+
+    public void initMoving(JDialog DiaLog, JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                DiaLog.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
     }
 
     /**
@@ -38,7 +72,7 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jLabel19 = new javax.swing.JLabel();
-        lblMaSach = new javax.swing.JLabel();
+        lblMaGiaThue = new javax.swing.JLabel();
         txtDonGia = new javax.swing.JTextField();
         SprHour = new javax.swing.JSpinner();
         SprMin = new javax.swing.JSpinner();
@@ -47,12 +81,13 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtMaSach1 = new javax.swing.JTextField();
-        lblMaSach1 = new javax.swing.JLabel();
+        txtMaGiaThue = new javax.swing.JTextField();
+        lblDonGia = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRadius1.setBackground(new java.awt.Color(255, 255, 255));
@@ -116,9 +151,9 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         jLabel19.setText("Bảng Giá Thuê");
         panelRadius1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 210, -1));
 
-        lblMaSach.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        lblMaSach.setText("Mã Sách");
-        panelRadius1.add(lblMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        lblMaGiaThue.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblMaGiaThue.setText("Mã Giá Thuê");
+        panelRadius1.add(lblMaGiaThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         txtDonGia.setBackground(new java.awt.Color(222, 247, 227));
         txtDonGia.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -156,17 +191,17 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         jLabel10.setText("Thời lượng");
         panelRadius1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
-        txtMaSach1.setBackground(new java.awt.Color(222, 247, 227));
-        txtMaSach1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtMaGiaThue.setBackground(new java.awt.Color(222, 247, 227));
+        txtMaGiaThue.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMaSach1KeyPressed(evt);
+                txtMaGiaThueKeyPressed(evt);
             }
         });
-        panelRadius1.add(txtMaSach1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 240, 40));
+        panelRadius1.add(txtMaGiaThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 240, 40));
 
-        lblMaSach1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        lblMaSach1.setText("Đơn Giá");
-        panelRadius1.add(lblMaSach1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
+        lblDonGia.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        lblDonGia.setText("Đơn Giá");
+        panelRadius1.add(lblDonGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jLabel6.setText("Mô Tả");
@@ -178,6 +213,7 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         getContentPane().add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 530));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblExit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExit1MouseClicked
@@ -199,24 +235,42 @@ public class TableRentCostDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_pnlExit1MouseExited
 
     private void btnLuuThongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThongActionPerformed
-       
+        String maGiaThue = txtMaGiaThue.getText();
+        int timThay = 0;
+        BangGiaThueDAO DaoGT = new BangGiaThueDAO();
+        listGT = DaoGT.selectAll();
+        
+        for (BangGiaThue x : listGT) {
+            if (x.getMaGiaThue().contains(maGiaThue)) {
+                timThay = 1;
+            }
+        }
+        
+        if(timThay == 0) {
+            this.insert();
+        } else{
+            if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+                this.update();
+            }
+        }
+        
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
     private void txtMoTaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoTaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           
+
         }
     }//GEN-LAST:event_txtMoTaKeyPressed
 
     private void txtDonGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDonGiaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           
+
         }
     }//GEN-LAST:event_txtDonGiaKeyPressed
 
-    private void txtMaSach1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSach1KeyPressed
+    private void txtMaGiaThueKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaGiaThueKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaSach1KeyPressed
+    }//GEN-LAST:event_txtMaGiaThueKeyPressed
 
     /**
      * @param args the command line arguments
@@ -273,13 +327,79 @@ public class TableRentCostDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDonGia;
     private javax.swing.JLabel lblExit1;
-    private javax.swing.JLabel lblMaSach;
-    private javax.swing.JLabel lblMaSach1;
+    private javax.swing.JLabel lblMaGiaThue;
     private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     private javax.swing.JTextField txtDonGia;
-    private javax.swing.JTextField txtMaSach1;
+    private javax.swing.JTextField txtMaGiaThue;
     private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
+  
+    public BangGiaThue getForm() {
+        String thoiLuong = SprHour.getValue().toString() +":"+SprMin.getValue().toString() +":"+SprSec.getValue().toString();
+        BangGiaThue gt = new BangGiaThue();
+        gt.setMaGiaThue(txtMaGiaThue.getText());
+        gt.setThoiLuong(Time.valueOf(thoiLuong));
+        gt.setDonGiaThue(Double.parseDouble(txtDonGia.getText()));
+        return gt;
+    }
+    
+    public BangGiaThue getForm(BangGiaThue gt) {
+        String thoiLuong = SprHour.getValue().toString() +":"+SprMin.getValue().toString() +":"+SprSec.getValue().toString();
+//        BangGiaThue gt = new BangGiaThue();
+        gt.setMaGiaThue(txtMaGiaThue.getText());
+        gt.setThoiLuong(Time.valueOf(thoiLuong));
+        gt.setDonGiaThue(Double.parseDouble(txtDonGia.getText()));
+        
+        return gt;
+    }
+    
+    public void setForm(BangGiaThue giaThue) {
+        txtMaGiaThue.setText(giaThue.getMaGiaThue());
+        txtDonGia.setText(String.valueOf(giaThue.getDonGiaThue()));
+        String[] gio = giaThue.getThoiLuong().toString().split("\\:");
+        SprHour.setValue(Integer.parseInt(gio[0]));
+        SprMin.setValue(Integer.parseInt(gio[1]));
+        SprSec.setValue(Integer.parseInt(gio[2]));
+    }
+    
+    BangGiaThueDAO DAOGiaThue = new BangGiaThueDAO();
+    //them mơi
+    public void insert() {
+        if (UtilityHelper.checkNullText(lblMaGiaThue, txtMaGiaThue) && UtilityHelper.checkMa(lblMaGiaThue, txtMaGiaThue)) {
+            if (UtilityHelper.checkNullText(lblDonGia, txtDonGia) && UtilityHelper.checkName(lblDonGia, txtDonGia)) {
+
+                try {
+                    BangGiaThue GT = getForm();
+                    DAOGiaThue.insert(GT);
+//                      this.fillTable();
+                    DialogHelper.alert(this, "Thêm mới Thành công");
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Thêm Mới Thất Bại!");
+                }
+
+            }
+        }
+    }
+    
+    public void update() {
+        if (UtilityHelper.checkNullText(lblMaGiaThue, txtMaGiaThue) && UtilityHelper.checkMa(lblMaGiaThue, txtMaGiaThue)) {
+            if (UtilityHelper.checkNullText(lblDonGia, txtDonGia) && UtilityHelper.checkName(lblDonGia, txtDonGia)) {
+
+                try {
+                        String maGiaThue = txtMaGiaThue.getText();
+                                
+                        BangGiaThue GT = DAOGiaThue.findById(maGiaThue);
+                        DAOGiaThue.update(getForm(GT));
+//                                this.fillTable();
+                        DialogHelper.alert(this, "Cập nhật Thành công");
+                    } catch (Exception e) {
+                        DialogHelper.alert(this, "Cập nhật Thất Bại!");
+                    }
+
+            }
+        }
+    }
 }

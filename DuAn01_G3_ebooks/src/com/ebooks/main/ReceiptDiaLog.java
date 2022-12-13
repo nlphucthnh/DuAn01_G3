@@ -903,6 +903,11 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
                 cboGioThueItemStateChanged(evt);
             }
         });
+        cboGioThue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGioThueActionPerformed(evt);
+            }
+        });
         panelRadius2.add(cboGioThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 40));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -1274,6 +1279,10 @@ public class ReceiptDiaLog extends javax.swing.JDialog {
            fillTableNguoiDung();
        }
     }//GEN-LAST:event_tabHDTUStateChanged
+
+    private void cboGioThueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGioThueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboGioThueActionPerformed
 
     /*tbdSetting args the command line arguments
      */

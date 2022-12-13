@@ -11,6 +11,7 @@ import com.ebooks.dao.AudioSachDAO;
 import com.ebooks.helper.ShareHelper;
 import com.ebooks.model.AudioSach;
 import com.ebooks.audio.FileTypeFilter;
+import com.ebooks.dao.BangGiaThueDAO;
 import com.ebooks.dao.HoaDonChiTietDAO;
 import jaco.mp3.player.MP3Player;
 
@@ -41,6 +42,8 @@ import com.ebooks.model.TacGia;
 import com.ebooks.model.TaiKhoan;
 import com.ebooks.model.TheLoai;
 import com.ebooks.model.ThucUong;
+import com.ebooks.main.TableRentCostDialog;
+import com.ebooks.model.BangGiaThue;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -157,6 +160,7 @@ public class Main extends javax.swing.JFrame {
     TheLoaiDAO DAOTL = new TheLoaiDAO();
     LoaiSSDAO DAOLSS = new LoaiSSDAO();
     HoaDonTongHopDAO DAOHDTH = new HoaDonTongHopDAO();
+    BangGiaThueDAO DAOBGT = new BangGiaThueDAO();
     //model 
     NguoiDung nguoiDung = new NguoiDung();
     ThucUong thucUong = new ThucUong();
@@ -164,6 +168,7 @@ public class Main extends javax.swing.JFrame {
     Sach sach = new Sach();
     TacGia tacGia = new TacGia();
     TheLoai theLoai = new TheLoai();
+    BangGiaThue bangGiaThue = new BangGiaThue();
     //List
 //    List<NguoiDung> listND = new ArrayList<>();
 
@@ -172,6 +177,7 @@ public class Main extends javax.swing.JFrame {
     List<Sach> listS = new ArrayList<>();
     List<TheLoai> listTL = new ArrayList<>();
     List<TacGia> listTG = new ArrayList<>();
+    List<BangGiaThue> listGT = new ArrayList<>();
     TimeNotifyDialog timeDialog;
 
     public Main() {
@@ -1080,9 +1086,9 @@ public class Main extends javax.swing.JFrame {
         btnFirstBangGia = new com.ebooks.Compoment.MyButton();
         btnNextBangGia = new com.ebooks.Compoment.MyButton();
         btnLastBangGia = new com.ebooks.Compoment.MyButton();
-        btnThucUong1 = new com.ebooks.Compoment.MyButton();
-        btnSuaThongTinThucUong1 = new com.ebooks.Compoment.MyButton();
-        btnXoaThucUong1 = new com.ebooks.Compoment.MyButton();
+        btnThemBangGia = new com.ebooks.Compoment.MyButton();
+        btnSuaBangGia = new com.ebooks.Compoment.MyButton();
+        btnXoaBangGia = new com.ebooks.Compoment.MyButton();
         pnlFrameStatistical = new com.ebooks.Compoment.PanelRadius();
         jLabel20 = new javax.swing.JLabel();
         tabThongKe = new com.ebooks.Compoment.MaterialTabbed();
@@ -2520,44 +2526,44 @@ public class Main extends javax.swing.JFrame {
         });
         panelRadius1.add(btnLastBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 60, 40));
 
-        btnThucUong1.setBackground(new java.awt.Color(87, 190, 110));
-        btnThucUong1.setForeground(new java.awt.Color(255, 255, 255));
-        btnThucUong1.setText("Thêm Bảng Giá");
-        btnThucUong1.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        btnThucUong1.setRadius(10);
-        btnThucUong1.addActionListener(new java.awt.event.ActionListener() {
+        btnThemBangGia.setBackground(new java.awt.Color(87, 190, 110));
+        btnThemBangGia.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemBangGia.setText("Thêm Bảng Giá");
+        btnThemBangGia.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnThemBangGia.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnThemBangGia.setRadius(10);
+        btnThemBangGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThucUong1ActionPerformed(evt);
+                btnThemBangGiaActionPerformed(evt);
             }
         });
-        panelRadius1.add(btnThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
+        panelRadius1.add(btnThemBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 150, 40));
 
-        btnSuaThongTinThucUong1.setBackground(new java.awt.Color(87, 190, 110));
-        btnSuaThongTinThucUong1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSuaThongTinThucUong1.setText("Sửa Thông Tin");
-        btnSuaThongTinThucUong1.setBoderColor(new java.awt.Color(87, 190, 110));
-        btnSuaThongTinThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        btnSuaThongTinThucUong1.setRadius(10);
-        btnSuaThongTinThucUong1.addActionListener(new java.awt.event.ActionListener() {
+        btnSuaBangGia.setBackground(new java.awt.Color(87, 190, 110));
+        btnSuaBangGia.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaBangGia.setText("Sửa Thông Tin");
+        btnSuaBangGia.setBoderColor(new java.awt.Color(87, 190, 110));
+        btnSuaBangGia.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnSuaBangGia.setRadius(10);
+        btnSuaBangGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaThongTinThucUong1ActionPerformed(evt);
+                btnSuaBangGiaActionPerformed(evt);
             }
         });
-        panelRadius1.add(btnSuaThongTinThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
+        panelRadius1.add(btnSuaBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 40));
 
-        btnXoaThucUong1.setBackground(new java.awt.Color(253, 127, 127));
-        btnXoaThucUong1.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaThucUong1.setText("Xóa Bảng Giá");
-        btnXoaThucUong1.setBoderColor(new java.awt.Color(253, 127, 127));
-        btnXoaThucUong1.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        btnXoaThucUong1.setRadius(10);
-        btnXoaThucUong1.addActionListener(new java.awt.event.ActionListener() {
+        btnXoaBangGia.setBackground(new java.awt.Color(253, 127, 127));
+        btnXoaBangGia.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoaBangGia.setText("Xóa Bảng Giá");
+        btnXoaBangGia.setBoderColor(new java.awt.Color(253, 127, 127));
+        btnXoaBangGia.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
+        btnXoaBangGia.setRadius(10);
+        btnXoaBangGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaThucUong1ActionPerformed(evt);
+                btnXoaBangGiaActionPerformed(evt);
             }
         });
-        panelRadius1.add(btnXoaThucUong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
+        panelRadius1.add(btnXoaBangGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 140, 150, 40));
 
         tabQuanLy.addTab("Bảng Giá Thuê", panelRadius1);
 
@@ -4109,8 +4115,10 @@ public class Main extends javax.swing.JFrame {
             fillTableNguoiDung();
         } else if (index == 6) {
             fillTableThucUong();
-        } else {
+        } else if (index == 7){
             fillTableHoaDon();
+        } else {
+            fillTableBangGiaThue();
         }
 
 
@@ -4240,31 +4248,59 @@ public class Main extends javax.swing.JFrame {
 
     private void btnFirstBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstBangGiaActionPerformed
         // TODO add your handling code here:
+        int index = tblBangGia.getSelectedRow();
+        UtilityHelper.first(index, tblBangGia);
     }//GEN-LAST:event_btnFirstBangGiaActionPerformed
 
     private void btnPreBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreBangGiaActionPerformed
         // TODO add your handling code here:
+        int index = tblBangGia.getSelectedRow();
+        UtilityHelper.previous(index, tblBangGia, listGT);
     }//GEN-LAST:event_btnPreBangGiaActionPerformed
 
     private void btnNextBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextBangGiaActionPerformed
         // TODO add your handling code here:
+        int index = tblBangGia.getSelectedRow();
+        UtilityHelper.next(index, tblBangGia, listGT);
     }//GEN-LAST:event_btnNextBangGiaActionPerformed
 
     private void btnLastBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastBangGiaActionPerformed
         // TODO add your handling code here:
+        int index = tblBangGia.getSelectedRow();
+        UtilityHelper.last(index, tblBangGia, listGT);
     }//GEN-LAST:event_btnLastBangGiaActionPerformed
 
-    private void btnThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThucUong1ActionPerformed
+    private void btnThemBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemBangGiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnThucUong1ActionPerformed
+        new TableRentCostDialog(this, true).setVisible(true);
+        fillTableBangGiaThue();
+    }//GEN-LAST:event_btnThemBangGiaActionPerformed
 
-    private void btnSuaThongTinThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaThongTinThucUong1ActionPerformed
+    private void btnSuaBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaBangGiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSuaThongTinThucUong1ActionPerformed
+        int index = tblBangGia.getSelectedRow();
+        if (index < 0) {
+            DialogHelper.alert(this, "Chưa chọn bảng giá cần chỉnh sửa!");
+        } else {
+            String maGiaThue = (String) tblBangGia.getValueAt(index, 0);
+            bangGiaThue = DAOBGT.findById(maGiaThue);
+            new TableRentCostDialog(this, true, bangGiaThue).setVisible(true);
+            fillTableBangGiaThue();
+        }
+        
+    }//GEN-LAST:event_btnSuaBangGiaActionPerformed
 
-    private void btnXoaThucUong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaThucUong1ActionPerformed
+    private void btnXoaBangGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaBangGiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaThucUong1ActionPerformed
+        
+        int index = tblBangGia.getSelectedRow();
+        if (index < 0) {
+            DialogHelper.alert(this, "Chưa chọn bảng giá cần xóa!");
+        } else if (DialogHelper.confirm(this, "Bạn thật sự muốn xóa bảng giá này?")) {
+            DAOBGT.delete(tblBangGia.getValueAt(index, 0).toString());
+            this.fillTableBangGiaThue();
+        }
+    }//GEN-LAST:event_btnXoaBangGiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4357,14 +4393,15 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnSetting;
     private com.ebooks.Compoment.MyButton btnStatistical;
     private com.ebooks.Compoment.MyButton btnSuaAudio;
+    private com.ebooks.Compoment.MyButton btnSuaBangGia;
     private com.ebooks.Compoment.MyButton btnSuaLoaiSach;
     private com.ebooks.Compoment.MyButton btnSuaNguoiDung;
     private com.ebooks.Compoment.MyButton btnSuaTaiKhoan;
     private com.ebooks.Compoment.MyButton btnSuaThongTin;
     private com.ebooks.Compoment.MyButton btnSuaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong;
-    private com.ebooks.Compoment.MyButton btnSuaThongTinThucUong1;
     private com.ebooks.Compoment.MyButton btnThemAudio;
+    private com.ebooks.Compoment.MyButton btnThemBangGia;
     private com.ebooks.Compoment.MyButton btnThemHoaDon;
     private com.ebooks.Compoment.MyButton btnThemLoaiSach;
     private com.ebooks.Compoment.MyButton btnThemNguoiDung;
@@ -4372,8 +4409,8 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnThemTacGia;
     private com.ebooks.Compoment.MyButton btnThemTaiKhoan;
     private com.ebooks.Compoment.MyButton btnThucUong;
-    private com.ebooks.Compoment.MyButton btnThucUong1;
     private com.ebooks.Compoment.MyButton btnXoaAudio;
+    private com.ebooks.Compoment.MyButton btnXoaBangGia;
     private com.ebooks.Compoment.MyButton btnXoaLoaiSach;
     private com.ebooks.Compoment.MyButton btnXoaNguoiDung;
     private com.ebooks.Compoment.MyButton btnXoaSach;
@@ -4381,7 +4418,6 @@ public class Main extends javax.swing.JFrame {
     private com.ebooks.Compoment.MyButton btnXoaTaiKhoan;
     private com.ebooks.Compoment.MyButton btnXoaThongTinHoaDon;
     private com.ebooks.Compoment.MyButton btnXoaThucUong;
-    private com.ebooks.Compoment.MyButton btnXoaThucUong1;
     private javax.swing.JComboBox<String> cboNamTS;
     private javax.swing.JComboBox<String> cboNamTU;
     private javax.swing.JComboBox<String> cboTheLoai;
@@ -4612,6 +4648,23 @@ public class Main extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+    public void fillTableBangGiaThue() {
+        DefaultTableModel model;
+        model = new DefaultTableModel();
+        model.setRowCount(0);
+        //set COLUMN
+        model.addColumn("Mã Giá Thuê");
+        model.addColumn("Thời Lượng");
+        model.addColumn("Đơn Giá");
+
+        listGT = DAOBGT.selectAll();
+        //tạo hàng và do du lieu
+        for (BangGiaThue tu : listGT) {
+            Object[] row = {tu.getMaGiaThue(), tu.getThoiLuong(), tu.getDonGiaThue()};
+            model.addRow(row);
+            tblBangGia.setModel(model);
         }
     }
 }
