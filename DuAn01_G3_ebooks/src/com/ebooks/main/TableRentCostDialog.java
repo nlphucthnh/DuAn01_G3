@@ -25,7 +25,7 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         setBackground(new Color(0, 0, 0, 0));
         initMoving(this, panelRadius1);
     }
-    
+
     public TableRentCostDialog(java.awt.Frame parent, boolean modal, BangGiaThue bangGiaThue) {
         super(parent, modal);
         initComponents();
@@ -239,32 +239,66 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         int timThay = 0;
         BangGiaThueDAO DaoGT = new BangGiaThueDAO();
         listGT = DaoGT.selectAll();
-        
+
         for (BangGiaThue x : listGT) {
             if (x.getMaGiaThue().contains(maGiaThue)) {
                 timThay = 1;
             }
         }
-        
-        if(timThay == 0) {
+
+        if (timThay == 0) {
             this.insert();
-        } else{
+        } else {
             if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
                 this.update();
             }
         }
-        
+
     }//GEN-LAST:event_btnLuuThongActionPerformed
 
     private void txtMoTaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoTaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String maGiaThue = txtMaGiaThue.getText();
+            int timThay = 0;
+            BangGiaThueDAO DaoGT = new BangGiaThueDAO();
+            listGT = DaoGT.selectAll();
 
+            for (BangGiaThue x : listGT) {
+                if (x.getMaGiaThue().contains(maGiaThue)) {
+                    timThay = 1;
+                }
+            }
+
+            if (timThay == 0) {
+                this.insert();
+            } else {
+                if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+                    this.update();
+                }
+            }
         }
     }//GEN-LAST:event_txtMoTaKeyPressed
 
     private void txtDonGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDonGiaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String maGiaThue = txtMaGiaThue.getText();
+            int timThay = 0;
+            BangGiaThueDAO DaoGT = new BangGiaThueDAO();
+            listGT = DaoGT.selectAll();
 
+            for (BangGiaThue x : listGT) {
+                if (x.getMaGiaThue().contains(maGiaThue)) {
+                    timThay = 1;
+                }
+            }
+
+            if (timThay == 0) {
+                this.insert();
+            } else {
+                if (DialogHelper.confirm(this, "Chắc chắn cập nhật?")) {
+                    this.update();
+                }
+            }
         }
     }//GEN-LAST:event_txtDonGiaKeyPressed
 
@@ -336,26 +370,26 @@ public class TableRentCostDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtMaGiaThue;
     private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
-  
+
     public BangGiaThue getForm() {
-        String thoiLuong = SprHour.getValue().toString() +":"+SprMin.getValue().toString() +":"+SprSec.getValue().toString();
+        String thoiLuong = SprHour.getValue().toString() + ":" + SprMin.getValue().toString() + ":" + SprSec.getValue().toString();
         BangGiaThue gt = new BangGiaThue();
         gt.setMaGiaThue(txtMaGiaThue.getText());
         gt.setThoiLuong(Time.valueOf(thoiLuong));
         gt.setDonGiaThue(Double.parseDouble(txtDonGia.getText()));
         return gt;
     }
-    
+
     public BangGiaThue getForm(BangGiaThue gt) {
-        String thoiLuong = SprHour.getValue().toString() +":"+SprMin.getValue().toString() +":"+SprSec.getValue().toString();
+        String thoiLuong = SprHour.getValue().toString() + ":" + SprMin.getValue().toString() + ":" + SprSec.getValue().toString();
 //        BangGiaThue gt = new BangGiaThue();
         gt.setMaGiaThue(txtMaGiaThue.getText());
         gt.setThoiLuong(Time.valueOf(thoiLuong));
         gt.setDonGiaThue(Double.parseDouble(txtDonGia.getText()));
-        
+
         return gt;
     }
-    
+
     public void setForm(BangGiaThue giaThue) {
         txtMaGiaThue.setText(giaThue.getMaGiaThue());
         txtDonGia.setText(String.valueOf(giaThue.getDonGiaThue()));
@@ -364,8 +398,9 @@ public class TableRentCostDialog extends javax.swing.JDialog {
         SprMin.setValue(Integer.parseInt(gio[1]));
         SprSec.setValue(Integer.parseInt(gio[2]));
     }
-    
+
     BangGiaThueDAO DAOGiaThue = new BangGiaThueDAO();
+
     //them mơi
     public void insert() {
         if (UtilityHelper.checkNullText(lblMaGiaThue, txtMaGiaThue) && UtilityHelper.checkMa(lblMaGiaThue, txtMaGiaThue)) {
@@ -383,21 +418,21 @@ public class TableRentCostDialog extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public void update() {
         if (UtilityHelper.checkNullText(lblMaGiaThue, txtMaGiaThue) && UtilityHelper.checkMa(lblMaGiaThue, txtMaGiaThue)) {
             if (UtilityHelper.checkNullText(lblDonGia, txtDonGia) && UtilityHelper.checkName(lblDonGia, txtDonGia)) {
 
                 try {
-                        String maGiaThue = txtMaGiaThue.getText();
-                                
-                        BangGiaThue GT = DAOGiaThue.findById(maGiaThue);
-                        DAOGiaThue.update(getForm(GT));
+                    String maGiaThue = txtMaGiaThue.getText();
+
+                    BangGiaThue GT = DAOGiaThue.findById(maGiaThue);
+                    DAOGiaThue.update(getForm(GT));
 //                                this.fillTable();
-                        DialogHelper.alert(this, "Cập nhật Thành công");
-                    } catch (Exception e) {
-                        DialogHelper.alert(this, "Cập nhật Thất Bại!");
-                    }
+                    DialogHelper.alert(this, "Cập nhật Thành công");
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Cập nhật Thất Bại!");
+                }
 
             }
         }
