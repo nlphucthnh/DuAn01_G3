@@ -83,11 +83,7 @@ public class TimeNotifyDialog extends javax.swing.JDialog {
             public void run() {
                 while (true) {
                     try {
-                        tic++;
-                        if (tic == 100) {
-                            sec += 1;
-                            tic = 0;
-                        }
+                        sec++;
                         if (sec == 60) {
                             min += 1;
                             sec = 0;
@@ -96,11 +92,10 @@ public class TimeNotifyDialog extends javax.swing.JDialog {
                             hour += 1;
                             min = 0;
                         }
-                        lblTic.setText(String.valueOf(tic));
-                        lblSec.setText(String.valueOf(sec + " :"));
+                        lblSec.setText(String.valueOf(sec));
                         lblMin.setText(String.valueOf(": " + min + " :"));
                         lblHour.setText(String.valueOf(hour));
-                        Thread.sleep(10);   //thread tạm dừng hoạt động trong 10 ms
+                        Thread.sleep(1000);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -135,7 +130,6 @@ public class TimeNotifyDialog extends javax.swing.JDialog {
         lblHour = new javax.swing.JLabel();
         lblMin = new javax.swing.JLabel();
         lblSec = new javax.swing.JLabel();
-        lblTic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -229,22 +223,17 @@ public class TimeNotifyDialog extends javax.swing.JDialog {
         lblHour.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         lblHour.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblHour.setText("0 ");
-        panelRadius1.add(lblHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 20, 20));
+        panelRadius1.add(lblHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, 20));
 
         lblMin.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         lblMin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMin.setText("0 ");
-        panelRadius1.add(lblMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, 20));
+        panelRadius1.add(lblMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 20, 20));
 
         lblSec.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
         lblSec.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSec.setText("0 ");
-        panelRadius1.add(lblSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 30, 20));
-
-        lblTic.setFont(new java.awt.Font("Inter SemiBold", 0, 12)); // NOI18N
-        lblTic.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTic.setText("0");
-        panelRadius1.add(lblTic, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 20, 20));
+        panelRadius1.add(lblSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 20, 20));
 
         getContentPane().add(panelRadius1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 250));
 
@@ -345,7 +334,6 @@ public class TimeNotifyDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblSec;
     private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JLabel lblThoiLuong;
-    private javax.swing.JLabel lblTic;
     private com.ebooks.Compoment.PanelRadius panelRadius1;
     private com.ebooks.Compoment.PanelRound pnlExit1;
     // End of variables declaration//GEN-END:variables

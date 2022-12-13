@@ -508,7 +508,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void displayTimeAudio() {
-
         int timeDislay = timeAuido / 125;
         int timeEven = timeDislay / 60;
         int timeSurplus = timeDislay % 60;
