@@ -3103,6 +3103,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainActionPerformed
         //SetColorPanel
+        fillTableDanhSachCacSach();
         SetColorPanel(pnlMain, true);
         SetColorPanel(pnlManage, false);
         SetColorPanel(pnlStatistical, false);
